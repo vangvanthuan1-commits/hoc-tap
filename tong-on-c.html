@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tổng Ôn 8 Bài C Nền Tảng &bull; Phenikaa K20 AI</title>
+  <style>
+    :root {
+      --bg: #070a13;
+      --card-bg: rgba(18, 24, 43, 0.85);
+      --card-border: rgba(56, 189, 248, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #38bdf8;
+      --pink: #ec4899;
+      --pink-glow: rgba(236, 72, 153, 0.3);
+      --gradient-main: linear-gradient(135deg, #38bdf8 0%, #ec4899 100%);
+      --code-bg: #0b1120;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --success: #34d399;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
+      color: var(--text);
+      line-height: 1.55;
+      padding: 16px;
+      padding-bottom: 60px;
+      min-height: 100vh;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+    .subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px; }
+    .lesson-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+    }
+    .lesson-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .lesson-num {
+      background: var(--gradient-main);
+      color: #070a13;
+      font-weight: 900;
+      font-size: 0.85rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .lesson-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .core-idea {
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.82rem;
+      color: var(--cyan);
+      overflow-x: auto;
+      margin: 8px 0 10px;
+      line-height: 1.45;
+    }
+    .code-kw { color: var(--pink); }
+    .code-type { color: #818cf8; }
+    .code-num { color: #fbbf24; }
+    .code-str { color: #34d399; }
+    .code-cmt { color: #64748b; font-style: italic; }
+    .trap-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: #fca5a5;
+    }
+    .trap-title {
+      font-weight: 700;
+      color: var(--danger);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .action-cta {
+      background: var(--gradient-main);
+      color: #070a13;
+      padding: 14px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-top: 24px;
+      box-shadow: 0 4px 20px var(--pink-glow);
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">&larr; Cổng Ôn Tập</a>
+  <h1>⚡ Tổng Ôn 8 Bài C Nền Tảng</h1>
+  <div class="subtitle">Đọc kỹ để hồi sinh phản xạ trước khi vào bài kiểm tra 1 tiết A B C D</div>
+
+  <!-- BÀI 1 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">1</div>
+      <div class="lesson-title">Cấu Trúc Chương Trình C & Hello World</div>
+    </div>
+    <div class="core-idea">
+      &bull; <code>#include &lt;stdio.h&gt;</code>: Thư viện chuẩn để dùng hàm in/nhập.<br>
+      &bull; <code>int main()</code>: Điểm khởi đầu bắt buộc của mọi chương trình C. Máy tính luôn bắt đầu chạy từ đây.<br>
+      &bull; <code>return 0;</code>: Báo cho hệ điều hành biết chương trình chạy kết thúc thành công.
+    </div>
+    <div class="code-block">
+<span class="code-kw">#include</span> &lt;stdio.h&gt;
+
+<span class="code-type">int</span> main() {
+    printf(<span class="code-str">"Hello Phenikaa!\n"</span>);
+    <span class="code-kw">return</span> <span class="code-num">0</span>;
+}
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ Bẫy thường gặp</div>
+      Quên dấu chấm phẩy <code>;</code> ở cuối lệnh, hoặc viết sai chữ <code>main</code> (vd: <code>Main</code>).
+    </div>
+  </div>
+
+  <!-- BÀI 2 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">2</div>
+      <div class="lesson-title">Biến, Kiểu Dữ Liệu & Toán Tử</div>
+    </div>
+    <div class="core-idea">
+      &bull; <code>int</code>: Số nguyên (%d), tốn 4 bytes.<br>
+      &bull; <code>float</code>: Số thực (%f), 4 bytes. In 2 số lẻ: <code>%.2f</code>.<br>
+      &bull; <code>char</code>: 1 ký tự (%c), 1 byte, để trong nháy đơn <code>'A'</code>.<br>
+      &bull; <strong>Chia nguyên</strong>: <code>5 / 2 = 2</code> (mất phần thập phân). Muốn ra <code>2.5</code> phải viết: <code>5.0 / 2</code> hoặc <code>(float)5 / 2</code>.<br>
+      &bull; <strong>Chia dư</strong>: <code>7 % 3 = 1</code> (chỉ dùng cho số nguyên).
+    </div>
+    <div class="code-block">
+<span class="code-type">int</span> a = <span class="code-num">5</span>, b = <span class="code-num">2</span>;
+<span class="code-type">float</span> thuong = (<span class="code-type">float</span>)a / b; <span class="code-cmt">// = 2.5</span>
+<span class="code-type">int</span> du = a % b;               <span class="code-cmt">// = 1</span>
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ Bẫy thường gặp (Toán tử ++ và --)</div>
+      &bull; <code>x++</code>: Trả về giá trị cũ của <code>x</code> để tính toán trước, rồi mới tăng <code>x</code>.<br>
+      &bull; <code>++x</code>: Tăng <code>x</code> lên trước, rồi mới lấy giá trị mới đi tính toán.
+    </div>
+  </div>
+
+  <!-- BÀI 3 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">3</div>
+      <div class="lesson-title">Nhập / Xuất Chuẩn (printf & scanf)</div>
+    </div>
+    <div class="core-idea">
+      &bull; <code>printf("%d", x);</code>: Đọc giá trị của <code>x</code> để in ra màn hình (không cần dấu &amp;).<br>
+      &bull; <code>scanf("%d", &amp;x);</code>: <strong>Bắt buộc có &amp;</strong> vì cần đưa địa chỉ ô nhớ để CPU ghi số nhập vào ô đó.
+    </div>
+    <div class="code-block">
+<span class="code-type">int</span> tuoi;
+printf(<span class="code-str">"Nhap tuoi: "</span>);
+scanf(<span class="code-str">"%d"</span>, &amp;tuoi);  <span class="code-cmt">// Bắt buộc có &amp;</span>
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ Bẫy thường gặp</div>
+      <code>scanf("%d", x);</code> quên <code>&amp;</code> sẽ làm sập chương trình (Crash / Segfault). Riêng mảng ký tự chuỗi thì không cần <code>&amp;</code>.
+    </div>
+  </div>
+
+  <!-- BÀI 4 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">4</div>
+      <div class="lesson-title">Cấu Trúc Rẽ Nhánh (if - else & switch - case)</div>
+    </div>
+    <div class="core-idea">
+      &bull; <strong>Toán tử so sánh</strong>: <code>==</code> (bằng), <code>!=</code> (khác), <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>.<br>
+      &bull; <strong>Toán tử logic</strong>: <code>&amp;&amp;</code> (VÀ), <code>||</code> (HOẶC), <code>!</code> (PHỦ ĐỊNH).<br>
+      &bull; <code>switch(biến)</code>: Dùng khi so sánh 1 biến với nhiều hằng số nguyên/ký tự.
+    </div>
+    <div class="code-block">
+<span class="code-kw">if</span> (diem &gt;= <span class="code-num">8.5</span>) {
+    printf(<span class="code-str">"Gioi\n"</span>);
+} <span class="code-kw">else if</span> (diem &gt;= <span class="code-num">7.0</span>) {
+    printf(<span class="code-str">"Kha\n"</span>);
+} <span class="code-kw">else</span> {
+    printf(<span class="code-str">"Trung binh\n"</span>);
+}
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ 2 Bẫy trắc nghiệm kinh điển</div>
+      1. Viết <code>if (x = 5)</code> thay vì <code>if (x == 5)</code>. Lệnh gán <code>x = 5</code> khiến điều kiện luôn luôn ĐÚNG (khác 0)!<br>
+      2. Trong <code>switch - case</code>, quên lệnh <code>break;</code> sẽ khiến code chạy tuồn tuột xuống các case bên dưới (Fall-through).
+    </div>
+  </div>
+
+  <!-- BÀI 5 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">5</div>
+      <div class="lesson-title">Vòng Lặp (for, while, do - while)</div>
+    </div>
+    <div class="core-idea">
+      &bull; <code>for(khởi tạo; điều kiện; bước nhảy)</code>: Dùng khi biết trước số lần lặp.<br>
+      &bull; <code>while(điều kiện)</code>: Kiểm tra điều kiện trước, đúng mới làm.<br>
+      &bull; <code>do { ... } while(điều kiện);</code>: Làm trước ít nhất 1 lần rồi mới kiểm tra điều kiện.<br>
+      &bull; <code>break;</code>: Thoát hẳn khỏi vòng lặp ngay lập tức.<br>
+      &bull; <code>continue;</code>: Bỏ qua các lệnh còn lại ở lượt hiện tại, nhảy ngay sang lượt lặp kế tiếp.
+    </div>
+    <div class="code-block">
+<span class="code-type">int</span> tong = <span class="code-num">0</span>;
+<span class="code-kw">for</span> (<span class="code-type">int</span> i = <span class="code-num">1</span>; i &lt;= <span class="code-num">5</span>; i++) {
+    tong += i;  <span class="code-cmt">// 1 + 2 + 3 + 4 + 5 = 15</span>
+}
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ Bẫy thường gặp</div>
+      Viết thừa dấu chấm phẩy: <code>for (int i=0; i&lt;5; i++);</code> &rarr; vòng lặp rỗng chạy một mình, ngoặc nhọn bên dưới chỉ chạy 1 lần!
+    </div>
+  </div>
+
+  <!-- BÀI 6 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">6</div>
+      <div class="lesson-title">Hàm (Function)</div>
+    </div>
+    <div class="core-idea">
+      &bull; Chia nhỏ chương trình thành các khối chức năng tái sử dụng.<br>
+      &bull; <code>void</code>: Hàm không trả về giá trị (chỉ in hoặc làm việc gì đó).<br>
+      &bull; <code>return</code>: Trả giá trị về cho nơi gọi hàm và kết thúc hàm ngay lập tức.<br>
+      &bull; <strong>Biến cục bộ (Local Variable)</strong>: Biến khai báo trong hàm nào thì chỉ sống trong hàm đó, hàm kết thúc là biến biến mất.
+    </div>
+    <div class="code-block">
+<span class="code-type">int</span> tinhTong(<span class="code-type">int</span> a, <span class="code-type">int</span> b) {
+    <span class="code-kw">return</span> a + b;
+}
+
+<span class="code-type">int</span> main() {
+    <span class="code-type">int</span> s = tinhTong(<span class="code-num">3</span>, <span class="code-num">7</span>); <span class="code-cmt">// s = 10</span>
+}
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ Bẫy thường gặp (Tham trị - Pass by Value)</div>
+      Khi truyền biến thường vào hàm (vd: <code>tang(x)</code>), hàm chỉ nhận được bản sao. Mọi thay đổi trong hàm không ảnh hưởng biến ở <code>main</code>!
+    </div>
+  </div>
+
+  <!-- BÀI 7 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">7</div>
+      <div class="lesson-title">Mảng 1 Chiều (Array)</div>
+    </div>
+    <div class="core-idea">
+      &bull; Mảng là tập hợp nhiều biến cùng kiểu nằm liền kề nhau trong bộ nhớ RAM.<br>
+      &bull; Khai báo: <code>int a[5];</code> &rarr; có 5 phần tử: <code>a[0], a[1], a[2], a[3], a[4]</code>.<br>
+      &bull; <strong>Chỉ số bắt đầu từ 0 đến n - 1</strong>.
+    </div>
+    <div class="code-block">
+<span class="code-type">int</span> a[<span class="code-num">4</span>] = {<span class="code-num">10</span>, <span class="code-num">20</span>, <span class="code-num">30</span>, <span class="code-num">40</span>};
+<span class="code-kw">for</span> (<span class="code-type">int</span> i = <span class="code-num">0</span>; i &lt; <span class="code-num">4</span>; i++) {
+    printf(<span class="code-str">"%d "</span>, a[i]);
+}
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ Bẫy truy cập ngoài mảng (Out of Bounds)</div>
+      Mảng <code>int a[5];</code> chỉ có đến <code>a[4]</code>. Nếu bạn gọi <code>a[5]</code> là đang đọc trúng vùng nhớ rác nguy hiểm!
+    </div>
+  </div>
+
+  <!-- BÀI 8 -->
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div class="lesson-num">8</div>
+      <div class="lesson-title">Chuỗi Ký Tự (String)</div>
+    </div>
+    <div class="core-idea">
+      &bull; Chuỗi trong C thực chất là <strong>mảng ký tự</strong> kết thúc bằng ký tự đặc biệt <code>'\0'</code> (Null terminator, mã ASCII = 0).<br>
+      &bull; Khai báo: <code>char s[20] = "Phenikaa";</code><br>
+      &bull; In chuỗi: <code>printf("%s", s);</code><br>
+      &bull; Nhập chuỗi có dấu cách: Dùng <code>fgets(s, sizeof(s), stdin);</code> (tránh dùng <code>scanf("%s")</code> vì dừng khi gặp dấu cách).<br>
+      &bull; Thư viện <code>#include &lt;string.h&gt;</code>: <code>strlen(s)</code> đếm số ký tự (không tính ký tự <code>'\0'</code>).
+    </div>
+    <div class="code-block">
+<span class="code-kw">#include</span> &lt;string.h&gt;
+<span class="code-type">char</span> ten[<span class="code-num">20</span>] = <span class="code-str">"AI K20"</span>;
+printf(<span class="code-str">"Do dai: %zu\n"</span>, strlen(ten)); <span class="code-cmt">// In ra: 6</span>
+    </div>
+    <div class="trap-box">
+      <div class="trap-title">⚠️ Bẫy kích thước chuỗi</div>
+      Muốn lưu chuỗi có 5 chữ cái (vd: "Hello"), mảng phải có kích thước tối thiểu là 6 ô nhớ để chừa 1 ô cho ký tự <code>'\0'</code>!
+    </div>
+  </div>
+
+  <div class="action-cta">
+    🔥 Bạn hãy đọc thật kỹ lại 8 bài trên. Khi nào sẵn sàng, quay lại đoạn chat nhắn: "Sẵn sàng" để bắt đầu bài kiểm tra 1 tiết trắc nghiệm code!
+  </div>
+</body>
+</html>
