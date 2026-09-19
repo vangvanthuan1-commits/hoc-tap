@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ôn Tập Giải Tích 1 - Giới Hạn</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151d30;
+      --card-border: #23314f;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #818cf8;
+      --success: #34d399;
+      --danger: #f87171;
+      --warning: #fbbf24;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 50px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 20px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .formula-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .formula-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .formula-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .formula-math {
+      font-size: 1.15rem;
+      font-family: "Cambria Math", "Times New Roman", serif;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 6px;
+      background: rgba(0,0,0,0.25);
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .formula-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .alert-box {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 16px 0;
+    }
+    .alert-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--danger);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .alert-content {
+      font-size: 0.82rem;
+      color: #fecaca;
+    }
+    .quiz-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .quiz-q {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .quiz-math {
+      font-size: 1.1rem;
+      font-family: "Cambria Math", serif;
+      color: var(--primary);
+      margin: 6px 0 12px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    button {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+      transition: opacity 0.15s ease;
+    }
+    button:active {
+      opacity: 0.8;
+    }
+    .btn-hint {
+      background: #1e293b;
+      color: var(--warning);
+      border: 1px solid #334155;
+    }
+    .btn-sol {
+      background: var(--primary);
+      color: #0b0f19;
+    }
+    .hidden-box {
+      display: none;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      animation: fadeIn 0.2s ease;
+    }
+    .hint-box {
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      color: #fef08a;
+    }
+    .sol-box {
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      color: #a7f3d0;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">&larr; Quay lại Cổng Ôn Tập</a>
+  <h1>🧮 Giải Tích 1: Giới Hạn</h1>
+  <div class="subtitle">Trọng tâm: Giới hạn vô định 0/0 & Giới hạn lượng giác</div>
+
+  <div class="alert-box">
+    <div class="alert-title">⚠️ Bẫy Sai Dấu Thường Gặp (Pinpoint Warning)</div>
+    <div class="alert-content">
+      Khi rút gọn biểu thức có dấu trừ trước ngoặc: <strong>-(1 - x) = -1 + x</strong>.<br>
+      Đừng quên đổi dấu của cả hai số hạng bên trong ngoặc!
+    </div>
+  </div>
+
+  <div class="section-title">📌 Bảng Giới Hạn Cốt Lõi (x &rarr; 0)</div>
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="formula-title">1. Giới Hạn Lượng Giác Cơ Bản</div>
+      <div class="formula-math">lim (x&rarr;0) [sin(x) / x] = 1</div>
+      <div class="formula-note">Hệ quả tổng quát: lim (x&rarr;0) [sin(kx) / x] = k</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-title">2. Giới Hạn Tang</div>
+      <div class="formula-math">lim (x&rarr;0) [tan(x) / x] = 1</div>
+      <div class="formula-note">Bản chất: tan(x) = sin(x) / cos(x). Khi x&rarr;0 thì cos(x)&rarr;1.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-title">3. Giới Hạn Cosin Bậc 2</div>
+      <div class="formula-math">lim (x&rarr;0) [(1 - cos x) / x²] = 1/2</div>
+      <div class="formula-note">Chứng minh bằng nhân liên hợp (1 + cos x) hoặc nhân đôi 2 sin²(x/2).</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-title">4. Công Thức Liên Hợp Căn Bậc Hai Nhanh</div>
+      <div class="formula-math">lim (x&rarr;0) [(√(1+ax) - √(1+bx)) / x] = (a - b) / 2</div>
+      <div class="formula-note">Áp dụng giải cực nhanh trắc nghiệm và kiểm tra lại tự luận.</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-title">5. Giới Hạn Mũ & Logarit</div>
+      <div class="formula-math">lim (x&rarr;0) [(eˣ - 1) / x] = 1 &nbsp;|&nbsp; lim (x&rarr;0) [ln(1+x) / x] = 1</div>
+      <div class="formula-note">Vô cùng bé tương đương: eˣ - 1 ~ x, ln(1+x) ~ x khi x &rarr; 0.</div>
+    </div>
+  </div>
+
+  <div class="section-title">📝 Bài Tập Tự Luyện Tương Tác</div>
+
+  <!-- Câu 1 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Bài 1: Tính giới hạn sau:</div>
+    <div class="quiz-math">lim (x&rarr;0) [tan(x) / x]</div>
+    <div class="btn-group">
+      <button class="btn-hint" onclick="toggle('h1')">💡 Xem Gợi Ý</button>
+      <button class="btn-sol" onclick="toggle('s1')">✅ Lời Giải</button>
+    </div>
+    <div id="h1" class="hidden-box hint-box">
+      <strong>Gợi ý:</strong> Hãy thay tan(x) = sin(x) / cos(x), sau đó viết lại thành [sin(x) / x] &times; [1 / cos(x)].
+    </div>
+    <div id="s1" class="hidden-box sol-box">
+      <strong>Lời giải:</strong><br>
+      = lim (x&rarr;0) [sin(x) / (x &times; cos(x))]<br>
+      = lim (x&rarr;0) [sin(x) / x] &times; lim (x&rarr;0) [1 / cos(x)]<br>
+      = 1 &times; (1 / cos 0) = 1 &times; 1 = <strong>1</strong>.
+    </div>
+  </div>
+
+  <!-- Câu 2 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Bài 2: Tính giới hạn lượng giác có hệ số:</div>
+    <div class="quiz-math">lim (x&rarr;0) [sin(4x) / x]</div>
+    <div class="btn-group">
+      <button class="btn-hint" onclick="toggle('h2')">💡 Xem Gợi Ý</button>
+      <button class="btn-sol" onclick="toggle('s2')">✅ Lời Giải</button>
+    </div>
+    <div id="h2" class="hidden-box hint-box">
+      <strong>Gợi ý:</strong> Để dùng sin(u)/u &rarr; 1, mẫu số cần là 4x. Hãy nhân và chia thêm cho 4.
+    </div>
+    <div id="s2" class="hidden-box sol-box">
+      <strong>Lời giải:</strong><br>
+      = lim (x&rarr;0) 4 &times; [sin(4x) / 4x]<br>
+      = 4 &times; 1 = <strong>4</strong>.
+    </div>
+  </div>
+
+  <!-- Câu 3 -->
+  <div class="quiz-card">
+    <div class="quiz-q">Bài 3: Áp dụng công thức liên hợp căn nhanh:</div>
+    <div class="quiz-math">lim (x&rarr;0) [(√(1 + 5x) - √(1 - 3x)) / x]</div>
+    <div class="btn-group">
+      <button class="btn-hint" onclick="toggle('h3')">💡 Xem Gợi Ý</button>
+      <button class="btn-sol" onclick="toggle('s3')">✅ Lời Giải</button>
+    </div>
+    <div id="h3" class="hidden-box hint-box">
+      <strong>Gợi ý:</strong> Dùng dạng tổng quát: (a - b) / 2 với a = 5 và b = -3. Lưu ý b mang dấu âm!
+    </div>
+    <div id="s3" class="hidden-box sol-box">
+      <strong>Lời giải:</strong><br>
+      Công thức: (a - b) / 2 = [5 - (-3)] / 2 = (5 + 3) / 2 = 8 / 2 = <strong>4</strong>.<br>
+      <em>(Lưu ý tránh nhầm dấu: 5 - (-3) = 5 + 3)</em>
+    </div>
+  </div>
+
+  <script>
+    function toggle(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

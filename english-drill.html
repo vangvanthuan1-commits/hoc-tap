@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>English Placement Drill - Phenikaa</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151d30;
+      --card-border: #23314f;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #818cf8;
+      --success: #34d399;
+      --danger: #f87171;
+      --warning: #fbbf24;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 60px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .app-header {
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .opt-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 12px 6px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .opt-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .main-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #0b0f19;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 48px;
+      margin-top: 8px;
+    }
+    .mistake-badge {
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: var(--danger);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .progress-bar-container {
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.2s ease;
+    }
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .q-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .answers-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .ans-btn {
+      background: #19233c;
+      border: 1px solid var(--card-border);
+      color: #f1f5f9;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.1s ease, border-color 0.1s ease;
+    }
+    .ans-btn:active {
+      transform: scale(0.99);
+    }
+    .ans-btn.correct {
+      background: rgba(52, 211, 153, 0.2) !important;
+      border-color: var(--success) !important;
+      color: #a7f3d0 !important;
+      font-weight: 600;
+    }
+    .ans-btn.wrong {
+      background: rgba(248, 113, 113, 0.2) !important;
+      border-color: var(--danger) !important;
+      color: #fecaca !important;
+    }
+    .ans-btn:disabled {
+      cursor: default;
+    }
+    .feedback-box {
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      animation: fadeIn 0.15s ease;
+    }
+    .feedback-correct {
+      background: rgba(52, 211, 153, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      color: #a7f3d0;
+    }
+    .feedback-wrong {
+      background: rgba(248, 113, 113, 0.12);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #fecaca;
+    }
+    .keyword-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(251, 191, 36, 0.2);
+      color: var(--warning);
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">&larr; Cổng Ôn Tập</a>
+  <div class="app-header">
+    <h1>🇬🇧 English Drill (A1-A2)</h1>
+    <div class="subtitle">Luyện phản xạ từ khóa &bull; Tối ưu điện thoại</div>
+  </div>
+
+  <!-- MÀN HÌNH BẮT ĐẦU -->
+  <div id="start-screen" class="card">
+    <div id="mistake-alert" class="mistake-badge" style="display:none;">
+      <span>⚠️ Bạn có <strong id="mistake-count">0</strong> câu sai cần ôn lại</span>
+      <button onclick="startMistakesOnly()" style="background:none; border:none; color:var(--primary); font-weight:700; cursor:pointer;">Luyện câu sai &rarr;</button>
+    </div>
+
+    <div style="font-size:0.9rem; font-weight:600; margin-bottom:6px;">Chọn số lượng câu luyện hôm nay:</div>
+    <div class="btn-grid">
+      <div class="opt-btn active" onclick="setCount(10, this)">10 Câu</div>
+      <div class="opt-btn" onclick="setCount(30, this)">30 Câu</div>
+      <div class="opt-btn" onclick="setCount(50, this)">50 Câu</div>
+    </div>
+
+    <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">
+      Phương pháp: <strong>Keyword nhận diện &rarr; Rule ngắn &rarr; Phản xạ nhanh</strong>.
+    </div>
+
+    <button class="main-btn" onclick="startQuiz()">Bắt Đầu Luyện Ngay 🚀</button>
+  </div>
+
+  <!-- MÀN HÌNH LÀM BÀI -->
+  <div id="quiz-screen" style="display:none;">
+    <div class="q-meta">
+      <span id="q-counter">Câu 1 / 10</span>
+      <span id="q-topic">Present Simple</span>
+    </div>
+    <div class="progress-bar-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+
+    <div class="card">
+      <div class="q-text" id="q-text">Loading...</div>
+      <div class="answers-grid" id="answers-grid"></div>
+
+      <div id="feedback-box" class="feedback-box" style="display:none;">
+        <div><span class="keyword-tag" id="fb-keyword">KEYWORD</span></div>
+        <div id="fb-rule" style="margin: 4px 0 6px;"></div>
+        <div id="fb-pitfall" style="font-size:0.8rem; color:#94a3b8;"></div>
+      </div>
+
+      <button id="next-btn" class="main-btn" style="display:none;" onclick="nextQuestion()">Câu Tiếp Theo &rarr;</button>
+    </div>
+  </div>
+
+  <!-- MÀN HÌNH KẾT QUẢ -->
+  <div id="result-screen" class="card" style="display:none; text-align:center;">
+    <h2 style="font-size:1.3rem; margin-bottom:8px;">Hoàn Thành Bài Luyện! 🎉</h2>
+    <div id="result-score" style="font-size:2rem; font-weight:800; color:var(--primary); margin:12px 0;">8/10</div>
+    <div id="result-msg" style="font-size:0.88rem; color:var(--text-muted); margin-bottom:20px;"></div>
+
+    <button class="main-btn" onclick="restartQuiz()">Luyện Lại Vòng Mới 🔄</button>
+  </div>
+
+  <script>
+    // NGÂN HÀNG CÂU HỎI THIẾT KẾ ĐẶC THÙ CHO PHENIKAA K20 (THEO TRIGGER KEYWORD)
+    const QUESTION_BANK = [
+      {
+        id: 1,
+        topic: "Present Simple",
+        keyword: "every day",
+        text: "She _____ to Phenikaa University by bus every day.",
+        options: ["goes", "go", "is going", "went"],
+        correct: 0,
+        rule: "Chủ ngữ ngôi thứ 3 số ít (She/He/It) + V(s/es).",
+        pitfall: "Tránh nhầm với 'go' nguyên mẫu hoặc thì tiếp diễn."
+      },
+      {
+        id: 2,
+        topic: "Present Continuous",
+        keyword: "now / at the moment",
+        text: "Look! The students _____ computer science in the lab now.",
+        options: ["studies", "are studying", "studied", "study"],
+        correct: 1,
+        rule: "Look! / Now / At the moment &rarr; am/is/are + V-ing.",
+        pitfall: "Đừng quên trợ động từ 'are' trước V-ing."
+      },
+      {
+        id: 3,
+        topic: "Past Simple",
+        keyword: "yesterday",
+        text: "He _____ his military uniform yesterday.",
+        options: ["washes", "washed", "is washing", "wash"],
+        correct: 1,
+        rule: "Yesterday &rarr; Quá khứ đơn (V2/ed).",
+        pitfall: "Hành động đã hoàn thành hẳn trong quá khứ."
+      },
+      {
+        id: 4,
+        topic: "Pronouns & Possessives",
+        keyword: "Tính từ sở hữu",
+        text: "This is my laptop, and that is _____ laptop.",
+        options: ["her", "hers", "she", "him"],
+        correct: 0,
+        rule: "Trước danh từ 'laptop' cần một Tính từ sở hữu: my/her/his/their.",
+        pitfall: "Hers là đại từ sở hữu (không đi kèm danh từ đằng sau)."
+      },
+      {
+        id: 5,
+        topic: "To be (Past)",
+        keyword: "last night",
+        text: "They _____ very tired after the marching drill last night.",
+        options: ["was", "were", "are", "have been"],
+        correct: 1,
+        rule: "Chủ ngữ số nhiều 'They' trong quá khứ dùng 'were'.",
+        pitfall: "Was chỉ đi với I / He / She / It / Danh từ số ít."
+      },
+      {
+        id: 6,
+        topic: "Future (will / be going to)",
+        keyword: "tomorrow (kế hoạch)",
+        text: "Look at those dark clouds! It _____ rain soon.",
+        options: ["is going to", "will", "rains", "rained"],
+        correct: 0,
+        rule: "Có bằng chứng trước mắt (mây đen) &rarr; dùng 'be going to'.",
+        pitfall: "'Will' chỉ dùng cho quyết định bộc phát hoặc dự đoán không có căn cứ hiện tại."
+      },
+      {
+        id: 7,
+        topic: "Modal Verbs",
+        keyword: "must / should",
+        text: "Soldiers _____ follow strict rules in the military camp.",
+        options: ["must", "must to", "ought", "need to"],
+        correct: 0,
+        rule: "Sau Modal verb (must, can, should) là Động từ nguyên mẫu KHÔNG 'to'.",
+        pitfall: "Bẫy rất hay gặp: 'must to do' &rarr; Sai hoàn toàn!"
+      },
+      {
+        id: 8,
+        topic: "Some / Any",
+        keyword: "Câu phủ định",
+        text: "I don't have _____ free time during the military course.",
+        options: ["some", "any", "many", "a"],
+        correct: 1,
+        rule: "Câu phủ định (don't have) & câu hỏi &rarr; Dùng 'any'.",
+        pitfall: "'Some' dùng trong câu khẳng định hoặc lời mời lịch sự."
+      },
+      {
+        id: 9,
+        topic: "Comparatives",
+        keyword: "than",
+        text: "Calculus is often _____ than general high school math.",
+        options: ["harder", "more hard", "hardest", "as hard"],
+        correct: 0,
+        rule: "Tính từ ngắn (hard) so sánh hơn &rarr; thêm đuôi -er + than.",
+        pitfall: "Không nói 'more harder' hay 'more hard'."
+      },
+      {
+        id: 10,
+        topic: "V-ing / to-V",
+        keyword: "enjoy / like / avoid",
+        text: "She avoids _____ mistakes in the grammar test.",
+        options: ["make", "making", "to make", "made"],
+        correct: 1,
+        rule: "Avoid + V-ing (Tránh làm gì).",
+        pitfall: "Các từ đi với V-ing: avoid, enjoy, practice, mind, finish."
+      },
+      {
+        id: 11,
+        topic: "Prepositions of Time",
+        keyword: "Giờ giấc & Ngày",
+        text: "The training session starts _____ 6:00 AM _____ Monday.",
+        options: ["at / on", "in / at", "on / in", "at / in"],
+        correct: 0,
+        rule: "Giờ dùng AT, Ngày dùng ON, Tháng/Năm dùng IN (Quy tắc: In năm, in tháng, in mùa - Gặp ngày, gặp thứ thì chừa On ra - Giờ giấc dùng At).",
+        pitfall: "Nhớ mẹo thần chú: AT giờ, ON ngày, IN tháng/năm."
+      },
+      {
+        id: 12,
+        topic: "Present Simple (Phủ định)",
+        keyword: "Trợ động từ",
+        text: "He _____ like waking up at 5:00 AM.",
+        options: ["doesn't", "don't", "isn't", "not"],
+        correct: 0,
+        rule: "Chủ ngữ He/She/It phủ định thì Hiện tại đơn mượn 'doesn't + V_nguyên_mẫu'.",
+        pitfall: "Không dùng 'isn't' trước một động từ chỉ hành động thường như 'like'."
+      }
+    ];
+
+    let targetCount = 10;
+    let activeQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let mistakesStorageKey = "phenikaa_drill_mistakes";
+
+    function getStoredMistakes() {
+      try {
+        return JSON.parse(localStorage.getItem(mistakesStorageKey)) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveMistake(qId) {
+      let list = getStoredMistakes();
+      if (!list.includes(qId)) {
+        list.push(qId);
+        localStorage.setItem(mistakesStorageKey, JSON.stringify(list));
+      }
+      checkMistakesUI();
+    }
+
+    function removeMistake(qId) {
+      let list = getStoredMistakes().filter(id => id !== qId);
+      localStorage.setItem(mistakesStorageKey, JSON.stringify(list));
+      checkMistakesUI();
+    }
+
+    function checkMistakesUI() {
+      let m = getStoredMistakes();
+      let alertBox = document.getElementById("mistake-alert");
+      let countSpan = document.getElementById("mistake-count");
+      if (m.length > 0) {
+        countSpan.textContent = m.length;
+        alertBox.style.display = "flex";
+      } else {
+        alertBox.style.display = "none";
+      }
+    }
+
+    function setCount(num, btn) {
+      targetCount = num;
+      document.querySelectorAll(".opt-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    function startQuiz(customQuestions = null) {
+      if (customQuestions) {
+        activeQuestions = customQuestions;
+      } else {
+        // Trộn ngẫu nhiên câu hỏi
+        let pool = [...QUESTION_BANK];
+        // Đưa các câu trong mistake log lên ưu tiên trước (Spaced Repetition)
+        let mistakeIds = getStoredMistakes();
+        pool.sort((a, b) => {
+          let aM = mistakeIds.includes(a.id) ? -1 : 1;
+          let bM = mistakeIds.includes(b.id) ? -1 : 1;
+          return aM - bM || Math.random() - 0.5;
+        });
+        activeQuestions = pool.slice(0, Math.min(targetCount, pool.length));
+      }
+
+      currentIndex = 0;
+      score = 0;
+      document.getElementById("start-screen").style.display = "none";
+      document.getElementById("result-screen").style.display = "none";
+      document.getElementById("quiz-screen").style.display = "block";
+      showQuestion();
+    }
+
+    function startMistakesOnly() {
+      let mIds = getStoredMistakes();
+      let qs = QUESTION_BANK.filter(q => mIds.includes(q.id));
+      if (qs.length > 0) {
+        startQuiz(qs);
+      }
+    }
+
+    function showQuestion() {
+      let q = activeQuestions[currentIndex];
+      let total = activeQuestions.length;
+
+      document.getElementById("q-counter").textContent = `Câu ${currentIndex + 1} / ${total}`;
+      document.getElementById("q-topic").textContent = q.topic;
+      document.getElementById("progress-bar").style.width = `${((currentIndex) / total) * 100}%`;
+
+      document.getElementById("q-text").textContent = q.text;
+      document.getElementById("feedback-box").style.display = "none";
+      document.getElementById("next-btn").style.display = "none";
+
+      let answersGrid = document.getElementById("answers-grid");
+      answersGrid.innerHTML = "";
+
+      q.options.forEach((opt, idx) => {
+        let btn = document.createElement("button");
+        btn.className = "ans-btn";
+        btn.innerHTML = `<span style="opacity:0.6; font-weight:700;">${String.fromCharCode(65 + idx)}.</span> ${opt}`;
+        btn.onclick = () => selectAnswer(idx);
+        answersGrid.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(chosenIdx) {
+      let q = activeQuestions[currentIndex];
+      let btns = document.querySelectorAll(".ans-btn");
+      btns.forEach(b => b.disabled = true);
+
+      let fbBox = document.getElementById("feedback-box");
+      let fbKeyword = document.getElementById("fb-keyword");
+      let fbRule = document.getElementById("fb-rule");
+      let fbPitfall = document.getElementById("fb-pitfall");
+
+      fbKeyword.textContent = `🎯 KEYWORD: ${q.keyword.toUpperCase()}`;
+      fbRule.innerHTML = `<strong>Quy tắc:</strong> ${q.rule}`;
+      fbPitfall.innerHTML = `<em>Lưu ý:</em> ${q.pitfall}`;
+
+      if (chosenIdx === q.correct) {
+        btns[chosenIdx].classList.add("correct");
+        fbBox.className = "feedback-box feedback-correct";
+        score++;
+        removeMistake(q.id); // Trả lời đúng thì gỡ khỏi mistake log
+      } else {
+        btns[chosenIdx].classList.add("wrong");
+        btns[q.correct].classList.add("correct");
+        fbBox.className = "feedback-box feedback-wrong";
+        saveMistake(q.id); // Trả lời sai thì lưu vào mistake log
+      }
+
+      fbBox.style.display = "block";
+      document.getElementById("next-btn").style.display = "block";
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      if (currentIndex < activeQuestions.length) {
+        showQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById("quiz-screen").style.display = "none";
+      document.getElementById("result-screen").style.display = "block";
+
+      let total = activeQuestions.length;
+      let pct = Math.round((score / total) * 100);
+      document.getElementById("result-score").textContent = `${score} / ${total} (${pct}%)`;
+
+      let msg = "";
+      if (pct >= 80) {
+        msg = "Xuất sắc! Nền tảng phản xạ của bạn rất tốt. Giữ vững phong độ này nhé! 🌟";
+      } else if (pct >= 60) {
+        msg = "Khá tốt! Các câu sai đã được tự động lưu vào Mistake Log để bạn ôn lại ngay.";
+      } else {
+        msg = "Đừng nản! Làm lại các câu sai vài lần là phản xạ sẽ ngấm vào đầu ngay thôi.";
+      }
+      document.getElementById("result-msg").textContent = msg;
+      checkMistakesUI();
+    }
+
+    function restartQuiz() {
+      document.getElementById("result-screen").style.display = "none";
+      document.getElementById("start-screen").style.display = "block";
+      checkMistakesUI();
+    }
+
+    // Khởi tạo
+    checkMistakesUI();
+  </script>
+</body>
+</html>

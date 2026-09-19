@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ôn Tập C Foundation - RAM & Pointer</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #151d30;
+      --card-border: #23314f;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #818cf8;
+      --success: #34d399;
+      --danger: #f87171;
+      --warning: #fbbf24;
+      --code-bg: #0d1322;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 50px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .progress-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: #1e293b;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 8px 0 6px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 70%;
+      background: linear-gradient(90deg, #38bdf8, #34d399);
+      border-radius: 4px;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 20px 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      margin: 8px 0;
+      line-height: 1.45;
+    }
+    .code-kw { color: #f472b6; }
+    .code-type { color: #818cf8; }
+    .code-num { color: #fbbf24; }
+    .code-str { color: #34d399; }
+    .code-cmt { color: #64748b; font-style: italic; }
+
+    .memory-diagram {
+      background: #0d1322;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px;
+      margin: 10px 0;
+    }
+    .mem-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 0.82rem;
+    }
+    .mem-row:last-child { margin-bottom: 0; }
+    .mem-addr {
+      font-family: monospace;
+      color: var(--warning);
+      width: 80px;
+      font-size: 0.75rem;
+    }
+    .mem-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 600;
+      min-width: 70px;
+      text-align: center;
+    }
+    .mem-label {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+    .alert-box {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 16px 0;
+    }
+    .alert-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--danger);
+      margin-bottom: 6px;
+    }
+    .alert-list {
+      font-size: 0.82rem;
+      color: #fecaca;
+      padding-left: 18px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    button {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .btn-hint {
+      background: #1e293b;
+      color: var(--warning);
+      border: 1px solid #334155;
+    }
+    .btn-sol {
+      background: var(--primary);
+      color: #0b0f19;
+    }
+    .hidden-box {
+      display: none;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+    }
+    .hint-box {
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      color: #fef08a;
+    }
+    .sol-box {
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      color: #a7f3d0;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">&larr; Quay lại Cổng Ôn Tập</a>
+  <h1>💻 C Foundation: RAM & Con Trỏ</h1>
+  <div class="subtitle">Duy trì phản xạ code 20 phút/ngày trong thời gian quân sự</div>
+
+  <div class="progress-box">
+    <div style="display:flex; justify-content:space-between; font-size:0.82rem;">
+      <span style="font-weight:600; color:#fff;">Tiến độ C cơ bản</span>
+      <span style="color:var(--success); font-weight:700;">70%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill"></div>
+    </div>
+    <div style="font-size:0.75rem; color:var(--text-muted);">
+      Mục tiêu kế tiếp: Pointer/RAM &rarr; Struct &rarr; Bài tổng hợp C.
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <div class="alert-title">⚠️ 3 Bẫy Cú Pháp Thường Gặp Cần Khắc Phục:</div>
+    <ul class="alert-list">
+      <li><strong>Quên dấu chấm phẩy ;</strong> ở cuối dòng lệnh.</li>
+      <li><strong>Thiếu đóng ngoặc kép "</strong> trong chuỗi <code>printf("...");</code>.</li>
+      <li><strong>Hàm scanf quên dấu &amp;:</strong> <code>scanf("%d", &x);</code> (phải đưa địa chỉ ô nhớ, không phải giá trị).</li>
+    </ul>
+  </div>
+
+  <div class="section-title">🧠 Bản Chất RAM & Con Trỏ (Pointer)</div>
+  <div class="card">
+    <div style="font-size:0.85rem; font-weight:600; color:#fff;">1. Mọi biến đều có 2 thứ: Giá trị và Địa chỉ</div>
+    <div class="code-block">
+<span class="code-type">int</span> x = <span class="code-num">10</span>;
+<span class="code-type">int</span> *p = &amp;x; <span class="code-cmt">// p lưu địa chỉ của x</span>
+    </div>
+
+    <div class="memory-diagram">
+      <div class="mem-row">
+        <span class="mem-addr">0x7ffee4</span>
+        <span class="mem-box">[ 10 ]</span>
+        <span class="mem-label">&larr; Biến x (giá trị = 10, địa chỉ &amp;x = 0x7ffee4)</span>
+      </div>
+      <div class="mem-row">
+        <span class="mem-addr">0x7ffee8</span>
+        <span class="mem-box">[ 0x7ffee4 ]</span>
+        <span class="mem-label">&larr; Con trỏ p (chứa địa chỉ của x)</span>
+      </div>
+    </div>
+
+    <div style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">
+      &bull; <strong>&amp;x</strong>: Cho biết "nhà của x ở đâu" (Địa chỉ).<br>
+      &bull; <strong>*p</strong>: "Đến địa chỉ mà p đang giữ để lấy/sửa giá trị" (Dereference).
+    </div>
+  </div>
+
+  <div class="section-title">📝 Bài Luyện Nhanh (Duy Trì Tay Code)</div>
+
+  <!-- Bài 1 -->
+  <div class="card">
+    <div style="font-weight:600; color:#fff; font-size:0.9rem;">Bài 1: Đoán xem chương trình in ra gì?</div>
+    <div class="code-block">
+<span class="code-type">int</span> a = <span class="code-num">5</span>;
+<span class="code-type">int</span> *p = &amp;a;
+*p = <span class="code-num">20</span>;
+printf(<span class="code-str">"%d\n"</span>, a);
+    </div>
+    <div class="btn-group">
+      <button class="btn-hint" onclick="toggle('h1')">💡 Xem Gợi Ý</button>
+      <button class="btn-sol" onclick="toggle('s1')">✅ Xem Đáp Án</button>
+    </div>
+    <div id="h1" class="hidden-box hint-box">
+      <strong>Gợi ý:</strong> <code>p</code> đang trỏ đến chính ô nhớ của <code>a</code>. Khi thay đổi <code>*p = 20</code>, giá trị trong ô nhớ đó bị đổi thành bao nhiêu?
+    </div>
+    <div id="s1" class="hidden-box sol-box">
+      <strong>Đáp án: 20</strong><br>
+      Vì <code>*p</code> thao tác trực tiếp vào vùng nhớ của <code>a</code>. Nên giá trị của <code>a</code> bị đổi từ 5 thành 20.
+    </div>
+  </div>
+
+  <!-- Bài 2 -->
+  <div class="card">
+    <div style="font-weight:600; color:#fff; font-size:0.9rem;">Bài 2: Tìm lỗi sai trong đoạn code scanf sau:</div>
+    <div class="code-block">
+<span class="code-type">int</span> n;
+printf(<span class="code-str">"Nhap n: "</span>);
+scanf(<span class="code-str">"%d"</span>, n);
+    </div>
+    <div class="btn-group">
+      <button class="btn-hint" onclick="toggle('h2')">💡 Xem Gợi Ý</button>
+      <button class="btn-sol" onclick="toggle('s2')">✅ Xem Đáp Án</button>
+    </div>
+    <div id="h2" class="hidden-box hint-box">
+      <strong>Gợi ý:</strong> <code>scanf</code> cần biết địa chỉ vùng nhớ để ghi dữ liệu từ bàn phím vào.
+    </div>
+    <div id="s2" class="hidden-box sol-box">
+      <strong>Lỗi sai:</strong> Thiếu dấu <code>&amp;</code> trước <code>n</code>.<br>
+      Sửa đúng: <code>scanf("%d", &amp;n);</code>.
+    </div>
+  </div>
+
+  <script>
+    function toggle(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
