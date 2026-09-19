@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Video Shorts: Tổng Ôn 8 Bài C &bull; Phenikaa K20 AI</title>
+  <style>
+    :root {
+      --bg: #050811;
+      --card: rgba(15, 23, 42, 0.95);
+      --cyan: #38bdf8;
+      --pink: #ec4899;
+      --pink-glow: rgba(236, 72, 153, 0.4);
+      --cyan-glow: rgba(56, 189, 248, 0.4);
+      --yellow: #fbbf24;
+      --green: #34d399;
+      --red: #f87171;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #000;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    /* Khung Video 9:16 chuẩn Reels / Shorts / TikTok */
+    .video-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 440px;
+      max-height: 920px;
+      background: var(--bg);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+    }
+    @media (min-width: 480px) {
+      .video-container {
+        border-radius: 28px;
+        border: 2px solid rgba(56, 189, 248, 0.3);
+        height: 94vh;
+      }
+    }
+
+    /* Thanh Timeline nhiều phân đoạn ở trên cùng (như Instagram Story / Reels) */
+    .story-bars {
+      display: flex;
+      gap: 4px;
+      padding: 12px 14px 6px;
+      z-index: 20;
+    }
+    .bar-item {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      transition: width 0.1s linear;
+    }
+    .bar-item.completed .bar-fill { width: 100%; }
+
+    /* Top Bar */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 16px;
+      z-index: 20;
+    }
+    .back-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 12px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .voice-toggle {
+      background: rgba(236, 72, 153, 0.2);
+      border: 1px solid var(--pink);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Vùng Nội Dung Video Chính */
+    .video-body {
+      flex: 1;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .badge-topic {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+      align-self: flex-start;
+      letter-spacing: 0.5px;
+    }
+    .video-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Khung Minh Họa Động (Dynamic Graphic Canvas/Box) */
+    .graphic-box {
+      background: rgba(11, 17, 32, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 12px;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+    .graphic-box::before {
+      content: '';
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 80px; height: 80px;
+      background: var(--pink-glow);
+      border-radius: 50%;
+      filter: blur(30px);
+    }
+
+    /* Khung Code Thực Tế */
+    .terminal-box {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    .terminal-header {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .code-line {
+      display: block;
+      transition: all 0.3s ease;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .code-line.active {
+      background: rgba(56, 189, 248, 0.2);
+      border-left: 3px solid var(--cyan);
+      color: #fff;
+      font-weight: 700;
+      transform: translateX(3px);
+    }
+    .kw { color: var(--pink); font-weight: 700; }
+    .type { color: #818cf8; }
+    .num { color: var(--yellow); }
+    .str { color: var(--green); }
+    .cmt { color: #64748b; font-style: italic; }
+
+    /* Phụ Đề & Bẫy Cần Nhớ */
+    .subtitle-box {
+      background: rgba(236, 72, 153, 0.12);
+      border: 1px solid rgba(236, 72, 153, 0.35);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 10px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: #fecdd3;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .subtitle-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* Controls dưới cùng */
+    .bottom-controls {
+      padding: 10px 16px 18px;
+      background: linear-gradient(to top, rgba(5, 8, 17, 0.95), transparent);
+      z-index: 20;
+    }
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: 0.2s;
+    }
+    .nav-btn:active { transform: scale(0.95); }
+    .play-pause-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      border: none;
+      color: #050811;
+      font-size: 1.2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 20px var(--pink-glow);
+    }
+    .speed-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--yellow);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* Minh Họa Từng Bài */
+    .mem-grid {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cell {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1.5px solid var(--cyan);
+      border-radius: 8px;
+      padding: 6px 10px;
+      text-align: center;
+      min-width: 50px;
+      animation: pulseCell 1.8s infinite alternate;
+    }
+    .cell.highlight {
+      background: rgba(236, 72, 153, 0.3);
+      border-color: var(--pink);
+      box-shadow: 0 0 12px var(--pink);
+    }
+    .cell-val { font-weight: 800; font-size: 1rem; color: #fff; }
+    .cell-idx { font-size: 0.65rem; color: var(--muted); font-family: monospace; }
+
+    @keyframes pulseCell {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.04); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="video-container" id="videoApp">
+  <!-- Story Bars (8 bài = 8 bars) -->
+  <div class="story-bars" id="storyBars"></div>
+
+  <!-- Header -->
+  <div class="top-header">
+    <a href="tong-on-c.html" class="back-btn">&larr; Đọc Văn Bản</a>
+    <button class="voice-toggle" id="voiceBtn" onclick="toggleVoice()">
+      <span id="voiceIcon">🔊</span> <span id="voiceText">Giọng Đọc: BẬT</span>
+    </button>
+  </div>
+
+  <!-- Mode Switcher -->
+  <div style="display:flex; gap:8px; padding:4px 16px 8px; z-index:20;">
+    <button id="btnInteractive" onclick="switchMode('interactive')" style="flex:1; padding:7px; border-radius:12px; border:1px solid var(--cyan); background:rgba(56,189,248,0.2); color:#fff; font-size:0.78rem; font-weight:700; cursor:pointer;">⚡ Shorts Tương Tác</button>
+    <button id="btnMp4" onclick="switchMode('mp4')" style="flex:1; padding:7px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.06); color:#cbd5e1; font-size:0.78rem; font-weight:700; cursor:pointer;">🎞️ Video MP4 (56s)</button>
+  </div>
+
+  <!-- MP4 Player Container -->
+  <div id="mp4Container" style="display:none; flex:1; padding:16px; flex-direction:column; justify-content:center; align-items:center; z-index:15;">
+    <video id="nativeVideo" src="tong-on-c.mp4" poster="frames/slide_00.png" controls playsinline style="width:100%; border-radius:18px; box-shadow:0 0 30px rgba(236,72,153,0.3); border:1px solid rgba(236,72,153,0.4); max-height:72vh; background:#000;"></video>
+    <div style="font-size:0.75rem; color:var(--muted); margin-top:12px; text-align:center;">
+      ✨ Video MP4 chuẩn 9:16 dọc điện thoại &bull; 8 slide tóm tắt 56s
+    </div>
+  </div>
+
+  <!-- Body (Shorts Tương Tác) -->
+  <div class="video-body" id="interactiveBody" onclick="handleScreenTap(event)">
+    <div class="badge-topic" id="lessonBadge">BÀI 1/8</div>
+    <div class="video-title" id="lessonTitle">Cấu Trúc C & Hello World</div>
+
+    <!-- Minh họa đồ họa -->
+    <div class="graphic-box" id="graphicBox"></div>
+
+    <!-- Terminal Code -->
+    <div class="terminal-box">
+      <div class="terminal-header">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <span style="font-size:0.7rem; color:#64748b; margin-left:6px;" id="codeFilename">main.c</span>
+      </div>
+      <div id="codeContent"></div>
+    </div>
+
+    <!-- Lời giảng & Bẫy -->
+    <div class="subtitle-box" id="subtitleBox">
+      <div class="subtitle-icon">💡</div>
+      <div id="subtitleText">Khởi động chương trình C: CPU luôn nạp hàm main() đầu tiên!</div>
+    </div>
+  </div>
+
+  <!-- Bottom Controls -->
+  <div class="bottom-controls">
+    <div class="control-row">
+      <button class="nav-btn" onclick="prevLesson()">&larr; Bài Trước</button>
+      <button class="play-pause-btn" id="playBtn" onclick="togglePlay()">⏸</button>
+      <button class="nav-btn" onclick="nextLesson()">Bài Tiếp &rarr;</button>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; color:var(--muted);">
+      <span>Chạm vào màn hình để Tạm Dừng / Tiếp Tục</span>
+      <button class="speed-btn" id="speedBtn" onclick="toggleSpeed()">Tốc độ: 1.0x</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Dữ liệu 8 bài học được thiết kế chuẩn kịch bản Video Shorts
+const lessons = [
+  {
+    num: "BÀI 1/8",
+    title: "Cấu Trúc C & Điểm Bắt Đầu",
+    graphic: `
+      <div style="text-align:center;">
+        <div style="font-size:2.2rem; margin-bottom:4px;">🚀</div>
+        <div style="font-weight:700; color:var(--cyan); font-size:0.9rem;">CPU Nạp main() Đầu Tiên</div>
+        <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">#include &lt;stdio.h&gt; cung cấp printf()</div>
+      </div>
+    `,
+    code: [
+      '<span class="kw">#include</span> &lt;stdio.h&gt;',
+      '<span class="type">int</span> main() {',
+      '    printf(<span class="str">"Hello Phenikaa AI!\\n"</span>);',
+      '    <span class="kw">return</span> <span class="num">0</span>;',
+      '}'
+    ],
+    activeLine: 2,
+    subtitle: "Mọi chương trình C đều bắt đầu từ main. Lệnh return 0 báo kết thúc thành công. Bẫy: Quên dấu chấm phẩy ; cuối lệnh!",
+    speech: "Bài 1: Cấu trúc C và Hello World. Máy tính luôn bắt đầu chạy từ hàm main. Quên dấu chấm phẩy cuối dòng là lỗi phổ biến nhất."
+  },
+  {
+    num: "BÀI 2/8",
+    title: "Toán Tử & Bẫy Chia Nguyên",
+    graphic: `
+      <div class="mem-grid">
+        <div class="cell"><div class="cell-idx">5 / 2</div><div class="cell-val" style="color:var(--red);">2</div><div class="cell-idx">mất số .5</div></div>
+        <div style="font-size:1.4rem; color:var(--cyan);">&rarr;</div>
+        <div class="cell highlight"><div class="cell-idx">(float)5 / 2</div><div class="cell-val" style="color:var(--green);">2.5</div><div class="cell-idx">ép kiểu chuẩn</div></div>
+      </div>
+    `,
+    code: [
+      '<span class="type">int</span> a = <span class="num">5</span>, b = <span class="num">2</span>;',
+      '<span class="type">float</span> kq = (<span class="type">float</span>)a / b; <span class="cmt">// 2.5</span>',
+      '<span class="type">int</span> du = a % b;               <span class="cmt">// 1</span>',
+      '<span class="type">int</span> x = <span class="num">10</span>; <span class="type">int</span> y = x++;      <span class="cmt">// y=10, x=11</span>'
+    ],
+    activeLine: 1,
+    subtitle: "5 chia 2 trong C bằng 2! Muốn ra 2.5 phải ép kiểu (float)5/2. Phép chia dư % chỉ dùng cho số nguyên. x++ lấy giá trị cũ trước khi tăng!",
+    speech: "Bài 2: Chia nguyên và toán tử. Năm chia hai trong C bằng hai. Muốn ra hai phẩy năm phải ép kiểu float. x cộng cộng lấy giá trị cũ trước khi tăng."
+  },
+  {
+    num: "BÀI 3/8",
+    title: "Nhập / Xuất: Bí Mật Dấu &",
+    graphic: `
+      <div class="mem-grid">
+        <div class="cell"><div class="cell-idx">printf("%d", x)</div><div class="cell-val">5</div><div class="cell-idx">Chỉ đọc giá trị</div></div>
+        <div style="font-size:1.4rem; color:var(--pink);">&harr;</div>
+        <div class="cell highlight"><div class="cell-idx">scanf("%d", &x)</div><div class="cell-val" style="color:var(--yellow);">&x = 0x100</div><div class="cell-idx">Đưa địa chỉ nạp số</div></div>
+      </div>
+    `,
+    code: [
+      '<span class="type">int</span> tuoi;',
+      'printf(<span class="str">"Nhap tuoi: "</span>);',
+      'scanf(<span class="str">"%d"</span>, &tuoi); <span class="cmt">// BẮT BUỘC có &</span>',
+      'printf(<span class="str">"Tuoi ban: %d\\n"</span>, tuoi);'
+    ],
+    activeLine: 2,
+    subtitle: "scanf bắt buộc phải có dấu & để chỉ đường cho CPU ghi vào ô nhớ! Quên & chương trình sẽ bị sập ngay lập tức.",
+    speech: "Bài 3: Nhập xuất dữ liệu. scanf bắt buộc phải có dấu và để đưa địa chỉ ô nhớ. Quên dấu và sẽ làm chương trình sập ngay."
+  },
+  {
+    num: "BÀI 4/8",
+    title: "Rẽ Nhánh & 2 Bẫy Trắc Nghiệm",
+    graphic: `
+      <div style="display:flex; gap:10px; text-align:center;">
+        <div style="background:rgba(239,68,68,0.2); border:1px solid var(--red); padding:8px 12px; border-radius:10px;">
+          <div style="color:var(--red); font-weight:800; font-size:0.8rem;">❌ if (x = 5)</div>
+          <div style="font-size:0.7rem; color:#cbd5e1;">Phép gán: LUÔN ĐÚNG</div>
+        </div>
+        <div style="background:rgba(52,211,153,0.2); border:1px solid var(--green); padding:8px 12px; border-radius:10px;">
+          <div style="color:var(--green); font-weight:800; font-size:0.8rem;">✅ if (x == 5)</div>
+          <div style="font-size:0.7rem; color:#cbd5e1;">So sánh bằng chuẩn</div>
+        </div>
+      </div>
+    `,
+    code: [
+      '<span class="kw">if</span> (x == <span class="num">5</span>) { <span class="cmt">// Dùng == chứ không dùng =</span>',
+      '    printf(<span class="str">"Dung\\n"</span>);',
+      '}',
+      '<span class="kw">switch</span>(chon) {',
+      '    <span class="kw">case</span> <span class="num">1</span>: printf(<span class="str">"A"</span>); <span class="kw">break</span>; <span class="cmt">// Phải có break!</span>',
+      '}'
+    ],
+    activeLine: 0,
+    subtitle: "Bẫy 1: if(x = 5) là phép gán, luôn đúng! Bẫy 2: switch quên lệnh break sẽ chạy tuồn tuột xuống các case bên dưới.",
+    speech: "Bài 4: Rẽ nhánh. Cẩn thận bẫy viết nhầm dấu bằng gán thay vì hai dấu bằng so sánh. Trong switch case nhớ luôn có lệnh break."
+  },
+  {
+    num: "BÀI 5/8",
+    title: "Vòng Lặp: for, while, break, continue",
+    graphic: `
+      <div class="mem-grid">
+        <div class="cell"><div class="cell-idx">i = 0</div><div class="cell-val">10</div></div>
+        <div class="cell"><div class="cell-idx">i = 1</div><div class="cell-val">20</div></div>
+        <div class="cell"><div class="cell-idx">i = 2</div><div class="cell-val">30</div></div>
+        <div class="cell highlight"><div class="cell-idx">break;</div><div class="cell-val" style="color:var(--yellow);">DỪNG</div></div>
+      </div>
+    `,
+    code: [
+      '<span class="type">int</span> tong = <span class="num">0</span>;',
+      '<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {',
+      '    <span class="kw">if</span> (i == <span class="num">3</span>) <span class="kw">continue</span>; <span class="cmt">// Bỏ qua i = 3</span>',
+      '    tong += i;',
+      '}'
+    ],
+    activeLine: 2,
+    subtitle: "break: đập vỡ vòng lặp ngay lập tức. continue: bỏ qua vòng hiện tại nhảy sang vòng kế. Bẫy: Thừa dấu chấm phẩy sau for!",
+    speech: "Bài 5: Vòng lặp. Lệnh break thoát hẳn vòng lặp. Lệnh continue bỏ qua lần lặp hiện tại. Cẩn thận không để dấu chấm phẩy ngay sau for."
+  },
+  {
+    num: "BÀI 6/8",
+    title: "Hàm & Bản Sao Tham Trị",
+    graphic: `
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div style="background:rgba(56,189,248,0.15); border:1px solid var(--cyan); padding:8px 12px; border-radius:10px; text-align:center;">
+          <div style="font-size:0.7rem; color:var(--muted);">Frame main()</div>
+          <div style="font-weight:800; color:#fff;">x = 5 (Không đổi!)</div>
+        </div>
+        <div style="font-size:1.2rem; color:var(--pink);">&harr;</div>
+        <div style="background:rgba(236,72,153,0.15); border:1px solid var(--pink); padding:8px 12px; border-radius:10px; text-align:center;">
+          <div style="font-size:0.7rem; color:var(--muted);">Frame tang()</div>
+          <div style="font-weight:800; color:var(--pink);">a = 5 &rarr; 6 (Bị xóa!)</div>
+        </div>
+      </div>
+    `,
+    code: [
+      '<span class="type">void</span> tang(<span class="type">int</span> a) {',
+      '    a = a + <span class="num">1</span>; <span class="cmt">// Chỉ đổi bản sao a!</span>',
+      '}',
+      '<span class="type">int</span> main() {',
+      '    <span class="type">int</span> x = <span class="num">5</span>; tang(x); <span class="cmt">// x vẫn là 5</span>',
+      '}'
+    ],
+    activeLine: 1,
+    subtitle: "Truyền biến thường vào hàm là truyền bản sao (Pass by value). Hàm tăng() kết thúc thì a bị xóa, x ở main vẫn là 5!",
+    speech: "Bài 6: Hàm và truyền tham trị. Truyền biến thường vào hàm chỉ là copy giá trị. Biến gốc ngoài main hoàn toàn không thay đổi."
+  },
+  {
+    num: "BÀI 7/8",
+    title: "Mảng 1 Chiều: Chỉ Số Từ 0",
+    graphic: `
+      <div class="mem-grid">
+        <div class="cell"><div class="cell-idx">a[0]</div><div class="cell-val">10</div></div>
+        <div class="cell"><div class="cell-idx">a[1]</div><div class="cell-val">20</div></div>
+        <div class="cell"><div class="cell-idx">a[2]</div><div class="cell-val">30</div></div>
+        <div class="cell" style="border-color:var(--red);"><div class="cell-idx" style="color:var(--red);">a[3] ❌</div><div class="cell-val" style="color:var(--red);">RÁC</div></div>
+      </div>
+    `,
+    code: [
+      '<span class="type">int</span> a[<span class="num">3</span>] = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>};',
+      '<span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; <span class="num">3</span>; i++) {',
+      '    printf(<span class="str">"%d "</span>, a[i]);',
+      '}',
+      '<span class="cmt">// a[3] là TRÀN MẢNG (Out of bounds)</span>'
+    ],
+    activeLine: 4,
+    subtitle: "Mảng có 3 phần tử chỉ có chỉ số từ a[0] đến a[2]. Truy cập a[3] là lỗi đọc vùng nhớ rác!",
+    speech: "Bài 7: Mảng 1 chiều. Chỉ số mảng luôn bắt đầu từ số không đến n trừ 1. Truy cập vượt quá chỉ số sẽ đọc vào vùng nhớ rác nguy hiểm."
+  },
+  {
+    num: "BÀI 8/8",
+    title: "Chuỗi: Ký Tự '\\0' Bí Mật",
+    graphic: `
+      <div class="mem-grid">
+        <div class="cell"><div class="cell-idx">s[0]</div><div class="cell-val">'A'</div></div>
+        <div class="cell"><div class="cell-idx">s[1]</div><div class="cell-val">'I'</div></div>
+        <div class="cell highlight"><div class="cell-idx">s[2]</div><div class="cell-val" style="color:var(--green);">\\0</div><div class="cell-idx">Hết chuỗi</div></div>
+      </div>
+    `,
+    code: [
+      '<span class="kw">#include</span> &lt;string.h&gt;',
+      '<span class="type">char</span> s[<span class="num">10</span>] = <span class="str">"AI"</span>;',
+      'printf(<span class="str">"Do dai: %zu\\n"</span>, strlen(s)); <span class="cmt">// = 2</span>',
+      'fgets(s, <span class="kw">sizeof</span>(s), stdin); <span class="cmt">// Nhập có dấu cách</span>'
+    ],
+    activeLine: 2,
+    subtitle: "Chuỗi trong C kết thúc bằng '\\0'. Muốn lưu 5 ký tự mảng phải có tối thiểu 6 ô nhớ! Nhập chuỗi có khoảng trắng dùng fgets().",
+    speech: "Bài 8: Chuỗi ký tự. Chuỗi trong C kết thúc bằng ký tự rỗng xuyệt không. Nhập chuỗi có khoảng trắng hãy dùng hàm ép ghét."
+  }
+];
+
+let currentIndex = 0;
+let isPlaying = true;
+let voiceEnabled = true;
+let playbackSpeed = 1.0;
+let slideDuration = 8000; // 8s mỗi slide
+let timer = null;
+let progressTimer = null;
+let progress = 0;
+
+// Khởi tạo story bars
+const storyBars = document.getElementById('storyBars');
+lessons.forEach((_, i) => {
+  const bar = document.createElement('div');
+  bar.className = 'bar-item';
+  bar.innerHTML = '<div class="bar-fill" id="barFill_' + i + '"></div>';
+  bar.onclick = () => jumpToLesson(i);
+  storyBars.appendChild(bar);
+});
+
+function renderLesson(idx) {
+  const item = lessons[idx];
+  document.getElementById('lessonBadge').innerText = item.num;
+  document.getElementById('lessonTitle').innerText = item.title;
+  document.getElementById('graphicBox').innerHTML = item.graphic;
+  document.getElementById('subtitleText').innerText = item.subtitle;
+
+  // Render code
+  const codeBox = document.getElementById('codeContent');
+  codeBox.innerHTML = item.code.map((line, lIdx) => 
+    `<span class="code-line ${lIdx === item.activeLine ? 'active' : ''}">${line}</span>`
+  ).join('');
+
+  // Update story bars
+  lessons.forEach((_, i) => {
+    const el = document.getElementById('barFill_' + i);
+    const parent = el.parentElement;
+    if (i < idx) {
+      parent.className = 'bar-item completed';
+      el.style.width = '100%';
+    } else if (i === idx) {
+      parent.className = 'bar-item';
+      el.style.width = '0%';
+    } else {
+      parent.className = 'bar-item';
+      el.style.width = '0%';
+    }
+  });
+
+  // Voice Speech
+  speakLesson(item.speech);
+}
+
+function speakLesson(text) {
+  if (!voiceEnabled || !('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'vi-VN';
+  utterance.rate = playbackSpeed;
+  window.speechSynthesis.speak(utterance);
+}
+
+function startSlideTimer() {
+  clearInterval(timer);
+  clearInterval(progressTimer);
+  progress = 0;
+  const intervalMs = 100;
+  const totalMs = slideDuration / playbackSpeed;
+  const step = (intervalMs / totalMs) * 100;
+
+  progressTimer = setInterval(() => {
+    if (!isPlaying) return;
+    progress += step;
+    const activeFill = document.getElementById('barFill_' + currentIndex);
+    if (activeFill) activeFill.style.width = Math.min(progress, 100) + '%';
+    if (progress >= 100) {
+      clearInterval(progressTimer);
+      nextLesson();
+    }
+  }, intervalMs);
+}
+
+function nextLesson() {
+  if (currentIndex < lessons.length - 1) {
+    currentIndex++;
+    renderLesson(currentIndex);
+    startSlideTimer();
+  } else {
+    // Hoàn thành cả 8 bài
+    jumpToLesson(0);
+  }
+}
+
+function prevLesson() {
+  if (currentIndex > 0) {
+    currentIndex--;
+  } else {
+    currentIndex = 0;
+  }
+  renderLesson(currentIndex);
+  startSlideTimer();
+}
+
+function jumpToLesson(i) {
+  currentIndex = i;
+  renderLesson(currentIndex);
+  startSlideTimer();
+}
+
+function togglePlay() {
+  isPlaying = !isPlaying;
+  document.getElementById('playBtn').innerText = isPlaying ? '⏸' : '▶';
+  if (!isPlaying && 'speechSynthesis' in window) {
+    window.speechSynthesis.pause();
+  } else if (isPlaying && 'speechSynthesis' in window) {
+    window.speechSynthesis.resume();
+  }
+}
+
+function toggleVoice() {
+  voiceEnabled = !voiceEnabled;
+  document.getElementById('voiceIcon').innerText = voiceEnabled ? '🔊' : '🔇';
+  document.getElementById('voiceText').innerText = voiceEnabled ? 'Giọng Đọc: BẬT' : 'Giọng Đọc: TẮT';
+  if (!voiceEnabled && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  } else if (voiceEnabled) {
+    speakLesson(lessons[currentIndex].speech);
+  }
+}
+
+function toggleSpeed() {
+  if (playbackSpeed === 1.0) playbackSpeed = 1.25;
+  else if (playbackSpeed === 1.25) playbackSpeed = 1.5;
+  else playbackSpeed = 1.0;
+  document.getElementById('speedBtn').innerText = 'Tốc độ: ' + playbackSpeed + 'x';
+  startSlideTimer();
+  if (voiceEnabled) speakLesson(lessons[currentIndex].speech);
+}
+
+function handleScreenTap(e) {
+  // Không nhận tap nếu click vào nút điều khiển
+  if (e.target.closest('.nav-btn') || e.target.closest('.play-pause-btn') || e.target.closest('.voice-toggle')) return;
+  togglePlay();
+}
+
+function switchMode(mode) {
+  const interactiveBody = document.getElementById('interactiveBody');
+  const bottomControls = document.querySelector('.bottom-controls');
+  const mp4Container = document.getElementById('mp4Container');
+  const btnInteractive = document.getElementById('btnInteractive');
+  const btnMp4 = document.getElementById('btnMp4');
+  const nativeVideo = document.getElementById('nativeVideo');
+
+  if (mode === 'mp4') {
+    interactiveBody.style.display = 'none';
+    bottomControls.style.display = 'none';
+    mp4Container.style.display = 'flex';
+    btnMp4.style.background = 'rgba(236,72,153,0.3)';
+    btnMp4.style.borderColor = 'var(--pink)';
+    btnMp4.style.color = '#fff';
+    btnInteractive.style.background = 'rgba(255,255,255,0.06)';
+    btnInteractive.style.borderColor = 'rgba(255,255,255,0.15)';
+    btnInteractive.style.color = '#cbd5e1';
+    // Dừng speech & timer
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    clearInterval(progressTimer);
+    nativeVideo.play().catch(() => {});
+  } else {
+    interactiveBody.style.display = 'flex';
+    bottomControls.style.display = 'block';
+    mp4Container.style.display = 'none';
+    btnInteractive.style.background = 'rgba(56,189,248,0.2)';
+    btnInteractive.style.borderColor = 'var(--cyan)';
+    btnInteractive.style.color = '#fff';
+    btnMp4.style.background = 'rgba(255,255,255,0.06)';
+    btnMp4.style.borderColor = 'rgba(255,255,255,0.15)';
+    btnMp4.style.color = '#cbd5e1';
+    nativeVideo.pause();
+    startSlideTimer();
+    if (voiceEnabled) speakLesson(lessons[currentIndex].speech);
+  }
+}
+
+// Chạy bài đầu tiên khi load
+renderLesson(0);
+startSlideTimer();
+</script>
+</body>
+</html>
