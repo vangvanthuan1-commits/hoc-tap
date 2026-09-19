@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kiến Trúc Máy Tính &bull; 12 Chặng Tiến Hóa</title>
+  <style>
+    :root {
+      --bg: #070a13;
+      --card-bg: rgba(18, 24, 43, 0.75);
+      --card-border: rgba(56, 189, 248, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #38bdf8;
+      --pink: #ec4899;
+      --pink-glow: rgba(236, 72, 153, 0.3);
+      --gradient-main: linear-gradient(135deg, #38bdf8 0%, #ec4899 100%);
+      --gradient-card: linear-gradient(145deg, rgba(26, 35, 62, 0.85), rgba(15, 23, 42, 0.95));
+      --warning: #fbbf24;
+      --success: #34d399;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(236, 72, 153, 0.12) 0%, transparent 45%);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 16px;
+      padding-bottom: 60px;
+      min-height: 100vh;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+    .subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px; }
+
+    /* Timeline Stepper */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      padding-left: 12px;
+      border-left: 2px solid rgba(56, 189, 248, 0.25);
+      margin-left: 8px;
+    }
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .step-card::before {
+      content: '';
+      position: absolute;
+      left: -19px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--cyan);
+      border: 2px solid #070a13;
+      box-shadow: 0 0 8px var(--cyan);
+    }
+    .step-card.pink-node::before {
+      background: var(--pink);
+      box-shadow: 0 0 8px var(--pink);
+    }
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .step-num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--cyan);
+      text-transform: uppercase;
+    }
+    .step-num.pink-tag {
+      background: rgba(236, 72, 153, 0.15);
+      color: var(--pink);
+    }
+    .step-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .step-highlight {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.3);
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      border-left: 2px solid var(--pink);
+    }
+
+    /* Stack Frame Diagram */
+    .stack-diagram {
+      background: #0a0e1c;
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    .stack-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 10px;
+    }
+    .stack-frame {
+      border: 1px dashed rgba(56, 189, 248, 0.4);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: rgba(56, 189, 248, 0.05);
+    }
+    .stack-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+    .stack-data {
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">&larr; Cổng Ôn Tập</a>
+  <h1>🗺️ 12 Chặng Tiến Hóa</h1>
+  <div class="subtitle">Từ Phần Cứng Vật Lý Đến Phần Mềm & Lập Trình C</div>
+
+  <!-- SƠ ĐỒ STACK FRAME & POINTER ĐẶC BIỆT -->
+  <div class="stack-diagram">
+    <div class="stack-title">🧠 Trực quan hóa: Tại sao cần Con Trỏ trong RAM?</div>
+    <div class="stack-frame">
+      <div class="stack-label">&bull; Stack Frame của hàm con (tang1)</div>
+      <div class="stack-data">Con trỏ: p = 0x1000 (Lưu địa chỉ x của main)</div>
+      <div class="stack-data">Lệnh *p = *p + 1: CPU ghi thẳng vào 0x1000 bên dưới!</div>
+    </div>
+    <div class="stack-frame" style="border-color:rgba(236,72,153,0.4); background:rgba(236,72,153,0.05);">
+      <div class="stack-label" style="color:var(--pink);">&bull; Stack Frame của hàm main()</div>
+      <div class="stack-data">Biến gốc: x (Địa chỉ 0x1000) &rarr; Bị thay đổi thật!</div>
+    </div>
+  </div>
+
+  <!-- 12 CHẶNG -->
+  <div class="timeline">
+    <!-- 1 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Chặng 1</span>
+        <span style="font-size:1.2rem;">⚡</span>
+      </div>
+      <div class="step-title">Bóng Bán Dẫn (Transistor)</div>
+      <div class="step-desc">Chiếc công tắc điện tử cơ bản nhất: điều khiển dòng điện bằng điện áp. Bật = 1, Tắt = 0. Hàng tỷ bóng ghép lại tạo nên bộ não máy tính.</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Chặng 2</span>
+        <span style="font-size:1.2rem;">🔢</span>
+      </div>
+      <div class="step-title">Hệ Nhị Phân & Mã Hóa</div>
+      <div class="step-desc">Mọi thứ (số nguyên, số thực, chữ cái) đều quy về dãy bit 0 và 1. Ký tự được ánh xạ qua bảng mã chuẩn ASCII/Unicode.</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Chặng 3</span>
+        <span style="font-size:1.2rem;">🚪</span>
+      </div>
+      <div class="step-title">Cổng Logic Boole (Logic Gates)</div>
+      <div class="step-desc">Ghép các bóng bán dẫn lại để tạo ra các quyết định logic: AND, OR, NOT, XOR. Là viên gạch xây dựng nên mọi mạch tính toán.</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Chặng 4</span>
+        <span style="font-size:1.2rem;">➕</span>
+      </div>
+      <div class="step-title">Bộ Tính Toán (ALU)</div>
+      <div class="step-desc">Ghép các cổng logic tạo mạch cộng (Adder) để thực hiện tính toán số học (+, -, *, /) và các phép so sánh điều kiện.</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="step-card pink-node">
+      <div class="step-header">
+        <span class="step-num pink-tag">Chặng 5</span>
+        <span style="font-size:1.2rem;">💾</span>
+      </div>
+      <div class="step-title">Mạch Nhớ (Flip-Flop)</div>
+      <div class="step-desc">Mạch hồi tiếp giúp lưu giữ trạng thái 1-bit ngay cả khi dòng điện không liên tục kích hoạt. Nền móng sơ khai của bộ nhớ.</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="step-card pink-node">
+      <div class="step-header">
+        <span class="step-num pink-tag">Chặng 6</span>
+        <span style="font-size:1.2rem;">🏢</span>
+      </div>
+      <div class="step-title">Thanh Ghi (Registers) & RAM</div>
+      <div class="step-desc">
+        &bull; <strong>Thanh ghi</strong>: Vài ô nhớ siêu tốc nằm sát trong CPU.<br>
+        &bull; <strong>RAM</strong>: Một ma trận hàng tỷ ô nhớ được đánh số địa chỉ Hex (0x1000,...).
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="step-card pink-node">
+      <div class="step-header">
+        <span class="step-num pink-tag">Chặng 7</span>
+        <span style="font-size:1.2rem;">🫀</span>
+      </div>
+      <div class="step-title">Bộ Vi Xử Lý (CPU) & Clock</div>
+      <div class="step-desc">Kết hợp ALU (tính toán) và Control Unit (điều phối). Xung nhịp đồng hồ (Clock GHz) giữ nhịp đồng bộ cho mọi chuyển động dữ liệu.</div>
+    </div>
+
+    <!-- 8 -->
+    <div class="step-card pink-node">
+      <div class="step-header">
+        <span class="step-num pink-tag">Chặng 8</span>
+        <span style="font-size:1.2rem;">🔄</span>
+      </div>
+      <div class="step-title">Chu Trình Lệnh (Fetch-Decode-Execute)</div>
+      <div class="step-desc">CPU liên tục lặp lại 3 nhịp: Kéo lệnh nhị phân từ RAM về &rarr; Giải mã lệnh &rarr; Ra lệnh cho ALU hoặc chuyển dữ liệu ô nhớ.</div>
+    </div>
+
+    <!-- 9 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Chặng 9</span>
+        <span style="font-size:1.2rem;">📜</span>
+      </div>
+      <div class="step-title">Mã Máy (Machine Code)</div>
+      <div class="step-desc">Chuỗi nhị phân thuần túy mà CPU đọc trực tiếp. Lập trình thuở đầu đòi hỏi phải nạp mã máy thủ công cực kỳ gian nan.</div>
+    </div>
+
+    <!-- 10 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Chặng 10</span>
+        <span style="font-size:1.2rem;">⚙️</span>
+      </div>
+      <div class="step-title">Hợp Ngữ (Assembly)</div>
+      <div class="step-desc">Bước tiến lớn thay mã nhị phân bằng từ viết tắt gợi nhớ: <code>MOV AX, 10</code>, <code>ADD AX, BX</code>. Gắn chặt với thanh ghi phần cứng.</div>
+    </div>
+
+    <!-- 11 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Chặng 11</span>
+        <span style="font-size:1.2rem;">💻</span>
+      </div>
+      <div class="step-title">Ngôn Ngữ Bậc Cao (C / C++)</div>
+      <div class="step-desc">Viết code gần gũi với toán học con người (<code>x = a + b;</code>). Trình biên dịch (Compiler) chịu trách nhiệm dịch tối ưu về lại Mã máy.</div>
+    </div>
+
+    <!-- 12 -->
+    <div class="step-card pink-node">
+      <div class="step-header">
+        <span class="step-num pink-tag">Chặng 12</span>
+        <span style="font-size:1.2rem;">🎯</span>
+      </div>
+      <div class="step-title">Quản Lý Bộ Nhớ & Con Trỏ (Pointer)</div>
+      <div class="step-desc">
+        Cung cấp cho lập trình viên khả năng can thiệp trực tiếp địa chỉ vật lý ô nhớ RAM qua <code>&amp;x</code> và <code>*p</code>. Cơ sở của hiệu năng cao và mọi hệ thống AI hiện đại.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
