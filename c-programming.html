@@ -3,66 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Ôn Tập C Foundation - RAM & Pointer</title>
+  <title>C Foundation &bull; RAM & Pointer</title>
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #151d30;
-      --card-border: #23314f;
-      --text: #f1f5f9;
+      --bg: #070a13;
+      --card-bg: rgba(18, 24, 43, 0.75);
+      --card-border: rgba(56, 189, 248, 0.25);
+      --text: #f8fafc;
       --text-muted: #94a3b8;
-      --primary: #38bdf8;
-      --accent: #818cf8;
-      --success: #34d399;
-      --danger: #f87171;
+      --cyan: #38bdf8;
+      --pink: #ec4899;
+      --pink-glow: rgba(236, 72, 153, 0.3);
+      --gradient-main: linear-gradient(135deg, #38bdf8 0%, #ec4899 100%);
+      --gradient-card: linear-gradient(145deg, rgba(26, 35, 62, 0.85), rgba(15, 23, 42, 0.95));
+      --code-bg: #0b1120;
       --warning: #fbbf24;
-      --code-bg: #0d1322;
+      --success: #34d399;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
       color: var(--text);
       line-height: 1.5;
       padding: 16px;
       padding-bottom: 50px;
+      min-height: 100vh;
     }
     .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: var(--primary);
+      color: var(--cyan);
       text-decoration: none;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 14px;
     }
     h1 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #fff;
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 4px;
     }
-    .subtitle {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
+    .subtitle { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
     .progress-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 16px;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
     }
     .progress-bar-bg {
       height: 8px;
-      background: #1e293b;
+      background: rgba(255,255,255,0.06);
       border-radius: 4px;
       overflow: hidden;
       margin: 8px 0 6px;
@@ -70,9 +70,24 @@
     .progress-bar-fill {
       height: 100%;
       width: 70%;
-      background: linear-gradient(90deg, #38bdf8, #34d399);
+      background: var(--gradient-main);
       border-radius: 4px;
     }
+    .alert-box {
+      background: rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(236, 72, 153, 0.35);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.15);
+    }
+    .alert-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 6px;
+    }
+    .alert-list { font-size: 0.82rem; color: #fecaca; padding-left: 18px; line-height: 1.5; }
     .section-title {
       font-size: 1rem;
       font-weight: 700;
@@ -85,133 +100,99 @@
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 12px;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+      backdrop-filter: blur(10px);
     }
     .code-block {
       background: var(--code-bg);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 0.85rem;
-      color: #38bdf8;
+      color: var(--cyan);
       overflow-x: auto;
-      margin: 8px 0;
+      margin: 10px 0;
       line-height: 1.45;
     }
-    .code-kw { color: #f472b6; }
+    .code-kw { color: var(--pink); }
     .code-type { color: #818cf8; }
     .code-num { color: #fbbf24; }
     .code-str { color: #34d399; }
     .code-cmt { color: #64748b; font-style: italic; }
 
     .memory-diagram {
-      background: #0d1322;
-      border: 1px solid var(--card-border);
+      background: #060913;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       padding: 12px;
       margin: 10px 0;
     }
-    .mem-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-      font-size: 0.82rem;
-    }
+    .mem-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.82rem; }
     .mem-row:last-child { margin-bottom: 0; }
-    .mem-addr {
-      font-family: monospace;
-      color: var(--warning);
-      width: 80px;
-      font-size: 0.75rem;
-    }
+    .mem-addr { font-family: monospace; color: var(--warning); width: 80px; font-size: 0.75rem; }
     .mem-box {
-      background: #1e293b;
-      border: 1px solid #334155;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--cyan);
       padding: 6px 12px;
-      border-radius: 6px;
+      border-radius: 8px;
       color: #fff;
-      font-weight: 600;
+      font-weight: 700;
       min-width: 70px;
       text-align: center;
     }
-    .mem-label {
-      color: var(--text-muted);
-      font-size: 0.78rem;
-    }
-    .alert-box {
-      background: rgba(248, 113, 113, 0.1);
-      border: 1px solid rgba(248, 113, 113, 0.3);
-      border-radius: 12px;
-      padding: 14px;
-      margin: 16px 0;
-    }
-    .alert-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--danger);
-      margin-bottom: 6px;
-    }
-    .alert-list {
-      font-size: 0.82rem;
-      color: #fecaca;
-      padding-left: 18px;
-    }
-    .btn-group {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
+    .mem-label { color: var(--text-muted); font-size: 0.78rem; }
+    .btn-group { display: flex; gap: 8px; margin-top: 10px; }
     button {
       flex: 1;
       padding: 10px 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       min-height: 44px;
     }
     .btn-hint {
-      background: #1e293b;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.4);
       color: var(--warning);
-      border: 1px solid #334155;
     }
     .btn-sol {
-      background: var(--primary);
+      background: var(--gradient-main);
       color: #0b0f19;
+      box-shadow: 0 2px 10px var(--pink-glow);
     }
     .hidden-box {
       display: none;
       margin-top: 10px;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.82rem;
     }
     .hint-box {
-      background: rgba(251, 191, 36, 0.1);
-      border: 1px solid rgba(251, 191, 36, 0.25);
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.3);
       color: #fef08a;
     }
     .sol-box {
-      background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.25);
+      background: rgba(52, 211, 153, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.3);
       color: #a7f3d0;
     }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back-btn">&larr; Quay lại Cổng Ôn Tập</a>
+  <a href="index.html" class="back-btn">&larr; Cổng Ôn Tập</a>
   <h1>💻 C Foundation: RAM & Con Trỏ</h1>
   <div class="subtitle">Duy trì phản xạ code 20 phút/ngày trong thời gian quân sự</div>
 
   <div class="progress-box">
     <div style="display:flex; justify-content:space-between; font-size:0.82rem;">
-      <span style="font-weight:600; color:#fff;">Tiến độ C cơ bản</span>
-      <span style="color:var(--success); font-weight:700;">70%</span>
+      <span style="font-weight:700; color:#fff;">Tiến độ C cơ bản</span>
+      <span style="color:var(--cyan); font-weight:800;">70%</span>
     </div>
     <div class="progress-bar-bg">
       <div class="progress-bar-fill"></div>
@@ -226,13 +207,13 @@
     <ul class="alert-list">
       <li><strong>Quên dấu chấm phẩy ;</strong> ở cuối dòng lệnh.</li>
       <li><strong>Thiếu đóng ngoặc kép "</strong> trong chuỗi <code>printf("...");</code>.</li>
-      <li><strong>Hàm scanf quên dấu &amp;:</strong> <code>scanf("%d", &x);</code> (phải đưa địa chỉ ô nhớ, không phải giá trị).</li>
+      <li><strong>Hàm scanf quên dấu &amp;:</strong> <code>scanf("%d", &x);</code> (phải đưa địa chỉ ô nhớ).</li>
     </ul>
   </div>
 
   <div class="section-title">🧠 Bản Chất RAM & Con Trỏ (Pointer)</div>
   <div class="card">
-    <div style="font-size:0.85rem; font-weight:600; color:#fff;">1. Mọi biến đều có 2 thứ: Giá trị và Địa chỉ</div>
+    <div style="font-size:0.85rem; font-weight:700; color:#fff;">1. Mọi biến đều có 2 thứ: Giá trị và Địa chỉ</div>
     <div class="code-block">
 <span class="code-type">int</span> x = <span class="code-num">10</span>;
 <span class="code-type">int</span> *p = &amp;x; <span class="code-cmt">// p lưu địa chỉ của x</span>
@@ -251,17 +232,16 @@
       </div>
     </div>
 
-    <div style="font-size:0.82rem; color:var(--text-muted); margin-top:8px;">
+    <div style="font-size:0.82rem; color:var(--text-muted); margin-top:8px; line-height:1.45;">
       &bull; <strong>&amp;x</strong>: Cho biết "nhà của x ở đâu" (Địa chỉ).<br>
       &bull; <strong>*p</strong>: "Đến địa chỉ mà p đang giữ để lấy/sửa giá trị" (Dereference).
     </div>
   </div>
 
-  <div class="section-title">📝 Bài Luyện Nhanh (Duy Trì Tay Code)</div>
+  <div class="section-title">📝 Bài Luyện Nhanh (20 Phút)</div>
 
-  <!-- Bài 1 -->
   <div class="card">
-    <div style="font-weight:600; color:#fff; font-size:0.9rem;">Bài 1: Đoán xem chương trình in ra gì?</div>
+    <div style="font-weight:700; color:#fff; font-size:0.9rem;">Bài 1: Đoán xem chương trình in ra gì?</div>
     <div class="code-block">
 <span class="code-type">int</span> a = <span class="code-num">5</span>;
 <span class="code-type">int</span> *p = &amp;a;
@@ -277,13 +257,12 @@ printf(<span class="code-str">"%d\n"</span>, a);
     </div>
     <div id="s1" class="hidden-box sol-box">
       <strong>Đáp án: 20</strong><br>
-      Vì <code>*p</code> thao tác trực tiếp vào vùng nhớ của <code>a</code>. Nên giá trị của <code>a</code> bị đổi từ 5 thành 20.
+      Vì <code>*p</code> thao tác trực tiếp vào vùng nhớ của <code>a</code>.
     </div>
   </div>
 
-  <!-- Bài 2 -->
   <div class="card">
-    <div style="font-weight:600; color:#fff; font-size:0.9rem;">Bài 2: Tìm lỗi sai trong đoạn code scanf sau:</div>
+    <div style="font-weight:700; color:#fff; font-size:0.9rem;">Bài 2: Tìm lỗi sai trong đoạn code scanf sau:</div>
     <div class="code-block">
 <span class="code-type">int</span> n;
 printf(<span class="code-str">"Nhap n: "</span>);

@@ -3,42 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Mini-Test Tổng Hợp Cuối Tuần - Phenikaa K20</title>
+  <title>Mini-Test Cuối Tuần &bull; Phenikaa K20</title>
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #151d30;
-      --card-border: #23314f;
-      --text: #f1f5f9;
+      --bg: #070a13;
+      --card-bg: rgba(18, 24, 43, 0.75);
+      --card-border: rgba(236, 72, 153, 0.25);
+      --text: #f8fafc;
       --text-muted: #94a3b8;
-      --primary: #38bdf8;
-      --accent: #818cf8;
+      --cyan: #38bdf8;
+      --pink: #ec4899;
+      --pink-glow: rgba(236, 72, 153, 0.35);
+      --gradient-main: linear-gradient(135deg, #38bdf8 0%, #ec4899 100%);
+      --gradient-card: linear-gradient(145deg, rgba(26, 35, 62, 0.85), rgba(15, 23, 42, 0.95));
       --success: #34d399;
       --danger: #f87171;
       --warning: #fbbf24;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
       color: var(--text);
       line-height: 1.5;
       padding: 16px;
       padding-bottom: 60px;
+      min-height: 100vh;
     }
     .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: var(--primary);
+      color: var(--cyan);
       text-decoration: none;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 12px;
     }
     .header {
@@ -47,12 +49,14 @@
       align-items: center;
       margin-bottom: 16px;
       padding-bottom: 12px;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .timer-badge {
       background: rgba(251, 191, 36, 0.15);
@@ -62,122 +66,106 @@
       border-radius: 9999px;
       font-family: monospace;
       font-size: 0.95rem;
-      font-weight: 700;
+      font-weight: 800;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
     }
     .subject-tag {
       display: inline-block;
       padding: 4px 10px;
       border-radius: 6px;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 10px;
       text-transform: uppercase;
     }
-    .tag-en { background: rgba(56, 189, 248, 0.2); color: var(--primary); }
-    .tag-math { background: rgba(129, 140, 248, 0.2); color: var(--accent); }
-    .tag-code { background: rgba(52, 211, 153, 0.2); color: var(--success); }
+    .tag-en { background: rgba(236, 72, 153, 0.2); border: 1px solid var(--pink); color: #f472b6; }
+    .tag-math { background: rgba(56, 189, 248, 0.2); border: 1px solid var(--cyan); color: var(--cyan); }
+    .tag-code { background: rgba(52, 211, 153, 0.2); border: 1px solid var(--success); color: #a7f3d0; }
 
     .q-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 16px;
       margin-bottom: 14px;
+      backdrop-filter: blur(10px);
     }
     .q-title {
       font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 700;
       color: #fff;
       margin-bottom: 12px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .math-expr {
       font-family: "Cambria Math", serif;
-      font-size: 1.1rem;
-      color: var(--primary);
-      margin: 4px 0 8px;
+      font-size: 1.15rem;
+      color: var(--cyan);
+      margin: 4px 0 10px;
     }
-    .options-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .options-grid { display: flex; flex-direction: column; gap: 8px; }
     .opt-label {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #19233c;
-      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 12px 14px;
       border-radius: 10px;
       font-size: 0.88rem;
       cursor: pointer;
       min-height: 48px;
-      transition: background 0.1s;
     }
-    .opt-label:active {
-      background: #23314f;
-    }
-    .opt-label input {
-      accent-color: var(--primary);
-      transform: scale(1.2);
-    }
+    .opt-label:active { background: rgba(236, 72, 153, 0.15); }
+    .opt-label input { accent-color: var(--pink); transform: scale(1.2); }
     .submit-btn {
       width: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      background: var(--gradient-main);
       color: #0b0f19;
       border: none;
       padding: 14px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       min-height: 50px;
       margin-top: 10px;
+      box-shadow: 0 4px 20px var(--pink-glow);
     }
     .result-box {
       display: none;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 20px;
       text-align: center;
       margin-top: 20px;
     }
-    .result-score {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin: 10px 0;
-    }
+    .result-score { font-size: 2.4rem; font-weight: 900; color: var(--cyan); margin: 10px 0; }
     .ans-detail {
       text-align: left;
       margin-top: 16px;
       padding-top: 16px;
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid rgba(255,255,255,0.08);
       font-size: 0.82rem;
     }
-    .ans-item {
-      margin-bottom: 12px;
-      padding: 10px;
-      border-radius: 8px;
-    }
+    .ans-item { margin-bottom: 12px; padding: 10px; border-radius: 8px; }
     .ans-correct { background: rgba(52, 211, 153, 0.1); border-left: 3px solid var(--success); }
     .ans-wrong { background: rgba(248, 113, 113, 0.1); border-left: 3px solid var(--danger); }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back-btn">&larr; Quay lại Cổng Ôn Tập</a>
+  <a href="index.html" class="back-btn">&larr; Cổng Ôn Tập</a>
   <div class="header">
     <div>
       <h1>📝 Mini-Test Cuối Tuần</h1>
-      <div style="font-size:0.75rem; color:var(--text-muted);">Đề tổng hợp 8 câu &bull; 15 Phút</div>
+      <div style="font-size:0.75rem; color:var(--text-muted);">8 câu tổng hợp &bull; 15 Phút</div>
     </div>
     <div class="timer-badge" id="timer">15:00</div>
   </div>
 
   <form id="test-form">
-    <!-- Phần 1: Tiếng Anh (3 câu) -->
+    <!-- Tiếng Anh -->
     <div class="q-card">
       <span class="subject-tag tag-en">Tiếng Anh (Placement)</span>
       <div class="q-title">1. Yesterday, the military instructor _____ us how to march properly.</div>
@@ -211,10 +199,10 @@
       </div>
     </div>
 
-    <!-- Phần 2: Giải tích 1 (3 câu) -->
+    <!-- Giải Tích -->
     <div class="q-card">
       <span class="subject-tag tag-math">Giải Tích 1</span>
-      <div class="q-title">4. Tính giới hạn lượng giác cơ bản:</div>
+      <div class="q-title">4. Tính giới hạn tang:</div>
       <div class="math-expr">lim (x&rarr;0) [tan(x) / x]</div>
       <div class="options-grid">
         <label class="opt-label"><input type="radio" name="q4" value="A"> A. 0</label>
@@ -226,7 +214,7 @@
 
     <div class="q-card">
       <span class="subject-tag tag-math">Giải Tích 1</span>
-      <div class="q-title">5. Áp dụng công thức liên hợp căn nhanh:</div>
+      <div class="q-title">5. Liên hợp căn nhanh:</div>
       <div class="math-expr">lim (x&rarr;0) [(√(1 + 6x) - √(1 - 2x)) / x]</div>
       <div class="options-grid">
         <label class="opt-label"><input type="radio" name="q5" value="A"> A. 2</label>
@@ -247,11 +235,11 @@
       </div>
     </div>
 
-    <!-- Phần 3: Coding C (2 câu) -->
+    <!-- C Foundation -->
     <div class="q-card">
       <span class="subject-tag tag-code">Coding (C Foundation)</span>
       <div class="q-title">7. Đoạn code C sau in ra giá trị gì?</div>
-      <div style="background:#0d1322; padding:8px; border-radius:6px; font-family:monospace; font-size:0.85rem; color:#38bdf8; margin-bottom:10px;">
+      <div style="background:#0b1120; padding:10px; border-radius:8px; font-family:monospace; font-size:0.85rem; color:var(--cyan); margin-bottom:10px;">
         int a = 10;<br>
         int *p = &a;<br>
         *p = 50;<br>
@@ -288,7 +276,6 @@
   </div>
 
   <script>
-    // ĐÁP ÁN CHUẨN
     const CORRECT_ANSWERS = {
       q1: { ans: "B", note: "Yesterday &rarr; Quá khứ đơn (showed)." },
       q2: { ans: "C", note: "Avoid + V-ing &rarr; being." },
@@ -300,7 +287,6 @@
       q8: { ans: "B", note: "scanf cần truyền địa chỉ ô nhớ &n." }
     };
 
-    // ĐỒNG HỒ 15 PHÚT
     let timeLeft = 15 * 60;
     let timerEl = document.getElementById("timer");
     let timerInterval = setInterval(() => {
@@ -308,10 +294,7 @@
       let m = Math.floor(timeLeft / 60);
       let s = timeLeft % 60;
       timerEl.textContent = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        gradeTest();
-      }
+      if (timeLeft <= 0) { clearInterval(timerInterval); gradeTest(); }
     }, 1000);
 
     function gradeTest() {
@@ -319,42 +302,24 @@
       let score = 0;
       let total = 8;
       let detailHtml = "";
-
       for (let i = 1; i <= total; i++) {
         let qKey = "q" + i;
         let selected = document.querySelector(`input[name="${qKey}"]:checked`);
         let val = selected ? selected.value : "Chưa chọn";
         let isCorrect = val === CORRECT_ANSWERS[qKey].ans;
-
         if (isCorrect) {
           score++;
-          detailHtml += `
-            <div class="ans-item ans-correct">
-              <strong>Câu ${i}: Đúng ✅</strong> (Đáp án: ${CORRECT_ANSWERS[qKey].ans})<br>
-              <span style="color:#94a3b8;">${CORRECT_ANSWERS[qKey].note}</span>
-            </div>
-          `;
+          detailHtml += `<div class="ans-item ans-correct"><strong>Câu ${i}: Đúng ✅</strong> (Đáp án: ${CORRECT_ANSWERS[qKey].ans})<br><span style="color:#94a3b8;">${CORRECT_ANSWERS[qKey].note}</span></div>`;
         } else {
-          detailHtml += `
-            <div class="ans-item ans-wrong">
-              <strong>Câu ${i}: Sai ❌</strong> (Bạn chọn: ${val} &bull; Đáp án đúng: <strong>${CORRECT_ANSWERS[qKey].ans}</strong>)<br>
-              <span style="color:#fecaca;">${CORRECT_ANSWERS[qKey].note}</span>
-            </div>
-          `;
+          detailHtml += `<div class="ans-item ans-wrong"><strong>Câu ${i}: Sai ❌</strong> (Bạn chọn: ${val} &bull; Đáp án đúng: <strong>${CORRECT_ANSWERS[qKey].ans}</strong>)<br><span style="color:#fecaca;">${CORRECT_ANSWERS[qKey].note}</span></div>`;
         }
       }
-
       document.getElementById("test-form").style.display = "none";
       let resBox = document.getElementById("result-box");
       resBox.style.display = "block";
       document.getElementById("result-score").textContent = `${score} / ${total}`;
-
       let pct = Math.round((score / total) * 100);
-      let msg = "";
-      if (pct >= 85) msg = "Quá đỉnh! Bạn đã nắm vững toàn bộ kiến thức tuần này! 🌟";
-      else if (pct >= 60) msg = "Khá tốt! Hãy xem lại các câu sai bên dưới nhé.";
-      else msg = "Cần củng cố thêm các bẫy dấu và cú pháp C.";
-      document.getElementById("result-msg").textContent = msg;
+      document.getElementById("result-msg").textContent = pct >= 85 ? "Quá đỉnh! Bạn đã nắm vững toàn bộ kiến thức tuần này! 🌟" : "Khá tốt! Hãy xem lại các câu sai bên dưới nhé.";
       document.getElementById("ans-detail").innerHTML = detailHtml;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }

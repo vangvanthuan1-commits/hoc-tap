@@ -2,19 +2,23 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cổng Ôn Tập K20 AI - Phenikaa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Phenikaa K20 AI &bull; Cổng Ôn Tập Di Động</title>
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #151d30;
-      --card-border: #23314f;
-      --text: #f1f5f9;
+      --bg: #070a13;
+      --card-bg: rgba(18, 24, 43, 0.75);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --text: #f8fafc;
       --text-muted: #94a3b8;
-      --primary: #38bdf8;
-      --accent: #818cf8;
-      --success: #34d399;
-      --warning: #fbbf24;
+      /* Bảng màu Neon Xanh Dương & Hồng */
+      --cyan: #38bdf8;
+      --blue: #2563eb;
+      --pink: #ec4899;
+      --pink-glow: rgba(236, 72, 153, 0.35);
+      --blue-glow: rgba(56, 189, 248, 0.35);
+      --gradient-main: linear-gradient(135deg, #38bdf8 0%, #ec4899 100%);
+      --gradient-card: linear-gradient(145deg, rgba(26, 35, 62, 0.8), rgba(15, 23, 42, 0.9));
     }
     * {
       box-sizing: border-box;
@@ -23,247 +27,594 @@
       -webkit-tap-highlight-color: transparent;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
       color: var(--text);
       line-height: 1.5;
       padding: 16px;
-      padding-bottom: 40px;
+      padding-bottom: 90px;
+      min-height: 100vh;
     }
     header {
       margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
     }
     .badge {
-      display: inline-block;
-      padding: 4px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
       border-radius: 9999px;
       font-size: 0.75rem;
-      font-weight: 600;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--primary);
+      font-weight: 700;
+      background: rgba(236, 72, 153, 0.15);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      color: #f472b6;
       margin-bottom: 8px;
     }
     h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
     }
     .subtitle {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       margin-top: 4px;
     }
-    .status-card {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 14px;
+    /* AI Status Banner */
+    .ai-banner {
+      background: var(--gradient-card);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      box-shadow: 0 8px 24px var(--pink-glow);
+      border-radius: 16px;
+      padding: 16px;
       margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
     }
-    .status-header {
+    .ai-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gradient-main);
+    }
+    .banner-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--warning);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
     }
-    .status-bar {
+    .banner-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.15);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .status-dot {
+      width: 6px;
       height: 6px;
-      background: #334155;
-      border-radius: 3px;
-      overflow: hidden;
-      margin-bottom: 8px;
+      background: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #34d399;
     }
-    .status-progress {
-      height: 100%;
-      width: 40%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      border-radius: 3px;
-    }
-    .status-text {
+    .banner-desc {
       font-size: 0.8rem;
-      color: var(--text-muted);
+      color: #cbd5e1;
+      line-height: 1.45;
+      margin-bottom: 12px;
     }
+    .ai-open-btn {
+      width: 100%;
+      background: var(--gradient-main);
+      color: #0b0f19;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+      transition: transform 0.15s ease;
+    }
+    .ai-open-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Cards Grid */
     .nav-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 14px;
       margin-bottom: 24px;
     }
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 16px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 110px;
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
     }
     .card:active {
       transform: scale(0.98);
-      border-color: var(--primary);
+      border-color: var(--pink);
+    }
+    .card.blue-theme {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.08);
+    }
+    .card.pink-theme {
+      border-color: rgba(236, 72, 153, 0.3);
+      box-shadow: 0 4px 20px rgba(236, 72, 153, 0.08);
+    }
+    .card.yellow-theme {
+      border-color: rgba(251, 191, 36, 0.35);
+      box-shadow: 0 4px 20px rgba(251, 191, 36, 0.08);
     }
     .card-top {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 8px;
     }
-    .card-icon {
-      font-size: 1.5rem;
+    .card-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .card-title {
       font-size: 1.05rem;
-      font-weight: 600;
+      font-weight: 700;
       color: #fff;
     }
     .card-desc {
       font-size: 0.82rem;
       color: var(--text-muted);
       margin-bottom: 12px;
+      line-height: 1.4;
     }
     .card-action {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 4px;
     }
-    .recent-log {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 16px;
+    .text-blue { color: var(--cyan); }
+    .text-pink { color: var(--pink); }
+    .text-yellow { color: #fbbf24; }
+
+    /* Modal Chat AI */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(7, 10, 19, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      flex-direction: column;
+      justify-content: flex-end;
     }
-    .recent-log h2 {
+    .modal-content {
+      background: #0f172a;
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      border-radius: 20px 20px 0 0;
+      max-height: 90vh;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -10px 40px rgba(236, 72, 153, 0.2);
+    }
+    .modal-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
       font-size: 1rem;
-      margin-bottom: 12px;
+      font-weight: 700;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      padding: 4px;
+      cursor: pointer;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chat-bubble {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+    .bubble-ai {
+      align-self: flex-start;
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: #f1f5f9;
+      border-bottom-left-radius: 4px;
+    }
+    .bubble-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #0284c7, #db2777);
       color: #fff;
+      font-weight: 500;
+      border-bottom-right-radius: 4px;
+    }
+    .quick-prompts {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 8px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      white-space: nowrap;
+    }
+    .qp-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .chat-input-bar {
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 8px;
+      background: #0b0f19;
+    }
+    .chat-input {
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .chat-input:focus {
+      border-color: var(--pink);
+    }
+    .send-btn {
+      background: var(--gradient-main);
+      color: #0b0f19;
+      border: none;
+      padding: 0 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .api-key-config {
+      padding: 10px 14px;
+      background: rgba(236, 72, 153, 0.08);
+      border-bottom: 1px solid rgba(236, 72, 153, 0.2);
+      font-size: 0.75rem;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .api-key-input {
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+    .api-key-save {
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    /* Floating AI Button */
+    .fab-ai {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 28px;
+      background: var(--gradient-main);
+      box-shadow: 0 8px 25px var(--pink-glow);
+      border: none;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      z-index: 100;
+      animation: pulse 2s infinite;
     }
-    .log-item {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.82rem;
-    }
-    .log-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-    .log-time {
-      font-size: 0.75rem;
-      color: var(--accent);
-      font-weight: 500;
-    }
-    .log-title {
-      font-weight: 600;
-      color: #fff;
-      margin: 2px 0;
-    }
-    .log-detail {
-      color: var(--text-muted);
-    }
-    footer {
-      text-align: center;
-      margin-top: 24px;
-      font-size: 0.75rem;
-      color: #64748b;
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(236, 72, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="badge">🎯 K20 AI - Phenikaa University</div>
-    <h1>Cổng Ôn Tập Di Động</h1>
-    <div class="subtitle">Không gian tự ôn tập nhanh offline cho điện thoại</div>
+    <div class="badge">✨ K20 AI &bull; PHENIKAA UNIVERSITY</div>
+    <h1>CỔNG ÔN TẬP DI ĐỘNG</h1>
+    <div class="subtitle">Gia sư AI cá nhân hóa &bull; Tối ưu điện thoại</div>
   </header>
 
-  <section class="status-card">
-    <div class="status-header">
-      <span>🎖️ Giai đoạn GDQP-AN (15/09 - 10/10/2026)</span>
-      <span>Hôm nay: 19/09</span>
+  <!-- BANNER GIA SƯ AI TRỰC TUYẾN -->
+  <section class="ai-banner">
+    <div class="banner-title">
+      <span>🤖 Gia Sư AI Gemini Flash</span>
+      <span class="banner-status"><span class="status-dot"></span> Sẵn sàng</span>
     </div>
-    <div class="status-bar">
-      <div class="status-progress"></div>
+    <div class="banner-desc">
+      Hỏi đáp bài tập, yêu cầu gợi ý Socratic và kiểm tra kiến thức Toán/Anh/C trực tiếp trên điện thoại.
     </div>
-    <div class="status-text">
-      Mục tiêu hôm nay: Giải tích 1 (Giới hạn lượng giác) + Duy trì tay code C + Giữ nền Tiếng Anh.
-    </div>
+    <button class="ai-open-btn" onclick="openChat()">
+      <span>💬 Mở Chat Trợ Lý AI Ngay</span>
+    </button>
   </section>
 
+  <!-- DANH MỤC ÔN TẬP -->
   <nav class="nav-grid">
-    <a href="giai-tich-1.html" class="card">
-      <div>
-        <div class="card-top">
-          <span class="card-icon">🧮</span>
+    <!-- Giải Tích 1 -->
+    <a href="giai-tich-1.html" class="card blue-theme">
+      <div class="card-top">
+        <div class="card-icon-box" style="color:var(--cyan); border-color:rgba(56,189,248,0.3);">🧮</div>
+        <div>
           <div class="card-title">Giải Tích 1: Giới Hạn & Đạo Hàm</div>
+          <div style="font-size:0.75rem; color:var(--cyan); font-weight:600;">Môn chính HK1 (3 tín chỉ)</div>
         </div>
-        <div class="card-desc">Bảng công thức nhanh, phân tích bẫy dấu ngoặc, thẻ flashcard và bài tập tự luyện tương tác.</div>
       </div>
-      <div class="card-action">Vào ôn Giải tích &rarr;</div>
+      <div class="card-desc">Bảng công thức nhanh, phân tích bẫy dấu ngoặc, thẻ flashcard và bài tập tự luyện tương tác.</div>
+      <div class="card-action text-blue">Vào ôn Giải tích &rarr;</div>
     </a>
 
-    <a href="english-drill.html" class="card">
-      <div>
-        <div class="card-top">
-          <span class="card-icon">🇬🇧</span>
+    <!-- Tiếng Anh -->
+    <a href="english-drill.html" class="card pink-theme">
+      <div class="card-top">
+        <div class="card-icon-box" style="color:var(--pink); border-color:rgba(236,72,153,0.3);">🇬🇧</div>
+        <div>
           <div class="card-title">English Placement Drill (A1-A2)</div>
+          <div style="font-size:0.75rem; color:var(--pink); font-weight:600;">Chuẩn bị Placement Test Phenikaa</div>
         </div>
-        <div class="card-desc">Luyện 10 / 30 / 50 câu trắc nghiệm nhanh qua Trigger Keywords, có lưu câu sai (Mistake Log).</div>
       </div>
-      <div class="card-action">Vào luyện trắc nghiệm &rarr;</div>
+      <div class="card-desc">Luyện 10 / 30 / 50 câu trắc nghiệm nhanh qua Trigger Keywords, có lưu câu sai (Mistake Log).</div>
+      <div class="card-action text-pink">Vào luyện trắc nghiệm &rarr;</div>
     </a>
 
-    <a href="c-programming.html" class="card">
-      <div>
-        <div class="card-top">
-          <span class="card-icon">💻</span>
-          <div class="card-title">C Foundation: RAM & Con Trỏ (Pointer)</div>
+    <!-- C Programming -->
+    <a href="c-programming.html" class="card blue-theme">
+      <div class="card-top">
+        <div class="card-icon-box" style="color:#34d399; border-color:rgba(52,211,153,0.3);">💻</div>
+        <div>
+          <div class="card-title">C Foundation: RAM & Con Trỏ</div>
+          <div style="font-size:0.75rem; color:#34d399; font-weight:600;">Duy trì 20p/ngày trong quân sự</div>
         </div>
-        <div class="card-desc">Ôn nhanh 20p/ngày: Trực quan ô nhớ RAM, con trỏ &x, *p và khắc phục 3 bẫy lỗi cú pháp.</div>
       </div>
-      <div class="card-action">Vào ôn C &rarr;</div>
+      <div class="card-desc">Mô phỏng ô nhớ RAM, con trỏ &x, *p, struct và sửa 3 lỗi cú pháp C hay gặp.</div>
+      <div class="card-action" style="color:#34d399;">Vào ôn C &rarr;</div>
     </a>
 
-    <a href="mini-test.html" class="card" style="border-color: rgba(251, 191, 36, 0.4);">
-      <div>
-        <div class="card-top">
-          <span class="card-icon">⏱️</span>
-          <div class="card-title" style="color: var(--warning);">Mini-Test Cuối Tuần (15 Phút)</div>
+    <!-- Mini-Test Cuối Tuần -->
+    <a href="mini-test.html" class="card yellow-theme">
+      <div class="card-top">
+        <div class="card-icon-box" style="color:#fbbf24; border-color:rgba(251,191,36,0.3);">⏱️</div>
+        <div>
+          <div class="card-title" style="color:#fbbf24;">Mini-Test Cuối Tuần (15 Phút)</div>
+          <div style="font-size:0.75rem; color:#fbbf24; font-weight:600;">Luyện Thứ Bảy & Chủ Nhật</div>
         </div>
-        <div class="card-desc">Đề test tổng hợp Thứ Bảy & Chủ Nhật: 8 câu chọn lọc gồm English, Giải tích 1 và C Foundation.</div>
       </div>
-      <div class="card-action" style="color: var(--warning);">Vào làm đề test &rarr;</div>
+      <div class="card-desc">Đề tổng hợp 8 câu chọn lọc gồm English, Giải tích 1 và C Foundation kèm chấm điểm tức thì.</div>
+      <div class="card-action text-yellow">Làm đề thi thử &rarr;</div>
     </a>
   </nav>
 
-  <section class="recent-log">
-    <h2>📓 Nhật Ký Học Gần Nhất</h2>
-    <div class="log-item">
-      <div class="log-time">19/09/2026 - 09:06 (GMT+7)</div>
-      <div class="log-title">Giải tích 1: Giới hạn lượng giác</div>
-      <div class="log-detail">Khởi động bài toán $\lim_{x\to0} \frac{\tan x}{x}$. Lưu ý khử dạng 0/0 qua phân số $\frac{\sin x}{x} \cdot \frac{1}{\cos x}$.</div>
-    </div>
-    <div class="log-item">
-      <div class="log-time">Sổ tay lỗi sai cần nhớ</div>
-      <div class="log-title">Bẫy dấu ngoặc đại số</div>
-      <div class="log-detail">Rút gọn liên hợp có dấu trừ: $-(1 - x) = -1 + x$. Cần tập trung ở bước bỏ dấu ngoặc.</div>
-    </div>
-  </section>
+  <!-- NÚT NỔI MỞ CHAT AI -->
+  <button class="fab-ai" onclick="openChat()" title="Chat với AI">✨</button>
 
-  <footer>
-    Antigravity AI Tutor Workspace &bull; phenikaa-k20-ai
-  </footer>
+  <!-- MODAL CHAT AI GEMINI FLASH -->
+  <div id="ai-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>✨ Gia Sư AI Gemini Flash</h3>
+        <button class="close-btn" onclick="closeChat()">&times;</button>
+      </div>
+
+      <!-- Cấu hình API Key (Lưu LocalStorage) -->
+      <div class="api-key-config">
+        <span>🔑 API Key:</span>
+        <input type="password" id="gemini-api-key" class="api-key-input" placeholder="Dán Gemini API Key vào đây">
+        <button class="api-key-save" onclick="saveApiKey()">Lưu</button>
+      </div>
+
+      <!-- Vùng tin nhắn chat -->
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-bubble bubble-ai">
+          Xin chào! Tôi là Gia sư AI đồng hành cùng bạn. Bạn cần gợi ý bài tập Giải tích, giải thích ngữ pháp Tiếng Anh hay hỏi về con trỏ trong C? Hãy nhập câu hỏi bên dưới nhé! 🚀
+        </div>
+      </div>
+
+      <!-- Nút câu hỏi nhanh -->
+      <div class="quick-prompts">
+        <button class="qp-btn" onclick="sendQuickPrompt('Gợi ý cho tôi cách tính lim(x->0) (1-cos x)/x^2')">💡 Gợi ý lim (1-cos x)/x²</button>
+        <button class="qp-btn" onclick="sendQuickPrompt('Phân biệt thì Hiện tại đơn và Hiện tại tiếp diễn qua keyword ngắn gọn')">🇬🇧 Keyword thì HTĐ vs HTTD</button>
+        <button class="qp-btn" onclick="sendQuickPrompt('Giải thích sự khác nhau giữa &x và *p trong C thật dễ hiểu')">💻 Giải thích &x và *p trong C</button>
+      </div>
+
+      <!-- Thanh nhập tin nhắn -->
+      <div class="chat-input-bar">
+        <input type="text" id="user-input" class="chat-input" placeholder="Nhập câu hỏi cho AI..." onkeydown="handleKeyDown(event)">
+        <button class="send-btn" onclick="sendMessage()">Gửi</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Quản lý Modal
+    function openChat() {
+      document.getElementById('ai-modal').style.display = 'flex';
+      loadApiKey();
+    }
+    function closeChat() {
+      document.getElementById('ai-modal').style.display = 'none';
+    }
+
+    // Quản lý API Key
+    function loadApiKey() {
+      const savedKey = localStorage.getItem('gemini_api_key') || '';
+      if (savedKey) {
+        document.getElementById('gemini-api-key').value = savedKey;
+      }
+    }
+    function saveApiKey() {
+      const key = document.getElementById('gemini-api-key').value.trim();
+      if (key) {
+        localStorage.setItem('gemini_api_key', key);
+        appendBubble('AI', 'Đã lưu API Key thành công! Giờ bạn có thể thoải mái hỏi đáp cùng Gemini Flash.');
+      } else {
+        alert('Vui lòng nhập API Key hợp lệ!');
+      }
+    }
+
+    // Gửi câu hỏi nhanh
+    function sendQuickPrompt(text) {
+      document.getElementById('user-input').value = text;
+      sendMessage();
+    }
+
+    function handleKeyDown(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    function appendBubble(sender, text) {
+      const container = document.getElementById('chat-messages');
+      const bubble = document.createElement('div');
+      bubble.className = `chat-bubble ${sender === 'User' ? 'bubble-user' : 'bubble-ai'}`;
+      bubble.innerText = text;
+      container.appendChild(bubble);
+      container.scrollTop = container.scrollHeight;
+      return bubble;
+    }
+
+    // Tích hợp Gemini 2.5 Flash / Gemini Flash API
+    async function sendMessage() {
+      const input = document.getElementById('user-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const apiKey = localStorage.getItem('gemini_api_key') || document.getElementById('gemini-api-key').value.trim();
+      if (!apiKey) {
+        appendBubble('User', text);
+        appendBubble('AI', '⚠️ Bạn chưa cài đặt Gemini API Key. Hãy dán API Key của bạn vào ô "API Key" ở trên rồi bấm "Lưu" để bắt đầu trò chuyện nhé! (Lấy key miễn phí tại aistudio.google.com)');
+        input.value = '';
+        return;
+      }
+
+      appendBubble('User', text);
+      input.value = '';
+
+      const loadingBubble = appendBubble('AI', 'Đang suy nghĩ... ⏳');
+
+      const systemPrompt = `Bạn là Gia sư AI dành cho sinh viên K20 AI Phenikaa University.
+Nhiệm vụ: Giải thích Toán Giải tích 1, Tiếng Anh và C theo phương pháp Socratic.
+Quy tắc:
+- Ngắn gọn, súc tích, ngắt đoạn rõ ràng, công thức toán chuẩn, dễ đọc trên điện thoại.
+- Nếu sinh viên hỏi bài, đưa gợi ý (hint) từng bước, không spoil toàn bộ đáp án ngay lập tức.
+- Giọng điệu: Thân thiện, động viên, dùng emoji phù hợp.`;
+
+      const requestBody = {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: `${systemPrompt}\n\nCâu hỏi của sinh viên: ${text}` }]
+          }
+        ]
+      };
+
+      try {
+        // Gọi Gemini 2.5 Flash endpoint chính thức
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Lỗi HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Gia sư AI không nhận được phản hồi phù hợp.";
+        loadingBubble.innerText = reply;
+      } catch (err) {
+        loadingBubble.innerText = `❌ Lỗi kết nối Gemini API: ${err.message}. Hãy kiểm tra lại API Key của bạn.`;
+      }
+    }
+
+    // Tự động load key khi mở trang
+    loadApiKey();
+  </script>
 </body>
 </html>
