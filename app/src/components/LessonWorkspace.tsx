@@ -6,7 +6,10 @@ import {
   Check,
   CheckCircle2,
   Clock3,
+  Bot,
+  Copy,
   ExternalLink,
+  FileCheck,
   FileText,
   Highlighter,
   Lightbulb,
@@ -35,6 +38,7 @@ import type {
 } from "../types";
 import NotesPanel from "./NotesPanel";
 import QuizPanel from "./QuizPanel";
+import AiTutorPanel from "./AiTutorPanel";
 import "./learning.css";
 
 interface LessonWorkspaceProps {
@@ -90,7 +94,8 @@ export default function LessonWorkspace({
 }: LessonWorkspaceProps) {
   const state = useLearningState();
   const progress = state.progress[lesson.id];
-  const [tab, setTab] = useState<"read" | "practice" | "notes">("read");
+  const [tab, setTab] = useState<"read" | "practice" | "ai" | "notes">("read");
+  const [aiInitialPrompt, setAiInitialPrompt] = useState<string>("");
   const [selection, setSelection] = useState<SelectedPassage | null>(null);
   const [notice, setNotice] = useState("");
   const [actionError, setActionError] = useState("");
@@ -390,8 +395,9 @@ export default function LessonWorkspace({
       >
         {(
           [
-            { id: "read", icon: BookOpen, label: "Bài học" },
-            { id: "practice", icon: Sparkles, label: "Thử sức" },
+            { id: "read", icon: BookOpen, label: "Lý thuyết" },
+            { id: "practice", icon: Sparkles, label: "Luyện tập" },
+            { id: "ai", icon: Bot, label: "Trợ lý AI GLM" },
             { id: "notes", icon: FileText, label: "Ghi chú" },
           ] as const
         ).map(({ id, icon: Icon, label }) => (
@@ -437,7 +443,13 @@ export default function LessonWorkspace({
         </div>
       )}
       <div role="tabpanel">
-        {tab === "notes" ? (
+        {tab === "ai" ? (
+          <AiTutorPanel
+            lesson={lesson}
+            initialPrompt={aiInitialPrompt}
+            onClearInitialPrompt={() => setAiInitialPrompt("")}
+          />
+        ) : tab === "notes" ? (
           <NotesPanel lessonId={lesson.id} subjectId={lesson.subjectId} />
         ) : tab === "practice" ? (
           <>
@@ -634,18 +646,43 @@ export default function LessonWorkspace({
           <button
             className="learning-color-dot pink"
             aria-label="Đánh dấu màu hồng"
+            title="Màu hồng: Bẫy lỗi hay gặp"
             onClick={() => saveHighlight("pink")}
           />
           <button
             className="learning-color-dot blue"
             aria-label="Đánh dấu màu xanh"
+            title="Màu xanh: Khái niệm cốt lõi"
             onClick={() => saveHighlight("blue")}
           />
           <button
             className="learning-color-dot yellow"
             aria-label="Đánh dấu màu vàng"
+            title="Màu vàng: Công thức quan trọng"
             onClick={() => saveHighlight("yellow")}
           />
+          <button
+            className="learning-color-dot green"
+            aria-label="Đánh dấu màu xanh lá"
+            title="Màu xanh lá: Mẹo nhớ & Ví dụ"
+            onClick={() => saveHighlight("green")}
+          />
+          <span />
+          <button
+            className="learning-ask-ai-selection-btn"
+            aria-label="Hỏi AI về đoạn này"
+            title="Hỏi Gia sư AI GLM về đoạn văn này"
+            onClick={() => {
+              setAiInitialPrompt(
+                `Hãy giải thích ngắn gọn bản chất và cách hiểu đoạn văn sau trong bài [${lesson.id}]:\n\n> "${selection.text}"`
+              );
+              setTab("ai");
+              setSelection(null);
+              window.getSelection()?.removeAllRanges();
+            }}
+          >
+            <Bot size={15} /> Hỏi AI
+          </button>
           <span />
           <button
             aria-label="Lưu đoạn chọn thành ghi chú"
@@ -742,6 +779,20 @@ export default function LessonWorkspace({
               onClick={completeLesson}
             >
               <Check size={17} /> Lưu và hẹn ôn
+            </button>
+            <button
+              type="button"
+              className="learning-button"
+              style={{ marginTop: 8 }}
+              onClick={() => {
+                const todayStr = new Date().toLocaleDateString("vi-VN");
+                const report = `# Checkpoint Học Tập [${lesson.id}] - ${todayStr}\n\n**Môn:** ${lesson.subjectId} - ${lesson.title}\n**Mục tiêu:** ${lesson.objective}\n**Kết quả tự luyện:** ${result.trim() || "Chưa nhập kết quả"}\n**Lỗi cần ôn:** ${errors.trim() || "Không có lỗi lớn"}\n**Lịch ôn ngắt quãng:** +1, +3, +7 ngày\n\n> *Gửi Antigravity AI:* Hãy ghi nhận tiến độ này và đưa ra 1-2 bài tập biến thể để tôi tự làm tiếp!`;
+                navigator.clipboard.writeText(report).then(() => {
+                  setNotice("Đã sao chép Báo cáo học tập! Bạn có thể dán vào chat cho Antigravity AI.");
+                });
+              }}
+            >
+              <Copy size={16} /> Sao chép Báo cáo cho Antigravity AI
             </button>
           </section>
         </div>

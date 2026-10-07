@@ -1,7 +1,19 @@
 export type SubjectId = "EN" | "GT" | "VL" | "IT" | "PL";
 export type CourseId = SubjectId;
 export type LessonStatus = "not_started" | "in_progress" | "completed";
-export type HighlightColor = "pink" | "blue" | "yellow";
+export type HighlightColor = "pink" | "blue" | "yellow" | "green";
+
+export interface AiChatMessage {
+  id: string;
+  role: "user" | "assistant" | "system";
+  content: string;
+  timestamp: string;
+}
+
+export interface AiConfig {
+  apiKey: string;
+  model: string;
+}
 
 export interface Resource {
   title: string;

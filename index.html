@@ -93,9 +93,9 @@
         <div style="background: rgba(255,255,255,0.85); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--pink-border);">
           <strong style="color: var(--pink-primary); font-size: 0.85rem;"><i class="fa-solid fa-bullseye"></i> ƯU TIÊN HÔM NAY THEO HỒ SƠ 07/10:</strong>
           <div style="font-size: 0.82rem; color: var(--text-main); margin-top: 4px;">
-            1. <strong>Tiếng Anh EN02:</strong> Luyện thể phủ định 'not' với To be, câu hỏi rút gọn aren't, isn't.<br>
-            2. <strong>Giải tích 1:</strong> Ôn giới hạn dạng 0/0 nhân tử & liên hợp, cẩn thận đổi dấu biểu thức.<br>
-            3. <strong>Lập trình C:</strong> Ôn Pointer & RAM, lưu ý dấu <code>&</code> trong <code>scanf</code>.
+            1. <strong>Tiếng Anh EN02:</strong> Luyện thể phủ định 'not' với To be, câu hỏi rút gọn aren't, isn't. <a href="javascript:void(0)" onclick="openLessonWorkspace('EN02')" style="color: var(--pink-primary); font-weight: 700; margin-left: 4px;">[Học ngay &bull; Lý thuyết + AI]</a><br>
+            2. <strong>Giải tích 1:</strong> Ôn giới hạn dạng 0/0 nhân tử & liên hợp, cẩn thận đổi dấu biểu thức. <a href="javascript:void(0)" onclick="openLessonWorkspace('GT06')" style="color: var(--blue-primary); font-weight: 700; margin-left: 4px;">[Học GT06]</a><br>
+            3. <strong>Lập trình C:</strong> Ôn Pointer & RAM, lưu ý dấu <code>&</code> trong <code>scanf</code>. <a href="javascript:void(0)" onclick="openLessonWorkspace('IT02')" style="color: #8b5cf6; font-weight: 700; margin-left: 4px;">[Học IT02]</a>
           </div>
         </div>
       </div>
@@ -160,6 +160,14 @@
         <h3><i class="fa-solid fa-bolt" style="color: var(--pink-primary);"></i> Bắt đầu học ngay</h3>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+        <div class="stat-card" style="cursor: pointer; border: 2px solid var(--pink-border); background: var(--pink-light);" onclick="openLessonWorkspace('EN02')">
+          <h4 style="color: var(--pink-primary); font-size: 0.95rem; margin-bottom: 4px;"><i class="fa-solid fa-graduation-cap"></i> Học Tiết EN02: To be & Bẫy lỗi</h4>
+          <p style="font-size: 0.8rem; color: var(--text-main);">Lý thuyết, highlight trực tiếp, 7 câu trắc nghiệm & hỏi Gia sư AI GLM 5.3.</p>
+        </div>
+        <div class="stat-card" style="cursor: pointer; border: 2px solid var(--blue-border); background: var(--blue-light);" onclick="openLessonWorkspace('EN01')">
+          <h4 style="color: var(--blue-primary); font-size: 0.95rem; margin-bottom: 4px;"><i class="fa-solid fa-graduation-cap"></i> Học Tiết EN01: Chẩn đoán & Ký hiệu</h4>
+          <p style="font-size: 0.8rem; color: var(--text-main);">Ôn phát âm email (dot, at, hyphen, underscore), ngữ pháp nền & mẹo thi.</p>
+        </div>
         <div class="stat-card" style="cursor: pointer;" onclick="switchTab('tab-quiz')">
           <h4 style="color: var(--pink-primary); font-size: 0.95rem; margin-bottom: 4px;"><i class="fa-solid fa-file-pen"></i> Thi thử Tiếng Anh 50 câu</h4>
           <p style="font-size: 0.8rem; color: var(--text-muted);">Mô phỏng 60 phút đúng chuẩn ảnh thông báo thi xếp lớp A6.</p>
@@ -471,8 +479,224 @@
   </div>
 
   <!-- =========================================================
-       BOTTOM NAVIGATION DÀNH CHO MOBILE
+       MODAL KHÔNG GIAN HỌC TẬP & HIGHLIGHT & AI GLM 5.3
        ========================================================= -->
+  <div class="workspace-modal-overlay" id="lessonWorkspaceModal">
+    <div class="workspace-modal-content">
+      <!-- Header -->
+      <div class="ws-header">
+        <div class="ws-title-group">
+          <span class="ws-code-badge" id="wsCodeBadge">EN02</span>
+          <div class="ws-title" id="wsTitle">To be, đại từ, sở hữu</div>
+        </div>
+        <button class="ws-close-btn" id="closeWorkspaceBtn" title="Đóng" onclick="closeLessonWorkspace()">&times;</button>
+      </div>
+
+      <!-- Stepper Tabs -->
+      <div class="ws-stepper">
+        <button class="ws-step-btn active" data-wstab="ws-tab-read" onclick="switchWorkspaceTab('ws-tab-read')">
+          <i class="fa-solid fa-book-open"></i> 1. Lý thuyết & Highlight
+        </button>
+        <button class="ws-step-btn" data-wstab="ws-tab-practice" onclick="switchWorkspaceTab('ws-tab-practice')">
+          <i class="fa-solid fa-pen-to-square"></i> 2. Luyện tập & Quiz
+        </button>
+        <button class="ws-step-btn ai-step" data-wstab="ws-tab-ai" onclick="switchWorkspaceTab('ws-tab-ai')">
+          <i class="fa-solid fa-robot"></i> 3. Trợ lý AI GLM 5.3
+        </button>
+        <button class="ws-step-btn" data-wstab="ws-tab-checkpoint" onclick="switchWorkspaceTab('ws-tab-checkpoint')">
+          <i class="fa-solid fa-circle-check"></i> 4. Checkpoint & Báo cáo
+        </button>
+      </div>
+
+      <!-- Body Tabs -->
+      <div class="ws-body">
+        <!-- TAB 1: LÝ THUYẾT & HIGHLIGHT -->
+        <div class="ws-tab-pane active" id="ws-tab-read">
+          <div class="theory-intro-banner" id="wsIntroBanner"></div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+            <i class="fa-solid fa-highlighter" style="color: var(--pink-primary);"></i>
+            <strong>Mẹo:</strong> Bôi đen bất kỳ đoạn văn nào bên dưới để tô màu <em>Xanh nước (Cốt lõi)</em>, <em>Hồng (Bẫy lỗi)</em>, <em>Vàng (Công thức)</em>, <em>Xanh lá (Mẹo nhớ)</em> hoặc bấm <strong>"Hỏi AI"</strong>!
+          </p>
+          <div id="wsTheorySectionsContainer"></div>
+          <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+            <button class="btn btn-primary" id="wsGoToPracticeBtn" onclick="switchWorkspaceTab('ws-tab-practice')">
+              Đã hiểu lý thuyết &bull; Sang phần Luyện tập <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 2: LUYỆN TẬP & BÀI TẬP -->
+        <div class="ws-tab-pane" id="ws-tab-practice">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--blue-primary);">
+              <i class="fa-solid fa-pen-nib"></i> Bài tập trắc nghiệm & Tự luyện theo bài
+            </h4>
+            <span id="wsPracticeScoreBadge" style="font-size: 0.8rem; font-weight: 700; background: var(--blue-light); color: var(--blue-primary); padding: 4px 10px; border-radius: var(--radius-full);">
+              Tiến độ: 0 câu
+            </span>
+          </div>
+          <div class="practice-container" id="wsPracticeQuestionsContainer"></div>
+          <div style="margin-top: 24px; display: flex; justify-content: space-between;">
+            <button class="btn btn-outline" id="wsBackToReadBtn" onclick="switchWorkspaceTab('ws-tab-read')">
+              <i class="fa-solid fa-arrow-left"></i> Xem lại lý thuyết
+            </button>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline" id="wsAskAiPracticeBtn" onclick="switchWorkspaceTab('ws-tab-ai')" style="color: var(--pink-primary); border-color: var(--pink-border);">
+                <i class="fa-solid fa-robot"></i> Hỏi Trợ lý AI GLM
+              </button>
+              <button class="btn btn-primary" id="wsGoToCheckpointBtn" onclick="switchWorkspaceTab('ws-tab-checkpoint')">
+                Tổng kết Checkpoint <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: TRỢ LÝ AI GLM 5.3 -->
+        <div class="ws-tab-pane" id="ws-tab-ai">
+          <div class="ai-tutor-box">
+            <!-- Top bar -->
+            <div class="ai-top-bar">
+              <div class="ai-status-pill">
+                <span class="ai-status-dot"></span>
+                <span>Gia Sư AI GLM 5.3 &bull; OpenRouter</span>
+              </div>
+              <button class="btn-small btn-outline" id="openAiSettingsBtn" title="Cài đặt API Key & Model" onclick="document.getElementById('aiSettingsModal').classList.add('active'); const k=document.getElementById('inputOpenRouterKey'); if(k) k.value=localStorage.getItem('thuan_openrouter_api_key')||''; const m=document.getElementById('inputOpenRouterModel'); if(m) m.value=localStorage.getItem('thuan_openrouter_model')||'thudm/glm-4-9b-chat';">
+                <i class="fa-solid fa-gear"></i> Cài đặt AI
+              </button>
+            </div>
+
+            <!-- Quick Chips -->
+            <div class="ai-chips-row">
+              <button class="ai-chip-btn" data-prompt="Giải thích bản chất khái niệm bài này thật ngắn gọn, dễ hiểu và cho ví dụ trực quan." onclick="sendAiMessage(this.dataset.prompt)">
+                💡 Bản chất bài học
+              </button>
+              <button class="ai-chip-btn" data-prompt="Chỉ ra những bẫy lỗi kinh điển mà sinh viên thường mắc nhất trong chủ đề này?" onclick="sendAiMessage(this.dataset.prompt)">
+                ⚠️ Bẫy lỗi hay gặp
+              </button>
+              <button class="ai-chip-btn" data-prompt="Cho tôi 1 bài tập trắc nghiệm mới tương tự (kèm 4 đáp án A B C D) để tôi tự luyện, chưa đưa ra lời giải vội nhé!" onclick="sendAiMessage(this.dataset.prompt)">
+                🎯 Thử thách tự luyện
+              </button>
+              <button class="ai-chip-btn" data-prompt="Cho tôi câu thần chú hoặc mẹo nhớ nhanh để không bị nhầm lẫn trong phòng thi." onclick="sendAiMessage(this.dataset.prompt)">
+                📌 Mẹo nhớ lâu
+              </button>
+            </div>
+
+            <!-- Chat messages -->
+            <div class="ai-chat-messages" id="wsAiChatMessages">
+              <div class="ai-bubble system-tip">
+                🤖 Gia sư AI hoạt động theo chuẩn sư phạm AGENTS.md: Giải thích ngắn gọn, gợi ý để bạn tự tư duy, không giải hộ.
+              </div>
+            </div>
+
+            <!-- Chat input -->
+            <div class="ai-chat-input-bar">
+              <textarea class="ai-input-area" id="wsAiInput" rows="1" placeholder="Hỏi bất kỳ điều gì về bài học hoặc bẫy lỗi... (Enter để gửi)"></textarea>
+              <button class="ai-send-btn" id="wsAiSendBtn" onclick="const inp=document.getElementById('wsAiInput'); if(inp&&inp.value.trim()){ sendAiMessage(inp.value.trim()); inp.value=''; }">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: CHECKPOINT & ĐỒNG BỘ -->
+        <div class="ws-tab-pane" id="ws-tab-checkpoint">
+          <div class="checkpoint-summary-card">
+            <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--pink-primary); margin-bottom: 6px;">
+              <i class="fa-solid fa-flag-checkered"></i> Tổng kết Kết quả Tiết học
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--text-main); margin-bottom: 12px;">
+              Ghi nhận tiến độ chính xác theo yêu cầu hồ sơ ngày 07/10: Chỉ đánh dấu hoàn thành khi đã tự luyện đạt yêu cầu; lưu riêng các bẫy lỗi đã phát hiện để lên lịch ôn 1/3/7 ngày.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+              <div>
+                <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">Trạng thái:</label>
+                <select id="wsCheckpointStatus" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px; font-weight: 700;">
+                  <option value="Đã hoàn thành">Đã hoàn thành</option>
+                  <option value="Đang học">Đang học</option>
+                  <option value="Chưa học">Chưa học</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">Kết quả tự luyện:</label>
+                <input type="text" id="wsCheckpointResult" placeholder="VD: Đúng 6/7 câu tự luyện" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px;">
+              </div>
+            </div>
+            <div style="margin-top: 10px;">
+              <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">Bẫy lỗi / Lỗi cần ôn lại:</label>
+              <textarea id="wsCheckpointMistakes" rows="2" placeholder="Ghi cụ thể bẫy lỗi gặp phải (VD: hers thay cho her phone; phủ định am not không rút gọn...)" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px;"></textarea>
+            </div>
+          </div>
+
+          <!-- Hành động đồng bộ -->
+          <div class="checkpoint-actions-grid">
+            <button class="btn btn-primary" id="wsSaveCheckpointBtn" onclick="saveLessonCheckpoint()">
+              <i class="fa-solid fa-floppy-disk"></i> Lưu Checkpoint & Cập nhật Hệ thống
+            </button>
+            <button class="btn btn-outline" id="wsCopyAiReportBtn" onclick="copyLessonAiReport()" style="color: var(--blue-primary); border-color: var(--blue-border);">
+              <i class="fa-solid fa-clipboard-check"></i> Sao chép Báo cáo cho Antigravity AI
+            </button>
+            <button class="btn btn-outline" id="wsSyncDirectToRepoBtn" onclick="syncLessonDirectToRepo()" style="color: var(--pink-primary); border-color: var(--pink-border);">
+              <i class="fa-solid fa-folder-tree"></i> Đồng bộ ngay vào Thư mục Repo d:\Hoctap
+            </button>
+            <button class="btn btn-outline" id="wsOpenSessionNoteBtn">
+              <i class="fa-solid fa-bookmark"></i> Xem Sổ tay Highlight của bài
+            </button>
+          </div>
+
+          <!-- Preview Markdown chuẩn AGENTS.md -->
+          <h4 style="font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; color: var(--text-muted);">
+            Bản xem trước Báo cáo Markdown gửi AI (chuẩn AGENTS.md):
+          </h4>
+          <pre class="markdown-preview-box" id="wsCheckpointMarkdownPreview" style="max-height: 180px;"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING HIGHLIGHT TOOLBAR (Hiện lên khi bôi đen văn bản lý thuyết) -->
+  <div class="floating-hl-toolbar" id="floatingHlToolbar">
+    <button class="hl-dot-btn hl-dot-blue" data-hlcolor="blue" title="Xanh nước: Cốt lõi" onclick="applyInTextHighlight('blue')"></button>
+    <button class="hl-dot-btn hl-dot-pink" data-hlcolor="pink" title="Hồng: Bẫy lỗi" onclick="applyInTextHighlight('pink')"></button>
+    <button class="hl-dot-btn hl-dot-yellow" data-hlcolor="yellow" title="Vàng: Công thức" onclick="applyInTextHighlight('yellow')"></button>
+    <button class="hl-dot-btn hl-dot-green" data-hlcolor="green" title="Xanh lá: Mẹo nhớ" onclick="applyInTextHighlight('green')"></button>
+    <button class="hl-ask-ai-btn" id="hlAskAiBtn" onclick="askAiAboutSelection()">
+      <i class="fa-solid fa-robot"></i> Hỏi AI
+    </button>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT TRỢ LÝ AI (OPENROUTER) -->
+  <div class="modal-overlay" id="aiSettingsModal">
+    <div class="modal-content" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--pink-primary);">
+          <i class="fa-solid fa-gear"></i> Cấu hình Trợ lý AI OpenRouter
+        </h3>
+        <button class="close-modal-btn" id="closeAiSettingsBtn" onclick="document.getElementById('aiSettingsModal').classList.remove('active')">&times;</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">API Key OpenRouter (Lưu an toàn trong trình duyệt):</label>
+          <input type="password" id="inputOpenRouterKey" placeholder="sk-or-v1-..." style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px; font-family: monospace; font-size: 0.85rem;">
+          <small style="font-size: 0.72rem; color: var(--text-muted);">Được lưu bảo mật trong LocalStorage trình duyệt của bạn, không gửi lộ ra ngoài repo.</small>
+        </div>
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Mô hình AI (Model ID):</label>
+          <input type="text" id="inputOpenRouterModel" value="thudm/glm-4-9b-chat" placeholder="thudm/glm-4-9b-chat hoặc zhipu/glm-4" style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px; font-size: 0.85rem;">
+          <div style="display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap;">
+            <button class="btn-small btn-outline" style="font-size: 0.72rem;" onclick="document.getElementById('inputOpenRouterModel').value='thudm/glm-4-9b-chat'">GLM-4 9B</button>
+            <button class="btn-small btn-outline" style="font-size: 0.72rem;" onclick="document.getElementById('inputOpenRouterModel').value='zhipu/glm-4'">GLM-4</button>
+            <button class="btn-small btn-outline" style="font-size: 0.72rem;" onclick="document.getElementById('inputOpenRouterModel').value='meta-llama/llama-3.3-70b-instruct:free'">Llama 3.3 (Free)</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="saveAiSettingsBtn" onclick="const k=document.getElementById('inputOpenRouterKey'); if(k&&k.value.trim()) localStorage.setItem('thuan_openrouter_api_key', k.value.trim()); const m=document.getElementById('inputOpenRouterModel'); if(m&&m.value.trim()) localStorage.setItem('thuan_openrouter_model', m.value.trim()); document.getElementById('aiSettingsModal').classList.remove('active'); showToast('Đã lưu cấu hình AI!');" style="margin-top: 8px;">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu cấu hình AI
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="app-toast-container" id="appToastContainer"></div>
   <nav class="mobile-bottom-nav">
     <button class="mobile-nav-btn active" data-tab="tab-hub">
       <i class="fa-solid fa-house"></i>
@@ -501,6 +725,6 @@
   </nav>
 
   <!-- Nạp module Javascript chính -->
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=2.5"></script>
 </body>
 </html>
