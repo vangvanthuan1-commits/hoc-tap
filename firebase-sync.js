@@ -76,18 +76,19 @@ export async function loadStudyState(defaultState) {
     console.warn("Không đọc được LocalStorage:", e);
   }
 
-  // Nếu Firebase hoạt động, thử đồng bộ từ Cloud
+  // Nếu Firebase hoạt động, thử đồng bộ từ Cloud với timeout 1.5s an toàn
   if (isFirebaseOnline && db) {
     try {
       const docRef = doc(db, "users", "thuan_phenikaa_k20");
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
+      const fetchPromise = getDoc(docRef);
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Firebase timeout 1.5s")), 1500));
+      const docSnap = await Promise.race([fetchPromise, timeoutPromise]);
+      if (docSnap && docSnap.exists()) {
         const cloudData = docSnap.data();
-        // Hợp nhất dữ liệu Cloud và Local (lấy dữ liệu mới hơn)
         return { ...defaultState, ...localData, ...cloudData, isCloudConnected: true };
       }
     } catch (err) {
-      console.warn("Không thể fetch từ Cloud Firestore, sử dụng LocalStorage:", err);
+      console.warn("Không thể fetch từ Cloud Firestore (dùng LocalStorage):", err.message);
     }
   }
 

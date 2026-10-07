@@ -83,13 +83,21 @@ let currentFcIndex = 0;
 let isFcFlipped = false;
 
 // Khởi chạy ứng dụng (Hỗ trợ cả trường hợp DOM đã tải xong trước khi module nạp)
-async function startApp() {
-  initUI();
-  await loadAppData();
-  renderAllViews();
+function startApp() {
   setupEventListeners();
   setupWorkspaceListeners();
+  initUI();
+  renderAllViews();
   startCountdownTimer();
+  updateAiLiveContext();
+
+  // Nạp dữ liệu đồng bộ nền, cập nhật giao diện mà không làm khóa phản hồi nút bấm
+  loadAppData().then(() => {
+    renderAllViews();
+    updateAiLiveContext();
+  }).catch(err => {
+    console.warn("Nạp dữ liệu nền:", err);
+  });
 }
 
 if (document.readyState === "loading") {
@@ -163,6 +171,10 @@ export function switchTab(tabId) {
 
   if (tabId === "tab-sync") {
     renderSyncReport();
+  }
+
+  if (typeof updateAiLiveContext === "function") {
+    updateAiLiveContext();
   }
 }
 window.switchTab = switchTab;
@@ -627,6 +639,9 @@ export function openLessonWorkspace(code) {
   switchWorkspaceTab("ws-tab-read");
 
   modal.classList.add("active");
+  if (typeof updateAiLiveContext === "function") {
+    updateAiLiveContext();
+  }
 }
 window.openLessonWorkspace = openLessonWorkspace;
 
@@ -634,6 +649,9 @@ export function closeLessonWorkspace() {
   const modal = document.getElementById("lessonWorkspaceModal");
   if (modal) modal.classList.remove("active");
   hideFloatingToolbar();
+  if (typeof updateAiLiveContext === "function") {
+    updateAiLiveContext();
+  }
 }
 window.closeLessonWorkspace = closeLessonWorkspace;
 
@@ -652,6 +670,9 @@ export function switchWorkspaceTab(tabId) {
   if (targetPane) targetPane.classList.add("active");
 
   hideFloatingToolbar();
+  if (typeof updateAiLiveContext === "function") {
+    updateAiLiveContext();
+  }
 }
 window.switchWorkspaceTab = switchWorkspaceTab;
 
@@ -840,13 +861,16 @@ function setupWorkspaceListeners() {
         if (container && container.contains(range.commonAncestorContainer)) {
           const rect = range.getBoundingClientRect();
           if (toolbar) {
-            toolbar.style.top = `${rect.top + window.scrollY - 8}px`;
+            toolbar.style.top = `${rect.bottom + window.scrollY + 8}px`;
             toolbar.style.left = `${rect.left + window.scrollX + (rect.width / 2)}px`;
             toolbar.classList.add("visible");
             activeSelectionData = {
               text: text,
               range: range.cloneRange()
             };
+            if (typeof updateAiLiveContext === "function") {
+              updateAiLiveContext();
+            }
           }
           return;
         }
@@ -1006,13 +1030,69 @@ function setupWorkspaceListeners() {
   }
 }
 
+let pendingHighlightColor = null;
+
+const COLOR_CONFIG = {
+  yellow: { label: "Vàng: Công thức", meaning: "Công thức, cấu trúc ngữ pháp / định lý cốt lõi", bg: "#fef9c3", color: "#854d0e" },
+  pink: { label: "Hồng: Bẫy lỗi", meaning: "Bẫy đề kinh điển, điểm dễ mất điểm hay nhầm lẫn", bg: "#fce7f3", color: "#9d174d" },
+  blue: { label: "Xanh nước: Cốt lõi", meaning: "Khái niệm cốt lõi, từ khóa trọng tâm bài học", bg: "#e0f2fe", color: "#0369a1" },
+  green: { label: "Xanh lá: Mẹo nhớ", meaning: "Mẹo suy luận nhanh, quy tắc ghi nhớ độc đáo", bg: "#dcfce7", color: "#15803d" }
+};
+
+export function promptHighlightWithNote(colorType) {
+  if (!activeSelectionData || !activeSelectionData.text) return;
+  pendingHighlightColor = colorType;
+  const cfg = COLOR_CONFIG[colorType] || COLOR_CONFIG.yellow;
+  
+  const popover = document.getElementById("hlNotePopover");
+  const badge = document.getElementById("hlNoteColorBadge");
+  const meaningText = document.getElementById("hlNoteMeaningText");
+  const quoteText = document.getElementById("hlNoteQuoteText");
+  const inputField = document.getElementById("hlNoteInputField");
+
+  if (badge) {
+    badge.textContent = cfg.label;
+    badge.style.backgroundColor = cfg.bg;
+    badge.style.color = cfg.color;
+  }
+  if (meaningText) meaningText.textContent = cfg.meaning;
+  if (quoteText) quoteText.textContent = `"${activeSelectionData.text}"`;
+  if (inputField) inputField.value = "";
+
+  hideFloatingToolbar();
+  if (popover) {
+    popover.style.display = "block";
+    if (inputField) setTimeout(() => inputField.focus(), 60);
+  }
+}
+window.promptHighlightWithNote = promptHighlightWithNote;
+
+export function closeHlNotePopover() {
+  const popover = document.getElementById("hlNotePopover");
+  if (popover) popover.style.display = "none";
+  pendingHighlightColor = null;
+}
+window.closeHlNotePopover = closeHlNotePopover;
+
+export function saveHighlightWithNote(withNote) {
+  if (!activeSelectionData || !pendingHighlightColor) {
+    closeHlNotePopover();
+    return;
+  }
+  const inputField = document.getElementById("hlNoteInputField");
+  const noteText = (withNote && inputField) ? inputField.value.trim() : "";
+
+  applyInTextHighlight(pendingHighlightColor, noteText);
+  closeHlNotePopover();
+}
+window.saveHighlightWithNote = saveHighlightWithNote;
+
 function hideFloatingToolbar() {
   const toolbar = document.getElementById("floatingHlToolbar");
   if (toolbar) toolbar.classList.remove("visible");
-  activeSelectionData = null;
 }
 
-function applyInTextHighlight(colorType) {
+function applyInTextHighlight(colorType, noteText = "") {
   if (!activeSelectionData || !activeSelectionData.text) return;
   const text = activeSelectionData.text;
 
@@ -1020,6 +1100,10 @@ function applyInTextHighlight(colorType) {
     const mark = document.createElement("mark");
     mark.className = `hl-mark-${colorType}`;
     mark.textContent = text;
+    if (noteText) {
+      mark.title = `Ghi chú: ${noteText}`;
+      mark.setAttribute("data-note", noteText);
+    }
     activeSelectionData.range.deleteContents();
     activeSelectionData.range.insertNode(mark);
   } catch (err) {
@@ -1027,11 +1111,14 @@ function applyInTextHighlight(colorType) {
   }
 
   // Thêm vào mảng highlight toàn cục
+  const cfg = COLOR_CONFIG[colorType] || { label: colorType, meaning: "" };
   const highlightItem = {
     id: "hl-" + Date.now(),
     text: text,
     type: colorType,
-    subject: currentWsLessonCode,
+    meaning: cfg.meaning,
+    note: noteText || "",
+    subject: currentWsLessonCode || "GENERAL",
     date: new Date().toLocaleDateString("vi-VN")
   };
   state.highlights.unshift(highlightItem);
@@ -1041,13 +1128,7 @@ function applyInTextHighlight(colorType) {
   hideFloatingToolbar();
   window.getSelection()?.removeAllRanges();
 
-  const colorLabels = {
-    blue: "Xanh nước (Cốt lõi)",
-    pink: "Hồng (Bẫy lỗi)",
-    yellow: "Vàng (Công thức)",
-    green: "Xanh lá (Mẹo nhớ)"
-  };
-  showToast(`Đã lưu highlight [${colorLabels[colorType] || colorType}] vào Sổ tay!`);
+  showToast(noteText ? `Đã lưu highlight [${cfg.label}] kèm ghi chú!` : `Đã lưu highlight [${cfg.label}] vào Sổ tay!`);
 }
 window.applyInTextHighlight = applyInTextHighlight;
 window.hideFloatingToolbar = hideFloatingToolbar;
@@ -1604,6 +1685,11 @@ function renderSidebarHighlightsList() {
           </button>
         </div>
         <div class="sidebar-hl-text">"${escapeHtml(hl.text)}"</div>
+        ${hl.note ? `
+          <div style="font-size: 0.76rem; color: #0284c7; background: #e0f2fe; padding: 4px 8px; border-radius: 4px; margin-top: 6px;">
+            <i class="fa-solid fa-note-sticky"></i> <strong>Note:</strong> ${escapeHtml(hl.note)}
+          </div>
+        ` : ''}
       </div>
     `;
   }).join("");
@@ -1631,6 +1717,7 @@ function insertHighlightIntoWordDoc(hl) {
     <div class="word-callout-trap" style="margin: 10px 0;">
       <strong><i class="fa-solid ${icon}"></i> [${title} - ${escapeHtml(hl.subject)}]:</strong>
       <div>"${escapeHtml(hl.text)}"</div>
+      ${hl.note ? `<div style="margin-top: 4px; font-size: 0.85rem; color: #be185d;"><strong><i class="fa-solid fa-pen"></i> Ghi chú cá nhân:</strong> ${escapeHtml(hl.note)}</div>` : ''}
     </div><p><br></p>
   `);
   showToast(`Đã chèn đoạn [${hl.subject}] vào trang Word!`);
@@ -2235,7 +2322,190 @@ function setupEventListeners() {
       });
     });
   }
+
+  // Floating AI Drawer input listener
+  const floatingAiInput = document.getElementById("floatingAiInput");
+  if (floatingAiInput) {
+    floatingAiInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleFloatingAiSend();
+      }
+    });
+  }
 }
+
+// =========================================================
+// 16. TRỢ LÝ AI Ở GÓC DƯỚI (FLOATING AI - BIẾT RÕ HÀNH VI HỌC)
+// =========================================================
+let floatingAiMessages = [];
+
+export function toggleFloatingAiDrawer() {
+  const drawer = document.getElementById("floatingAiDrawer");
+  if (!drawer) return;
+  const isOpening = !drawer.classList.contains("active");
+  drawer.classList.toggle("active", isOpening);
+  if (isOpening) {
+    updateAiLiveContext();
+    const input = document.getElementById("floatingAiInput");
+    if (input) setTimeout(() => input.focus(), 80);
+  }
+}
+window.toggleFloatingAiDrawer = toggleFloatingAiDrawer;
+
+export function getLiveStudyContext() {
+  const wsModal = document.getElementById("lessonWorkspaceModal");
+  const isWsOpen = wsModal && wsModal.classList.contains("active");
+
+  if (isWsOpen && currentWsContent) {
+    const stepNames = {
+      "ws-tab-read": "Đang đọc Lý thuyết & Highlight",
+      "ws-tab-practice": "Đang làm Bài tập & Quiz trắc nghiệm",
+      "ws-tab-ai": "Đang hỏi Gia sư AI trong bài",
+      "ws-tab-checkpoint": "Đang tổng kết Checkpoint"
+    };
+    let ctx = `[Bài học: ${currentWsLessonCode} - ${currentWsContent.title} | Bước: ${stepNames[currentWsTab] || currentWsTab}]`;
+    if (activeSelectionData && activeSelectionData.text) {
+      ctx += ` [Đoạn bôi đen: "${activeSelectionData.text}"]`;
+    }
+    return ctx;
+  }
+
+  if (currentTab === "tab-notes") {
+    return `[Sổ tay Word: Môn ${currentDocSubject}]`;
+  }
+  if (currentTab === "tab-quiz") {
+    const q = currentQuizList && currentQuizList[currentQuizIndex];
+    if (q) {
+      return `[Thi thử câu ${currentQuizIndex + 1}: "${q.prompt || q.question}"]`;
+    }
+    return `[Ma trận đề thi & Ôn tập]`;
+  }
+  if (currentTab === "tab-sessions") {
+    return `[Danh sách Bài học & Môn học: ${selectedCourseSubject}]`;
+  }
+  if (currentTab === "tab-logic") {
+    return `[Luyện tư duy Logic / Bug Hunter level ${currentBugLevelIndex + 1}]`;
+  }
+
+  return `[Màn hình Tổng quan Học tập Phenikaa K20 AI]`;
+}
+window.getLiveStudyContext = getLiveStudyContext;
+
+export function updateAiLiveContext() {
+  const contextBarText = document.getElementById("aiLiveContextText");
+  const launcherSubtext = document.getElementById("aiLauncherSubtext");
+  const ctx = getLiveStudyContext();
+  const cleanCtx = ctx.replace(/\[|\]/g, "");
+  if (contextBarText) {
+    contextBarText.textContent = `Đang theo dõi: ${cleanCtx}`;
+  }
+  if (launcherSubtext) {
+    launcherSubtext.textContent = currentWsLessonCode ? `Đang theo sát ${currentWsLessonCode}` : "Theo sát việc học";
+  }
+}
+window.updateAiLiveContext = updateAiLiveContext;
+
+export function sendFloatingAiPrompt(promptText) {
+  const input = document.getElementById("floatingAiInput");
+  if (input) input.value = promptText;
+  handleFloatingAiSend();
+}
+window.sendFloatingAiPrompt = sendFloatingAiPrompt;
+
+export async function handleFloatingAiSend() {
+  const input = document.getElementById("floatingAiInput");
+  if (!input || !input.value.trim()) return;
+  const userText = input.value.trim();
+  input.value = "";
+
+  const chatContainer = document.getElementById("floatingAiChatMessages");
+  if (!chatContainer) return;
+
+  // Render User Message
+  const userBubble = document.createElement("div");
+  userBubble.className = "ai-bubble user";
+  userBubble.textContent = userText;
+  chatContainer.appendChild(userBubble);
+
+  // Render Loading Bubble
+  const loadingBubble = document.createElement("div");
+  loadingBubble.className = "ai-bubble assistant";
+  loadingBubble.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Trợ lý AI GLM 5.3 đang suy nghĩ...`;
+  chatContainer.appendChild(loadingBubble);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  const currentContext = getLiveStudyContext();
+  floatingAiMessages.push({ role: "user", content: `[Ngữ cảnh màn hình lúc hỏi: ${currentContext}]\n\n${userText}` });
+
+  const systemPrompt = `Bạn là Gia Sư AI GLM 5.3 cá nhân của Vàng Văn Thuận (Phenikaa University K20 AI, GPA mục tiêu >= 3.60, xếp lớp tiếng Anh 8.5+).
+BẠN THEO DÕI TRỰC TIẾP HÀNH VI HỌC CỦA THUẬN TRÊN MÀN HÌNH:
+Ngữ cảnh hiện tại của Thuận: ${currentContext}
+
+QUY TẮC SƯ PHẠM BẮT BUỘC (theo AGENTS.md):
+1. Giải thích thật ngắn gọn, tập trung thẳng vào bản chất khái niệm.
+2. Luôn chỉ rõ các bẫy đề kinh điển dễ mất điểm trong kỳ thi.
+3. Khi Thuận hỏi bài tập hoặc đoạn bôi đen, đưa gợi ý tư duy trước để Thuận tự làm, không đưa đáp án ngay lập tức.
+4. Xưng hô thân thiện, truyền động lực, chuẩn tác phong Gia sư AI Phenikaa K20.`;
+
+  try {
+    const apiKey = getOpenRouterApiKey();
+    const primaryModel = getOpenRouterModel();
+
+    let payload = {
+      model: primaryModel,
+      messages: [
+        { role: "system", content: systemPrompt },
+        ...floatingAiMessages.slice(-6)
+      ],
+      temperature: 0.4,
+      max_tokens: 650
+    };
+
+    let response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+        "HTTP-Referer": "https://hoctap-phenikaa-k20.vercel.app",
+        "X-Title": "Phenikaa K20 AI Floating Tutor"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok && primaryModel.includes("glm")) {
+      console.warn("Primary GLM failed, attempting fallback model...");
+      payload.model = "meta-llama/llama-3.3-70b-instruct:free";
+      response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+          "HTTP-Referer": "https://hoctap-phenikaa-k20.vercel.app",
+          "X-Title": "Phenikaa K20 AI Floating Tutor"
+        },
+        body: JSON.stringify(payload)
+      });
+    }
+
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData?.error?.message || `Lỗi OpenRouter HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const replyText = data.choices?.[0]?.message?.content || "Không nhận được phản hồi từ AI.";
+
+    floatingAiMessages.push({ role: "assistant", content: replyText });
+    loadingBubble.innerHTML = formatMarkdownToHtml(replyText);
+  } catch (err) {
+    loadingBubble.className = "ai-bubble assistant error";
+    loadingBubble.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i> <strong>Lỗi kết nối AI:</strong> ${escapeHtml(err.message)}<br><small>Bấm bánh răng ⚙️ để kiểm tra cấu hình OpenRouter.</small>`;
+  }
+
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+window.handleFloatingAiSend = handleFloatingAiSend;
 
 // Render toàn bộ dữ liệu ban đầu
 function renderAllViews() {

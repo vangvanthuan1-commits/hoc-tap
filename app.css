@@ -1186,17 +1186,22 @@ body {
    LESSON WORKSPACE & IN-TEXT HIGHLIGHT & AI TUTOR STYLES
    ========================================================= */
 
-/* Modal Không gian Học tập toàn màn hình / kích thước lớn */
+/* Không gian Học tập Toàn màn hình (Full-Page Study Workspace) */
 .workspace-modal-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(6px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
   display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 300;
-  padding: 12px;
+  flex-direction: column;
+  z-index: 900;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .workspace-modal-overlay.active {
@@ -1205,16 +1210,37 @@ body {
 
 .workspace-modal-content {
   background: #ffffff;
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   width: 100%;
-  max-width: 960px;
-  height: 92vh;
+  max-width: 100% !important;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-floating);
+  box-shadow: none;
   overflow: hidden;
-  animation: modalScale 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+}
+
+.ws-back-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: #f1f5f9;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ws-back-nav-btn:hover {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  border-color: var(--blue-border);
 }
 
 /* Header bài học */
@@ -1424,69 +1450,193 @@ body {
   font-weight: 600;
 }
 
-/* Floating Highlight Toolbar (Thanh công cụ nổi khi bôi đen chữ) */
+/* Floating Highlight Toolbar (Hiện bên dưới đoạn văn bản được bôi đen) */
 .floating-hl-toolbar {
   position: absolute;
-  z-index: 400;
+  z-index: 500;
   display: none;
   background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-full);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  padding: 5px 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  padding: 6px 10px;
   align-items: center;
   gap: 6px;
-  animation: popIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: translate(-50%, -100%);
-  margin-top: -8px;
+  animation: popInBelow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate(-50%, 0);
 }
 
 .floating-hl-toolbar.visible {
   display: flex;
 }
 
-@keyframes popIn {
-  from { opacity: 0; transform: translate(-50%, -85%) scale(0.9); }
-  to { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+@keyframes popInBelow {
+  from { opacity: 0; transform: translate(-50%, -8px) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
 }
 
-.hl-dot-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-full);
-  border: 2px solid #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-  position: relative;
-}
-.hl-dot-btn:hover {
-  transform: scale(1.2);
+.hl-colors-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
-.hl-dot-blue { background: #38bdf8; }
-.hl-dot-pink { background: #f472b6; }
-.hl-dot-yellow { background: #facc15; }
-.hl-dot-green { background: #4ade80; }
-
-.hl-ask-ai-btn {
+.hl-color-pill {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
-  background: var(--gradient-primary);
-  color: #ffffff;
-  border: none;
+  gap: 6px;
+  padding: 5px 10px;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 700;
+  border: 1px solid transparent;
   cursor: pointer;
+  transition: all 0.18s ease;
   white-space: nowrap;
-  margin-left: 4px;
 }
-.hl-ask-ai-btn:hover {
+
+.hl-pill-yellow {
+  background: #fef9c3;
+  color: #854d0e;
+  border-color: #fef08a;
+}
+.hl-pill-yellow:hover {
+  background: #fef08a;
+  transform: translateY(-1px);
+}
+
+.hl-pill-pink {
+  background: #fce7f3;
+  color: #9d174d;
+  border-color: #fbcfe8;
+}
+.hl-pill-pink:hover {
+  background: #fbcfe8;
+  transform: translateY(-1px);
+}
+
+.hl-pill-blue {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #bae6fd;
+}
+.hl-pill-blue:hover {
+  background: #bae6fd;
+  transform: translateY(-1px);
+}
+
+.hl-pill-green {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+.hl-pill-green:hover {
+  background: #bbf7d0;
+  transform: translateY(-1px);
+}
+
+.hl-pill-ai {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(236, 72, 153, 0.25);
+}
+.hl-pill-ai:hover {
   opacity: 0.95;
-  transform: scale(1.03);
+  transform: translateY(-1px);
+}
+
+.hl-swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.hl-swatch.yellow { background: #eab308; }
+.hl-swatch.pink { background: #ec4899; }
+.hl-swatch.blue { background: #0284c7; }
+.hl-swatch.green { background: #22c55e; }
+
+/* Popover Ghi chú cho Highlight */
+.hl-note-popover {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 950;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-floating);
+  width: 90%;
+  max-width: 440px;
+  padding: 18px 20px;
+  animation: modalScale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hl-note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.hl-badge-pill {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.hl-pop-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.hl-note-quote {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-main);
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--blue-primary);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 14px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.hl-note-input-wrap label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.hl-note-input-wrap input {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.hl-note-input-wrap input:focus {
+  border-color: var(--pink-primary);
+}
+
+.hl-note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 /* 2. TAB BÀI TẬP & LUYỆN TẬP */
@@ -2693,5 +2843,282 @@ body {
   padding: 24px;
   margin-top: 20px;
   box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   FLOATING AI ASSISTANT (Nổi ở góc dưới, Biết rõ hành vi)
+   ========================================================= */
+.floating-ai-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 850;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 8px;
+  background: #ffffff;
+  border: 1.5px solid var(--pink-border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.25), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-ai-launcher:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--pink-primary);
+  box-shadow: 0 14px 28px -5px rgba(236, 72, 153, 0.35);
+}
+
+.ai-launcher-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+}
+
+.ai-launcher-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-launcher-text span {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.ai-launcher-text small {
+  font-size: 0.7rem;
+  color: var(--pink-primary);
+  font-weight: 600;
+}
+
+/* Cửa sổ chat AI Drawer nổi */
+.floating-ai-drawer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 390px;
+  max-width: calc(100vw - 32px);
+  height: 580px;
+  max-height: calc(100vh - 100px);
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
+  z-index: 920;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUpAi 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-ai-drawer.active {
+  display: flex;
+}
+
+@keyframes slideUpAi {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ai-drawer-header {
+  padding: 12px 16px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-drawer-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-avatar-mini {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.ai-drawer-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.ai-drawer-status {
+  font-size: 0.72rem;
+  color: var(--success);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ai-drawer-status .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.ai-drawer-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.ai-icon-btn {
+  background: #f1f5f9;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ai-icon-btn:hover {
+  background: var(--pink-light);
+  color: var(--pink-primary);
+  border-color: var(--pink-border);
+}
+
+/* Thanh ngữ cảnh thời gian thực */
+.ai-live-context-bar {
+  padding: 7px 14px;
+  background: var(--gradient-soft);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--blue-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-chips-scroll {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border-light);
+  background: #fafafa;
+  scrollbar-width: none;
+}
+.ai-chips-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.ai-chip-pill {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ai-chip-pill:hover {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  border-color: var(--blue-border);
+}
+
+.ai-drawer-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #ffffff;
+}
+
+.ai-drawer-input-area {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  gap: 8px;
+  background: #ffffff;
+}
+
+.ai-drawer-input-area textarea {
+  flex: 1;
+  resize: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  outline: none;
+  max-height: 80px;
+}
+
+.ai-drawer-input-area textarea:focus {
+  border-color: var(--blue-primary);
+}
+
+.ai-drawer-input-area button {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease;
+}
+
+.ai-drawer-input-area button:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .floating-ai-launcher {
+    bottom: 85px;
+    right: 16px;
+  }
+  .floating-ai-drawer {
+    bottom: 85px;
+    right: 12px;
+    width: calc(100vw - 24px);
+    height: 72vh;
+  }
 }
 

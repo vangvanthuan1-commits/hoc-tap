@@ -31,25 +31,25 @@
 
       <!-- Navigation Desktop -->
       <nav class="desktop-nav">
-        <button class="nav-item-btn active" data-tab="tab-hub">
+        <button class="nav-item-btn active" data-tab="tab-hub" onclick="switchTab('tab-hub')">
           <i class="fa-solid fa-house"></i> Tổng quan
         </button>
-        <button class="nav-item-btn" data-tab="tab-sessions">
+        <button class="nav-item-btn" data-tab="tab-sessions" onclick="switchTab('tab-sessions')">
           <i class="fa-solid fa-book-open"></i> Bài học
         </button>
-        <button class="nav-item-btn" data-tab="tab-notes">
+        <button class="nav-item-btn" data-tab="tab-notes" onclick="switchTab('tab-notes')">
           <i class="fa-solid fa-highlighter"></i> Sổ tay & Highlight
         </button>
-        <button class="nav-item-btn" data-tab="tab-quiz">
+        <button class="nav-item-btn" data-tab="tab-quiz" onclick="switchTab('tab-quiz')">
           <i class="fa-solid fa-pen-nib"></i> Luyện tập & Thi thử
         </button>
-        <button class="nav-item-btn" data-tab="tab-logic">
+        <button class="nav-item-btn" data-tab="tab-logic" onclick="switchTab('tab-logic')">
           <i class="fa-solid fa-brain"></i> Game Logic
         </button>
-        <button class="nav-item-btn" data-tab="tab-schedule">
+        <button class="nav-item-btn" data-tab="tab-schedule" onclick="switchTab('tab-schedule')">
           <i class="fa-solid fa-calendar-days"></i> Lịch học
         </button>
-        <button class="nav-item-btn" data-tab="tab-sync">
+        <button class="nav-item-btn" data-tab="tab-sync" onclick="switchTab('tab-sync')">
           <i class="fa-solid fa-cloud-arrow-up"></i> Cầu nối AI Repo
         </button>
       </nav>
@@ -734,13 +734,20 @@
        ========================================================= -->
   <div class="workspace-modal-overlay" id="lessonWorkspaceModal">
     <div class="workspace-modal-content">
-      <!-- Header -->
+      <!-- Header Toàn Trang Học Tập -->
       <div class="ws-header">
+        <button class="ws-back-nav-btn" id="closeWorkspaceBtn" title="Quay lại danh sách bài học" onclick="closeLessonWorkspace()">
+          <i class="fa-solid fa-arrow-left"></i> <span>Quay lại bài học</span>
+        </button>
         <div class="ws-title-group">
           <span class="ws-code-badge" id="wsCodeBadge">EN02</span>
           <div class="ws-title" id="wsTitle">To be, đại từ, sở hữu</div>
         </div>
-        <button class="ws-close-btn" id="closeWorkspaceBtn" title="Đóng" onclick="closeLessonWorkspace()">&times;</button>
+        <div class="ws-header-actions">
+          <button class="btn btn-outline-small" onclick="toggleFloatingAiDrawer()" title="Mở Gia sư AI theo sát bài học" style="color: var(--pink-primary); border-color: var(--pink-border);">
+            <i class="fa-solid fa-robot"></i> <span>Hỏi AI</span>
+          </button>
+        </div>
       </div>
 
       <!-- Stepper Tabs -->
@@ -904,15 +911,104 @@
     </div>
   </div>
 
-  <!-- FLOATING HIGHLIGHT TOOLBAR (Hiện lên khi bôi đen văn bản lý thuyết) -->
+  <!-- FLOATING HIGHLIGHT TOOLBAR (Hiện bên dưới đoạn văn bản được bôi đen) -->
   <div class="floating-hl-toolbar" id="floatingHlToolbar">
-    <button class="hl-dot-btn hl-dot-blue" data-hlcolor="blue" title="Xanh nước: Cốt lõi" onclick="applyInTextHighlight('blue')"></button>
-    <button class="hl-dot-btn hl-dot-pink" data-hlcolor="pink" title="Hồng: Bẫy lỗi" onclick="applyInTextHighlight('pink')"></button>
-    <button class="hl-dot-btn hl-dot-yellow" data-hlcolor="yellow" title="Vàng: Công thức" onclick="applyInTextHighlight('yellow')"></button>
-    <button class="hl-dot-btn hl-dot-green" data-hlcolor="green" title="Xanh lá: Mẹo nhớ" onclick="applyInTextHighlight('green')"></button>
-    <button class="hl-ask-ai-btn" id="hlAskAiBtn" onclick="askAiAboutSelection()">
-      <i class="fa-solid fa-robot"></i> Hỏi AI
-    </button>
+    <div class="hl-colors-row">
+      <button class="hl-color-pill hl-pill-yellow" onclick="promptHighlightWithNote('yellow')" title="Vàng: Công thức / Cấu trúc">
+        <span class="hl-swatch yellow"></span> Vàng: Công thức
+      </button>
+      <button class="hl-color-pill hl-pill-pink" onclick="promptHighlightWithNote('pink')" title="Hồng: Bẫy lỗi hay mắc">
+        <span class="hl-swatch pink"></span> Hồng: Bẫy lỗi
+      </button>
+      <button class="hl-color-pill hl-pill-blue" onclick="promptHighlightWithNote('blue')" title="Xanh nước: Khái niệm cốt lõi">
+        <span class="hl-swatch blue"></span> Xanh: Cốt lõi
+      </button>
+      <button class="hl-color-pill hl-pill-green" onclick="promptHighlightWithNote('green')" title="Xanh lá: Mẹo nhớ">
+        <span class="hl-swatch green"></span> Xanh: Mẹo nhớ
+      </button>
+      <button class="hl-color-pill hl-pill-ai" onclick="askAiAboutSelection()" title="Hỏi Trợ lý AI về đoạn văn bản này">
+        <i class="fa-solid fa-robot"></i> Hỏi AI đoạn này
+      </button>
+    </div>
+  </div>
+
+  <!-- POPOVER GHI CHÚ CHO HIGHLIGHT (Giải thích màu sắc và cho phép note) -->
+  <div class="hl-note-popover" id="hlNotePopover" style="display: none;">
+    <div class="hl-note-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span id="hlNoteColorBadge" class="hl-badge-pill">Đánh dấu</span>
+        <span id="hlNoteMeaningText" style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">Ý nghĩa màu</span>
+      </div>
+      <button class="hl-pop-close" onclick="closeHlNotePopover()">&times;</button>
+    </div>
+    <div class="hl-note-quote" id="hlNoteQuoteText">"Đoạn trích dẫn..."</div>
+    <div class="hl-note-input-wrap">
+      <label><i class="fa-solid fa-pen"></i> Ghi chú cho đoạn này (tùy chọn):</label>
+      <input type="text" id="hlNoteInputField" placeholder="VD: Bẫy hay nhầm phủ định To be, nhớ am not không rút gọn...">
+    </div>
+    <div class="hl-note-actions">
+      <button class="btn btn-outline-small" onclick="saveHighlightWithNote(false)">Lưu không ghi chú</button>
+      <button class="btn btn-primary-small" onclick="saveHighlightWithNote(true)"><i class="fa-solid fa-check"></i> Lưu Highlight & Note</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TRỢ LÝ AI Ở GÓC DƯỚI MÀN HÌNH (FLOATING AI TUTOR - BIẾT RÕ BẠN ĐANG LÀM GÌ)
+       ========================================================= -->
+  <!-- Nút tròn nổi ở góc dưới -->
+  <div class="floating-ai-launcher" id="floatingAiLauncher" onclick="toggleFloatingAiDrawer()" title="Hỏi Trợ lý AI GLM 5.3">
+    <div class="ai-launcher-avatar">
+      <i class="fa-solid fa-robot"></i>
+    </div>
+    <div class="ai-launcher-text">
+      <span>Trợ lý AI GLM</span>
+      <small id="aiLauncherSubtext">Theo sát việc học của bạn</small>
+    </div>
+  </div>
+
+  <!-- Cửa sổ Chat AI nổi ở góc dưới -->
+  <div class="floating-ai-drawer" id="floatingAiDrawer">
+    <!-- Header -->
+    <div class="ai-drawer-header">
+      <div class="ai-drawer-title-group">
+        <div class="ai-avatar-mini"><i class="fa-solid fa-robot"></i></div>
+        <div>
+          <div class="ai-drawer-title">Gia Sư AI GLM 5.3</div>
+          <div class="ai-drawer-status"><span class="status-dot"></span> Sẵn sàng theo sát bài học</div>
+        </div>
+      </div>
+      <div class="ai-drawer-actions">
+        <button class="ai-icon-btn" onclick="document.getElementById('aiSettingsModal').classList.add('active')" title="Cài đặt AI"><i class="fa-solid fa-gear"></i></button>
+        <button class="ai-icon-btn" onclick="toggleFloatingAiDrawer()" title="Thu nhỏ"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+
+    <!-- Thanh Ngữ Cảnh Thời Gian Thực (AI biết rõ người dùng đang làm gì) -->
+    <div class="ai-live-context-bar" id="aiLiveContextBar">
+      <i class="fa-solid fa-location-crosshairs" style="color: var(--pink-primary);"></i>
+      <span id="aiLiveContextText">Đang theo dõi: Màn hình Tổng quan</span>
+    </div>
+
+    <!-- Quick prompt chips -->
+    <div class="ai-chips-scroll">
+      <button class="ai-chip-pill" onclick="sendFloatingAiPrompt('Giải thích bản chất khái niệm đang hiển thị trên màn hình ngắn gọn, dễ hiểu?')">💡 Bản chất khái niệm</button>
+      <button class="ai-chip-pill" onclick="sendFloatingAiPrompt('Chỉ ra những bẫy đề kinh điển dễ mất điểm nhất ở phần này?')">⚠️ Bẫy đề hay gặp</button>
+      <button class="ai-chip-pill" onclick="sendFloatingAiPrompt('Cho tôi 1 bài tập tình huống / trắc nghiệm mới tương tự để tôi tự luyện?')">🎯 Bài tập tương tự</button>
+      <button class="ai-chip-pill" onclick="askAiAboutSelection()">📝 Giải thích đoạn bôi đen</button>
+    </div>
+
+    <!-- Khung tin nhắn -->
+    <div class="ai-drawer-messages" id="floatingAiChatMessages">
+      <div class="ai-bubble system-tip">
+        🤖 Tôi là Gia sư AI GLM 5.3! Tôi luôn biết rõ bạn đang mở bài học nào, đọc đoạn nào hay gặp bẫy lỗi nào. Cứ hỏi tôi bất kỳ lúc nào nhé!
+      </div>
+    </div>
+
+    <!-- Khung nhập tin nhắn -->
+    <div class="ai-drawer-input-area">
+      <textarea id="floatingAiInput" placeholder="Hỏi AI bất kỳ điều gì... (Enter để gửi)" rows="1"></textarea>
+      <button id="floatingAiSendBtn" onclick="handleFloatingAiSend()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
   </div>
 
   <!-- MODAL CÀI ĐẶT TRỢ LÝ AI (OPENROUTER) -->
@@ -949,27 +1045,27 @@
   <!-- TOAST NOTIFICATION CONTAINER -->
   <div class="app-toast-container" id="appToastContainer"></div>
   <nav class="mobile-bottom-nav">
-    <button class="mobile-nav-btn active" data-tab="tab-hub">
+    <button class="mobile-nav-btn active" data-tab="tab-hub" onclick="switchTab('tab-hub')">
       <i class="fa-solid fa-house"></i>
       <span>Tổng quan</span>
     </button>
-    <button class="mobile-nav-btn" data-tab="tab-sessions">
+    <button class="mobile-nav-btn" data-tab="tab-sessions" onclick="switchTab('tab-sessions')">
       <i class="fa-solid fa-book-open"></i>
       <span>Bài học</span>
     </button>
-    <button class="mobile-nav-btn" data-tab="tab-notes">
+    <button class="mobile-nav-btn" data-tab="tab-notes" onclick="switchTab('tab-notes')">
       <i class="fa-solid fa-highlighter"></i>
       <span>Sổ tay</span>
     </button>
-    <button class="mobile-nav-btn" data-tab="tab-quiz">
+    <button class="mobile-nav-btn" data-tab="tab-quiz" onclick="switchTab('tab-quiz')">
       <i class="fa-solid fa-pen-nib"></i>
       <span>Thi thử</span>
     </button>
-    <button class="mobile-nav-btn" data-tab="tab-logic">
+    <button class="mobile-nav-btn" data-tab="tab-logic" onclick="switchTab('tab-logic')">
       <i class="fa-solid fa-brain"></i>
       <span>Logic</span>
     </button>
-    <button class="mobile-nav-btn" data-tab="tab-sync">
+    <button class="mobile-nav-btn" data-tab="tab-sync" onclick="switchTab('tab-sync')">
       <i class="fa-solid fa-cloud"></i>
       <span>Đồng bộ</span>
     </button>
