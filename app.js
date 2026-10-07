@@ -46,6 +46,26 @@ let currentSubjectFilter = "ALL";
 let currentStatusFilter = "ALL";
 let pomodoroIntervalId = null;
 
+// Trạng thái Bấm giờ học tập (Study Timer & Stopwatch)
+let studyTimerMode = "stopwatch"; // "stopwatch" hoặc "pomodoro"
+let studyTimerSeconds = 0;
+let studyTimerInterval = null;
+let studyTimerRunning = false;
+let todayStudyMinutes = parseInt(localStorage.getItem("thuan_today_study_mins") || "0", 10);
+
+// Trạng thái Duyệt Môn học & Bài học (Courses & Lessons)
+let selectedCourseSubject = "EN";
+let lessonStatusFilter = "ALL";
+let lessonSearchKeyword = "";
+
+// Trạng thái Sổ tay Word (Word-Style Rich Text Notebook)
+let currentDocSubject = "GENERAL";
+let wordDocAutoSaveTimeout = null;
+
+// Trạng thái Đề thi AI & Ma trận
+let currentExamType = "preset"; // "preset" hoặc "ai"
+let currentAiExamQuestions = [];
+
 // Trạng thái Không gian Học tập (Lesson Workspace)
 let currentWsLessonCode = "EN02";
 let currentWsContent = null;
@@ -80,7 +100,10 @@ if (document.readyState === "loading") {
 
 // Khởi tạo các thành phần giao diện
 function initUI() {
-  renderSubjectPills();
+  initStudyTimer();
+  renderCoursesOverview();
+  initWordNotebook();
+  initExamMatrixUI();
   renderScheduleList();
   loadFullSchedule();
   renderBugHunterLevel(0);
@@ -187,116 +210,365 @@ function renderStats() {
 }
 
 // =========================================================
-// 4. DANH SÁCH 122 TIẾT TỰ HỌC
+// 4. HEADER STUDY TIMER & STOPWATCH
 // =========================================================
-function renderSubjectPills() {
-  const container = document.getElementById("subjectPillsContainer");
-  if (!container) return;
+function initStudyTimer() {
+  const toggleBtn = document.getElementById("studyTimerToggleBtn");
+  const resetBtn = document.getElementById("studyTimerResetBtn");
+  const modeBtn = document.getElementById("studyTimerModeToggle");
 
-  const subjects = [
-    { id: "ALL", label: "Tất cả (122 tiết)" },
-    { id: "EN", label: "Tiếng Anh (24)" },
-    { id: "GT", label: "Giải tích 1 (32)" },
-    { id: "IT", label: "Nhập môn CNTT (20)" },
-    { id: "VL", label: "Vật lý 1 (28)" },
-    { id: "PL", label: "Pháp luật (18)" }
-  ];
+  if (modeBtn) {
+    modeBtn.addEventListener("click", toggleStudyTimerMode);
+  }
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", toggleStudyTimer);
+  }
+  if (resetBtn) {
+    resetBtn.addEventListener("click", resetStudyTimer);
+  }
+  updateStudyTimerDisplay();
+}
 
-  container.innerHTML = subjects.map(s => `
-    <button class="pill-btn ${currentSubjectFilter === s.id ? 'active' : ''}" data-subject="${s.id}">
-      ${s.label}
-    </button>
-  `).join("");
+function toggleStudyTimerMode() {
+  if (studyTimerRunning) {
+    if (!confirm("Đang có phiên học đang bấm giờ. Bạn có muốn đổi chế độ và đặt lại thời gian không?")) {
+      return;
+    }
+    clearInterval(studyTimerInterval);
+    studyTimerRunning = false;
+  }
+  studyTimerMode = studyTimerMode === "stopwatch" ? "pomodoro" : "stopwatch";
+  studyTimerSeconds = studyTimerMode === "pomodoro" ? 25 * 60 : 0;
 
-  container.querySelectorAll(".pill-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      currentSubjectFilter = btn.dataset.subject;
-      renderSubjectPills();
-      renderSessionsList();
+  const modeText = document.getElementById("studyTimerModeText");
+  const timerBox = document.getElementById("headerStudyTimer");
+  const toggleBtn = document.getElementById("studyTimerToggleBtn");
+
+  if (modeText) modeText.textContent = studyTimerMode === "stopwatch" ? "Bấm giờ" : "Pomodoro";
+  if (timerBox) timerBox.classList.remove("timer-running");
+  if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+
+  updateStudyTimerDisplay();
+  showToast(`Đã chuyển sang chế độ: ${studyTimerMode === "stopwatch" ? "Bấm giờ tự do (Stopwatch)" : "Pomodoro (25 phút tập trung)"}`);
+}
+
+function toggleStudyTimer() {
+  const toggleBtn = document.getElementById("studyTimerToggleBtn");
+  const timerBox = document.getElementById("headerStudyTimer");
+
+  if (!studyTimerRunning) {
+    studyTimerRunning = true;
+    if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+    if (timerBox) timerBox.classList.add("timer-running");
+
+    studyTimerInterval = setInterval(() => {
+      if (studyTimerMode === "stopwatch") {
+        studyTimerSeconds++;
+      } else {
+        if (studyTimerSeconds <= 1) {
+          clearInterval(studyTimerInterval);
+          studyTimerRunning = false;
+          studyTimerSeconds = 0;
+          if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+          if (timerBox) timerBox.classList.remove("timer-running");
+          updateStudyTimerDisplay();
+          todayStudyMinutes += 25;
+          localStorage.setItem("thuan_today_study_mins", todayStudyMinutes);
+          alert("🎉 Chúc mừng bạn đã hoàn thành trọn vẹn 25 phút Pomodoro tập trung sâu!");
+          renderStats();
+          return;
+        }
+        studyTimerSeconds--;
+      }
+      updateStudyTimerDisplay();
+    }, 1000);
+
+    showToast("Đã bắt đầu bấm giờ học! Tập trung nhé.");
+  } else {
+    studyTimerRunning = false;
+    clearInterval(studyTimerInterval);
+    if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+    if (timerBox) timerBox.classList.remove("timer-running");
+    showToast("Đã tạm dừng bấm giờ học.");
+  }
+}
+
+function resetStudyTimer() {
+  const timerBox = document.getElementById("headerStudyTimer");
+  const toggleBtn = document.getElementById("studyTimerToggleBtn");
+
+  if (studyTimerRunning) {
+    clearInterval(studyTimerInterval);
+    studyTimerRunning = false;
+  }
+  if (timerBox) timerBox.classList.remove("timer-running");
+  if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+
+  if (studyTimerMode === "stopwatch" && studyTimerSeconds >= 60) {
+    const learnedMins = Math.round(studyTimerSeconds / 60);
+    todayStudyMinutes += learnedMins;
+    localStorage.setItem("thuan_today_study_mins", todayStudyMinutes);
+    showToast(`🎉 Hoàn thành phiên học ${learnedMins} phút! Đã tích lũy vào hôm nay.`);
+    renderStats();
+  }
+
+  studyTimerSeconds = studyTimerMode === "pomodoro" ? 25 * 60 : 0;
+  updateStudyTimerDisplay();
+}
+
+function updateStudyTimerDisplay() {
+  const display = document.getElementById("studyTimerDisplay");
+  if (!display) return;
+
+  const totalSecs = studyTimerSeconds;
+  const hrs = Math.floor(totalSecs / 3600);
+  const mins = Math.floor((totalSecs % 3600) / 60);
+  const secs = totalSecs % 60;
+
+  if (studyTimerMode === "stopwatch") {
+    display.textContent = `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  } else {
+    display.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  }
+}
+
+// =========================================================
+// 5. MÔN HỌC & BÀI HỌC (COURSES & LESSONS EXPLORER)
+// =========================================================
+function renderCoursesOverview() {
+  const grid = document.getElementById("coursesCardsGrid");
+  if (!grid) return;
+
+  const subjectKeys = ["EN", "GT", "IT", "VL", "PL"];
+  
+  grid.innerHTML = subjectKeys.map(key => {
+    const info = SUBJECTS_MAP[key] || {};
+    const subjectSessions = state.sessions.filter(s => s.subject === key);
+    const total = subjectSessions.length;
+    const done = subjectSessions.filter(s => s.status === "Đã hoàn thành").length;
+    const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+    return `
+      <div class="course-card" data-subject="${key}">
+        <div class="course-card-top">
+          <div class="course-icon-badge" style="background: ${info.bgColor}; color: ${info.color};">
+            <i class="fa-solid ${info.icon || 'fa-book'}"></i>
+          </div>
+          <span class="course-code-tag" style="background: ${info.bgColor}; color: ${info.color};">
+            ${key} &bull; ${info.credits || 3} Tín chỉ
+          </span>
+        </div>
+        <div class="course-card-title">${info.name || key}</div>
+        <div class="course-card-desc">${info.description || ''}</div>
+        <div class="course-meta-row">
+          <span><i class="fa-solid fa-chalkboard-user"></i> ${info.lecturer || 'Giảng viên khoa'}</span>
+          <span><i class="fa-solid fa-bullseye" style="color: var(--pink-primary);"></i> ${info.targetScore || 'Điểm A'}</span>
+        </div>
+        <div class="course-progress-wrapper">
+          <div class="course-progress-info">
+            <span style="color: var(--text-muted);">Tiến độ: ${done}/${total} bài</span>
+            <span style="color: ${info.color};">${percent}%</span>
+          </div>
+          <div class="course-progress-bar">
+            <div class="course-progress-fill" style="width: ${percent}%; background: ${info.color};"></div>
+          </div>
+        </div>
+        <button class="course-action-btn" style="background: ${info.bgColor}; color: ${info.color}; border-color: ${info.badgeColor};">
+          <i class="fa-solid fa-book-open"></i> Vào môn học &bull; ${total} bài học
+        </button>
+      </div>
+    `;
+  }).join("");
+
+  grid.querySelectorAll(".course-card").forEach(card => {
+    card.addEventListener("click", () => {
+      openCourseLessons(card.dataset.subject);
     });
   });
 }
 
-function renderSessionsList() {
-  const container = document.getElementById("sessionsListGrid");
+function openCourseLessons(subjectKey) {
+  selectedCourseSubject = subjectKey;
+  const overviewView = document.getElementById("subjectsOverviewView");
+  const explorerView = document.getElementById("subjectLessonsExplorerView");
+  if (!overviewView || !explorerView) return;
+
+  overviewView.style.display = "none";
+  explorerView.style.display = "block";
+
+  const info = SUBJECTS_MAP[subjectKey] || {};
+  const subjectSessions = state.sessions.filter(s => s.subject === subjectKey);
+  const done = subjectSessions.filter(s => s.status === "Đã hoàn thành").length;
+
+  const hero = document.getElementById("currentSubjectHero");
+  if (hero) {
+    hero.innerHTML = `
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span style="background: ${info.bgColor}; color: ${info.color}; font-size: 0.75rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">
+            MÃ: ${info.code || subjectKey}
+          </span>
+          <span style="font-size: 0.8rem; color: var(--pink-primary); font-weight: 700;">
+            <i class="fa-solid fa-bullseye"></i> Mục tiêu: ${info.targetScore || 'Điểm cao'}
+          </span>
+        </div>
+        <div class="subject-hero-title">${info.name || subjectKey}</div>
+        <div class="subject-hero-meta">
+          ${info.description || ''} &bull; GV: <strong>${info.lecturer || 'Giảng viên khoa'}</strong> &bull; Phòng: <strong>${info.room || 'Theo TKB'}</strong>
+        </div>
+      </div>
+      <div style="text-align: right; min-width: 130px;">
+        <div style="font-size: 1.35rem; font-weight: 900; color: ${info.color};">${done} / ${subjectSessions.length}</div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Bài đã hoàn thành</div>
+      </div>
+    `;
+  }
+
+  // Cài đặt nút Quay lại
+  const backBtn = document.getElementById("backToSubjectsBtn");
+  if (backBtn) {
+    backBtn.onclick = backToCoursesOverview;
+  }
+
+  // Cài đặt ô tìm kiếm
+  const searchInput = document.getElementById("lessonSearchInput");
+  if (searchInput) {
+    searchInput.value = lessonSearchKeyword;
+    searchInput.oninput = (e) => {
+      lessonSearchKeyword = e.target.value.trim().toLowerCase();
+      renderSubjectLessonsList();
+    };
+  }
+
+  // Cài đặt filter pills
+  const filterPills = document.querySelectorAll("#lessonStatusFilterContainer .filter-pill-btn");
+  filterPills.forEach(pill => {
+    pill.classList.toggle("active", pill.dataset.status === lessonStatusFilter);
+    pill.onclick = () => {
+      lessonStatusFilter = pill.dataset.status;
+      filterPills.forEach(p => p.classList.toggle("active", p.dataset.status === lessonStatusFilter));
+      renderSubjectLessonsList();
+    };
+  });
+
+  renderSubjectLessonsList();
+}
+window.openCourseLessons = openCourseLessons;
+
+function backToCoursesOverview() {
+  const overviewView = document.getElementById("subjectsOverviewView");
+  const explorerView = document.getElementById("subjectLessonsExplorerView");
+  if (!overviewView || !explorerView) return;
+
+  explorerView.style.display = "none";
+  overviewView.style.display = "block";
+  renderCoursesOverview();
+}
+window.backToCoursesOverview = backToCoursesOverview;
+
+function renderSubjectLessonsList() {
+  const container = document.getElementById("subjectLessonsList");
+  const countBadge = document.getElementById("lessonCountBadge");
   if (!container) return;
 
-  let filtered = state.sessions;
-  if (currentSubjectFilter !== "ALL") {
-    filtered = filtered.filter(s => s.subject === currentSubjectFilter);
-  }
-  if (currentStatusFilter !== "ALL") {
-    filtered = filtered.filter(s => s.status === currentStatusFilter);
+  let list = state.sessions.filter(s => s.subject === selectedCourseSubject);
+  const totalInSubject = list.length;
+
+  if (lessonStatusFilter !== "ALL") {
+    list = list.filter(s => s.status.includes(lessonStatusFilter));
   }
 
-  container.innerHTML = filtered.map(s => {
-    const subInfo = SUBJECTS_MAP[s.subject] || {};
+  if (lessonSearchKeyword) {
+    list = list.filter(s => 
+      s.code.toLowerCase().includes(lessonSearchKeyword) || 
+      s.title.toLowerCase().includes(lessonSearchKeyword)
+    );
+  }
+
+  if (countBadge) {
+    countBadge.textContent = `Hiển thị ${list.length} / ${totalInSubject} bài học`;
+  }
+
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 32px; background: #ffffff; border-radius: 8px; color: var(--text-muted); border: 1px dashed var(--border-light);">
+        <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5rem; margin-bottom: 8px; color: var(--text-light);"></i>
+        <div>Không tìm thấy bài học nào phù hợp với từ khóa "${escapeHtml(lessonSearchKeyword)}".</div>
+      </div>
+    `;
+    return;
+  }
+
+  const subInfo = SUBJECTS_MAP[selectedCourseSubject] || {};
+
+  container.innerHTML = list.map(s => {
     let statusClass = "status-todo";
     if (s.status === "Đã hoàn thành") statusClass = "status-done";
     if (s.status.includes("Đang học")) statusClass = "status-learning";
 
     return `
-      <div class="session-card" data-code="${s.code}">
-        <div class="session-header">
-          <span class="session-code" style="color: ${subInfo.color}; background: ${subInfo.bgColor};">
-            ${s.code} &bull; ${subInfo.shortName || s.subject}
+      <div class="lesson-row-card" data-code="${s.code}">
+        <div class="lesson-row-left">
+          <span class="lesson-code-pill" style="background: ${subInfo.bgColor}; color: ${subInfo.color};">
+            ${s.code}
           </span>
-          <span class="session-status ${statusClass}">
-            ${s.status}
-          </span>
+          <div>
+            <div class="lesson-title-text">${s.title}</div>
+            <div class="lesson-sub-meta">
+              <span class="session-status ${statusClass}" style="padding: 1px 6px; font-size: 0.72rem;">${s.status}</span>
+              ${s.result ? `<span style="color: var(--success);"><i class="fa-solid fa-check"></i> ${s.result}</span>` : ""}
+              ${s.mistakes ? `<span style="color: #e11d48;"><i class="fa-solid fa-triangle-exclamation"></i> Lỗi: ${escapeHtml(s.mistakes)}</span>` : ""}
+            </div>
+          </div>
         </div>
-        <div class="session-title" style="cursor: pointer;">${s.title}</div>
-        <div class="session-meta">
-          ${s.result ? `<div><i class="fa-solid fa-check text-success"></i> ${s.result}</div>` : ""}
-          ${s.mistakes ? `<div style="color: #e11d48;"><i class="fa-solid fa-triangle-exclamation"></i> Lỗi: ${s.mistakes}</div>` : ""}
-        </div>
-        <div class="session-actions">
-          <button class="btn-small btn-primary-small start-study-btn" data-code="${s.code}">
-            <i class="fa-solid fa-graduation-cap"></i> Học ngay
+        <div class="lesson-row-right">
+          <button class="btn btn-primary-small start-study-lesson-btn" data-code="${s.code}" style="padding: 6px 14px; font-size: 0.82rem;">
+            <i class="fa-solid fa-book-open"></i> Học ngay
           </button>
-          <button class="btn-small open-session-btn" data-code="${s.code}">
-            <i class="fa-regular fa-pen-to-square"></i> Cập nhật
-          </button>
-          <button class="btn-small open-note-btn" data-code="${s.code}">
+          <button class="btn-small open-word-note-btn" data-code="${s.code}" title="Mở Sổ tay Word cho bài này">
             <i class="fa-regular fa-note-sticky"></i> Note
+          </button>
+          <button class="btn-small open-session-update-btn" data-code="${s.code}" title="Cập nhật trạng thái">
+            <i class="fa-regular fa-pen-to-square"></i>
           </button>
         </div>
       </div>
     `;
   }).join("");
 
-  // Bắt sự kiện bấm Học ngay
-  container.querySelectorAll(".start-study-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+  container.querySelectorAll(".start-study-lesson-btn").forEach(btn => {
+    btn.onclick = (e) => {
       e.stopPropagation();
       openLessonWorkspace(btn.dataset.code);
-    });
+    };
   });
 
-  // Bắt sự kiện bấm vào tiêu đề thẻ để mở bài học
-  container.querySelectorAll(".session-card").forEach(card => {
-    card.addEventListener("click", (e) => {
+  container.querySelectorAll(".lesson-row-card").forEach(card => {
+    card.onclick = (e) => {
       if (e.target.closest("button")) return;
       openLessonWorkspace(card.dataset.code);
-    });
+    };
   });
 
-  // Bắt sự kiện mở modal cập nhật tiết học
-  container.querySelectorAll(".open-session-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+  container.querySelectorAll(".open-word-note-btn").forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      loadDocForSubject(btn.dataset.code);
+      switchTab("tab-notes");
+    };
+  });
+
+  container.querySelectorAll(".open-session-update-btn").forEach(btn => {
+    btn.onclick = (e) => {
       e.stopPropagation();
       openSessionModal(btn.dataset.code);
-    });
+    };
   });
+}
 
-  // Bắt sự kiện mở sổ tay ghi chú của tiết
-  container.querySelectorAll(".open-note-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      openNoteForSession(btn.dataset.code);
-      switchTab("tab-notes");
-    });
-  });
+function renderSessionsList() {
+  renderCoursesOverview();
+  renderSubjectLessonsList();
 }
 
 // =========================================================
@@ -1040,101 +1312,467 @@ function showToast(message, icon = "fa-circle-check") {
 window.showToast = showToast;
 
 // =========================================================
-// 10. GHI CHÚ & HIGHLIGHT TAB SỔ TAY
+// 10. SỔ TAY GHI CHÚ KIỂU WORD (WORD-STYLE NOTEBOOK)
 // =========================================================
-function openNoteForSession(code) {
-  const session = state.sessions.find(s => s.code === code);
-  const noteTitle = document.getElementById("currentNoteTitle");
-  const textarea = document.getElementById("noteTextarea");
-  
-  if (noteTitle) noteTitle.textContent = session ? `Ghi chú: [${session.code}] ${session.title}` : "Sổ tay ghi chú";
-  if (textarea) textarea.value = state.notes[code] || "";
-  renderHighlightsList();
-}
+function initWordNotebook() {
+  const editor = document.getElementById("wordDocEditor");
+  const subjectSelect = document.getElementById("docSubjectSelector");
+  const saveBtn = document.getElementById("saveWordDocBtn");
+  const newBtn = document.getElementById("newWordDocBtn");
+  const copyBtn = document.getElementById("copyWordDocBtn");
+  const printBtn = document.getElementById("printWordDocBtn");
+  const headingSelect = document.getElementById("ribbonHeadingSelect");
 
-function saveCurrentNote() {
-  const code = state.selectedSessionCode || "GENERAL";
-  const textarea = document.getElementById("noteTextarea");
-  if (!textarea) return;
+  if (!editor) return;
 
-  state.notes[code] = textarea.value;
-  saveStudyState(state);
-  showToast("Đã lưu ghi chú vào hệ thống!");
-}
+  // Nạp danh sách môn / bài học vào dropdown
+  if (subjectSelect) {
+    subjectSelect.innerHTML = `
+      <option value="GENERAL">Sổ tay Tổng hợp K20 AI</option>
+      <optgroup label="Tiếng Anh (EN)">
+        ${state.sessions.filter(s => s.subject === "EN").map(s => `<option value="${s.code}">[${s.code}] ${s.title}</option>`).join("")}
+      </optgroup>
+      <optgroup label="Giải tích 1 (GT)">
+        ${state.sessions.filter(s => s.subject === "GT").map(s => `<option value="${s.code}">[${s.code}] ${s.title}</option>`).join("")}
+      </optgroup>
+      <optgroup label="Lập trình C & CNTT (IT)">
+        ${state.sessions.filter(s => s.subject === "IT").map(s => `<option value="${s.code}">[${s.code}] ${s.title}</option>`).join("")}
+      </optgroup>
+      <optgroup label="Vật lý 1 (VL)">
+        ${state.sessions.filter(s => s.subject === "VL").map(s => `<option value="${s.code}">[${s.code}] ${s.title}</option>`).join("")}
+      </optgroup>
+      <optgroup label="Pháp luật (PL)">
+        ${state.sessions.filter(s => s.subject === "PL").map(s => `<option value="${s.code}">[${s.code}] ${s.title}</option>`).join("")}
+      </optgroup>
+    `;
 
-function applyHighlight(colorType) {
-  const textarea = document.getElementById("noteTextarea");
-  if (!textarea) return;
-
-  const start = textarea.selectionStart;
-  const end = textarea.selectionEnd;
-  const selectedText = textarea.value.substring(start, end).trim();
-
-  if (!selectedText) {
-    alert("Vui lòng bôi đen (chọn) đoạn văn bản bạn muốn highlight!");
-    return;
+    subjectSelect.value = currentDocSubject;
+    subjectSelect.onchange = (e) => {
+      saveCurrentWordDoc(false);
+      loadDocForSubject(e.target.value);
+    };
   }
 
-  const highlightItem = {
-    id: "hl-" + Date.now(),
-    text: selectedText,
-    type: colorType,
-    subject: state.selectedSessionCode || "Chung",
-    date: new Date().toLocaleDateString("vi-VN")
-  };
+  // Ribbon commands (Bold, Italic, Underline, Strikethrough, Justify, Lists)
+  document.querySelectorAll(".ribbon-btn[data-command]").forEach(btn => {
+    btn.onclick = (e) => {
+      e.preventDefault();
+      document.execCommand(btn.dataset.command, false, null);
+      editor.focus();
+    };
+  });
 
-  state.highlights.unshift(highlightItem);
-  saveStudyState(state);
-  renderHighlightsList();
-  showToast("Đã thêm highlight vào Sổ tay!");
+  // Ribbon heading select
+  if (headingSelect) {
+    headingSelect.onchange = () => {
+      const tag = headingSelect.value;
+      document.execCommand("formatBlock", false, tag);
+      editor.focus();
+    };
+  }
+
+  // Ribbon highlight colors
+  document.querySelectorAll(".ribbon-hl-color-btn").forEach(btn => {
+    btn.onclick = () => {
+      const color = btn.dataset.hlColor;
+      applyWordHighlight(color);
+    };
+  });
+
+  // Remove highlight
+  const removeHlBtn = document.getElementById("removeHighlightBtn");
+  if (removeHlBtn) {
+    removeHlBtn.onclick = () => {
+      document.execCommand("removeFormat", false, null);
+      editor.focus();
+    };
+  }
+
+  // Insert Callout trap box
+  const insertCalloutBtn = document.getElementById("insertTrapCalloutBtn");
+  if (insertCalloutBtn) {
+    insertCalloutBtn.onclick = () => {
+      insertHtmlAtCursor(`
+        <div class="word-callout-trap">
+          <strong><i class="fa-solid fa-triangle-exclamation"></i> BẪY LỖI KINH ĐIỂN CẦN TRÁNH:</strong>
+          <div>Ghi lại bẫy đề thi hoặc sai sót dễ nhầm lẫn nhất ở đây...</div>
+        </div><p><br></p>
+      `);
+    };
+  }
+
+  // Insert Code box
+  const insertCodeBtn = document.getElementById("insertCodeBoxBtn");
+  if (insertCodeBtn) {
+    insertCodeBtn.onclick = () => {
+      insertHtmlAtCursor(`
+        <pre class="word-code-box"><code>// Ví dụ mã nguồn C / Công thức Toán
+#include &lt;stdio.h&gt;
+// Lưu ý: scanf cần dấu &amp; khi nhập biến cơ bản
+</code></pre><p><br></p>
+      `);
+    };
+  }
+
+  // Insert Table 2x3
+  const insertTableBtn = document.getElementById("insertTableBtn");
+  if (insertTableBtn) {
+    insertTableBtn.onclick = () => {
+      insertHtmlAtCursor(`
+        <table class="word-table">
+          <thead>
+            <tr><th>Khái niệm / Dạng bài</th><th>Công thức &amp; Quy tắc</th><th>Bẫy đề thi cần tránh</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dạng 1: Cơ bản</td><td>Quy tắc biến đổi</td><td>Bẫy dấu, nhầm biến số</td></tr>
+            <tr><td>Dạng 2: Vận dụng</td><td>Phương pháp giải</td><td>Điều kiện xác định</td></tr>
+          </tbody>
+        </table><p><br></p>
+      `);
+    };
+  }
+
+  // Save / New / Copy / Print actions
+  if (saveBtn) saveBtn.onclick = () => saveCurrentWordDoc(true);
+  if (newBtn) {
+    newBtn.onclick = () => {
+      if (confirm("Tạo trang mới cho tài liệu này? (Nội dung cũ sẽ được làm mới)")) {
+        editor.innerHTML = `<h1>Ghi chú mới</h1><p>Bắt đầu ghi lại công thức và bẫy lỗi ở đây...</p>`;
+        saveCurrentWordDoc(true);
+      }
+    };
+  }
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(editor.innerText).then(() => {
+        showToast("Đã sao chép toàn bộ văn bản Word vào Clipboard!");
+      });
+    };
+  }
+  if (printBtn) {
+    printBtn.onclick = () => {
+      window.print();
+    };
+  }
+
+  // Auto save on input (debounced 1.2s)
+  editor.addEventListener("input", () => {
+    const indicator = document.getElementById("docAutoSaveIndicator");
+    if (indicator) indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...`;
+
+    clearTimeout(wordDocAutoSaveTimeout);
+    wordDocAutoSaveTimeout = setTimeout(() => {
+      saveCurrentWordDoc(false);
+    }, 1200);
+  });
+
+  // Tải nội dung ban đầu
+  loadDocForSubject(currentDocSubject);
+  renderSidebarHighlightsList();
 }
 
-function renderHighlightsList() {
-  const container = document.getElementById("savedHighlightsList");
+function applyWordHighlight(color) {
+  const selection = window.getSelection();
+  if (!selection.rangeCount || selection.isCollapsed) {
+    alert("Vui lòng bôi đen đoạn chữ trên trang giấy Word để tô màu highlight!");
+    return;
+  }
+  document.execCommand("hiliteColor", false, color);
+}
+
+function insertHtmlAtCursor(html) {
+  const editor = document.getElementById("wordDocEditor");
+  if (!editor) return;
+  editor.focus();
+
+  const selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    range.deleteContents();
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    const frag = document.createDocumentFragment();
+    let node;
+    while ((node = tempDiv.firstChild)) {
+      frag.appendChild(node);
+    }
+    range.insertNode(frag);
+  } else {
+    editor.innerHTML += html;
+  }
+  saveCurrentWordDoc(false);
+}
+
+function loadDocForSubject(code) {
+  currentDocSubject = code;
+  const editor = document.getElementById("wordDocEditor");
+  const titleInput = document.getElementById("docTitleInput");
+  const subjectSelect = document.getElementById("docSubjectSelector");
+
+  if (subjectSelect) subjectSelect.value = code;
+
+  const session = state.sessions.find(s => s.code === code);
+  if (titleInput) {
+    titleInput.value = session 
+      ? `[${session.code}] ${session.title} — Sổ tay Bẫy lỗi & Công thức`
+      : `Sổ tay Tổng hợp & Bẫy lỗi Phenikaa K20 AI — Vàng Văn Thuận`;
+  }
+
+  if (!editor) return;
+
+  if (state.notes[code] && state.notes[code].trim().length > 0) {
+    editor.innerHTML = state.notes[code];
+  } else {
+    // Tạo mẫu Word chuẩn đẹp, thanh lịch
+    editor.innerHTML = `
+      <h1>${session ? `[${session.code}] ${session.title}` : 'SỔ TAY BẪY LỖI & CÔNG THỨC K20 AI'}</h1>
+      <p><em>Ngày lập: ${new Date().toLocaleDateString("vi-VN")} &bull; Người học: Vàng Văn Thuận</em></p>
+      
+      <h2>1. KHÁI NIỆM &amp; CÔNG THỨC CỐT LÕI</h2>
+      <p>Ghi lại các định nghĩa, quy tắc và bản chất bạn vừa tiếp thu được...</p>
+      
+      <div class="word-callout-trap">
+        <strong><i class="fa-solid fa-triangle-exclamation"></i> BẪY LỖI CẦN ĐẶC BIỆT CHÚ Ý:</strong>
+        <div>${session && session.mistakes ? escapeHtml(session.mistakes) : 'Bôi màu hồng các lỗi hay mắc khi làm bài tập vào đây.'}</div>
+      </div>
+
+      <h2>2. VÍ DỤ MINH HỌA &amp; MẸO NHỚ</h2>
+      <ul>
+        <li>Quy tắc nhớ nhanh: ...</li>
+        <li>Tình huống áp dụng: ...</li>
+      </ul>
+      <p><br></p>
+    `;
+  }
+
+  const indicator = document.getElementById("docAutoSaveIndicator");
+  if (indicator) indicator.innerHTML = `<i class="fa-solid fa-check"></i> Đã tự động lưu`;
+}
+window.loadDocForSubject = loadDocForSubject;
+
+function saveCurrentWordDoc(notify = false) {
+  const editor = document.getElementById("wordDocEditor");
+  if (!editor) return;
+
+  state.notes[currentDocSubject] = editor.innerHTML;
+  saveStudyState(state);
+
+  const indicator = document.getElementById("docAutoSaveIndicator");
+  if (indicator) indicator.innerHTML = `<i class="fa-solid fa-check"></i> Đã tự động lưu (${new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})})`;
+
+  if (notify) {
+    showToast("Đã lưu sổ tay Word vào hệ thống!");
+  }
+}
+window.saveCurrentWordDoc = saveCurrentWordDoc;
+
+function renderSidebarHighlightsList() {
+  const container = document.getElementById("sidebarHighlightsList");
+  const countBadge = document.getElementById("sidebarHlCount");
   if (!container) return;
 
+  if (countBadge) {
+    countBadge.textContent = `${state.highlights.length} đoạn`;
+  }
+
   if (state.highlights.length === 0) {
-    container.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 12px;">Chưa có đoạn highlight nào. Bôi đen chữ ở bài học hoặc ghi chú để lưu bẫy lỗi!</div>`;
+    container.innerHTML = `
+      <div style="text-align: center; padding: 20px 10px; color: var(--text-muted); font-size: 0.8rem;">
+        Chưa có đoạn highlight nào. Khi đọc lý thuyết bài học, bôi đen chữ để lưu vào đây!
+      </div>
+    `;
     return;
   }
 
-  container.innerHTML = state.highlights.slice(0, 10).map(h => {
-    let typeLabel = "Cốt lõi";
-    let typeClass = "type-blue";
-    if (h.type === "pink") { typeLabel = "Bẫy lỗi"; typeClass = "type-pink"; }
-    if (h.type === "yellow") { typeLabel = "Công thức"; typeClass = "type-yellow"; }
-    if (h.type === "green") { typeLabel = "Mẹo nhớ"; typeClass = "type-green"; }
+  container.innerHTML = state.highlights.map(hl => {
+    let tagColor = "#0284c7";
+    let tagBg = "#e0f2fe";
+    let tagLabel = "CỐT LÕI";
+
+    if (hl.type === "pink") { tagColor = "#e11d48"; tagBg = "#ffe4e6"; tagLabel = "BẪY LỖI"; }
+    if (hl.type === "yellow") { tagColor = "#ca8a04"; tagBg = "#fef9c3"; tagLabel = "CÔNG THỨC"; }
+    if (hl.type === "green") { tagColor = "#16a34a"; tagBg = "#dcfce7"; tagLabel = "MẸO NHỚ"; }
 
     return `
-      <div class="saved-highlight-item ${typeClass}">
-        <div>
-          <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">[${typeLabel}] ${h.subject}:</span>
-          <div style="font-weight: 600; font-size: 0.9rem; margin-top: 2px;">${escapeHtml(h.text)}</div>
+      <div class="sidebar-hl-card">
+        <div class="sidebar-hl-top">
+          <span class="sidebar-hl-tag" style="background: ${tagBg}; color: ${tagColor}; padding: 2px 6px; border-radius: 4px;">
+            [${tagLabel}] ${hl.subject}
+          </span>
+          <button class="sidebar-hl-insert-btn" data-hlid="${hl.id}">
+            <i class="fa-solid fa-plus"></i> Chèn
+          </button>
         </div>
-        <button class="btn-small delete-hl-btn" data-id="${h.id}" style="color: #ef4444; border: none; background: transparent;">
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
+        <div class="sidebar-hl-text">"${escapeHtml(hl.text)}"</div>
       </div>
     `;
   }).join("");
 
-  container.querySelectorAll(".delete-hl-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.id;
-      state.highlights = state.highlights.filter(h => h.id !== id);
-      saveStudyState(state);
-      renderHighlightsList();
-    });
+  container.querySelectorAll(".sidebar-hl-insert-btn").forEach(btn => {
+    btn.onclick = () => {
+      const hlId = btn.dataset.hlid;
+      const hl = state.highlights.find(h => h.id === hlId);
+      if (hl) {
+        insertHighlightIntoWordDoc(hl);
+      }
+    };
   });
 }
 
+function insertHighlightIntoWordDoc(hl) {
+  let icon = "fa-triangle-exclamation";
+  let title = "BẪY LỖI";
+
+  if (hl.type === "yellow") { title = "CÔNG THỨC QUAN TRỌNG"; icon = "fa-calculator"; }
+  if (hl.type === "blue") { title = "KHÁI NIỆM CỐT LÕI"; icon = "fa-droplet"; }
+  if (hl.type === "green") { title = "MẸO NHỚ SÂU"; icon = "fa-lightbulb"; }
+
+  insertHtmlAtCursor(`
+    <div class="word-callout-trap" style="margin: 10px 0;">
+      <strong><i class="fa-solid ${icon}"></i> [${title} - ${escapeHtml(hl.subject)}]:</strong>
+      <div>"${escapeHtml(hl.text)}"</div>
+    </div><p><br></p>
+  `);
+  showToast(`Đã chèn đoạn [${hl.subject}] vào trang Word!`);
+}
+
+function openNoteForSession(code) {
+  loadDocForSubject(code);
+}
+
+function renderHighlightsList() {
+  renderSidebarHighlightsList();
+}
+
 // =========================================================
-// 11. LUYỆN TẬP & THI THỬ (QUIZZES)
+// 11. MA TRẬN ĐỀ THI & AI GLM 5.3 TẠO ĐỀ ÔN TẬP
 // =========================================================
+function initExamMatrixUI() {
+  const genBtn = document.getElementById("aiGenerateQuizBtn");
+  if (genBtn) {
+    genBtn.onclick = generateAiQuizFromMatrix;
+  }
+
+  const askAiQuizBtn = document.getElementById("askAiQuizQuestionBtn");
+  if (askAiQuizBtn) {
+    askAiQuizBtn.onclick = () => {
+      const q = currentQuizList[currentQuizIndex];
+      if (!q) return;
+      const prompt = `Giải thích bản chất câu trắc nghiệm này và chỉ rõ bẫy đề: "${q.question}" - Các lựa chọn: ${q.options ? q.options.join(" | ") : ''}`;
+      openLessonWorkspace(currentWsLessonCode || "EN01");
+      switchWorkspaceTab("ws-tab-ai");
+      sendAiMessage(prompt);
+    };
+  }
+}
+
+async function generateAiQuizFromMatrix() {
+  const subjectKey = document.getElementById("matrixSubjectSelect")?.value || "EN";
+  const qCount = parseInt(document.getElementById("matrixQuestionCountSelect")?.value || "5", 10);
+  const focusMode = document.getElementById("matrixFocusSelect")?.value || "balanced";
+  const loader = document.getElementById("aiQuizLoadingBox");
+  const genBtn = document.getElementById("aiGenerateQuizBtn");
+
+  if (loader) loader.style.display = "flex";
+  if (genBtn) genBtn.disabled = true;
+
+  const subInfo = SUBJECTS_MAP[subjectKey] || { name: "Tổng hợp K20" };
+
+  const systemPrompt = `Bạn là Trưởng bộ môn & Gia sư AI Phenikaa K20 AI theo quy ước AGENTS.md.
+Nhiệm vụ: Tạo một bộ đề ôn tập trắc nghiệm gồm chính xác ${qCount} câu hỏi môn ${subInfo.name} (${subjectKey}) bám sát ma trận:
+- 30% Nhận biết (khái niệm, cú pháp, từ vựng)
+- 40% Thông hiểu (bản chất, cấu trúc, biến đổi)
+- 20% Vận dụng (tính toán, code C, chia thì)
+- 10% Bẫy đề thường gặp (các bẫy kinh điển sinh viên hay bị trừ điểm).
+Chế độ trọng tâm: ${focusMode}.
+
+YÊU CẦU ĐẶC BIỆT VỀ ĐỊNH DẠNG:
+Trả về DUY NHẤT một mảng JSON hợp lệ, KHÔNG thêm bất kỳ văn bản giải thích nào ngoài mảng JSON.
+Định dạng mỗi phần tử:
+[
+  {
+    "question": "Nội dung câu hỏi ngắn gọn, rõ ràng",
+    "options": ["Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D"],
+    "correctIndex": 0,
+    "explanation": "Giải thích ngắn gọn bản chất và chỉ rõ vì sao các phương án khác là bẫy sai"
+  }
+]`;
+
+  const userMsg = [{
+    role: "user",
+    content: `Hãy sinh ngay bộ đề ôn tập gồm ${qCount} câu trắc nghiệm môn ${subInfo.name} theo đúng ma trận trên.`
+  }];
+
+  try {
+    const rawAiResponse = await callOpenRouterApi(userMsg, systemPrompt);
+    
+    // Parse JSON
+    let jsonStr = rawAiResponse.trim();
+    if (jsonStr.includes("```json")) {
+      jsonStr = jsonStr.split("```json")[1].split("```")[0].trim();
+    } else if (jsonStr.includes("```")) {
+      jsonStr = jsonStr.split("```")[1].split("```")[0].trim();
+    }
+    
+    const startIdx = jsonStr.indexOf("[");
+    const endIdx = jsonStr.lastIndexOf("]");
+    if (startIdx !== -1 && endIdx !== -1) {
+      jsonStr = jsonStr.substring(startIdx, endIdx + 1);
+    }
+
+    const parsed = JSON.parse(jsonStr);
+
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      currentQuizList = parsed;
+      currentQuizIndex = 0;
+      userQuizAnswers = {};
+
+      const sourceTag = document.getElementById("quizSourceTag");
+      if (sourceTag) {
+        sourceTag.textContent = `AI GLM 5.3 • Ma trận ${subInfo.shortName || subjectKey}`;
+        sourceTag.style.background = "var(--pink-light)";
+        sourceTag.style.color = "var(--pink-primary)";
+      }
+
+      const summaryBox = document.getElementById("quizResultSummaryBox");
+      if (summaryBox) summaryBox.style.display = "none";
+
+      renderQuizQuestion();
+
+      const quizCard = document.getElementById("quizActiveCard");
+      if (quizCard) {
+        quizCard.scrollIntoView({ behavior: "smooth" });
+      }
+
+      showToast(`✨ AI GLM 5.3 đã tạo thành công bộ đề ${parsed.length} câu theo ma trận!`);
+    } else {
+      throw new Error("Phản hồi của AI không đúng định dạng mảng câu hỏi.");
+    }
+  } catch (err) {
+    console.error("Lỗi tạo đề AI:", err);
+    alert("Không thể tạo đề bằng AI: " + err.message + "\nĐang chuyển sang bộ đề thi mẫu có sẵn...");
+    startQuiz(subjectKey === "GT" ? "GT" : "EN");
+  } finally {
+    if (loader) loader.style.display = "none";
+    if (genBtn) genBtn.disabled = false;
+  }
+}
+
 function startQuiz(type) {
   currentQuizList = QUIZ_QUESTIONS[type] || QUIZ_QUESTIONS["EN"];
   currentQuizIndex = 0;
   userQuizAnswers = {};
+
+  const sourceTag = document.getElementById("quizSourceTag");
+  if (sourceTag) {
+    sourceTag.textContent = type === "EN" ? "Đề Tiếng Anh 50 câu" : "Đề Giải tích 1 (Giới hạn)";
+    sourceTag.style.background = "var(--blue-light)";
+    sourceTag.style.color = "var(--blue-primary)";
+  }
+
+  const summaryBox = document.getElementById("quizResultSummaryBox");
+  if (summaryBox) summaryBox.style.display = "none";
+
   renderQuizQuestion();
 }
 
@@ -1153,7 +1791,7 @@ function renderQuizQuestion() {
   if (optionsEl) {
     optionsEl.innerHTML = q.options.map((opt, idx) => `
       <button class="quiz-option-btn ${userQuizAnswers[currentQuizIndex] === idx ? 'selected' : ''}" data-idx="${idx}">
-        ${escapeHtml(opt)}
+        <strong>${String.fromCharCode(65 + idx)}.</strong> ${escapeHtml(opt)}
       </button>
     `).join("");
 
@@ -1170,17 +1808,108 @@ function renderQuizQuestion() {
 }
 
 function showQuizExplanation() {
-  const q = currentQuizList[currentQuizIndex];
-  const userAns = userQuizAnswers[currentQuizIndex];
-  const expBox = document.getElementById("quizExplanation");
-  if (!expBox || userAns === undefined) return;
+  submitQuizWithSummary();
+}
 
-  const isCorrect = userAns === q.correctIndex;
-  expBox.className = "quiz-explanation-box " + (isCorrect ? "correct" : "wrong");
-  expBox.style.display = "block";
-  expBox.innerHTML = `
-    <strong>${isCorrect ? '✓ Đúng rồi!' : '✗ Chưa đúng!'}</strong> ${escapeHtml(q.explanation)}
+function submitQuizWithSummary() {
+  if (!currentQuizList || currentQuizList.length === 0) return;
+
+  const total = currentQuizList.length;
+  let correctCount = 0;
+  const mistakeItems = [];
+
+  currentQuizList.forEach((q, idx) => {
+    const userAns = userQuizAnswers[idx];
+    if (userAns === q.correctIndex) {
+      correctCount++;
+    } else {
+      mistakeItems.push({
+        qIndex: idx + 1,
+        question: q.question,
+        userChoice: userAns !== undefined ? q.options[userAns] : "Chưa trả lời",
+        correctChoice: q.options[q.correctIndex],
+        explanation: q.explanation
+      });
+    }
+  });
+
+  const percent = Math.round((correctCount / total) * 100);
+  const summaryBox = document.getElementById("quizResultSummaryBox");
+  if (!summaryBox) return;
+
+  summaryBox.style.display = "block";
+  summaryBox.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+      <div>
+        <h4 style="font-size: 1.2rem; font-weight: 800; color: var(--text-main);">
+          <i class="fa-solid fa-square-poll-vertical" style="color: var(--blue-primary);"></i> Tổng Kết Kết Quả Bài Thi
+        </h4>
+        <p style="font-size: 0.82rem; color: var(--text-muted);">
+          Đúng ${correctCount} / ${total} câu (${percent}%) &bull; ${percent >= 80 ? '🎉 Nắm rất chắc kiến thức bản chất!' : '⚠️ Có một số bẫy đề cần rà soát lại bên dưới.'}
+        </p>
+      </div>
+      <div style="font-size: 2rem; font-weight: 900; color: ${percent >= 80 ? 'var(--success)' : 'var(--pink-primary)'}; font-family: monospace;">
+        ${percent}%
+      </div>
+    </div>
+
+    ${mistakeItems.length > 0 ? `
+      <div style="background: #fff1f2; border: 1px solid var(--pink-border); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 16px;">
+        <h5 style="color: #9f1239; font-weight: 800; font-size: 0.9rem; margin-bottom: 8px;">
+          <i class="fa-solid fa-triangle-exclamation"></i> Danh sách ${mistakeItems.length} câu dính bẫy cần ghi vào Sổ tay:
+        </h5>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          ${mistakeItems.map(m => `
+            <div style="font-size: 0.82rem; color: #881337; padding-bottom: 8px; border-bottom: 1px dashed #fecdd3;">
+              <strong>Câu ${m.qIndex}:</strong> ${escapeHtml(m.question)}<br>
+              <span style="color: #e11d48;">Bạn chọn: ${escapeHtml(m.userChoice)}</span> &bull; 
+              <span style="color: #059669; font-weight: 700;">Đáp án đúng: ${escapeHtml(m.correctChoice)}</span><br>
+              <em>💡 Bản chất & Bẫy: ${escapeHtml(m.explanation)}</em>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    ` : `
+      <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 16px; color: #065f46; font-size: 0.88rem;">
+        <i class="fa-solid fa-circle-check"></i> Tuyệt đối chính xác! Bạn không mắc phải bẫy đề nào trong bài này.
+      </div>
+    `}
+
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <button class="btn btn-primary" id="retryAiExamBtn">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> AI Tạo Đề Mới Tương Tự
+      </button>
+      <button class="btn btn-outline" id="saveQuizToWordBtn" style="color: var(--blue-primary); border-color: var(--blue-border);">
+        <i class="fa-solid fa-file-pen"></i> Chèn Bẫy Sai Vào Sổ Tay Word
+      </button>
+    </div>
   `;
+
+  const retryBtn = document.getElementById("retryAiExamBtn");
+  if (retryBtn) retryBtn.onclick = generateAiQuizFromMatrix;
+
+  const saveToWordBtn = document.getElementById("saveQuizToWordBtn");
+  if (saveToWordBtn) {
+    saveToWordBtn.onclick = () => {
+      if (mistakeItems.length > 0) {
+        const mistakeHtml = mistakeItems.map(m => `
+          <li><strong>Câu ${m.qIndex}:</strong> ${escapeHtml(m.question)} &rarr; Bẫy sai: <em>${escapeHtml(m.explanation)}</em></li>
+        `).join("");
+        insertHtmlAtCursor(`
+          <div class="word-callout-trap">
+            <strong>BẪY LỖI TỪ ĐỀ ÔN TẬP (${correctCount}/${total} đúng):</strong>
+            <ul>${mistakeHtml}</ul>
+          </div><p><br></p>
+        `);
+        showToast("Đã chèn các bẫy đề vừa gặp vào trang Word!");
+        switchTab("tab-notes");
+      } else {
+        showToast("Bạn làm đúng 100%, không có câu sai nào cần chèn!");
+      }
+    };
+  }
+
+  summaryBox.scrollIntoView({ behavior: "smooth" });
 }
 
 // =========================================================

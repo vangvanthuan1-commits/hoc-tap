@@ -35,7 +35,7 @@
           <i class="fa-solid fa-house"></i> Tổng quan
         </button>
         <button class="nav-item-btn" data-tab="tab-sessions">
-          <i class="fa-solid fa-book-open"></i> 122 Tiết học
+          <i class="fa-solid fa-book-open"></i> Bài học
         </button>
         <button class="nav-item-btn" data-tab="tab-notes">
           <i class="fa-solid fa-highlighter"></i> Sổ tay & Highlight
@@ -54,8 +54,23 @@
         </button>
       </nav>
 
-      <!-- Badge trạng thái kết nối -->
+      <!-- Widget Bấm giờ học tập tiện lợi & Trạng thái kết nối -->
       <div class="header-actions">
+        <div class="header-study-timer" id="headerStudyTimer">
+          <button class="timer-mode-btn" id="studyTimerModeToggle" title="Chuyển chế độ: Bấm giờ xuôi / Pomodoro đếm ngược">
+            <i class="fa-solid fa-stopwatch"></i> <span id="studyTimerModeText">Bấm giờ</span>
+          </button>
+          <div class="timer-time-display" id="studyTimerDisplay">00:00:00</div>
+          <div class="timer-controls">
+            <button class="timer-btn timer-btn-play" id="studyTimerToggleBtn" title="Bắt đầu học">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="timer-btn timer-btn-reset" id="studyTimerResetBtn" title="Kết thúc buổi học / Đặt lại">
+              <i class="fa-solid fa-stop"></i>
+            </button>
+          </div>
+        </div>
+
         <div class="sync-badge" id="syncStatusBadge">
           <span class="sync-dot" id="syncStatusDot"></span>
           <span id="syncStatusText">Firebase Online</span>
@@ -187,79 +202,303 @@
       </div>
     </section>
 
-    <!-- 2. TAB 122 TIẾT TỰ HỌC (SESSIONS) -->
+    <!-- 2. TAB MÔN HỌC & BÀI HỌC (COURSES & LESSONS) -->
     <section id="tab-sessions" class="tab-pane">
-      <div class="section-heading">
-        <h3><i class="fa-solid fa-book-open" style="color: var(--blue-primary);"></i> 122 Tiết tự học Kỳ 1 (Phenikaa K20)</h3>
+      <!-- 2.1 View Chọn Môn Học -->
+      <div id="subjectsOverviewView">
+        <div class="section-heading">
+          <h3><i class="fa-solid fa-graduation-cap" style="color: var(--blue-primary);"></i> Chọn Môn Học (Chương trình Kỳ 1 & Ôn thi Xếp lớp)</h3>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">
+          Bấm vào môn học bên dưới để mở toàn bộ bài học theo lộ trình, đọc lý thuyết chuẩn, bôi màu highlight trực tiếp và tự luyện!
+        </p>
+
+        <!-- Lưới thẻ môn học lớn -->
+        <div class="courses-cards-grid" id="coursesCardsGrid">
+          <!-- Rendered by JS: EN, GT, IT, VL, PL... -->
+        </div>
       </div>
-      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
-        Đồng bộ trực tiếp với <code>tien-do.csv</code>. Mỗi tiết tương ứng 45 phút học bản chất và tự luyện.
-      </p>
 
-      <!-- Bộ lọc môn học -->
-      <div class="subject-pills" id="subjectPillsContainer">
-        <!-- Rendered by JS -->
-      </div>
-
-      <!-- Danh sách tiết học -->
-      <div class="sessions-list-grid" id="sessionsListGrid">
-        <!-- Rendered by JS -->
-      </div>
-    </section>
-
-    <!-- 3. TAB SỔ TAY GHI CHÚ & SMART HIGHLIGHTER -->
-    <section id="tab-notes" class="tab-pane">
-      <div class="section-heading">
-        <h3><i class="fa-solid fa-highlighter" style="color: var(--pink-primary);"></i> Sổ tay Ghi chú & Highlight thông minh</h3>
-      </div>
-      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
-        Bôi đen từ hoặc đoạn văn bản trong ghi chú, sau đó bấm nút màu tương ứng để đưa vào Sổ tay Bẫy lỗi & Công thức!
-      </p>
-
-      <div class="highlighter-container">
-        <h4 id="currentNoteTitle" style="font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">
-          Ghi chú bài học
-        </h4>
-
-        <!-- Thanh công cụ Highlight 4 màu -->
-        <div class="highlighter-toolbar">
-          <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-right: 4px;">Highlight:</span>
-          <button class="hl-btn hl-btn-blue" data-color="blue">
-            <i class="fa-solid fa-droplet"></i> Xanh nước (Cốt lõi)
+      <!-- 2.2 View Danh sách Bài học của Môn đã chọn -->
+      <div id="subjectLessonsExplorerView" style="display: none;">
+        <div class="lessons-nav-bar">
+          <button class="btn btn-outline" id="backToSubjectsBtn">
+            <i class="fa-solid fa-arrow-left"></i> Chọn môn học khác
           </button>
-          <button class="hl-btn hl-btn-pink" data-color="pink">
-            <i class="fa-solid fa-triangle-exclamation"></i> Hồng (Bẫy lỗi hay mắc)
-          </button>
-          <button class="hl-btn hl-btn-yellow" data-color="yellow">
-            <i class="fa-solid fa-calculator"></i> Vàng (Công thức / Cấu trúc)
-          </button>
-          <button class="hl-btn hl-btn-green" data-color="green">
-            <i class="fa-solid fa-lightbulb"></i> Xanh lá (Mẹo nhớ)
-          </button>
-          <button class="btn btn-primary" id="saveNoteBtn" style="margin-left: auto; padding: 6px 14px; font-size: 0.8rem;">
-            <i class="fa-solid fa-floppy-disk"></i> Lưu ghi chú
-          </button>
+          <div class="lessons-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="lessonSearchInput" placeholder="Tìm bài học (VD: EN02, Giới hạn, Con trỏ...)...">
+          </div>
         </div>
 
-        <textarea class="note-editor-area" id="noteTextarea" placeholder="Nhập ghi chú học tập, kiến thức bản chất, công thức hoặc các lỗi bạn vừa gặp phải... (Bôi đen đoạn văn để bấm nút highlight bên trên)"></textarea>
+        <!-- Banner thông tin môn học đang mở -->
+        <div class="subject-hero-card" id="currentSubjectHero">
+          <!-- Rendered by JS -->
+        </div>
 
-        <!-- Danh sách các đoạn đã highlight -->
-        <h4 style="font-size: 0.9rem; font-weight: 700; margin-top: 20px; color: var(--text-main);">
-          <i class="fa-solid fa-bookmark" style="color: var(--blue-primary);"></i> Các đoạn Highlight & Bẫy lỗi quan trọng:
-        </h4>
-        <div class="saved-highlights-list" id="savedHighlightsList">
+        <!-- Bộ lọc trạng thái bài học -->
+        <div class="lessons-filter-bar">
+          <div class="status-filter-pills" id="lessonStatusFilterContainer">
+            <button class="filter-pill-btn active" data-status="ALL">Tất cả bài học</button>
+            <button class="filter-pill-btn" data-status="Chưa học">Chưa học</button>
+            <button class="filter-pill-btn" data-status="Đang học">Đang học</button>
+            <button class="filter-pill-btn" data-status="Đã hoàn thành">Đã hoàn thành</button>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted); margin-left: auto;" id="lessonCountBadge">
+            Hiển thị bài học
+          </span>
+        </div>
+
+        <!-- Danh sách bài học của môn -->
+        <div class="subject-lessons-list" id="subjectLessonsList">
           <!-- Rendered by JS -->
         </div>
       </div>
     </section>
 
-    <!-- 4. TAB LUYỆN TẬP & THI THỬ (QUIZZES) -->
+    <!-- 3. TAB SỔ TAY GHI CHÚ KIỂU WORD & TRÍCH XUẤT HIGHLIGHT -->
+    <section id="tab-notes" class="tab-pane">
+      <div class="word-notebook-container">
+        <!-- Header điều khiển tài liệu Word -->
+        <div class="doc-control-header">
+          <div class="doc-title-input-group">
+            <div class="doc-icon-badge"><i class="fa-solid fa-file-lines"></i></div>
+            <div style="flex: 1;">
+              <input type="text" id="docTitleInput" class="doc-title-field" value="Sổ tay Tổng hợp & Bẫy lỗi Học tập — Vàng Văn Thuận" placeholder="Tiêu đề tài liệu ghi chú...">
+              <div class="doc-meta-sub">
+                <span><i class="fa-solid fa-bookmark" style="color: var(--blue-primary);"></i> Môn/Bài:</span>
+                <select id="docSubjectSelector" class="doc-subject-select">
+                  <!-- Rendered by JS -->
+                </select>
+                <span class="doc-save-indicator" id="docAutoSaveIndicator">
+                  <i class="fa-solid fa-check"></i> Đã tự động lưu
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="doc-actions-group">
+            <button class="btn btn-primary" id="saveWordDocBtn" title="Lưu tài liệu">
+              <i class="fa-solid fa-floppy-disk"></i> Lưu ghi chú
+            </button>
+            <button class="btn btn-outline" id="newWordDocBtn" title="Tạo trang mới">
+              <i class="fa-solid fa-file-circle-plus"></i> Trang mới
+            </button>
+            <button class="btn btn-outline" id="copyWordDocBtn" title="Sao chép toàn bộ văn bản">
+              <i class="fa-solid fa-copy"></i> Sao chép
+            </button>
+            <button class="btn btn-outline" id="printWordDocBtn" title="In hoặc lưu PDF">
+              <i class="fa-solid fa-print"></i> In / PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- THANH CÔNG CỤ RIBBON KIỂU MICROSOFT WORD -->
+        <div class="word-ribbon-toolbar" id="wordRibbonToolbar">
+          <!-- Nhóm 1: Kiểu đoạn văn & Heading -->
+          <div class="ribbon-group">
+            <select class="ribbon-select" id="ribbonHeadingSelect" title="Kiểu định dạng">
+              <option value="p">Văn bản thường (Normal)</option>
+              <option value="h1">Tiêu đề lớn (Heading 1)</option>
+              <option value="h2">Tiêu đề vừa (Heading 2)</option>
+              <option value="h3">Tiêu đề nhỏ (Heading 3)</option>
+            </select>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <!-- Nhóm 2: Định dạng chữ B I U S -->
+          <div class="ribbon-group">
+            <button class="ribbon-btn" id="ribbonBoldBtn" data-command="bold" title="In đậm (Ctrl+B)">
+              <i class="fa-solid fa-bold"></i>
+            </button>
+            <button class="ribbon-btn" id="ribbonItalicBtn" data-command="italic" title="In nghiêng (Ctrl+I)">
+              <i class="fa-solid fa-italic"></i>
+            </button>
+            <button class="ribbon-btn" id="ribbonUnderlineBtn" data-command="underline" title="Gạch chân (Ctrl+U)">
+              <i class="fa-solid fa-underline"></i>
+            </button>
+            <button class="ribbon-btn" id="ribbonStrikeBtn" data-command="strikeThrough" title="Gạch ngang chữ">
+              <i class="fa-solid fa-strikethrough"></i>
+            </button>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <!-- Nhóm 3: Căn lề -->
+          <div class="ribbon-group">
+            <button class="ribbon-btn" data-command="justifyLeft" title="Căn lề trái">
+              <i class="fa-solid fa-align-left"></i>
+            </button>
+            <button class="ribbon-btn" data-command="justifyCenter" title="Căn lề giữa">
+              <i class="fa-solid fa-align-center"></i>
+            </button>
+            <button class="ribbon-btn" data-command="justifyRight" title="Căn lề phải">
+              <i class="fa-solid fa-align-right"></i>
+            </button>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <!-- Nhóm 4: Danh sách -->
+          <div class="ribbon-group">
+            <button class="ribbon-btn" data-command="insertUnorderedList" title="Danh sách dấu chấm (Bullet)">
+              <i class="fa-solid fa-list-ul"></i>
+            </button>
+            <button class="ribbon-btn" data-command="insertOrderedList" title="Danh sách số (1. 2. 3.)">
+              <i class="fa-solid fa-list-ol"></i>
+            </button>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <!-- Nhóm 5: Bút Highlight Word 4 Màu Chuẩn -->
+          <div class="ribbon-group ribbon-hl-group">
+            <span class="ribbon-label"><i class="fa-solid fa-highlighter"></i> Bút Highlight:</span>
+            <button class="ribbon-hl-color-btn hl-color-yellow" data-hl-color="#fef08a" title="Highlight Vàng (Công thức / Cấu trúc)"></button>
+            <button class="ribbon-hl-color-btn hl-color-pink" data-hl-color="#fbcfe8" title="Highlight Hồng (Bẫy lỗi hay mắc)"></button>
+            <button class="ribbon-hl-color-btn hl-color-blue" data-hl-color="#bae6fd" title="Highlight Xanh nước (Khái niệm cốt lõi)"></button>
+            <button class="ribbon-hl-color-btn hl-color-green" data-hl-color="#bbf7d0" title="Highlight Xanh lá (Mẹo nhớ)"></button>
+            <button class="ribbon-btn" id="removeHighlightBtn" title="Tẩy màu Highlight">
+              <i class="fa-solid fa-eraser"></i>
+            </button>
+          </div>
+
+          <div class="ribbon-divider"></div>
+
+          <!-- Nhóm 6: Chèn khối chuyên dụng -->
+          <div class="ribbon-group">
+            <button class="ribbon-btn" id="insertTrapCalloutBtn" title="Chèn Hộp Bẫy lỗi thường gặp">
+              <i class="fa-solid fa-triangle-exclamation" style="color: var(--pink-primary);"></i> Hộp Bẫy lỗi
+            </button>
+            <button class="ribbon-btn" id="insertCodeBoxBtn" title="Chèn Hộp Code / Công thức">
+              <i class="fa-solid fa-code" style="color: var(--blue-primary);"></i> Khối Code
+            </button>
+            <button class="ribbon-btn" id="insertTableBtn" title="Chèn Bảng 2x3">
+              <i class="fa-solid fa-table"></i> Bảng
+            </button>
+            <button class="ribbon-btn" data-command="insertHorizontalRule" title="Chèn đường kẻ ngang phân cách">
+              <i class="fa-solid fa-minus"></i> Đường kẻ
+            </button>
+          </div>
+        </div>
+
+        <!-- KHUNG SOẠN THẢO: 2 CỘT (TRANG GIẤY WORD & SIDEBAR HIGHLIGHT) -->
+        <div class="word-workspace-layout">
+          <!-- Cột 1: Trang Giấy Word (A4 Sheet Canvas) -->
+          <div class="word-page-container">
+            <div class="word-paper-sheet" id="wordDocEditor" contenteditable="true" spellcheck="false">
+              <!-- Nội dung Word hiển thị ở đây (Được nạp bởi JS) -->
+            </div>
+          </div>
+
+          <!-- Cột 2: Sidebar Kho trích xuất highlight từ bài học -->
+          <div class="word-highlights-sidebar">
+            <div class="sidebar-header">
+              <h4><i class="fa-solid fa-bookmark" style="color: var(--pink-primary);"></i> Kho Bẫy Lỗi & Highlight</h4>
+              <span class="sidebar-count-badge" id="sidebarHlCount">0 đoạn</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">
+              Các đoạn bạn đã bôi màu khi đọc lý thuyết bài học. Bấm <strong>"+ Chèn"</strong> để đưa ngay vào trang Word ở vị trí con trỏ!
+            </p>
+            <div class="sidebar-highlights-scroll" id="sidebarHighlightsList">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TAB LUYỆN TẬP & THI THỬ (QUIZZES & AI EXAM MATRIX) -->
     <section id="tab-quiz" class="tab-pane">
-      <div class="section-heading">
-        <h3><i class="fa-solid fa-pen-nib" style="color: var(--blue-primary);"></i> Luyện tập & Đề thi thử mô phỏng</h3>
+      <!-- KHU VỰC 1: TRUNG TÂM MA TRẬN ĐỀ & AI TẠO ĐỀ ÔN TẬP -->
+      <div class="exam-matrix-card">
+        <div class="exam-matrix-header">
+          <div class="matrix-title-group">
+            <div class="matrix-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--blue-primary);">
+                Ma Trận Đề & AI GLM 5.3 Tạo Đề Ôn Tập Tương Tự
+              </h3>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">
+                Thiết lập ma trận phân bổ độ khó và để AI tạo ngay bộ đề trắc nghiệm chuẩn sư phạm, kèm bẫy lỗi kinh điển.
+              </p>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="aiGenerateQuizBtn" style="white-space: nowrap;">
+            <i class="fa-solid fa-robot"></i> ✨ AI Tạo Đề Mới
+          </button>
+        </div>
+
+        <!-- Bộ điều khiển cấu hình Ma trận đề -->
+        <div class="matrix-config-grid">
+          <div class="matrix-config-item">
+            <label><i class="fa-solid fa-graduation-cap"></i> Môn học ôn tập:</label>
+            <select id="matrixSubjectSelect" class="form-select">
+              <option value="EN">Tiếng Anh (Xếp lớp & Ngữ pháp)</option>
+              <option value="GT">Giải tích 1 (Giới hạn, Đạo hàm, Tích phân)</option>
+              <option value="IT">Nhập môn CNTT & Lập trình C (Con trỏ, Mảng)</option>
+              <option value="VL">Vật lý 1 (Cơ học, Nhiệt học)</option>
+              <option value="PL">Pháp luật đại cương</option>
+              <option value="ALL">Đề Tổng hợp Kỳ 1 K20</option>
+            </select>
+          </div>
+
+          <div class="matrix-config-item">
+            <label><i class="fa-solid fa-list-ol"></i> Số lượng câu hỏi:</label>
+            <select id="matrixQuestionCountSelect" class="form-select">
+              <option value="5">5 câu (Mini Challenge - 7 phút)</option>
+              <option value="10" selected>10 câu (Ôn tập tiêu chuẩn - 15 phút)</option>
+              <option value="15">15 câu (Chuyên sâu & Bẫy lỗi - 25 phút)</option>
+            </select>
+          </div>
+
+          <div class="matrix-config-item">
+            <label><i class="fa-solid fa-sliders"></i> Chế độ câu hỏi:</label>
+            <select id="matrixFocusSelect" class="form-select">
+              <option value="balanced">Cân đối theo Ma trận chuẩn</option>
+              <option value="traps_heavy">Tập trung Bẫy lỗi kinh điển</option>
+              <option value="concept_deep">Bản chất khái niệm & Vận dụng</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bảng trực quan hóa Ma trận đề ôn tập -->
+        <div class="matrix-visual-table">
+          <div class="matrix-col-pill" style="border-left: 4px solid #38bdf8;">
+            <div class="matrix-col-title">1. Nhận biết (30%)</div>
+            <div class="matrix-col-desc">Khái niệm cốt lõi, từ vựng, cú pháp cơ bản</div>
+          </div>
+          <div class="matrix-col-pill" style="border-left: 4px solid #818cf8;">
+            <div class="matrix-col-title">2. Thông hiểu (40%)</div>
+            <div class="matrix-col-desc">Hiểu bản chất quy tắc, nhận diện cấu trúc tương đương</div>
+          </div>
+          <div class="matrix-col-pill" style="border-left: 4px solid #34d399;">
+            <div class="matrix-col-title">3. Vận dụng (20%)</div>
+            <div class="matrix-col-desc">Tính toán, biến đổi, giải quyết tình huống thực tế</div>
+          </div>
+          <div class="matrix-col-pill" style="border-left: 4px solid #fb7185;">
+            <div class="matrix-col-title">4. Bẫy đề thường gặp (10%)</div>
+            <div class="matrix-col-desc">Những bẫy kinh điển dễ mất điểm nhất trong đề thi</div>
+          </div>
+        </div>
+
+        <!-- Trạng thái Loading khi AI đang tạo đề -->
+        <div class="ai-generating-loader" id="aiQuizLoadingBox" style="display: none;">
+          <div class="loader-spinner"></div>
+          <div>
+            <strong>Gia sư AI GLM 5.3 đang thiết kế đề ôn tập theo ma trận...</strong>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">
+              Đang chọn lọc bẫy đề kinh điển và lời giải thích bản chất theo chuẩn AGENTS.md.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+      <!-- ĐỀ THI CÓ SẴN (PRE-MADE EXAMS) -->
+      <div style="display: flex; gap: 8px; margin: 18px 0 14px 0; flex-wrap: wrap;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; margin-right: 4px;">
+          <i class="fa-solid fa-fire" style="color: var(--pink-primary); margin-right: 4px;"></i> Đề luyện có sẵn:
+        </span>
         <button class="btn btn-outline" id="startEnQuizBtn">
           <i class="fa-solid fa-language" style="color: var(--pink-primary);"></i> Đề Tiếng Anh xếp lớp 50 câu (60 phút)
         </button>
@@ -268,9 +507,13 @@
         </button>
       </div>
 
-      <div class="quiz-card">
+      <!-- KHU VỰC 2: KHUNG LÀM BÀI TRẮC NGHIỆM TƯƠNG TÁC -->
+      <div class="quiz-card" id="quizActiveCard">
         <div class="quiz-header">
-          <span class="quiz-badge" id="quizProgressText">Câu 1 / 6</span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="quiz-badge" id="quizProgressText">Câu 1 / 6</span>
+            <span class="quiz-source-tag" id="quizSourceTag">Đề mẫu</span>
+          </div>
           <div class="quiz-timer">
             <i class="fa-solid fa-clock"></i> <span id="quizTimerDisplay">60:00</span>
           </div>
@@ -284,24 +527,32 @@
           <!-- Rendered by JS -->
         </div>
 
-        <!-- Khung giải thích bản chất (Luôn giải thích ngắn gọn, chỉ rõ bẫy) -->
+        <!-- Khung giải thích bản chất & Bẫy đề (Luôn giải thích ngắn gọn theo AGENTS.md) -->
         <div class="quiz-explanation-box" id="quizExplanation" style="display: none;">
           <!-- Rendered by JS -->
         </div>
 
-        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-top: 20px; flex-wrap: wrap; gap: 10px;">
           <button class="btn btn-outline" id="prevQuestionBtn">
             <i class="fa-solid fa-arrow-left"></i> Câu trước
           </button>
           <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline" id="askAiQuizQuestionBtn" style="color: var(--pink-primary); border-color: var(--pink-border);">
+              <i class="fa-solid fa-robot"></i> Hỏi AI giải thích
+            </button>
             <button class="btn btn-outline" id="nextQuestionBtn">
               Câu sau <i class="fa-solid fa-arrow-right"></i>
             </button>
             <button class="btn btn-primary" id="submitQuizBtn">
-              <i class="fa-solid fa-paper-plane"></i> Nộp bài
+              <i class="fa-solid fa-paper-plane"></i> Nộp bài & Chấm điểm
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- KHU VỰC 3: BẢNG TỔNG KẾT KẾT QUẢ THI & BẪY CẦN ÔN -->
+      <div class="quiz-result-summary-card" id="quizResultSummaryBox" style="display: none;">
+        <!-- Rendered by JS -->
       </div>
     </section>
 
@@ -704,7 +955,7 @@
     </button>
     <button class="mobile-nav-btn" data-tab="tab-sessions">
       <i class="fa-solid fa-book-open"></i>
-      <span>122 Tiết</span>
+      <span>Bài học</span>
     </button>
     <button class="mobile-nav-btn" data-tab="tab-notes">
       <i class="fa-solid fa-highlighter"></i>
@@ -725,6 +976,6 @@
   </nav>
 
   <!-- Nạp module Javascript chính -->
-  <script type="module" src="app.js?v=2.5"></script>
+  <script type="module" src="app.js?v=2.6"></script>
 </body>
 </html>
