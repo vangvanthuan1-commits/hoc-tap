@@ -1,0 +1,10 @@
+__pycache__/
+*.py
+*.pyc
+frames/
+video_parts/
+voices/
+voices_lively/
+.git/
+.system_generated/
+*.log

@@ -38,14 +38,19 @@ Khi có thông tin mới, cập nhật hồ sơ hiện tại và ghi rõ ngày, 
 - [Mục tiêu GPA 3.6 và chuyên đề từng mã học phần](ke-hoach-hoc-tap/hk1-2026/README.md).
 - Quy chế quy đổi điểm đã kiểm chứng; chuyên đề tự học được đánh dấu đề xuất, chờ đề cương lớp.
 
-## Website ôn tập
+## Web Học Tập Cá Nhân (Chính thức)
 
-Các trang HTML ở thư mục gốc gồm Giải tích, tiếng Anh, lập trình C, kiến trúc máy tính và mini test. Các thư mục frames, voices, voices_lively, media và video_parts chứa tài nguyên ảnh, âm thanh và video.
+Ứng dụng web học tập cá nhân toàn diện tại `index.html` (giao diện nền trắng hiện đại, tông Xanh nước & Hồng Rose, tối ưu cho cả điện thoại và máy tính):
+- **122 Tiết tự học**: Đồng bộ trực tiếp với `ke-hoach-hoc-tap/hk1-2026/tung-tiet/tien-do.csv` (Tiếng Anh, Giải tích 1, Nhập môn CNTT & C, Vật lý 1, Pháp luật).
+- **Ghi chú & Smart Highlighter**: Bôi đen note và highlight 4 màu (Xanh nước cốt lõi, Hồng bẫy lỗi, Vàng công thức, Xanh lá mẹo nhớ), tự động tổng hợp sổ tay bẫy lỗi.
+- **Luyện tập & Thi thử**: Mô phỏng kỳ thi Tiếng Anh xếp lớp Phenikaa (50 câu / 60 phút), Mini test Giới hạn và Lập trình C kèm giải thích bản chất ngắn gọn.
+- **Tư duy Logic & Trò chơi Mini**: Bắt bọ Code C (C Bug Hunter) và Spaced Repetition Flashcards (chu kỳ 1 / 3 / 7 ngày).
+- **Thời khóa biểu Phenikaa**: Đầy đủ 64 buổi học kỳ 1 (từ 02/11/2026), phòng học, giảng viên, ca học và đồng hồ đếm ngược thi 17/10.
+- **Cầu nối Firebase & GitHub Repo**: Đồng bộ đám mây Firebase Firestore (`hoc-tap-8c6f7`), LocalStorage offline-first, hỗ trợ File System Access API ghi thẳng vào repo `d:\Hoctap` và 1-click xuất báo cáo Markdown gửi cho Antigravity AI.
 
-Chạy từ thư mục repo:
+Chạy web từ thư mục repo:
 
 ```bash
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
-
-Các script Python dựng video là công cụ phụ; nhiều script còn dùng đường dẫn cố định từ máy cũ.
+Truy cập tại: `http://127.0.0.1:8000` (hoặc mở trực tiếp file `index.html` trên trình duyệt). Bản giao diện cũ được lưu an toàn tại `index-backup-dark.html`.

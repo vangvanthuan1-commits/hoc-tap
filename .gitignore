@@ -8,3 +8,4 @@ app/*.tsbuildinfo
 *-debug.log
 playwright-results/
 app/public/legacy/
+.vercel
