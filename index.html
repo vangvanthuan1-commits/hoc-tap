@@ -43,8 +43,8 @@
         <button class="nav-item-btn" data-tab="tab-quiz" onclick="switchTab('tab-quiz')">
           <i class="fa-solid fa-pen-nib"></i> Luyện tập & Thi thử
         </button>
-        <button class="nav-item-btn" data-tab="tab-logic" onclick="switchTab('tab-logic')">
-          <i class="fa-solid fa-brain"></i> Game Logic
+        <button class="nav-item-btn" data-tab="tab-spaced" onclick="switchTab('tab-spaced')">
+          <i class="fa-solid fa-clock-rotate-left"></i> Học ngắt quãng
         </button>
         <button class="nav-item-btn" data-tab="tab-schedule" onclick="switchTab('tab-schedule')">
           <i class="fa-solid fa-calendar-days"></i> Lịch học
@@ -112,6 +112,18 @@
             2. <strong>Giải tích 1:</strong> Ôn giới hạn dạng 0/0 nhân tử & liên hợp, cẩn thận đổi dấu biểu thức. <a href="javascript:void(0)" onclick="openLessonWorkspace('GT06')" style="color: var(--blue-primary); font-weight: 700; margin-left: 4px;">[Học GT06]</a><br>
             3. <strong>Lập trình C:</strong> Ôn Pointer & RAM, lưu ý dấu <code>&</code> trong <code>scanf</code>. <a href="javascript:void(0)" onclick="openLessonWorkspace('IT02')" style="color: #8b5cf6; font-weight: 700; margin-left: 4px;">[Học IT02]</a>
           </div>
+        </div>
+
+        <!-- Thẻ nhắc ôn tập lặp lại ngắt quãng (Spaced Repetition alert) -->
+        <div class="spaced-hub-alert" id="spacedHubAlertBox" style="margin-top: 10px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: var(--radius-md); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-clock-rotate-left" style="color: var(--pink-primary); font-size: 1.1rem;"></i>
+            <div>
+              <strong style="color: #9f1239; font-size: 0.85rem;">Ôn tập ngắt quãng (3 ngày):</strong>
+              <span id="spacedHubAlertText" style="font-size: 0.8rem; color: #881337; margin-left: 4px;">Đang tính toán lịch ôn lại...</span>
+            </div>
+          </div>
+          <button class="btn-small btn-primary" onclick="switchTab('tab-spaced')" style="font-size: 0.76rem;">Xem hàng đợi ôn tập <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
 
@@ -187,9 +199,9 @@
           <h4 style="color: var(--pink-primary); font-size: 0.95rem; margin-bottom: 4px;"><i class="fa-solid fa-file-pen"></i> Thi thử Tiếng Anh 50 câu</h4>
           <p style="font-size: 0.8rem; color: var(--text-muted);">Mô phỏng 60 phút đúng chuẩn ảnh thông báo thi xếp lớp A6.</p>
         </div>
-        <div class="stat-card" style="cursor: pointer;" onclick="switchTab('tab-logic')">
-          <h4 style="color: var(--blue-primary); font-size: 0.95rem; margin-bottom: 4px;"><i class="fa-solid fa-bug"></i> Bắt bọ Code C & Lật thẻ</h4>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">Rèn phản xạ logic tìm lỗi scanf, con trỏ và ôn ngắt quãng 1/3/7 ngày.</p>
+        <div class="stat-card" style="cursor: pointer;" onclick="switchTab('tab-spaced')">
+          <h4 style="color: var(--pink-primary); font-size: 0.95rem; margin-bottom: 4px;"><i class="fa-solid fa-clock-rotate-left"></i> Học ngắt quãng & Ôn 1/3/7 ngày</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Tự động lên lịch nhắc ôn sau 3 ngày, Flashcard bẫy lỗi và Pomodoro 25 phút.</p>
         </div>
         <div class="stat-card" style="cursor: pointer;" onclick="switchTab('tab-notes')">
           <h4 style="color: #ca8a04; font-size: 0.95rem; margin-bottom: 4px;"><i class="fa-solid fa-highlighter"></i> Sổ tay Highlight bẫy lỗi</h4>
@@ -494,17 +506,28 @@
         </div>
       </div>
 
-      <!-- ĐỀ THI CÓ SẴN (PRE-MADE EXAMS) -->
-      <div style="display: flex; gap: 8px; margin: 18px 0 14px 0; flex-wrap: wrap;">
-        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; margin-right: 4px;">
-          <i class="fa-solid fa-fire" style="color: var(--pink-primary); margin-right: 4px;"></i> Đề luyện có sẵn:
+      <!-- BỘ LỌC CHỌN MÔN ÔN TẬP ĐỂ TEST KIẾN THỨC -->
+      <div class="quiz-subjects-filter-bar">
+        <span style="font-size: 0.85rem; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+          <i class="fa-solid fa-graduation-cap" style="color: var(--pink-primary);"></i> Chọn môn để test kiến thức:
         </span>
-        <button class="btn btn-outline" id="startEnQuizBtn">
-          <i class="fa-solid fa-language" style="color: var(--pink-primary);"></i> Đề Tiếng Anh xếp lớp 50 câu (60 phút)
-        </button>
-        <button class="btn btn-outline" id="startGtQuizBtn">
-          <i class="fa-solid fa-infinity" style="color: var(--blue-primary);"></i> Mini Test Giới hạn 0/0 (Giải tích 1)
-        </button>
+        <div class="quiz-pills-row">
+          <button class="quiz-sub-pill active" id="btnQuizSubEN" onclick="startSubjectQuiz('EN')">
+            <i class="fa-solid fa-language"></i> Tiếng Anh (Xếp lớp 8.5+)
+          </button>
+          <button class="quiz-sub-pill" id="btnQuizSubGT" onclick="startSubjectQuiz('GT')">
+            <i class="fa-solid fa-infinity"></i> Giải tích 1 (Giới hạn, Vô cùng bé)
+          </button>
+          <button class="quiz-sub-pill" id="btnQuizSubIT" onclick="startSubjectQuiz('IT')">
+            <i class="fa-solid fa-laptop-code"></i> Nhập môn CNTT & C (Pointer, RAM)
+          </button>
+          <button class="quiz-sub-pill" id="btnQuizSubVL" onclick="startSubjectQuiz('VL')">
+            <i class="fa-solid fa-atom"></i> Vật lý 1 (Cơ học, Nhiệt)
+          </button>
+          <button class="quiz-sub-pill" id="btnQuizSubPL" onclick="startSubjectQuiz('PL')">
+            <i class="fa-solid fa-scale-balanced"></i> Pháp luật đại cương
+          </button>
+        </div>
       </div>
 
       <!-- KHU VỰC 2: KHUNG LÀM BÀI TRẮC NGHIỆM TƯƠNG TÁC -->
@@ -556,47 +579,71 @@
       </div>
     </section>
 
-    <!-- 5. TAB MINI-GAME & LOGIC HAY -->
-    <section id="tab-logic" class="tab-pane">
+    <!-- 5. TAB HỌC NGẮT QUÃNG & LẶP LẠI 1/3/7 NGÀY (SPACED REPETITION & POMODORO) -->
+    <section id="tab-spaced" class="tab-pane">
       <div class="section-heading">
-        <h3><i class="fa-solid fa-brain" style="color: var(--pink-primary);"></i> Rèn luyện tư duy logic & Học ngắt quãng</h3>
+        <div>
+          <h3><i class="fa-solid fa-clock-rotate-left" style="color: var(--pink-primary);"></i> Học Ngắt Quãng & Lặp Lại 1 - 3 - 7 Ngày</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+            Phương pháp Spaced Repetition: Sau khi học xong 1 bài (VD EN01), hệ thống tự động hẹn lịch nhắc bạn ôn lại sau 1 ngày, 3 ngày và 7 ngày để nhớ sâu.
+          </p>
+        </div>
       </div>
 
-      <!-- GAME 1: BẮT BỌ CODE C -->
-      <div class="game-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <h4 id="bugHunterTitle" style="color: var(--blue-primary); font-size: 1.05rem; font-weight: 800;">
-            Level 1: Nhập dữ liệu cơ bản
-          </h4>
-          <button class="btn-small btn-outline" id="nextBugLevelBtn">
-            Màn tiếp theo <i class="fa-solid fa-forward"></i>
-          </button>
+      <!-- KHU VỰC 1: HÀNG ĐỢI ÔN TẬP NGẮT QUÃNG (SPACED REPETITION QUEUE) -->
+      <div class="spaced-queue-box">
+        <div class="spaced-queue-header">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-bell" style="color: var(--pink-primary);"></i>
+            <h4 style="font-size: 1rem; font-weight: 800; color: var(--text-main);">
+              Lịch Nhắc Ôn Tập Ngắt Quãng (Đến hạn hôm nay & Trong 3 ngày tới)
+            </h4>
+          </div>
+          <span class="badge badge-pink" id="spacedQueueCountBadge">0 bài cần ôn</span>
         </div>
-        <p id="bugHunterInstruction" style="font-size: 0.85rem; color: var(--text-muted);">
-          Đoạn code sau đây bị lỗi runtime khi người dùng nhập số. Hãy bấm vào dòng bị lỗi!
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">
+          <i class="fa-solid fa-circle-info"></i> Ví dụ: Hôm nay học xong <strong>EN01</strong>, sau 3 ngày hệ thống sẽ hiện thẻ ở mục này để nhắc bạn bấm vào ôn lại ngay!
         </p>
-
-        <!-- Code Block tương tác -->
-        <div class="code-interactive-box" id="bugHunterCodeBox">
-          <!-- Rendered by JS -->
-        </div>
-
-        <div id="bugHunterFeedback" style="padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.88rem; display: none; background: var(--bg-subtle); border-left: 4px solid var(--blue-primary);">
-          <!-- Feedback text -->
+        <div id="spacedReviewsContainer" class="spaced-queue-grid">
+          <!-- Rendered by JS: Due Today & Upcoming 3 days cards -->
         </div>
       </div>
 
-      <!-- GAME 2: SPACED REPETITION FLASHCARDS -->
+      <!-- KHU VỰC 2: BẤM GIỜ HỌC TẬP NGẮT QUÃNG POMODORO (25P TẬP TRUNG / 5P NGHỈ) -->
+      <div class="pomodoro-study-hub">
+        <div class="pomo-card">
+          <div class="pomo-top">
+            <h4 style="font-size: 1rem; font-weight: 800; color: var(--blue-primary);">
+              <i class="fa-solid fa-stopwatch-20" style="color: var(--pink-primary);"></i> Bấm Giờ Học Ngắt Quãng (Pomodoro 25p / 5p)
+            </h4>
+            <span class="pomo-badge" id="pomoCycleBadge">Chu kỳ 1 / 4</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
+            Tập trung 25 phút không xao nhãng &bull; Nghỉ 5 phút. Thời gian học sẽ được tự động cộng dồn vào <strong>Nhật ký học tập</strong> để AI theo dõi chính xác.
+          </p>
+          <div class="pomo-timer-large" id="pomoTimerLarge">25:00</div>
+          <div class="pomo-actions-row">
+            <button class="btn btn-primary" id="pomoMainToggleBtn" onclick="togglePomodoro()">
+              <i class="fa-solid fa-play"></i> Bắt đầu 25 phút học
+            </button>
+            <button class="btn btn-outline" id="pomoResetBtn" onclick="resetPomodoro()">
+              <i class="fa-solid fa-rotate-left"></i> Đặt lại
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KHU VỰC 3: FLASHCARDS BẪY LỖI & CÔNG THỨC -->
       <div class="game-card">
         <h4 style="color: var(--pink-primary); font-size: 1.05rem; font-weight: 800; margin-bottom: 6px;">
-          <i class="fa-solid fa-repeat"></i> Spaced Repetition Flashcards (Chu kỳ 1 / 3 / 7 ngày)
+          <i class="fa-solid fa-layer-group"></i> Flashcards Bẫy Lỗi & Công Thức Cốt Lõi
         </h4>
         <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
-          Ôn lại kiến thức và bẫy lỗi theo phương pháp lặp lại ngắt quãng khoa học.
+          Lật thẻ kiểm tra phản xạ, bấm đánh giá để hệ thống tự động lên lịch nhắc lại.
         </p>
 
         <div class="flashcard-wrapper">
-          <div class="flashcard-3d" id="flashcardElement">
+          <div class="flashcard-3d" id="flashcardElement" onclick="flipFlashcard()">
             <div class="flashcard-badge" id="flashcardSubjectBadge">EN &bull; Ngữ pháp</div>
             <div class="flashcard-text" id="flashcardContent">
               <!-- Rendered by JS -->
@@ -606,13 +653,13 @@
         </div>
 
         <div class="flashcard-actions">
-          <button class="btn btn-outline fc-rate-btn" data-interval="1" style="color: #ef4444;">
+          <button class="btn btn-outline fc-rate-btn" onclick="rateFlashcard(1)" style="color: #ef4444; border-color: #fca5a5;">
             <i class="fa-solid fa-rotate-left"></i> Cần ôn lại (+1 ngày)
           </button>
-          <button class="btn btn-primary fc-rate-btn" data-interval="3">
+          <button class="btn btn-primary fc-rate-btn" onclick="rateFlashcard(3)">
             <i class="fa-solid fa-check"></i> Đã nhớ (+3 ngày)
           </button>
-          <button class="btn btn-outline fc-rate-btn" data-interval="7" style="color: var(--success);">
+          <button class="btn btn-outline fc-rate-btn" onclick="rateFlashcard(7)" style="color: var(--success); border-color: #86efac;">
             <i class="fa-solid fa-award"></i> Thuộc lòng (+7 ngày)
           </button>
         </div>
@@ -622,11 +669,23 @@
     <!-- 6. TAB LỊCH HỌC TỪ CỔNG PHENIKAA -->
     <section id="tab-schedule" class="tab-pane">
       <div class="section-heading">
-        <h3><i class="fa-solid fa-calendar-days" style="color: var(--blue-primary);"></i> Lịch học Phenikaa Kỳ 1 (Bắt đầu 02/11/2026)</h3>
+        <div>
+          <h3><i class="fa-solid fa-calendar-days" style="color: var(--blue-primary);"></i> Lịch Học Phenikaa Kỳ 1 (Trực quan Thời gian & Địa điểm)</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+            Trích xuất chính xác từ cổng sinh viên <code>lich-hoc/2026-10-07-cac-tuan-sau.json</code> (64 buổi học) và lịch thi xếp lớp tiếng Anh.
+          </p>
+        </div>
       </div>
-      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
-        Được trích xuất từ cổng sinh viên <code>lich-hoc/2026-10-07-cac-tuan-sau.json</code> (64 buổi học chi tiết).
-      </p>
+
+      <!-- BỘ LỌC LỊCH HỌC -->
+      <div class="schedule-filters-row">
+        <button class="schedule-filter-pill active" id="btnSchedALL" onclick="filterScheduleList('ALL')">Tất cả lịch học</button>
+        <button class="schedule-filter-pill" id="btnSchedOCT" onclick="filterScheduleList('OCT')">Tháng 10 (Thi xếp lớp TA)</button>
+        <button class="schedule-filter-pill" id="btnSchedGT" onclick="filterScheduleList('GT')">Giải tích 1 (A4-102)</button>
+        <button class="schedule-filter-pill" id="btnSchedIT" onclick="filterScheduleList('IT')">Nhập môn CNTT (A1-701)</button>
+        <button class="schedule-filter-pill" id="btnSchedVL" onclick="filterScheduleList('VL')">Vật lý 1 (A5-303)</button>
+        <button class="schedule-filter-pill" id="btnSchedRUN" onclick="filterScheduleList('RUN')">Chạy 1 (Sân thể thao)</button>
+      </div>
 
       <div class="schedule-list" id="scheduleListContainer">
         <!-- Rendered by JS -->
@@ -644,6 +703,37 @@
           <p style="font-size: 0.82rem; color: var(--text-main);">
             Tất cả tiến độ học tập, bài thi, highlight bẫy lỗi và note của bạn được lưu an toàn trên <strong>Firebase Cloud</strong> và <strong>LocalStorage</strong>. Để tôi (Antigravity AI) nắm được kết quả học tập trong buổi làm việc tiếp theo, bạn có thể đồng bộ trực tiếp vào thư mục repo hoặc sao chép báo cáo Markdown dưới đây!
           </p>
+        </div>
+
+        <!-- BẢNG NHẬT KÝ HỌC TẬP THỰC TẾ & LỊCH HẸN ÔN LẠI 3 NGÀY (AI BIẾT RÕ BẠN HỌC BAO NHIÊU TIẾNG, NGÀY NÀO) -->
+        <div class="study-log-card" style="margin-bottom: 20px;">
+          <div class="study-log-header">
+            <div>
+              <h4 style="font-size: 1.02rem; font-weight: 800; color: var(--text-main);">
+                <i class="fa-solid fa-timeline" style="color: var(--pink-primary);"></i> Nhật ký học tập & Theo dõi thời gian thực (Đã kết nối AI)
+              </h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">
+                Mọi buổi học bạn bấm giờ, làm trắc nghiệm hoặc đánh dấu highlight đều được ghi nhận ngày giờ, số phút học và hẹn lịch ôn sau 3 ngày.
+              </p>
+            </div>
+            <span class="badge badge-pink" id="totalStudyMinutesBadge">0 phút</span>
+          </div>
+          <div class="study-log-table-wrap">
+            <table class="study-log-table">
+              <thead>
+                <tr>
+                  <th>Ngày & Giờ</th>
+                  <th>Bài học / Môn</th>
+                  <th>Thời gian học</th>
+                  <th>Hoạt động / Điểm</th>
+                  <th>Lịch hẹn ôn lại</th>
+                </tr>
+              </thead>
+              <tbody id="studyLogTableBody">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div class="sync-grid">
@@ -750,19 +840,26 @@
         </div>
       </div>
 
-      <!-- Stepper Tabs -->
-      <div class="ws-stepper">
-        <button class="ws-step-btn active" data-wstab="ws-tab-read" onclick="switchWorkspaceTab('ws-tab-read')">
-          <i class="fa-solid fa-book-open"></i> 1. Lý thuyết & Highlight
+      <!-- Vòng tròn chuyển các mục học tập (Circular Stepper Navigation) -->
+      <div class="ws-circular-stepper">
+        <button class="ws-circle-step active" data-wstab="ws-tab-read" onclick="switchWorkspaceTab('ws-tab-read')" title="Mục 1: Lý thuyết & Highlight">
+          <span class="step-circle"><i class="fa-solid fa-book-open"></i></span>
+          <span class="step-label">1. Lý thuyết</span>
         </button>
-        <button class="ws-step-btn" data-wstab="ws-tab-practice" onclick="switchWorkspaceTab('ws-tab-practice')">
-          <i class="fa-solid fa-pen-to-square"></i> 2. Luyện tập & Quiz
+        <div class="ws-step-connector"></div>
+        <button class="ws-circle-step" data-wstab="ws-tab-practice" onclick="switchWorkspaceTab('ws-tab-practice')" title="Mục 2: Luyện tập & Quiz">
+          <span class="step-circle"><i class="fa-solid fa-pen-to-square"></i></span>
+          <span class="step-label">2. Luyện tập</span>
         </button>
-        <button class="ws-step-btn ai-step" data-wstab="ws-tab-ai" onclick="switchWorkspaceTab('ws-tab-ai')">
-          <i class="fa-solid fa-robot"></i> 3. Trợ lý AI GLM 5.3
+        <div class="ws-step-connector"></div>
+        <button class="ws-circle-step ai-circle" data-wstab="ws-tab-ai" onclick="switchWorkspaceTab('ws-tab-ai')" title="Mục 3: Trợ lý AI GLM 5.3">
+          <span class="step-circle"><i class="fa-solid fa-robot"></i></span>
+          <span class="step-label">3. Hỏi AI</span>
         </button>
-        <button class="ws-step-btn" data-wstab="ws-tab-checkpoint" onclick="switchWorkspaceTab('ws-tab-checkpoint')">
-          <i class="fa-solid fa-circle-check"></i> 4. Checkpoint & Báo cáo
+        <div class="ws-step-connector"></div>
+        <button class="ws-circle-step" data-wstab="ws-tab-checkpoint" onclick="switchWorkspaceTab('ws-tab-checkpoint')" title="Mục 4: Checkpoint & Báo cáo">
+          <span class="step-circle"><i class="fa-solid fa-circle-check"></i></span>
+          <span class="step-label">4. Báo cáo</span>
         </button>
       </div>
 
@@ -771,6 +868,20 @@
         <!-- TAB 1: LÝ THUYẾT & HIGHLIGHT -->
         <div class="ws-tab-pane active" id="ws-tab-read">
           <div class="theory-intro-banner" id="wsIntroBanner"></div>
+
+          <!-- Ghi chú nhanh khi học trên lớp & tự học -->
+          <div class="ws-live-note-card">
+            <div class="ws-live-note-header">
+              <span style="font-weight: 700; color: var(--blue-primary); font-size: 0.85rem;">
+                <i class="fa-solid fa-pen-to-square"></i> Ghi chú nhanh tiết học (Lưu trực tiếp vào Sổ tay):
+              </span>
+              <button class="btn-small btn-primary" onclick="saveWsLessonLiveNote()">
+                <i class="fa-solid fa-floppy-disk"></i> Lưu ghi chú
+              </button>
+            </div>
+            <textarea id="wsLessonLiveNoteInput" placeholder="Ghi chép lưu ý của giảng viên trên lớp, công thức mở rộng hoặc câu hỏi cần hỏi AI..."></textarea>
+          </div>
+
           <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
             <i class="fa-solid fa-highlighter" style="color: var(--pink-primary);"></i>
             <strong>Mẹo:</strong> Bôi đen bất kỳ đoạn văn nào bên dưới để tô màu <em>Xanh nước (Cốt lõi)</em>, <em>Hồng (Bẫy lỗi)</em>, <em>Vàng (Công thức)</em>, <em>Xanh lá (Mẹo nhớ)</em> hoặc bấm <strong>"Hỏi AI"</strong>!
@@ -1061,9 +1172,9 @@
       <i class="fa-solid fa-pen-nib"></i>
       <span>Thi thử</span>
     </button>
-    <button class="mobile-nav-btn" data-tab="tab-logic" onclick="switchTab('tab-logic')">
-      <i class="fa-solid fa-brain"></i>
-      <span>Logic</span>
+    <button class="mobile-nav-btn" data-tab="tab-spaced" onclick="switchTab('tab-spaced')">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <span>Ngắt quãng</span>
     </button>
     <button class="mobile-nav-btn" data-tab="tab-sync" onclick="switchTab('tab-sync')">
       <i class="fa-solid fa-cloud"></i>

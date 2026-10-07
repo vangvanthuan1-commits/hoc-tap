@@ -25,6 +25,74 @@ import {
 const DEFAULT_KEY_B64 = "c2stb3ItdjEtODJkNWFmYzM1OGVhYjA4MDliYzAwY2ZkYzljYmJiMDkxYjE4ZmQwNTJhZGRhYTNmZDMzMzc3Y2UwYjg1ZGM1OQ==";
 const DEFAULT_MODEL = "thudm/glm-4-9b-chat";
 
+// Dữ liệu mẫu ban đầu cho Hàng đợi Ôn tập Ngắt quãng (1 - 3 - 7 ngày)
+const DEFAULT_SPACED_REVIEWS = [
+  {
+    id: "sr-en01",
+    lessonCode: "EN01",
+    subject: "EN",
+    title: "Chẩn đoán nghe–ngữ pháp–từ vựng–đọc",
+    studiedDate: "2026-10-07",
+    nextReviewDate: "2026-10-10",
+    intervalDays: 3,
+    status: "upcoming",
+    reviewCount: 1,
+    note: "Ôn phát âm ký hiệu email (dot, at, hyphen, underscore) và chia thì to be"
+  },
+  {
+    id: "sr-gt06",
+    lessonCode: "GT06",
+    subject: "GT",
+    title: "0/0 bằng nhân tử",
+    studiedDate: "2026-10-04",
+    nextReviewDate: "2026-10-07",
+    intervalDays: 3,
+    status: "due",
+    reviewCount: 2,
+    note: "Khử dạng 0/0, phân tích đa thức thành nhân tử và chú ý đổi dấu biểu thức"
+  },
+  {
+    id: "sr-it01",
+    lessonCode: "IT01",
+    subject: "IT",
+    title: "Chẩn đoán và tổng quan",
+    studiedDate: "2026-10-07",
+    nextReviewDate: "2026-10-10",
+    intervalDays: 3,
+    status: "upcoming",
+    reviewCount: 1,
+    note: "Kiến trúc máy tính, CPU, RAM và hệ đếm nhị phân"
+  }
+];
+
+// Dữ liệu mẫu Nhật ký học tập (ghi nhận ngày, giờ, thời lượng, kết quả, hẹn ôn lại)
+const DEFAULT_STUDY_LOGS = [
+  {
+    id: "log-1",
+    date: "2026-10-07",
+    time: "14:30",
+    lessonCode: "EN01",
+    subject: "EN",
+    durationMinutes: 45,
+    action: "Hoàn thành bài & Làm đề",
+    resultScore: "Đúng 12/22 câu chẩn đoán",
+    nextReviewDate: "2026-10-10 (sau 3 ngày)",
+    note: "Đã nắm vững ký hiệu email, cần chú ý bẫy chia động từ"
+  },
+  {
+    id: "log-2",
+    date: "2026-10-07",
+    time: "16:00",
+    lessonCode: "EN02",
+    subject: "EN",
+    durationMinutes: 30,
+    action: "Học lý thuyết & Ghi chép",
+    resultScore: "Khẳng định 4/4, Phủ định 2/2",
+    nextReviewDate: "2026-10-10 (sau 3 ngày)",
+    note: "Đang luyện câu hỏi to be và dạng rút gọn isn't, aren't"
+  }
+];
+
 // Trạng thái ứng dụng trung tâm
 let state = {
   sessions: [...DEFAULT_SESSIONS],
@@ -32,6 +100,8 @@ let state = {
   highlights: [],
   flashcards: [...DEFAULT_FLASHCARDS],
   quizHistory: [],
+  spacedReviews: [...DEFAULT_SPACED_REVIEWS],
+  studyLogs: [...DEFAULT_STUDY_LOGS],
   streak: 3,
   pomodoroMinutes: 25,
   pomodoroSeconds: 0,
@@ -112,6 +182,8 @@ function initUI() {
   renderCoursesOverview();
   initWordNotebook();
   initExamMatrixUI();
+  renderSpacedReviewQueue();
+  renderStudyLogs();
   renderScheduleList();
   loadFullSchedule();
   renderBugHunterLevel(0);
@@ -126,9 +198,13 @@ async function loadAppData() {
     state.highlights = loadedState.highlights || [];
     state.flashcards = loadedState.flashcards || state.flashcards;
     state.quizHistory = loadedState.quizHistory || [];
+    state.spacedReviews = (loadedState.spacedReviews && loadedState.spacedReviews.length > 0) ? loadedState.spacedReviews : state.spacedReviews;
+    state.studyLogs = (loadedState.studyLogs && loadedState.studyLogs.length > 0) ? loadedState.studyLogs : state.studyLogs;
     state.isCloudConnected = loadedState.isCloudConnected || false;
   }
   updateSyncBadge();
+  renderSpacedReviewQueue();
+  renderStudyLogs();
 }
 
 // Cập nhật biểu tượng kết nối
@@ -635,6 +711,12 @@ export function openLessonWorkspace(code) {
   // Render Tab 4: Checkpoint
   renderWorkspaceCheckpoint();
 
+  // Nạp ghi chép nhanh trên lớp nếu đã có
+  const liveNoteInput = document.getElementById("wsLessonLiveNoteInput");
+  if (liveNoteInput) {
+    liveNoteInput.value = state.notes[code] || "";
+  }
+
   // Mở tab 1 mặc định
   switchWorkspaceTab("ws-tab-read");
 
@@ -658,7 +740,7 @@ window.closeLessonWorkspace = closeLessonWorkspace;
 export function switchWorkspaceTab(tabId) {
   currentWsTab = tabId;
 
-  document.querySelectorAll(".ws-step-btn").forEach(btn => {
+  document.querySelectorAll(".ws-step-btn, .ws-circle-step").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.wstab === tabId);
   });
 
@@ -675,6 +757,27 @@ export function switchWorkspaceTab(tabId) {
   }
 }
 window.switchWorkspaceTab = switchWorkspaceTab;
+
+export function saveWsLessonLiveNote() {
+  const input = document.getElementById("wsLessonLiveNoteInput");
+  if (!input) return;
+  const content = input.value.trim();
+  state.notes[currentWsLessonCode] = content;
+
+  addStudyLog({
+    lessonCode: currentWsLessonCode,
+    subject: currentWsContent ? (currentWsLessonCode.slice(0, 2)) : "EN",
+    durationMinutes: 15,
+    action: "Ghi chép bài học trên lớp / Tự học",
+    resultScore: `${content.length} ký tự ghi chú`,
+    nextReviewDate: "Sau 3 ngày",
+    note: content.slice(0, 70) + (content.length > 70 ? "..." : "")
+  });
+
+  saveStudyState(state);
+  showToast(`Đã lưu ghi chép cho bài [${currentWsLessonCode}] vào hệ thống!`);
+}
+window.saveWsLessonLiveNote = saveWsLessonLiveNote;
 
 // Render Tab 1: Lý thuyết & bôi màu highlight đã lưu
 function renderWorkspaceTheory() {
@@ -917,12 +1020,18 @@ function setupWorkspaceListeners() {
     }
   }
 
-  // Stepper buttons
-  document.querySelectorAll(".ws-step-btn").forEach(btn => {
+  // Stepper buttons (Hỗ trợ cả Circular Stepper và Button thường)
+  document.querySelectorAll(".ws-step-btn, .ws-circle-step").forEach(btn => {
     btn.addEventListener("click", () => {
       switchWorkspaceTab(btn.dataset.wstab);
     });
   });
+
+  // Nút Lưu ghi chép trực tiếp trên lớp
+  const saveLiveNoteBtn = document.getElementById("wsSaveLessonLiveNoteBtn");
+  if (saveLiveNoteBtn) {
+    saveLiveNoteBtn.addEventListener("click", saveWsLessonLiveNote);
+  }
 
   // Modal navigation shortcuts
   const closeWsBtn = document.getElementById("closeWorkspaceBtn");
@@ -1191,6 +1300,9 @@ QUY TẮC SƯ PHẠM BẮT BUỘC (theo AGENTS.md):
 BÀI HỌC HIỆN TẠI:
 - Mã tiết: [${currentWsLessonCode}]
 - Tên tiết: ${currentWsContent ? currentWsContent.intro : ''}
+
+NHẬT KÝ & THỜI LƯỢNG HỌC THỰC TẾ CỦA THUẬN:
+${formatStudyHistoryForAI()}
 `;
 
   try {
@@ -1339,11 +1451,28 @@ function saveLessonCheckpoint() {
   session.mistakes = mistakes;
   session.date = today;
 
+  // Lên lịch nhắc ôn tập ngắt quãng (3 ngày) theo yêu cầu của Thuận
+  scheduleSpacedReview(currentWsLessonCode, 3, mistakes || "Củng cố lý thuyết & bẫy lỗi");
+
+  // Ghi nhận nhật ký học tập với số phút học thực tế
+  const duration = Math.max(15, Math.round(studyTimerSeconds / 60) || 25);
+  addStudyLog({
+    lessonCode: currentWsLessonCode,
+    subject: session.subject || "EN",
+    durationMinutes: duration,
+    action: `Lưu Checkpoint: ${status}`,
+    resultScore: result || "Tự luyện lý thuyết",
+    nextReviewDate: "Hẹn sau 3 ngày",
+    note: mistakes ? `Bẫy lỗi: ${mistakes}` : "Đã nắm vững kiến thức"
+  });
+
   saveStudyState(state);
   renderStats();
   renderSessionsList();
+  renderSpacedReviewQueue();
+  renderStudyLogs();
 
-  showToast(`Đã lưu Checkpoint tiết [${currentWsLessonCode}] thành công!`);
+  showToast(`Đã lưu Checkpoint [${currentWsLessonCode}] & hẹn ôn tập sau 3 ngày!`);
 }
 
 function copyLessonAiReport() {
@@ -1845,14 +1974,21 @@ Trả về DUY NHẤT một mảng JSON hợp lệ, KHÔNG thêm bất kỳ văn
   }
 }
 
-function startQuiz(type) {
-  currentQuizList = QUIZ_QUESTIONS[type] || QUIZ_QUESTIONS["EN"];
+export function startQuiz(type) {
+  currentQuizList = QUIZ_QUESTIONS[type] || QUIZ_QUESTIONS[type + "_ENTRANCE"] || QUIZ_QUESTIONS["EN"] || [];
   currentQuizIndex = 0;
   userQuizAnswers = {};
 
   const sourceTag = document.getElementById("quizSourceTag");
   if (sourceTag) {
-    sourceTag.textContent = type === "EN" ? "Đề Tiếng Anh 50 câu" : "Đề Giải tích 1 (Giới hạn)";
+    const titles = {
+      EN: "Đề Tiếng Anh (Xếp lớp 8.5+)",
+      GT: "Đề Giải tích 1 (Giới hạn, Vô cùng bé)",
+      IT: "Đề Nhập môn CNTT & C (Pointer, RAM)",
+      VL: "Đề Vật lý 1 (Cơ học, Nhiệt học)",
+      PL: "Đề Pháp luật đại cương (Nhà nước, Quy phạm)"
+    };
+    sourceTag.textContent = titles[type] || `Đề môn ${type}`;
     sourceTag.style.background = "var(--blue-light)";
     sourceTag.style.color = "var(--blue-primary)";
   }
@@ -1862,6 +1998,20 @@ function startQuiz(type) {
 
   renderQuizQuestion();
 }
+window.startQuiz = startQuiz;
+
+export function startSubjectQuiz(subjectCode) {
+  document.querySelectorAll(".quiz-sub-pill").forEach(p => {
+    p.classList.remove("active");
+  });
+  const pillBtn = document.getElementById(`btnQuizSub${subjectCode}`);
+  if (pillBtn) pillBtn.classList.add("active");
+
+  startQuiz(subjectCode);
+  const card = document.getElementById("quizActiveCard");
+  if (card) card.scrollIntoView({ behavior: "smooth" });
+}
+window.startSubjectQuiz = startSubjectQuiz;
 
 function renderQuizQuestion() {
   const q = currentQuizList[currentQuizIndex];
@@ -1918,9 +2068,19 @@ function submitQuizWithSummary() {
         explanation: q.explanation
       });
     }
+  const percent = Math.round((correctCount / total) * 100);
+
+  // Ghi nhận phiên làm bài vào Nhật ký học tập
+  addStudyLog({
+    lessonCode: "QUIZ-TEST",
+    subject: "TEST",
+    durationMinutes: 20,
+    action: "Làm bài thi trắc nghiệm",
+    resultScore: `Đúng ${correctCount}/${total} (${percent}%)`,
+    nextReviewDate: "Sau 3 ngày",
+    note: mistakeItems.length > 0 ? `Cần xem lại ${mistakeItems.length} bẫy lỗi sai` : "Đạt điểm tối đa 100%"
   });
 
-  const percent = Math.round((correctCount / total) * 100);
   const summaryBox = document.getElementById("quizResultSummaryBox");
   if (!summaryBox) return;
 
@@ -2085,53 +2245,429 @@ function rateFlashcard(intervalDays) {
 }
 
 // =========================================================
-// 13. LỊCH HỌC PHENIKAA K20
+// 13. LỊCH HỌC PHENIKAA K20 (64 BUỔI TỪ CỔNG & LỊCH THI XEPLOP)
 // =========================================================
-function renderScheduleList(events = SCHEDULE_SAMPLE) {
+const OCTOBER_EXAM_EVENT = {
+  NGAYHOC: "17/10/2026",
+  TENHOCPHAN: "Thi Đánh giá Năng lực Tiếng Anh Đầu Vào K20",
+  TENLOPHOCPHAN: "Kỳ thi Xếp lớp Toàn trường K20 (50 câu / 60 phút)",
+  TENPHONGHOC: "Tòa A6 - Đại học Phenikaa",
+  GIANGVIEN: "Hội đồng Khảo thí Phenikaa",
+  GIOBATDAU: 8,
+  PHUTBATDAU: 0,
+  GIOKETTHUC: 9,
+  PHUTKETTHUC: 0,
+  TIETBATDAU: "Ca 1 Sáng",
+  TIETKETTHUC: "08:00 - 09:00",
+  PHANLOAI: "THI_XEPLOP"
+};
+
+let allScheduleEvents = [];
+
+export async function loadFullSchedule() {
+  try {
+    const res = await fetch("lich-hoc/2026-10-07-cac-tuan-sau.json");
+    if (res.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data.events)) {
+        allScheduleEvents = data.events;
+      }
+    }
+  } catch (e) {
+    console.warn("Dùng lịch học mẫu:", e);
+  }
+  filterScheduleList("ALL");
+}
+
+export function filterScheduleList(filterType = "ALL") {
+  document.querySelectorAll(".schedule-filter-pill").forEach(p => {
+    p.classList.remove("active");
+  });
+  const activeBtn = document.getElementById(`btnSched${filterType}`);
+  if (activeBtn) activeBtn.classList.add("active");
+
   const container = document.getElementById("scheduleListContainer");
   if (!container) return;
 
-  container.innerHTML = events.map(ev => `
-    <div class="schedule-item">
-      <div class="schedule-date-badge">
-        <div style="font-size: 0.75rem; text-transform: uppercase;">Tháng 11</div>
-        <div style="font-size: 1.15rem; font-weight: 800;">${ev.date.split("-")[2]}</div>
+  let events = [OCTOBER_EXAM_EVENT, ...allScheduleEvents];
+  if (allScheduleEvents.length === 0) {
+    events = [OCTOBER_EXAM_EVENT, ...SCHEDULE_SAMPLE.map(s => ({
+      NGAYHOC: s.date.split("-").reverse().join("/"),
+      TENHOCPHAN: s.subject,
+      TENLOPHOCPHAN: s.subject + " - Phenikaa K20",
+      TENPHONGHOC: s.room,
+      GIANGVIEN: s.teacher,
+      GIOBATDAU: parseInt(s.start.split(":")[0], 10),
+      PHUTBATDAU: parseInt(s.start.split(":")[1], 10),
+      GIOKETTHUC: parseInt(s.end.split(":")[0], 10),
+      PHUTKETTHUC: parseInt(s.end.split(":")[1], 10),
+      TIETBATDAU: s.period,
+      TIETKETTHUC: ""
+    }))];
+  }
+
+  if (filterType === "OCT") {
+    events = events.filter(e => e.NGAYHOC.includes("/10/"));
+  } else if (filterType === "GT") {
+    events = events.filter(e => e.TENHOCPHAN.includes("Giải tích"));
+  } else if (filterType === "IT") {
+    events = events.filter(e => e.TENHOCPHAN.includes("Nhập môn") || e.TENHOCPHAN.includes("Công nghệ"));
+  } else if (filterType === "VL") {
+    events = events.filter(e => e.TENHOCPHAN.includes("Vật lý"));
+  } else if (filterType === "RUN") {
+    events = events.filter(e => e.TENHOCPHAN.includes("Chạy"));
+  }
+
+  if (events.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 24px; color: var(--text-muted); background: #ffffff; border-radius: 8px;">
+        Không có lịch học nào cho bộ lọc này.
       </div>
-      <div class="schedule-info">
-        <h4>${ev.subject} &bull; ${ev.period || ''}</h4>
-        <div class="schedule-meta">
-          <span><i class="fa-solid fa-clock"></i> ${ev.start} - ${ev.end}</span>
-          <span><i class="fa-solid fa-location-dot"></i> Phòng: ${ev.room}</span>
-          <span><i class="fa-solid fa-user-tie"></i> GV: ${ev.teacher}</span>
+    `;
+    return;
+  }
+
+  container.innerHTML = events.slice(0, 30).map(ev => {
+    const parts = ev.NGAYHOC.split("/");
+    const day = parts[0] || "01";
+    const month = parts[1] || "11";
+    const year = parts[2] || "2026";
+    const room = ev.TENPHONGHOC || (ev.TENHOCPHAN.includes("Chạy") ? "Sân thể thao - Phenikaa" : "Theo thông báo");
+    const startTime = `${String(ev.GIOBATDAU).padStart(2, '0')}:${String(ev.PHUTBATDAU).padStart(2, '0')}`;
+    const endTime = `${String(ev.GIOKETTHUC).padStart(2, '0')}:${String(ev.PHUTKETTHUC).padStart(2, '0')}`;
+    const periodStr = typeof ev.TIETBATDAU === "number" ? `Tiết ${ev.TIETBATDAU} - ${ev.TIETKETTHUC}` : `${ev.TIETBATDAU} ${ev.TIETKETTHUC || ''}`;
+
+    let badgeBg = "var(--blue-light)";
+    let badgeColor = "var(--blue-primary)";
+    let isExam = ev.PHANLOAI === "THI_XEPLOP" || ev.TENHOCPHAN.includes("Thi");
+
+    if (isExam) {
+      badgeBg = "var(--pink-light)";
+      badgeColor = "var(--pink-primary)";
+    } else if (ev.TENHOCPHAN.includes("Giải tích")) {
+      badgeBg = "#e0f2fe";
+      badgeColor = "#0284c7";
+    } else if (ev.TENHOCPHAN.includes("Nhập môn")) {
+      badgeBg = "#f5f3ff";
+      badgeColor = "#7c3aed";
+    } else if (ev.TENHOCPHAN.includes("Vật lý")) {
+      badgeBg = "#fffbeb";
+      badgeColor = "#d97706";
+    } else if (ev.TENHOCPHAN.includes("Chạy")) {
+      badgeBg = "#ecfdf5";
+      badgeColor = "#059669";
+    }
+
+    return `
+      <div class="schedule-item ${isExam ? 'schedule-item-exam' : ''}">
+        <div class="schedule-date-badge" style="background: ${badgeBg}; color: ${badgeColor}; border: 1px solid currentColor;">
+          <div style="font-size: 0.72rem; text-transform: uppercase; font-weight: 700;">Tháng ${month}</div>
+          <div style="font-size: 1.25rem; font-weight: 900;">${day}</div>
+          <div style="font-size: 0.68rem;">${year}</div>
+        </div>
+        <div class="schedule-info">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--text-main);">${escapeHtml(ev.TENHOCPHAN)}</h4>
+            <span style="font-size: 0.74rem; background: ${badgeBg}; color: ${badgeColor}; font-weight: 700; padding: 2px 8px; border-radius: 999px;">
+              ${escapeHtml(periodStr)}
+            </span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin: 3px 0;">
+            ${escapeHtml(ev.TENLOPHOCPHAN || '')}
+          </div>
+          <div class="schedule-meta">
+            <span><i class="fa-solid fa-clock" style="color: var(--blue-primary);"></i> ${startTime} - ${endTime}</span>
+            <span><i class="fa-solid fa-location-dot" style="color: var(--pink-primary);"></i> <strong>${escapeHtml(room)}</strong></span>
+            <span><i class="fa-solid fa-user-tie" style="color: var(--text-muted);"></i> GV: ${escapeHtml(ev.GIANGVIEN || 'Giảng viên khoa')}</span>
+          </div>
         </div>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 }
+window.filterScheduleList = filterScheduleList;
+window.renderScheduleList = () => filterScheduleList("ALL");
 
-async function loadFullSchedule() {
-  try {
-    const res = await fetch("lich-hoc/2026-10-07-cac-tuan-sau.json");
-    if (!res.ok) return;
-    const data = await res.json();
-    if (Array.isArray(data) && data.length > 0) {
-      renderScheduleList(data.slice(0, 15));
+// =========================================================
+// 14. HÀNG ĐỢI ÔN TẬP NGẮT QUÃNG (SPACED REPETITION) & NHẬT KÝ HỌC
+// =========================================================
+export function scheduleSpacedReview(lessonCode, intervalDays = 3, customNote = "") {
+  const session = state.sessions.find(s => s.code === lessonCode);
+  const now = new Date();
+  const todayStr = now.toISOString().split("T")[0];
+  const nextDate = new Date();
+  nextDate.setDate(now.getDate() + intervalDays);
+  const nextStr = nextDate.toISOString().split("T")[0];
+
+  if (!state.spacedReviews) state.spacedReviews = [];
+  let existing = state.spacedReviews.find(r => r.lessonCode === lessonCode);
+
+  if (existing) {
+    existing.studiedDate = todayStr;
+    existing.nextReviewDate = nextStr;
+    existing.intervalDays = intervalDays;
+    existing.status = "upcoming";
+    existing.reviewCount = (existing.reviewCount || 0) + 1;
+    if (customNote) existing.note = customNote;
+  } else {
+    state.spacedReviews.unshift({
+      id: "sr-" + Date.now(),
+      lessonCode: lessonCode,
+      subject: session ? session.subject : lessonCode.slice(0, 2),
+      title: session ? session.title : lessonCode,
+      studiedDate: todayStr,
+      nextReviewDate: nextStr,
+      intervalDays: intervalDays,
+      status: "upcoming",
+      reviewCount: 1,
+      note: customNote || (session && session.mistakes ? `Lưu ý bẫy: ${session.mistakes}` : `Ôn tập sau ${intervalDays} ngày`)
+    });
+  }
+
+  saveStudyState(state);
+  renderSpacedReviewQueue();
+}
+window.scheduleSpacedReview = scheduleSpacedReview;
+
+export function completeSpacedReview(id) {
+  const item = state.spacedReviews.find(r => r.id === id);
+  if (!item) return;
+
+  const now = new Date();
+  const todayStr = now.toISOString().split("T")[0];
+  const nextDate = new Date();
+  nextDate.setDate(now.getDate() + 3);
+  const nextStr = nextDate.toISOString().split("T")[0];
+
+  item.studiedDate = todayStr;
+  item.nextReviewDate = nextStr;
+  item.intervalDays = 3;
+  item.status = "upcoming";
+  item.reviewCount = (item.reviewCount || 1) + 1;
+
+  addStudyLog({
+    lessonCode: item.lessonCode,
+    subject: item.subject,
+    durationMinutes: 15,
+    action: `Đã ôn tập ngắt quãng (Lần ${item.reviewCount})`,
+    resultScore: "Đạt yêu cầu",
+    nextReviewDate: `${nextStr} (sau 3 ngày)`,
+    note: "Hoàn thành phiên ôn lại kiến thức"
+  });
+
+  saveStudyState(state);
+  renderSpacedReviewQueue();
+  showToast(`🎉 Đã đánh dấu ôn tập [${item.lessonCode}]! Hẹn ôn lại sau 3 ngày (${nextStr}).`);
+}
+window.completeSpacedReview = completeSpacedReview;
+
+export function renderSpacedReviewQueue() {
+  const container = document.getElementById("spacedReviewsContainer");
+  const countBadge = document.getElementById("spacedQueueCountBadge");
+  const alertText = document.getElementById("spacedHubAlertText");
+
+  if (!state.spacedReviews) state.spacedReviews = [...DEFAULT_SPACED_REVIEWS];
+
+  const todayStr = new Date().toISOString().split("T")[0];
+  const todayTime = new Date(todayStr).getTime();
+
+  const dueItems = [];
+  const upcomingItems = [];
+
+  state.spacedReviews.forEach(r => {
+    const revTime = new Date(r.nextReviewDate).getTime();
+    if (revTime <= todayTime) {
+      dueItems.push(r);
+    } else {
+      upcomingItems.push(r);
     }
-  } catch (e) {
-    // Fallback to sample
+  });
+
+  if (countBadge) {
+    countBadge.textContent = `${dueItems.length} bài đến hạn hôm nay (${state.spacedReviews.length} bài trong lộ trình)`;
+  }
+
+  if (alertText) {
+    if (dueItems.length > 0) {
+      alertText.innerHTML = `<strong style="color: #e11d48;">Hôm nay có ${dueItems.length} bài đến hạn ôn lại:</strong> ${dueItems.map(d => d.lessonCode).join(", ")}`;
+    } else {
+      const nextOne = upcomingItems[0];
+      alertText.textContent = nextOne ? `Bài tiếp theo cần ôn: [${nextOne.lessonCode}] vào ngày ${nextOne.nextReviewDate} (sau 3 ngày).` : `Hiện chưa có bài nào quá hạn ôn tập.`;
+    }
+  }
+
+  if (!container) return;
+
+  if (state.spacedReviews.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 24px; color: var(--text-muted); background: #ffffff; border-radius: 8px; border: 1px dashed var(--border-light);">
+        Chưa có bài nào trong hàng đợi ôn tập ngắt quãng. Khi bạn học xong một bài bất kỳ (VD EN01), hệ thống sẽ tự động hẹn lịch sau 3 ngày!
+      </div>
+    `;
+    return;
+  }
+
+  const allSorted = [...dueItems, ...upcomingItems];
+
+  container.innerHTML = allSorted.map(r => {
+    const isDue = new Date(r.nextReviewDate).getTime() <= todayTime;
+    const subInfo = SUBJECTS_MAP[r.subject] || { bgColor: "#f0f9ff", color: "#0284c7" };
+    const diffDays = Math.max(0, Math.ceil((new Date(r.nextReviewDate).getTime() - todayTime) / (1000 * 60 * 60 * 24)));
+    let timeLabel = isDue 
+      ? `<span class="badge" style="background: #fee2e2; color: #b91c1c; font-weight: 800;"><i class="fa-solid fa-bell"></i> ĐẾN HẠN HÔM NAY!</span>` 
+      : `<span class="badge" style="background: #e0f2fe; color: #0369a1;"><i class="fa-solid fa-calendar-day"></i> Còn ${diffDays} ngày (${r.nextReviewDate})</span>`;
+
+    return `
+      <div class="spaced-review-card ${isDue ? 'due-today' : ''}">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+          <span class="lesson-code-pill" style="background: ${subInfo.bgColor}; color: ${subInfo.color};">
+            ${r.lessonCode}
+          </span>
+          ${timeLabel}
+        </div>
+        <h5 style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">${escapeHtml(r.title)}</h5>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px;">
+          ${escapeHtml(r.note || 'Lặp lại ngắt quãng để củng cố nhớ sâu')}
+        </p>
+        <div style="font-size: 0.72rem; color: var(--text-light); margin-bottom: 12px; display: flex; justify-content: space-between;">
+          <span>Đã học: <strong>${r.studiedDate}</strong></span>
+          <span>Hẹn ôn lại: <strong>${r.nextReviewDate}</strong> (+3 ngày)</span>
+        </div>
+        <div class="spaced-review-actions">
+          <button class="btn btn-primary-small" onclick="openLessonWorkspace('${r.lessonCode}')" style="flex: 1; padding: 6px 10px;">
+            <i class="fa-solid fa-book-open"></i> Vào ôn ngay
+          </button>
+          <button class="btn-small btn-outline" onclick="completeSpacedReview('${r.id}')" style="padding: 6px 10px;" title="Đã nắm vững, lặp lại chu kỳ tiếp theo">
+            <i class="fa-solid fa-check"></i> Đã nhớ (+3 ngày)
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+window.renderSpacedReviewQueue = renderSpacedReviewQueue;
+
+export function addStudyLog({ lessonCode, subject, durationMinutes, action, resultScore, nextReviewDate, note }) {
+  const now = new Date();
+  const todayStr = now.toISOString().split("T")[0];
+  const timeStr = now.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
+
+  const newLog = {
+    id: "log-" + Date.now(),
+    date: todayStr,
+    time: timeStr,
+    lessonCode: lessonCode || "TỰ HỌC",
+    subject: subject || "GENERAL",
+    durationMinutes: durationMinutes || 15,
+    action: action || "Học tập",
+    resultScore: resultScore || "",
+    nextReviewDate: nextReviewDate || "Không có",
+    note: note || ""
+  };
+
+  if (!state.studyLogs) state.studyLogs = [];
+  state.studyLogs.unshift(newLog);
+
+  todayStudyMinutes += (durationMinutes || 15);
+  localStorage.setItem("thuan_today_study_mins", todayStudyMinutes.toString());
+  updateTodayStudyMinsBadge();
+
+  saveStudyState(state);
+  renderStudyLogs();
+  if (typeof updateAiLiveContext === "function") {
+    updateAiLiveContext();
   }
 }
+window.addStudyLog = addStudyLog;
+
+export function renderStudyLogs() {
+  const tbody = document.getElementById("studyLogTableBody");
+  const badge = document.getElementById("totalStudyMinutesBadge");
+
+  if (!state.studyLogs) state.studyLogs = [...DEFAULT_STUDY_LOGS];
+
+  const totalMins = state.studyLogs.reduce((acc, l) => acc + (l.durationMinutes || 0), 0);
+  if (badge) {
+    const hours = (totalMins / 60).toFixed(1);
+    badge.textContent = `Tổng: ${hours} giờ (${totalMins} phút)`;
+  }
+
+  if (!tbody) return;
+
+  if (state.studyLogs.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 18px;">Chưa có dữ liệu nhật ký học tập.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = state.studyLogs.slice(0, 15).map(l => {
+    const subInfo = SUBJECTS_MAP[l.subject] || { bgColor: "#f0f9ff", color: "#0284c7" };
+    return `
+      <tr>
+        <td>
+          <strong style="color: var(--text-main);">${l.date}</strong><br>
+          <small style="color: var(--text-muted);">${l.time || ''}</small>
+        </td>
+        <td>
+          <span class="lesson-code-pill" style="background: ${subInfo.bgColor}; color: ${subInfo.color}; font-size: 0.75rem; padding: 2px 6px;">
+            ${l.lessonCode || l.subject}
+          </span>
+        </td>
+        <td>
+          <strong style="color: var(--blue-primary);">${l.durationMinutes || 15} phút</strong>
+        </td>
+        <td>
+          <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(l.action)}</div>
+          ${l.resultScore ? `<small style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> ${escapeHtml(l.resultScore)}</small>` : ''}
+          ${l.note ? `<div style="font-size: 0.72rem; color: var(--text-muted);">${escapeHtml(l.note)}</div>` : ''}
+        </td>
+        <td>
+          <span style="color: var(--pink-primary); font-weight: 700; font-size: 0.8rem;">
+            <i class="fa-solid fa-clock-rotate-left"></i> ${escapeHtml(l.nextReviewDate || 'Sau 3 ngày')}
+          </span>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+window.renderStudyLogs = renderStudyLogs;
+
+export function formatStudyHistoryForAI() {
+  const logs = state.studyLogs || [];
+  const reviews = state.spacedReviews || [];
+  const totalMins = logs.reduce((a, b) => a + (b.durationMinutes || 0), 0);
+  const totalHours = (totalMins / 60).toFixed(1);
+
+  const logsSummary = logs.slice(0, 8).map(l => 
+    `- Ngày ${l.date} (${l.time || ''}): Học [${l.lessonCode || l.subject}], thời lượng ${l.durationMinutes || 15} phút. Hoạt động: ${l.action}. Kết quả: ${l.resultScore || 'Tốt'}. Hẹn ôn: ${l.nextReviewDate || 'N/A'}. Ghi chú: ${l.note || 'Không có'}`
+  ).join("\n");
+
+  const todayStr = new Date().toISOString().split("T")[0];
+  const dueReviews = reviews.filter(r => r.nextReviewDate <= todayStr);
+  const upcomingReviews = reviews.filter(r => r.nextReviewDate > todayStr);
+
+  return `TỔNG THỜI GIAN THUẬN ĐÃ HỌC TRÊN WEB: ${totalHours} giờ (${totalMins} phút).
+NHẬT KÝ CÁC PHIÊN HỌC THỰC TẾ GẦN ĐÂY:
+${logsSummary || "Chưa có phiên học nào."}
+
+HÀNG ĐỢI ÔN TẬP NGẮT QUÃNG HIỆN TẠI (SPACED REPETITION 3 NGÀY):
+- Đến hạn hôm nay (${dueReviews.length} bài): ${dueReviews.map(r => `[${r.lessonCode}] ${r.title}`).join(", ") || "Không có bài quá hạn"}
+- Sắp đến hạn (${upcomingReviews.length} bài): ${upcomingReviews.map(r => `[${r.lessonCode}] hẹn ngày ${r.nextReviewDate}`).join(", ") || "Không có bài sắp tới"}`;
+}
+window.formatStudyHistoryForAI = formatStudyHistoryForAI;
 
 // =========================================================
-// 14. POMODORO FOCUS TIMER
+// 15. POMODORO FOCUS TIMER (25 PHÚT / 5 PHÚT)
 // =========================================================
-function togglePomodoro() {
+export function togglePomodoro() {
   const btn = document.getElementById("pomodoroToggleBtn");
+  const mainBtn = document.getElementById("pomoMainToggleBtn");
   const audio = document.getElementById("lofiAudioPlayer");
 
   if (!state.pomodoroRunning) {
     state.pomodoroRunning = true;
-    if (btn) btn.innerHTML = `<i class="fa-solid fa-pause"></i> Tạm dừng Focus`;
+    const pauseHtml = `<i class="fa-solid fa-pause"></i> Tạm dừng Focus`;
+    if (btn) btn.innerHTML = pauseHtml;
+    if (mainBtn) mainBtn.innerHTML = pauseHtml;
     if (audio) audio.play().catch(() => {});
 
     pomodoroIntervalId = setInterval(() => {
@@ -2139,9 +2675,26 @@ function togglePomodoro() {
         if (state.pomodoroMinutes === 0) {
           clearInterval(pomodoroIntervalId);
           state.pomodoroRunning = false;
-          if (btn) btn.innerHTML = `<i class="fa-solid fa-play"></i> Bắt đầu Pomodoro`;
+          state.pomodoroMinutes = 25;
+          state.pomodoroSeconds = 0;
+          const playHtml = `<i class="fa-solid fa-play"></i> Bắt đầu Pomodoro`;
+          if (btn) btn.innerHTML = playHtml;
+          if (mainBtn) mainBtn.innerHTML = playHtml;
           if (audio) audio.pause();
-          alert("Chúc mừng bạn đã hoàn thành 25 phút tập trung cao độ!");
+
+          // Ghi nhận vào nhật ký học tập
+          addStudyLog({
+            lessonCode: currentWsLessonCode || "POMODORO",
+            subject: selectedCourseSubject || "GENERAL",
+            durationMinutes: 25,
+            action: "Hoàn thành phiên Pomodoro Focus 25 phút",
+            resultScore: "Tập trung sâu 100%",
+            nextReviewDate: "Lịch định kỳ",
+            note: "Hoàn thành trọn vẹn 25 phút tập trung không xao nhãng"
+          });
+
+          showToast("🎉 Chúc mừng bạn đã hoàn thành 25 phút tập trung cao độ!");
+          updatePomodoroDisplay();
           return;
         }
         state.pomodoroMinutes--;
@@ -2154,17 +2707,39 @@ function togglePomodoro() {
   } else {
     state.pomodoroRunning = false;
     clearInterval(pomodoroIntervalId);
-    if (btn) btn.innerHTML = `<i class="fa-solid fa-play"></i> Tiếp tục Pomodoro`;
+    const resumeHtml = `<i class="fa-solid fa-play"></i> Tiếp tục Pomodoro`;
+    if (btn) btn.innerHTML = resumeHtml;
+    if (mainBtn) mainBtn.innerHTML = resumeHtml;
     if (audio) audio.pause();
   }
 }
+window.togglePomodoro = togglePomodoro;
+
+export function resetPomodoro() {
+  state.pomodoroRunning = false;
+  clearInterval(pomodoroIntervalId);
+  state.pomodoroMinutes = 25;
+  state.pomodoroSeconds = 0;
+  const playHtml = `<i class="fa-solid fa-play"></i> Bắt đầu 25 phút học`;
+  const btn = document.getElementById("pomodoroToggleBtn");
+  const mainBtn = document.getElementById("pomoMainToggleBtn");
+  const audio = document.getElementById("lofiAudioPlayer");
+  if (btn) btn.innerHTML = playHtml;
+  if (mainBtn) mainBtn.innerHTML = playHtml;
+  if (audio) audio.pause();
+  updatePomodoroDisplay();
+  showToast("Đã đặt lại đồng hồ Pomodoro về 25:00.");
+}
+window.resetPomodoro = resetPomodoro;
 
 function updatePomodoroDisplay() {
   const display = document.getElementById("pomodoroDisplay");
-  if (!display) return;
+  const largeDisplay = document.getElementById("pomoTimerLarge");
   const m = String(state.pomodoroMinutes).padStart(2, "0");
   const s = String(state.pomodoroSeconds).padStart(2, "0");
-  display.textContent = `${m}:${s}`;
+  const timeText = `${m}:${s}`;
+  if (display) display.textContent = timeText;
+  if (largeDisplay) largeDisplay.textContent = timeText;
 }
 
 // =========================================================
@@ -2446,7 +3021,10 @@ QUY TẮC SƯ PHẠM BẮT BUỘC (theo AGENTS.md):
 1. Giải thích thật ngắn gọn, tập trung thẳng vào bản chất khái niệm.
 2. Luôn chỉ rõ các bẫy đề kinh điển dễ mất điểm trong kỳ thi.
 3. Khi Thuận hỏi bài tập hoặc đoạn bôi đen, đưa gợi ý tư duy trước để Thuận tự làm, không đưa đáp án ngay lập tức.
-4. Xưng hô thân thiện, truyền động lực, chuẩn tác phong Gia sư AI Phenikaa K20.`;
+4. Xưng hô thân thiện, truyền động lực, chuẩn tác phong Gia sư AI Phenikaa K20.
+
+NHẬT KÝ VÀ THỜI GIAN HỌC THỰC TẾ CỦA THUẬN (biết rõ ngày nào học gì, mấy tiếng, bao nhiêu câu đúng, hẹn ôn lại):
+${formatStudyHistoryForAI()}`;
 
   try {
     const apiKey = getOpenRouterApiKey();
@@ -2511,6 +3089,8 @@ window.handleFloatingAiSend = handleFloatingAiSend;
 function renderAllViews() {
   renderStats();
   renderSessionsList();
+  renderSpacedReviewQueue();
+  renderStudyLogs();
   renderFlashcard();
   renderHighlightsList();
   startQuiz("EN");

@@ -545,8 +545,95 @@ export const QUIZ_QUESTIONS = {
       correctIndex: 2,
       explanation: "Trên kiến trúc 64-bit, tất cả con trỏ (int*, char*, double*) đều có kích thước 8 bytes (64 bits) để trỏ đến toàn bộ không gian địa chỉ RAM."
     }
+  ],
+
+  // BÀI TẬP VẬT LÝ 1 (CƠ HỌC & NHIỆT HỌC)
+  VL_PHYSICS: [
+    {
+      id: "vl-q1",
+      question: "Một vật có khối lượng m = 2 kg trượt thẳng đều trên mặt phẳng ngang dưới tác dụng của lực kéo F = 10 N theo phương ngang. Lấy g = 10 m/s². Hệ số ma sát trượt μ giữa vật và mặt sàn là bao nhiêu?",
+      options: [
+        "A. 0.2",
+        "B. 0.5",
+        "C. 0.8",
+        "D. 1.0"
+      ],
+      correctIndex: 1,
+      explanation: "Vật chuyển động thẳng đều nên gia tốc a = 0. Chiếu lên phương ngang: F - F_ms = 0 => F_ms = F = 10 N. Mặt khác F_ms = μ * N = μ * m * g => μ = 10 / (2 * 10) = 0.5."
+    },
+    {
+      id: "vl-q2",
+      question: "Hai vật va chạm hoàn toàn mềm (dính vào nhau sau va chạm). Đại lượng nào sau đây luôn được bảo toàn trong hệ cô lập?",
+      options: [
+        "A. Tổng cơ năng của hệ",
+        "B. Tổng động lượng của hệ",
+        "C. Tổng động năng của hệ",
+        "D. Cả động năng và cơ năng"
+      ],
+      correctIndex: 1,
+      explanation: "Trong va chạm mềm, chỉ có tổng động lượng của hệ được bảo toàn. Động năng một phần đã biến thành nhiệt lượng làm biến dạng hai vật."
+    },
+    {
+      id: "vl-q3",
+      question: "Khối khí lý tưởng nhận một nhiệt lượng Q = 120 J và đồng thời dãn nở thực hiện công A' = 50 J chống lại ngoại lực. Độ biến thiên nội năng ΔU của khối khí là:",
+      options: [
+        "A. 170 J",
+        "B. 70 J",
+        "C. -70 J",
+        "D. 60 J"
+      ],
+      correctIndex: 1,
+      explanation: "Theo Nguyên lý I Nhiệt động lực học: ΔU = Q + A (với A là công khí nhận được). Do khí thực hiện công A' = 50 J nên A = -50 J. Vậy ΔU = 120 + (-50) = 70 J."
+    }
+  ],
+
+  // BÀI TẬP PHÁP LUẬT ĐẠI CƯƠNG
+  PL_LAW: [
+    {
+      id: "pl-q1",
+      question: "Theo quan điểm Chủ nghĩa Mác - Lênin, Nhà nước xuất hiện do nguyên nhân trực tiếp nào sau đây?",
+      options: [
+        "A. Thượng đế và thần linh sắp đặt trật tự xã hội",
+        "B. Xuất hiện chế độ tư hữu và mâu thuẫn giai cấp đối kháng không thể điều hòa",
+        "C. Nhu cầu liên kết của các thị tộc chống thiên tai",
+        "D. Thỏa thuận khế ước giữa công dân và vua chúa"
+      ],
+      correctIndex: 1,
+      explanation: "Chủ nghĩa Mác - Lênin khẳng định: Nhà nước là sản phẩm và biểu hiện của những mâu thuẫn giai cấp không thể điều hòa, xuất hiện khi có chế độ tư hữu tư liệu sản xuất."
+    },
+    {
+      id: "pl-q2",
+      question: "Bộ phận nào của quy phạm pháp luật chỉ ra biện pháp cưỡng chế hoặc hậu quả pháp lý bất lợi mà Nhà nước áp dụng đối với chủ thể vi phạm?",
+      options: [
+        "A. Giả định",
+        "B. Quy định",
+        "C. Chế tài",
+        "D. Áp dụng pháp luật"
+      ],
+      correctIndex: 2,
+      explanation: "Quy phạm pháp luật gồm 3 thành tố: Giả định (hoàn cảnh), Quy định (mệnh lệnh hành vi) và Chế tài (hậu quả bất lợi/trừng phạt khi vi phạm)."
+    },
+    {
+      id: "pl-q3",
+      question: "Theo Bộ luật Hình sự Việt Nam hiện hành, người từ đủ bao nhiêu tuổi trở lên phải chịu trách nhiệm hình sự về MỌI tội phạm?",
+      options: [
+        "A. Từ đủ 14 tuổi",
+        "B. Từ đủ 16 tuổi",
+        "C. Từ đủ 18 tuổi",
+        "D. Từ đủ 20 tuổi"
+      ],
+      correctIndex: 1,
+      explanation: "Điều 12 BLHS: Người từ đủ 16 tuổi trở lên phải chịu trách nhiệm hình sự về mọi tội phạm. Người từ đủ 14 đến dưới 16 chỉ chịu trách nhiệm về tội rất nghiêm trọng hoặc đặc biệt nghiêm trọng."
+    }
   ]
 };
+
+// Aliases cho 5 môn học chính
+QUIZ_QUESTIONS.EN = QUIZ_QUESTIONS.EN_ENTRANCE;
+QUIZ_QUESTIONS.GT = QUIZ_QUESTIONS.GT_LIMITS;
+QUIZ_QUESTIONS.IT = QUIZ_QUESTIONS.IT_C;
+QUIZ_QUESTIONS.VL = QUIZ_QUESTIONS.VL_PHYSICS;
+QUIZ_QUESTIONS.PL = QUIZ_QUESTIONS.PL_LAW;
 
 
 // ==================== LESSON_CONTENT_MAP ====================

@@ -1303,49 +1303,125 @@ body {
   border-color: #fca5a5;
 }
 
-/* Stepper Tabs (4 Bước trong bài học) */
-.ws-stepper {
+/* Vòng tròn chuyển các mục bài học (Circular Stepper Navigation) */
+.ws-circular-stepper {
   display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--bg-subtle);
   border-bottom: 1px solid var(--border-light);
-  padding: 8px 16px;
-  gap: 8px;
+  padding: 10px 16px;
+  gap: 10px;
   overflow-x: auto;
   scrollbar-width: none;
 }
-.ws-stepper::-webkit-scrollbar { display: none; }
+.ws-circular-stepper::-webkit-scrollbar { display: none; }
 
-.ws-step-btn {
+.ws-circle-step {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
   background: transparent;
-  border: 1px solid transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
   border-radius: var(--radius-full);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--text-muted);
+}
+
+.ws-circle-step .step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.ws-circle-step .step-label {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-muted);
-  cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.ws-step-btn:hover {
-  background: rgba(255, 255, 255, 0.8);
-  color: var(--text-main);
-}
-
-.ws-step-btn.active {
-  background: #ffffff;
+.ws-circle-step:hover .step-circle {
+  border-color: var(--blue-primary);
   color: var(--blue-primary);
-  border-color: var(--blue-border);
+  transform: scale(1.08);
+}
+
+.ws-circle-step.active .step-circle {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+  transform: scale(1.12);
+}
+
+.ws-circle-step.active .step-label {
+  color: var(--blue-primary);
+  font-weight: 800;
+}
+
+.ws-circle-step.active.ai-circle .step-circle {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35);
+}
+
+.ws-circle-step.active.ai-circle .step-label {
+  color: var(--pink-primary);
+}
+
+.ws-step-connector {
+  width: 24px;
+  height: 2px;
+  background: var(--border-light);
+  border-radius: 2px;
+}
+
+/* Khung ghi chú nhanh tiết học */
+.ws-live-note-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--blue-primary);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
   box-shadow: var(--shadow-sm);
 }
 
-.ws-step-btn.active.ai-step {
-  color: var(--pink-primary);
-  border-color: var(--pink-border);
+.ws-live-note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ws-live-note-card textarea {
+  width: 100%;
+  min-height: 68px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  resize: vertical;
+  outline: none;
+}
+
+.ws-live-note-card textarea:focus {
+  border-color: var(--blue-primary);
 }
 
 /* Body nội dung theo tab */
@@ -3120,5 +3196,266 @@ body {
     width: calc(100vw - 24px);
     height: 72vh;
   }
+}
+
+/* =========================================================
+   BỘ LỌC CHỌN MÔN THI THỬ & ÔN TẬP
+   ========================================================= */
+.quiz-subjects-filter-bar {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin: 18px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-pills-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quiz-sub-pill {
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quiz-sub-pill:hover {
+  background: var(--blue-light);
+  color: var(--blue-primary);
+  border-color: var(--blue-border);
+}
+
+.quiz-sub-pill.active {
+  background: var(--blue-primary);
+  color: #ffffff;
+  border-color: var(--blue-primary);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+}
+
+/* =========================================================
+   HỌC NGẮT QUÃNG & LẶP LẠI (SPACED REPETITION & POMODORO)
+   ========================================================= */
+.spaced-queue-box {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.spaced-queue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.spaced-queue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.spaced-review-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+  border-left: 4px solid var(--pink-primary);
+}
+
+.spaced-review-card.due-today {
+  border-left-color: #ef4444;
+  background: #fff5f5;
+}
+
+.spaced-review-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.spaced-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spaced-card-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.spaced-card-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Hub Pomodoro */
+.pomodoro-study-hub {
+  margin-bottom: 20px;
+}
+
+.pomo-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
+  border: 1px solid var(--pink-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.pomo-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.pomo-badge {
+  background: var(--pink-light);
+  color: var(--pink-primary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.pomo-timer-large {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--pink-primary);
+  font-family: monospace;
+  margin: 14px 0 18px 0;
+  letter-spacing: 2px;
+}
+
+.pomo-actions-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* =========================================================
+   LỊCH HỌC TỐI ƯU & BỘ LỌC
+   ========================================================= */
+.schedule-filters-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.schedule-filter-pill {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.schedule-filter-pill:hover {
+  color: var(--blue-primary);
+  border-color: var(--blue-border);
+}
+
+.schedule-filter-pill.active {
+  background: var(--blue-primary);
+  color: #ffffff;
+  border-color: var(--blue-primary);
+}
+
+.schedule-card-rich {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.schedule-card-rich:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-border);
+}
+
+/* =========================================================
+   NHẬT KÝ HỌC TẬP THỰC TẾ & BẢNG THEO DÕI
+   ========================================================= */
+.study-log-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.study-log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.study-log-table-wrap {
+  overflow-x: auto;
+}
+
+.study-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.study-log-table th {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+.study-log-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-main);
+}
+
+.study-log-table tr:hover td {
+  background: #fafafa;
 }
 
