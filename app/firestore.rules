@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+    function validLearningState(uid) {
+      let data = request.resource.data;
+      return data.keys().hasAll(['schemaVersion', 'ownerUid', 'createdAt', 'updatedAt', 'progress', 'notes', 'highlights', 'quizAttempts', 'reviewCards', 'sessions', 'deleted'])
+        && data.keys().hasOnly(['schemaVersion', 'ownerUid', 'createdAt', 'updatedAt', 'progress', 'notes', 'highlights', 'quizAttempts', 'reviewCards', 'sessions', 'deleted'])
+        && data.schemaVersion == 1
+        && data.ownerUid == uid
+        && data.createdAt is string && data.updatedAt is string
+        && data.progress is map && data.deleted is map
+        && data.notes is list && data.highlights is list
+        && data.quizAttempts is list && data.reviewCards is list && data.sessions is list;
+    }
+    match /users/{uid}/learning/state {
+      allow read: if owner(uid);
+      allow create, update: if owner(uid) && validLearningState(uid);
+      allow delete: if owner(uid);
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

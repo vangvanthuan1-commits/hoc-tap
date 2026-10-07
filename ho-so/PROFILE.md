@@ -23,6 +23,7 @@ Cập nhật: 07/10/2026. Nguồn: snapshot do người dùng cung cấp, lưu t
 
 ## Cách hỗ trợ phù hợp
 
+- Người dùng phản hồi cách chia bài quá vụn/lặp lại gây nhàm chán. Ưu tiên tình huống gần bản thân, mini challenge và luyện một lượt rồi chữa lỗi.
 - Giảng ngắn, giải thích bản chất: lý thuyết ngắn → ví dụ → người dùng tự làm → kiểm tra và chỉ lỗi. Khi luyện, gợi ý trước, không đưa ngay đáp án.
 - Theo dõi riêng phần đã học, đang học, dự định học và lỗi hay mắc; không đánh đồng kế hoạch với kết quả.
 - Yêu cầu mới 07/10: học phần nào phải ghi note và có file ôn lại, gồm lý thuyết ngắn, lỗi thực tế, bài tự luyện, đáp án tách riêng và lịch ôn 1/3/7 ngày.
@@ -69,6 +70,13 @@ Cập nhật: 07/10/2026. Nguồn: snapshot do người dùng cung cấp, lưu t
 
 - Người dùng chấp nhận đề thi và đề cương các năm trước cùng mã học phần; không cần giới hạn khóa K20. Ghi riêng năm và phần đã đọc; không lấy năm thu thập trang thành năm thi.
 - [Danh mục tài liệu cũ](../ke-hoach-hoc-tap/hk1-2026/tai-lieu-cu-cung-ma-2026-10-07.md): 2 đường dẫn đề giữa kỳ Vật lý FFS703013 mới đọc tiêu đề/mô tả; bài giảng CSE702040 năm 2024 đọc được phần xem trước về chuyển đổi số. Đã cập nhật IT19; chưa xác nhận thêm tiến độ học.
+
+## App học tập cá nhân — yêu cầu 07/10/2026
+
+- Người dùng muốn Study Space là app chính lâu dài: các môn HK1, ghi chú/highlight, bài luyện/kiểm tra, lịch, tiến độ; tối ưu điện thoại/máy tính, màu xanh nước biển/hồng.
+- Mã ứng dụng ở [app/README.md](../app/README.md); nhập kế hoạch 122 tiết, 64 buổi học, 78 học phần. 22 bài có nội dung và 141 câu tự luyện; còn lại là đề cương, không tự coi đã có toàn bộ giáo trình.
+- Dùng cấu hình client Firebase người dùng cung cấp. Offline lưu trên máy; Authentication/Firestore cần provider và rules hợp lệ để sync giữa thiết bị. Nút GitHub gửi bản JSON + Markdown mới vào [tu-app/](tu-app/README.md) để khôi phục ngữ cảnh.
+- Không ghi kết quả thử tự động của phần mềm thành kết quả học của người dùng. Tiến độ gốc vẫn EN01 chẩn đoán hoàn thành, EN02 đã luyện khẳng định/phủ định; câu hỏi và sở hữu chưa xác nhận đã luyện.
 
 ## Phạm vi lưu trữ
 

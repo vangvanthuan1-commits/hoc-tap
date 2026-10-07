@@ -1,0 +1,6125 @@
+{
+  "meta": {
+    "version": 1,
+    "checkedAt": "2026-10-07",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "lessonCount": 122,
+    "scheduleCheckedAt": "2026-10-07T07:26:18+07:00",
+    "scheduleRangeStart": "2026-10-12",
+    "scheduleRangeEnd": "2027-01-31",
+    "contentNotice": "22 bài có nội dung và câu hỏi tự luyện. Các bài còn lại có đề cương/mục tiêu và tài nguyên; chưa có nội dung đầy đủ.",
+    "outlineNotice": "Đề cương tự học đề xuất; chưa phải đề cương hoặc phạm vi thi chính thức theo mã.",
+    "scheduleNotice": "Lịch được đọc ngày 07/10/2026. Lịch hiện tại có thể thay đổi; chưa có ca thi đầu vào cá nhân."
+  },
+  "profile": {
+    "name": "Vàng Văn Thuận",
+    "nickname": "Thuận",
+    "university": "Đại học Phenikaa",
+    "cohort": "K20",
+    "major": "Trí tuệ nhân tạo",
+    "className": "ICT5-2610210.01",
+    "gpaTarget": 3.6,
+    "englishTarget": 8.5,
+    "currentLesson": "EN02",
+    "currentMathLesson": "GT10",
+    "englishPlacement": {
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-18",
+      "location": "Tòa A6",
+      "status": "tentative_group_window",
+      "personalSlotKnown": false,
+      "durationMinutes": 60,
+      "totalQuestions": 50,
+      "sections": [
+        {
+          "name": "Nghe",
+          "questions": 10
+        },
+        {
+          "name": "Ngữ pháp",
+          "questions": 15
+        },
+        {
+          "name": "Từ vựng",
+          "questions": 15
+        },
+        {
+          "name": "Đọc",
+          "questions": 10
+        }
+      ],
+      "exemptions": [
+        {
+          "minScore": 6,
+          "maxScore": 8.4,
+          "courses": [
+            "Tiếng Anh 1"
+          ]
+        },
+        {
+          "minScore": 8.5,
+          "maxScore": 10,
+          "courses": [
+            "Tiếng Anh 1",
+            "Tiếng Anh 2"
+          ]
+        }
+      ],
+      "exemptionFirstAttemptOnly": true,
+      "source": "placement-notice"
+    },
+    "checkpoints": [
+      {
+        "subjectId": "EN",
+        "text": "EN01 đã chẩn đoán; EN02 đang luyện khẳng định/phủ định."
+      },
+      {
+        "subjectId": "GT",
+        "text": "Đã luyện giới hạn trực tiếp, nhân tử, liên hợp, sin theo hồ sơ; chưa tự gán hoàn thành các tiết kế hoạch."
+      },
+      {
+        "subjectId": "IT",
+        "text": "C đã tới chuỗi; dùng dự án/AI không đồng nghĩa đã học mọi công nghệ."
+      },
+      {
+        "subjectId": "VL",
+        "text": "Chưa xác nhận bắt đầu Vật lý chính thức."
+      },
+      {
+        "subjectId": "PL",
+        "text": "Chưa xác nhận bắt đầu Pháp luật chính thức."
+      }
+    ]
+  },
+  "subjects": [
+    {
+      "id": "EN",
+      "name": "Tiếng Anh đầu vào",
+      "shortName": "Tiếng Anh",
+      "code": "Đầu vào K20",
+      "credits": 0,
+      "color": "pink",
+      "icon": "Languages",
+      "priority": 1,
+      "target": "8.5+",
+      "lessonCount": 24,
+      "description": "Nghe, từ vựng, ngữ pháp và đọc. Ưu tiên trước kỳ thi đầu vào.",
+      "sourceFile": "tieng-anh-dau-vao.md",
+      "resourceIds": [
+        "bc-grammar",
+        "bc-listening",
+        "bc-reading"
+      ]
+    },
+    {
+      "id": "GT",
+      "name": "Giải tích 1",
+      "shortName": "Giải tích",
+      "code": "FFS703080",
+      "credits": 3,
+      "color": "blue",
+      "icon": "Sigma",
+      "priority": 2,
+      "target": "8.5+",
+      "lessonCount": 32,
+      "description": "Giới hạn → đạo hàm → tích phân. Tiếp tục tan và 1−cos(x).",
+      "sourceFile": "FFS703080-giai-tich-1.md",
+      "resourceIds": [
+        "openstax-calculus"
+      ]
+    },
+    {
+      "id": "VL",
+      "name": "Vật lý 1",
+      "shortName": "Vật lý",
+      "code": "FFS703013",
+      "credits": 3,
+      "color": "violet",
+      "icon": "Atom",
+      "priority": 3,
+      "target": "8.0+",
+      "lessonCount": 28,
+      "description": "Vector, cơ học, nhiệt học và thực hành. Xây nền cùng Giải tích.",
+      "sourceFile": "FFS703013-vat-ly-1.md",
+      "resourceIds": [
+        "openstax-physics"
+      ]
+    },
+    {
+      "id": "IT",
+      "name": "Nhập môn Công nghệ thông tin",
+      "shortName": "CNTT",
+      "code": "CSE702040",
+      "credits": 2,
+      "color": "cyan",
+      "icon": "Monitor",
+      "priority": 4,
+      "target": "9.0+",
+      "lessonCount": 20,
+      "description": "Máy tính, dữ liệu, mạng, an toàn số và tư duy thuật toán.",
+      "sourceFile": "CSE702040-nhap-mon-cntt.md",
+      "resourceIds": [
+        "cs50",
+        "comp-course-sampler"
+      ]
+    },
+    {
+      "id": "PL",
+      "name": "Pháp luật đại cương",
+      "shortName": "Pháp luật",
+      "code": "FFS702001",
+      "credits": 2,
+      "color": "rose",
+      "icon": "Scale",
+      "priority": 5,
+      "target": "9.0+",
+      "lessonCount": 18,
+      "description": "Học khái niệm qua tình huống; đối chiếu văn bản còn hiệu lực.",
+      "sourceFile": "FFS702001-phap-luat-dai-cuong.md",
+      "resourceIds": [
+        "legal-documents"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "EN01",
+      "subjectId": "EN",
+      "order": 1,
+      "title": "Chẩn đoán nghe–ngữ pháp–từ vựng–đọc",
+      "objective": "Xác định kỹ năng yếu và nhóm lỗi",
+      "exercises": "Bài tự kiểm tra từ nguồn British Council; ghi số đúng riêng bốn phần",
+      "criteria": "Có bảng lỗi và 3 ưu tiên; không dùng điểm tự luyện làm điểm xếp lớp",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN02",
+      "subjectId": "EN",
+      "order": 2,
+      "title": "To be, đại từ, sở hữu",
+      "objective": "Cấu trúc câu, chủ ngữ, đại từ/tính từ sở hữu",
+      "exercises": "15 câu + nghe hội thoại tự giới thiệu 5 phút",
+      "criteria": "≥13/15; phân biệt her/hers",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN03",
+      "subjectId": "EN",
+      "order": 3,
+      "title": "Hiện tại đơn",
+      "objective": "S/es, do/does, câu hỏi/phủ định",
+      "exercises": "15 câu + đọc một lịch sinh hoạt",
+      "criteria": "≥13/15; sửa lỗi does+V",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN04",
+      "subjectId": "EN",
+      "order": 4,
+      "title": "Hiện tại tiếp diễn",
+      "objective": "Be+V-ing và ngữ cảnh đang diễn ra",
+      "exercises": "12 câu + nghe mô tả hoạt động",
+      "criteria": "≥10/12; phân biệt thói quen và hiện tại",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN05",
+      "subjectId": "EN",
+      "order": 5,
+      "title": "Quá khứ đơn",
+      "objective": "Was/were, V2, did+V",
+      "exercises": "15 câu + đọc/ nghe sự kiện hôm qua",
+      "criteria": "≥13/15; không dùng did+V2",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN06",
+      "subjectId": "EN",
+      "order": 6,
+      "title": "Tương lai nền",
+      "objective": "Will/going to, kế hoạch và dấu hiệu",
+      "exercises": "12 câu theo ngữ cảnh + nghe lịch hẹn",
+      "criteria": "≥10/12",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN07",
+      "subjectId": "EN",
+      "order": 7,
+      "title": "Mạo từ và lượng từ",
+      "objective": "A/an/the; đếm được; some/any; much/many",
+      "exercises": "15 câu + đoạn điền từ",
+      "criteria": "≥13/15",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN08",
+      "subjectId": "EN",
+      "order": 8,
+      "title": "So sánh và từ loại",
+      "objective": "Comparative/superlative; adj/adv",
+      "exercises": "15 câu + đoạn so sánh ngắn",
+      "criteria": "≥13/15; xét vị trí từ",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN09",
+      "subjectId": "EN",
+      "order": 9,
+      "title": "Giới từ và liên từ",
+      "objective": "At/in/on; thời gian/nơi chốn; because/although",
+      "exercises": "15 câu + nghe số/giờ",
+      "criteria": "≥13/15",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN10",
+      "subjectId": "EN",
+      "order": 10,
+      "title": "Modal verbs",
+      "objective": "Can/must/should; dạng động từ theo sau",
+      "exercises": "12 câu tình huống + đoạn nội quy",
+      "criteria": "≥10/12; không thêm to sau must",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN11",
+      "subjectId": "EN",
+      "order": 11,
+      "title": "V-ing/to-V",
+      "objective": "Cụm thường gặp và cách dùng theo ngữ cảnh",
+      "exercises": "15 câu theo nhóm từ, 5 ví dụ tự đặt",
+      "criteria": "≥13/15; không học mỗi từ đơn lẻ",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN12",
+      "subjectId": "EN",
+      "order": 12,
+      "title": "Test ngữ pháp nền",
+      "objective": "Trộn EN02–11; ưu tiên lỗi sai",
+      "exercises": "30 câu tự luyện trong 30 phút + 15 phút sửa",
+      "criteria": "≥26/30, nêu lý do đáp án",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN13",
+      "subjectId": "EN",
+      "order": 13,
+      "title": "Hiện tại hoàn thành",
+      "objective": "Have/has+V3, since/for, phân biệt quá khứ",
+      "exercises": "12 câu và 1 đoạn đọc",
+      "criteria": "≥10/12; học sau khi vững các thì nền",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN14",
+      "subjectId": "EN",
+      "order": 14,
+      "title": "Bị động",
+      "objective": "Be+V3, thì cơ bản và chuyển đổi",
+      "exercises": "12 câu",
+      "criteria": "≥10/12; giữ đúng thì",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN15",
+      "subjectId": "EN",
+      "order": 15,
+      "title": "Mệnh đề quan hệ",
+      "objective": "Who/which/that, vị trí và chức năng",
+      "exercises": "12 câu + đọc đoạn có mệnh đề quan hệ",
+      "criteria": "≥10/12; xác định danh từ được bổ nghĩa",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN16",
+      "subjectId": "EN",
+      "order": 16,
+      "title": "Điều kiện và cấu trúc mở rộng",
+      "objective": "Điều kiện 0/1/2; bổ sung 3 khi cần",
+      "exercises": "12 câu theo ưu tiên chẩn đoán",
+      "criteria": "≥10/12; không dồn toàn bộ thời gian vào cấu trúc hiếm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN17",
+      "subjectId": "EN",
+      "order": 17,
+      "title": "Nghe số, giờ, ngày và thông tin",
+      "objective": "Nhận số, đánh vần, thời gian, địa điểm",
+      "exercises": "2–3 bài nghe ngắn; làm trước khi xem transcript",
+      "criteria": "≥80% câu luyện; nghe lại được đoạn sai",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN18",
+      "subjectId": "EN",
+      "order": 18,
+      "title": "Nghe hội thoại và ý chính",
+      "objective": "Câu hỏi đáp, ý chính, thông tin chi tiết",
+      "exercises": "2 bài nghe A1/A2; nâng mức nếu chẩn đoán tốt",
+      "criteria": "≥80%; ghi bẫy của từng câu sai",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN19",
+      "subjectId": "EN",
+      "order": 19,
+      "title": "Đọc tìm chi tiết",
+      "objective": "Skimming/scanning, từ khóa và paraphrase",
+      "exercises": "2 đoạn + 10 câu",
+      "criteria": "≥8/10; chỉ ra dòng chứng cứ",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN20",
+      "subjectId": "EN",
+      "order": 20,
+      "title": "Đọc điền từ và từ vựng",
+      "objective": "Ngữ cảnh, collocation, từ loại",
+      "exercises": "2 đoạn cloze + 10 từ theo chủ đề",
+      "criteria": "≥80%; đặt câu với từ mới",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN21",
+      "subjectId": "EN",
+      "order": 21,
+      "title": "Đề tự luyện A",
+      "objective": "Nghe + đọc + ngữ pháp, có giới hạn thời gian",
+      "exercises": "Đề tự luyện 50 câu/60 phút: 10 nghe +15 grammar +15 vocabulary +10 reading",
+      "criteria": "Ghi điểm từng kỹ năng; không coi là đề đầu vào trường",
+      "durationMinutes": 60,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN22",
+      "subjectId": "EN",
+      "order": 22,
+      "title": "Sửa đề A",
+      "objective": "Phân loại lỗi kiến thức, nghe, thời gian",
+      "exercises": "Làm lại 10 câu sai/khó; nghe lại transcript",
+      "criteria": "Đúng ≥8/10 câu mới cùng dạng",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN23",
+      "subjectId": "EN",
+      "order": 23,
+      "title": "Đề tự luyện B",
+      "objective": "Đo tiến bộ với bài mới",
+      "exercises": "Đề mới 50 câu/60 phút cùng cấu trúc A; không dùng lại câu đã nhớ",
+      "criteria": "Mục tiêu 44/50; điểm thi dự đoán còn phụ thuộc trọng số và mức khó thật",
+      "durationMinutes": 60,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "EN24",
+      "subjectId": "EN",
+      "order": 24,
+      "title": "Sửa đề B và chuẩn bị thi",
+      "objective": "Sửa lỗi EN23, ôn 20 lỗi cá nhân, giấy tờ theo thông báo",
+      "exercises": "Làm lại câu sai bằng câu mới; kiểm tra ca/phòng khi công bố",
+      "criteria": "Không học dồn; chỉ dùng thông báo chính thức để xác nhận thi",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md",
+      "resources": [
+        {
+          "id": "bc-grammar",
+          "title": "British Council — ngữ pháp A1/A2",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+          "kind": "resource",
+          "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+        },
+        {
+          "id": "bc-listening",
+          "title": "British Council — nghe A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+          "kind": "resource",
+          "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+        },
+        {
+          "id": "bc-reading",
+          "title": "British Council — đọc A1",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+          "kind": "resource",
+          "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT01",
+      "subjectId": "GT",
+      "order": 1,
+      "title": "Chẩn đoán nền",
+      "objective": "Tìm lỗ hổng đại số và giới hạn",
+      "exercises": "10 câu: đổi dấu, nhân tử, phân thức, 0/0, sin; ghi lỗi từng câu",
+      "criteria": "≥8/10; yếu nhóm nào học lại nhóm đó",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT02",
+      "subjectId": "GT",
+      "order": 2,
+      "title": "Ngoặc và phân thức",
+      "objective": "Đổi dấu toàn bộ; quy đồng; rút gọn có điều kiện",
+      "exercises": "8 biểu thức, gồm -(1-x), (x²-1)/(x-1)",
+      "criteria": "≥7/8 và ghi điều kiện xác định",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT03",
+      "subjectId": "GT",
+      "order": 3,
+      "title": "Lượng giác cần dùng",
+      "objective": "Sin/cos/tan, đẳng thức, radian",
+      "exercises": "8 bài đổi radian và rút gọn lượng giác",
+      "criteria": "≥7/8; biết tan=sin/cos",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT04",
+      "subjectId": "GT",
+      "order": 4,
+      "title": "Hàm, đồ thị, dãy",
+      "objective": "Miền xác định, hàm hợp, hàm cơ bản, giới hạn dãy",
+      "exercises": "6 miền xác định và 2 ví dụ dãy hội tụ",
+      "criteria": "≥7/8; phân biệt dãy với hàm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT05",
+      "subjectId": "GT",
+      "order": 5,
+      "title": "Giới hạn trực tiếp",
+      "objective": "Thế trực tiếp; giới hạn hữu hạn; nhận dạng vô định",
+      "exercises": "10 giới hạn, phân loại trước khi giải",
+      "criteria": "≥8/10; không coi 0/0 là 0",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT06",
+      "subjectId": "GT",
+      "order": 6,
+      "title": "0/0 bằng nhân tử",
+      "objective": "Tách nhân tử và khử nhân tử trên miền phù hợp",
+      "exercises": "8 bài đa thức/phân thức",
+      "criteria": "≥7/8; không thay x=a trước khi khử",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT07",
+      "subjectId": "GT",
+      "order": 7,
+      "title": "0/0 bằng liên hợp",
+      "objective": "Căn và biểu thức liên hợp",
+      "exercises": "6 giới hạn có căn",
+      "criteria": "≥5/6 và giải thích cách chọn liên hợp",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT08",
+      "subjectId": "GT",
+      "order": 8,
+      "title": "Vô cực và một phía",
+      "objective": "So bậc; giới hạn trái/phải; dấu của vô cực",
+      "exercises": "8 bài gồm mẫu tiến về 0",
+      "criteria": "≥7/8; phân biệt ±∞",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT09",
+      "subjectId": "GT",
+      "order": 9,
+      "title": "Giới hạn sin",
+      "objective": "sin(u)/u với u→0; thay biến",
+      "exercises": "8 bài sin(kx)/(mx), sin²(x)/x²",
+      "criteria": "≥7/8; chỉ rõ u→0",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT10",
+      "subjectId": "GT",
+      "order": 10,
+      "title": "Giới hạn tan và cos",
+      "objective": "tan(x)=sin(x)/cos(x); 1-cos(x)=2sin²(x/2)",
+      "exercises": "8 bài tan(3x)/x và (1-cos(2x))/x² cùng biến thể",
+      "criteria": "≥7/8; giải thích từng phép đổi",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT11",
+      "subjectId": "GT",
+      "order": 11,
+      "title": "Giới hạn mũ và log",
+      "objective": "e^u-1; ln(1+u); cơ số a",
+      "exercises": "8 bài cơ bản và biến đổi đối số",
+      "criteria": "≥7/8; kiểm tra miền log",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT12",
+      "subjectId": "GT",
+      "order": 12,
+      "title": "Vô cùng bé tương đương",
+      "objective": "Điều kiện thay tương đương; tích/thương và bẫy tổng/hiệu",
+      "exercises": "6 bài hợp lệ và 2 phản ví dụ",
+      "criteria": "≥7/8; không thay máy móc",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT13",
+      "subjectId": "GT",
+      "order": 13,
+      "title": "Test giới hạn",
+      "objective": "Chọn đúng phương pháp, không nhầm dấu",
+      "exercises": "12 câu trộn, 35 phút; 10 phút sửa lỗi",
+      "criteria": "≥10/12; lỗi cũ không lặp",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT14",
+      "subjectId": "GT",
+      "order": 14,
+      "title": "Liên tục và tham số",
+      "objective": "Giới hạn trái/phải bằng giá trị hàm",
+      "exercises": "6 hàm từng đoạn cần tìm tham số",
+      "criteria": "≥5/6, đủ ba điều kiện",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT15",
+      "subjectId": "GT",
+      "order": 15,
+      "title": "Định nghĩa đạo hàm",
+      "objective": "Tỉ số sai phân; ý nghĩa độ dốc và tiếp tuyến",
+      "exercises": "Tính từ định nghĩa cho x²; 4 bài tiếp tuyến đơn giản",
+      "criteria": "≥4/5; hiểu đạo hàm tại điểm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT16",
+      "subjectId": "GT",
+      "order": 16,
+      "title": "Quy tắc đạo hàm",
+      "objective": "Tổng/tích/thương; đạo hàm cơ bản",
+      "exercises": "12 đạo hàm, gồm lượng giác/mũ/log",
+      "criteria": "≥10/12; không bỏ mẫu bình phương",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT17",
+      "subjectId": "GT",
+      "order": 17,
+      "title": "Đạo hàm hàm hợp",
+      "objective": "Quy tắc dây chuyền; nhiều lớp",
+      "exercises": "10 biểu thức hợp, nêu hàm ngoài/trong",
+      "criteria": "≥9/10; nhân đủ đạo hàm trong",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT18",
+      "subjectId": "GT",
+      "order": 18,
+      "title": "Đạo hàm cấp cao và hàm ẩn",
+      "objective": "Đạo hàm cấp 2; đạo hàm ẩn khi đề cương có",
+      "exercises": "6 bài theo mức đã học",
+      "criteria": "≥5/6; bỏ phần hàm ẩn nếu không thuộc phạm vi",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT19",
+      "subjectId": "GT",
+      "order": 19,
+      "title": "L’Hôpital có điều kiện",
+      "objective": "Chỉ dùng cho dạng phù hợp và đủ giả thiết",
+      "exercises": "6 giới hạn, giải bằng cách nền trước rồi đối chiếu",
+      "criteria": "≥5/6; nêu dạng 0/0 hoặc ∞/∞ hợp lệ",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT20",
+      "subjectId": "GT",
+      "order": 20,
+      "title": "Định lý giá trị trung bình",
+      "objective": "Rolle, Lagrange và điều kiện áp dụng",
+      "exercises": "4 bài kiểm tra giả thiết, 2 ứng dụng",
+      "criteria": "≥5/6; không bỏ điều kiện trên đoạn",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT21",
+      "subjectId": "GT",
+      "order": 21,
+      "title": "Đơn điệu",
+      "objective": "Dấu đạo hàm; các khoảng xác định",
+      "exercises": "3 bảng dấu và khoảng tăng/giảm",
+      "criteria": "Đúng cả miền và khoảng của 3 bài",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT22",
+      "subjectId": "GT",
+      "order": 22,
+      "title": "Cực trị và GTLN/GTNN",
+      "objective": "Điểm tới hạn; biên đoạn; điều kiện miền",
+      "exercises": "6 bài cực trị và cực trị trên đoạn",
+      "criteria": "≥5/6; xét đủ biên",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT23",
+      "subjectId": "GT",
+      "order": 23,
+      "title": "Lồi lõm và khảo sát",
+      "objective": "Đạo hàm cấp 2, tiệm cận, bảng biến thiên",
+      "exercises": "Khảo sát 2 hàm với checklist",
+      "criteria": "Không thiếu miền, dấu đạo hàm và giới hạn",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT24",
+      "subjectId": "GT",
+      "order": 24,
+      "title": "Bài toán tối ưu",
+      "objective": "Mô hình, ràng buộc, chọn biến và kiểm tra biên",
+      "exercises": "3 bài diện tích/chi phí/hình học",
+      "criteria": "≥2/3; giải thích nghiệm phù hợp",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT25",
+      "subjectId": "GT",
+      "order": 25,
+      "title": "Nguyên hàm",
+      "objective": "Nhận dạng mẫu; hằng số C",
+      "exercises": "12 nguyên hàm cơ bản",
+      "criteria": "≥10/12; kiểm tra bằng đạo hàm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT26",
+      "subjectId": "GT",
+      "order": 26,
+      "title": "Tích phân xác định",
+      "objective": "Newton–Leibniz; cận và dấu",
+      "exercises": "8 bài có đổi thứ tự cận hoặc hàm đổi dấu",
+      "criteria": "≥7/8; phân biệt diện tích với tích phân có dấu",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT27",
+      "subjectId": "GT",
+      "order": 27,
+      "title": "Đổi biến",
+      "objective": "Chọn u, đổi vi phân và cận",
+      "exercises": "8 tích phân",
+      "criteria": "≥7/8; đổi cận hoặc quay về biến cũ đúng",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT28",
+      "subjectId": "GT",
+      "order": 28,
+      "title": "Từng phần",
+      "objective": "Chọn u/dv; công thức và dấu",
+      "exercises": "6 tích phân kiểu x·e^x, x·sin(x), ln(x)",
+      "criteria": "≥5/6; kiểm tra bằng đạo hàm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT29",
+      "subjectId": "GT",
+      "order": 29,
+      "title": "Tích phân hữu tỉ và lượng giác",
+      "objective": "Phân tích mẫu; nhận dạng mẫu đặc biệt",
+      "exercises": "6 bài đúng mức slide; không mở rộng nếu chưa cần",
+      "criteria": "≥5/6; ghi điều kiện và phương pháp",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT30",
+      "subjectId": "GT",
+      "order": 30,
+      "title": "Ứng dụng tích phân",
+      "objective": "Diện tích giữa các đồ thị; tách khoảng",
+      "exercises": "4 bài giao điểm và diện tích",
+      "criteria": "≥3/4; không cộng diện tích âm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT31",
+      "subjectId": "GT",
+      "order": 31,
+      "title": "Đề tự luyện tổng hợp 1",
+      "objective": "Giới hạn–liên tục–đạo hàm",
+      "exercises": "Bài trộn 35 phút rồi chấm lỗi theo dạng",
+      "criteria": "≥85%; đây không phải đề thi chính thức",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "GT32",
+      "subjectId": "GT",
+      "order": 32,
+      "title": "Đề tự luyện tổng hợp 2",
+      "objective": "Tích phân và bài tổng hợp",
+      "exercises": "Bài trộn 35 phút; chốt 5 lỗi hay mắc",
+      "criteria": "≥85% ở hai lượt và tự giải thích được",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703080-giai-tich-1.md",
+      "resources": [
+        {
+          "id": "openstax-calculus",
+          "title": "OpenStax — Calculus Volume 1",
+          "url": "https://openstax.org/details/books/calculus-volume-1",
+          "kind": "resource",
+          "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL01",
+      "subjectId": "VL",
+      "order": 1,
+      "title": "SI và kiểm tra đơn vị",
+      "objective": "Đổi đơn vị, bậc độ lớn, thứ nguyên",
+      "exercises": "10 câu đổi km/h↔m/s, đơn vị lực/công/công suất",
+      "criteria": "≥9/10; mọi kết quả có đơn vị",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL02",
+      "subjectId": "VL",
+      "order": 2,
+      "title": "Vector và chiếu trục",
+      "objective": "Cộng vector, thành phần, sin/cos",
+      "exercises": "8 bài chiếu lực/vector vận tốc",
+      "criteria": "≥7/8; nhất quán góc",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL03",
+      "subjectId": "VL",
+      "order": 3,
+      "title": "Đồ thị x–v–a",
+      "objective": "Ý nghĩa độ dốc và diện tích; biến thiên theo thời gian",
+      "exercises": "6 bài đọc đồ thị",
+      "criteria": "≥5/6; không nhầm vị trí và quãng đường",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL04",
+      "subjectId": "VL",
+      "order": 4,
+      "title": "Chuyển động thẳng và rơi",
+      "objective": "Phương trình, chọn chiều dương, thời điểm",
+      "exercises": "8 bài thẳng biến đổi đều/rơi tự do",
+      "criteria": "≥7/8; lập phương trình trước thay số",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL05",
+      "subjectId": "VL",
+      "order": 5,
+      "title": "Ném và chuyển động phẳng",
+      "objective": "Phân tích theo hai trục",
+      "exercises": "6 bài ném ngang/xiên cơ bản",
+      "criteria": "≥5/6; dùng cùng thời gian hai trục",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL06",
+      "subjectId": "VL",
+      "order": 6,
+      "title": "Chuyển động tròn",
+      "objective": "Gia tốc hướng tâm, vận tốc góc",
+      "exercises": "6 bài v–ω–a",
+      "criteria": "≥5/6; phân biệt gia tốc tiếp tuyến/hướng tâm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL07",
+      "subjectId": "VL",
+      "order": 7,
+      "title": "Newton và sơ đồ lực",
+      "objective": "Ba định luật, vật khảo sát, FBD",
+      "exercises": "Vẽ 8 sơ đồ lực",
+      "criteria": "≥7/8; không đặt cặp lực–phản lực lên cùng vật",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL08",
+      "subjectId": "VL",
+      "order": 8,
+      "title": "Ma sát và mặt nghiêng",
+      "objective": "Ma sát nghỉ/trượt, chiếu lực",
+      "exercises": "6 bài",
+      "criteria": "≥5/6; ma sát nghỉ không luôn bằng μN",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL09",
+      "subjectId": "VL",
+      "order": 9,
+      "title": "Hệ vật và liên kết",
+      "objective": "Cùng gia tốc, lực căng, phương trình hệ",
+      "exercises": "5 bài hai vật/mặt nghiêng",
+      "criteria": "≥4/5; đúng giả thiết ròng rọc/dây",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL10",
+      "subjectId": "VL",
+      "order": 10,
+      "title": "Công và công suất",
+      "objective": "Tích lực theo chuyển dời, góc, tốc độ làm việc",
+      "exercises": "8 bài",
+      "criteria": "≥7/8; phân biệt lực với công",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL11",
+      "subjectId": "VL",
+      "order": 11,
+      "title": "Động năng và định lý công",
+      "objective": "Tổng công, biến thiên động năng",
+      "exercises": "6 bài so với cách Newton",
+      "criteria": "≥5/6; tính đủ công các lực",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL12",
+      "subjectId": "VL",
+      "order": 12,
+      "title": "Thế năng và cơ năng",
+      "objective": "Mốc thế năng, bảo toàn, lực không bảo toàn",
+      "exercises": "6 bài lò xo/trọng lực",
+      "criteria": "≥5/6; giải thích khi nào không bảo toàn",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL13",
+      "subjectId": "VL",
+      "order": 13,
+      "title": "Động lượng và xung lượng",
+      "objective": "Hệ cô lập, tổng vector động lượng",
+      "exercises": "6 bài",
+      "criteria": "≥5/6; nêu hệ khảo sát",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL14",
+      "subjectId": "VL",
+      "order": 14,
+      "title": "Va chạm",
+      "objective": "Đàn hồi/không đàn hồi; bảo toàn gì",
+      "exercises": "6 bài một chiều",
+      "criteria": "≥5/6; không bảo toàn động năng cho mọi va chạm",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL15",
+      "subjectId": "VL",
+      "order": 15,
+      "title": "Test cơ học nền",
+      "objective": "Chọn Newton hay năng lượng hay động lượng",
+      "exercises": "10 bài ngắn, 35 phút",
+      "criteria": "≥8/10 và sửa hết lỗi đơn vị",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL16",
+      "subjectId": "VL",
+      "order": 16,
+      "title": "Mômen và cân bằng",
+      "objective": "Trục quay, cánh tay đòn, điều kiện cân bằng",
+      "exercises": "5 bài khi thuộc slide",
+      "criteria": "≥4/5; xác định đúng trục",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL17",
+      "subjectId": "VL",
+      "order": 17,
+      "title": "Quay vật rắn",
+      "objective": "Mômen quán tính, động năng quay",
+      "exercises": "5 bài khi lớp yêu cầu",
+      "criteria": "≥4/5; không đánh đồng khối lượng với mômen quán tính",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL18",
+      "subjectId": "VL",
+      "order": 18,
+      "title": "Dao động",
+      "objective": "Phương trình, chu kỳ, năng lượng cơ bản",
+      "exercises": "6 bài khi đề cương có",
+      "criteria": "≥5/6; thống nhất pha và đơn vị",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL19",
+      "subjectId": "VL",
+      "order": 19,
+      "title": "Nhiệt độ và nhiệt lượng",
+      "objective": "Cân bằng nhiệt, nhiệt dung, đổi thang",
+      "exercises": "6 bài",
+      "criteria": "≥5/6; theo đúng quy ước dấu",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL20",
+      "subjectId": "VL",
+      "order": 20,
+      "title": "Khí lý tưởng",
+      "objective": "Phương trình trạng thái, mol và nhiệt độ tuyệt đối",
+      "exercises": "8 bài",
+      "criteria": "≥7/8; dùng kelvin",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL21",
+      "subjectId": "VL",
+      "order": 21,
+      "title": "Các quá trình khí",
+      "objective": "Đẳng nhiệt/đẳng áp/đẳng tích; đồ thị p–V",
+      "exercises": "6 bài phân loại và công",
+      "criteria": "≥5/6; nhận biết đại lượng giữ không đổi",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL22",
+      "subjectId": "VL",
+      "order": 22,
+      "title": "Nguyên lý I nhiệt động lực học",
+      "objective": "Nội năng, công và nhiệt",
+      "exercises": "6 bài quá trình/hệ kín",
+      "criteria": "≥5/6; ghi quy ước dấu trước tính",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL23",
+      "subjectId": "VL",
+      "order": 23,
+      "title": "Động cơ nhiệt và nguyên lý II",
+      "objective": "Hiệu suất, chu trình; entropy nếu lớp có",
+      "exercises": "5 bài mức cơ bản",
+      "criteria": "≥4/5; không tự thêm công thức ngoài phạm vi",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL24",
+      "subjectId": "VL",
+      "order": 24,
+      "title": "Sai số đo",
+      "objective": "Sai số, chữ số có nghĩa, lan truyền sai số",
+      "exercises": "Một bảng đo giả lập và 5 bài sai số",
+      "criteria": "Báo cáo sai số cùng đơn vị, số chữ số phù hợp",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL25",
+      "subjectId": "VL",
+      "order": 25,
+      "title": "Bảng dữ liệu và đồ thị",
+      "objective": "Đồ thị, slope, phân tích đơn giản",
+      "exercises": "Vẽ đồ thị từ 6–10 phép đo giả lập",
+      "criteria": "Đủ tên trục/đơn vị, giải thích slope",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL26",
+      "subjectId": "VL",
+      "order": 26,
+      "title": "Viết báo cáo thực hành",
+      "objective": "Mục đích, cơ sở, dữ liệu, xử lý, kết luận",
+      "exercises": "Một báo cáo giả lập 2–3 trang; đổi sang bài lab thật khi có",
+      "criteria": "Đủ cấu trúc, kết luận không vượt dữ liệu",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL27",
+      "subjectId": "VL",
+      "order": 27,
+      "title": "Đề tự luyện cơ–nhiệt",
+      "objective": "Nhận dạng bài và chọn định luật",
+      "exercises": "Bài trộn 35 phút, ghi định luật dùng",
+      "criteria": "≥85%; không gọi là đề giữa kỳ chính thức",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "VL28",
+      "subjectId": "VL",
+      "order": 28,
+      "title": "Ôn tổng hợp và lỗi",
+      "objective": "Đơn vị, dấu, đồ thị, báo cáo",
+      "exercises": "Test mới và sửa 5 lỗi lặp",
+      "criteria": "≥85% ở hai lượt; lịch thi còn chưa xác minh",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS703013-vat-ly-1.md",
+      "resources": [
+        {
+          "id": "openstax-physics",
+          "title": "OpenStax — University Physics Volume 1",
+          "url": "https://openstax.org/details/books/university-physics-volume-1",
+          "kind": "resource",
+          "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT01",
+      "subjectId": "IT",
+      "order": 1,
+      "title": "Chẩn đoán và tổng quan",
+      "objective": "CNTT/CS/AI; phần cứng/phần mềm",
+      "exercises": "10 câu và sơ đồ hệ thống",
+      "criteria": "≥8/10; tách rõ hệ điều hành/ứng dụng",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT02",
+      "subjectId": "IT",
+      "order": 2,
+      "title": "Bit, byte, hệ đếm",
+      "objective": "Nhị phân, hệ 16, dung lượng",
+      "exercises": "15 bài đổi cơ số/dung lượng",
+      "criteria": "≥13/15",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT03",
+      "subjectId": "IT",
+      "order": 3,
+      "title": "Mã hóa dữ liệu",
+      "objective": "Số, ký tự, Unicode, ảnh/âm thanh",
+      "exercises": "8 bài dung lượng ảnh và biểu diễn ký tự",
+      "criteria": "≥7/8; phân biệt dữ liệu với cách mã hóa",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT04",
+      "subjectId": "IT",
+      "order": 4,
+      "title": "CPU và bộ nhớ",
+      "objective": "CPU/cache/RAM/ROM/SSD; thực thi chương trình",
+      "exercises": "Sơ đồ đường đi dữ liệu từ file đến CPU",
+      "criteria": "Giải thích đúng vai trò từng phần",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT05",
+      "subjectId": "IT",
+      "order": 5,
+      "title": "Hệ điều hành và file",
+      "objective": "File, đường dẫn, process, quyền",
+      "exercises": "Tổ chức thư mục tài liệu và giải thích process",
+      "criteria": "Tự làm lại, không mất dữ liệu",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT06",
+      "subjectId": "IT",
+      "order": 6,
+      "title": "Mạng và Internet",
+      "objective": "IP, DNS, client/server, LAN",
+      "exercises": "Vẽ luồng truy cập một website",
+      "criteria": "Phân biệt IP, domain, URL",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT07",
+      "subjectId": "IT",
+      "order": 7,
+      "title": "Web và dịch vụ số",
+      "objective": "HTTP/HTTPS, trình duyệt, dữ liệu cá nhân",
+      "exercises": "5 tình huống web và quyền truy cập",
+      "criteria": "≥4/5; hiểu HTTPS không bảo đảm mọi nội dung đáng tin",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT08",
+      "subjectId": "IT",
+      "order": 8,
+      "title": "An toàn số",
+      "objective": "Phishing, MFA, sao lưu, quyền tối thiểu",
+      "exercises": "8 tình huống nhận diện và xử lý",
+      "criteria": "≥7/8; không lưu mật khẩu vào repo",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT09",
+      "subjectId": "IT",
+      "order": 9,
+      "title": "Nghề nghiệp, đạo đức và xã hội",
+      "objective": "Bản quyền, quyền riêng tư, AI, trách nhiệm nghề nghiệp",
+      "exercises": "3 tình huống với lập luận, không chỉ chọn đáp án",
+      "criteria": "Nêu ảnh hưởng, trách nhiệm và cách xử lý",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT10",
+      "subjectId": "IT",
+      "order": 10,
+      "title": "Thuật toán và lưu đồ",
+      "objective": "Tuần tự/rẽ nhánh/lặp, input/output",
+      "exercises": "3 lưu đồ: max, tổng chẵn, kiểm tra nguyên tố",
+      "criteria": "Chạy tay được với dữ liệu biên",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT11",
+      "subjectId": "IT",
+      "order": 11,
+      "title": "Linux: đường dẫn và file",
+      "objective": "Nhánh dự phòng: pwd, ls, cd, mkdir, cp, mv",
+      "exercises": "Bài tổ chức thư mục trong vùng thử nghiệm riêng",
+      "criteria": "Tự làm lại; không dùng lệnh xóa rộng",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT12",
+      "subjectId": "IT",
+      "order": 12,
+      "title": "Linux: quyền và quy trình",
+      "objective": "Nhánh dự phòng: quyền, process, đọc trợ giúp",
+      "exercises": "5 tình huống đường dẫn/quyền",
+      "criteria": "≥4/5 và giải thích thay đổi",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT13",
+      "subjectId": "IT",
+      "order": 13,
+      "title": "Python: biến và dữ liệu",
+      "objective": "Nhánh dự phòng: nhập/xuất, kiểu và toán tử",
+      "exercises": "3 chương trình đổi đơn vị/tính trung bình",
+      "criteria": "Tự viết và giải thích từng dòng",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT14",
+      "subjectId": "IT",
+      "order": 14,
+      "title": "Python: điều kiện",
+      "objective": "Nhánh dự phòng: if/elif, toán tử so sánh",
+      "exercises": "3 bài phân loại và kiểm tra dữ liệu",
+      "criteria": "Đúng ca biên; không nhầm =/==",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT15",
+      "subjectId": "IT",
+      "order": 15,
+      "title": "Python: vòng lặp",
+      "objective": "Nhánh dự phòng: for/while, tích lũy",
+      "exercises": "3 bài tổng, đếm, tìm max",
+      "criteria": "Không lệch chỉ số hoặc lặp vô hạn",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT16",
+      "subjectId": "IT",
+      "order": 16,
+      "title": "Python: hàm và danh sách",
+      "objective": "Nhánh dự phòng: hàm, list, tham số",
+      "exercises": "2 bài xử lý danh sách",
+      "criteria": "Tự viết, kiểm tra rỗng và 1 phần tử",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT17",
+      "subjectId": "IT",
+      "order": 17,
+      "title": "Dữ liệu file/CSV",
+      "objective": "Nhánh dự phòng: đọc dữ liệu nhỏ, thống kê",
+      "exercises": "Một file 10 dòng, xuất kết quả tổng hợp",
+      "criteria": "Không lộ dữ liệu cá nhân; giải thích quy trình",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT18",
+      "subjectId": "IT",
+      "order": 18,
+      "title": "Lab theo đề lớp",
+      "objective": "Thay bằng công cụ và bài chính thức đã được giao",
+      "exercises": "Làm lại 1 lab từ đầu, lưu sản phẩm",
+      "criteria": "Đủ rubric chính thức; chưa có rubric thì chỉ tự luyện",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT19",
+      "subjectId": "IT",
+      "order": 19,
+      "title": "Chuyển đổi số và xu hướng công nghệ",
+      "objective": "Chủ đề có trong phần xem trước bài giảng cũ đúng mã năm 2024; phân biệt số hóa và chuyển đổi quy trình",
+      "exercises": "Chọn đăng ký môn học: vẽ trước/sau, đề xuất công cụ, lợi ích, rủi ro và chỉ số hiệu quả",
+      "criteria": "Giải thích được thay đổi quy trình; chưa xác nhận câu thi hoặc yêu cầu bài nhóm",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "IT20",
+      "subjectId": "IT",
+      "order": 20,
+      "title": "Ôn nền + thực hành",
+      "objective": "Lý thuyết trộn và tái hiện thao tác",
+      "exercises": "20 câu nền, làm lại 1 lab không xem hướng dẫn",
+      "criteria": "≥18/20; tự thao tác, chưa khẳng định dạng thi",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/CSE702040-nhap-mon-cntt.md",
+      "resources": [
+        {
+          "id": "cs50",
+          "title": "Harvard — CS50",
+          "url": "https://cs50.harvard.edu/x/",
+          "kind": "resource",
+          "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+        },
+        {
+          "id": "comp-course-sampler",
+          "title": "Phenikaa — Computer Science course sampler",
+          "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+          "kind": "official",
+          "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL01",
+      "subjectId": "PL",
+      "order": 1,
+      "title": "Nhà nước: nguồn gốc và bản chất",
+      "objective": "Khái niệm, đặc trưng, các cách phân biệt",
+      "exercises": "10 câu khái niệm và 2 ví dụ",
+      "criteria": "≥8/10; giải thích bằng lời của mình",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL02",
+      "subjectId": "PL",
+      "order": 2,
+      "title": "Chức năng và hình thức nhà nước",
+      "objective": "Chức năng, chính thể, cấu trúc, chế độ",
+      "exercises": "Bảng so sánh và 8 câu",
+      "criteria": "≥7/8",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL03",
+      "subjectId": "PL",
+      "order": 3,
+      "title": "Bộ máy nhà nước",
+      "objective": "Vai trò các cơ quan theo văn bản hiện hành",
+      "exercises": "Vẽ sơ đồ, phân tích 4 nhiệm vụ cơ quan",
+      "criteria": "Đúng chức năng; cập nhật mô hình hiện hành",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL04",
+      "subjectId": "PL",
+      "order": 4,
+      "title": "Pháp luật: khái niệm và đặc trưng",
+      "objective": "Bản chất, vai trò, quan hệ với đạo đức",
+      "exercises": "8 câu phân biệt và 2 tình huống",
+      "criteria": "≥7/8",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL05",
+      "subjectId": "PL",
+      "order": 5,
+      "title": "Quy phạm pháp luật",
+      "objective": "Giả định/quy định/chế tài, cấu trúc",
+      "exercises": "Phân tích 5 quy phạm mẫu",
+      "criteria": "≥4/5; không ép mọi điều luật chứa đủ 3 phần",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL06",
+      "subjectId": "PL",
+      "order": 6,
+      "title": "Văn bản và hiệu lực",
+      "objective": "Văn bản quy phạm, thứ bậc, hiệu lực",
+      "exercises": "5 tình huống chọn văn bản áp dụng",
+      "criteria": "≥4/5; kiểm tra hiệu lực thật",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL07",
+      "subjectId": "PL",
+      "order": 7,
+      "title": "Quan hệ pháp luật",
+      "objective": "Chủ thể, nội dung, khách thể, sự kiện pháp lý",
+      "exercises": "5 tình huống theo bốn mục",
+      "criteria": "≥4/5",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL08",
+      "subjectId": "PL",
+      "order": 8,
+      "title": "Vi phạm pháp luật",
+      "objective": "Dấu hiệu và các yếu tố cấu thành",
+      "exercises": "6 tình huống, phân biệt hành vi và hậu quả",
+      "criteria": "≥5/6",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL09",
+      "subjectId": "PL",
+      "order": 9,
+      "title": "Trách nhiệm pháp lý",
+      "objective": "Hình sự/hành chính/dân sự/kỷ luật",
+      "exercises": "10 câu tình huống và bảng so sánh",
+      "criteria": "≥9/10; giải thích các cặp dễ nhầm",
+      "durationMinutes": 45,
+      "outlineOnly": false,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL10",
+      "subjectId": "PL",
+      "order": 10,
+      "title": "Hiến pháp và quyền cơ bản",
+      "objective": "Quyền/nghĩa vụ, nguyên tắc tổ chức",
+      "exercises": "6 tình huống theo tài liệu hiện hành",
+      "criteria": "≥5/6; không dùng mô hình cơ quan lỗi thời",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL11",
+      "subjectId": "PL",
+      "order": 11,
+      "title": "Pháp luật hành chính",
+      "objective": "Quản lý, quyết định, xử lý vi phạm",
+      "exercises": "6 tình huống nếu lớp yêu cầu",
+      "criteria": "≥5/6",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL12",
+      "subjectId": "PL",
+      "order": 12,
+      "title": "Dân sự: tài sản và chủ thể",
+      "objective": "Năng lực, sở hữu, giao dịch",
+      "exercises": "6 tình huống dân sự",
+      "criteria": "≥5/6; phân biệt năng lực và hành vi",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL13",
+      "subjectId": "PL",
+      "order": 13,
+      "title": "Hợp đồng và nghĩa vụ",
+      "objective": "Giao kết, hiệu lực, thực hiện, trách nhiệm",
+      "exercises": "4 tình huống hợp đồng",
+      "criteria": "≥3/4; không suy diễn ngoài dữ kiện",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL14",
+      "subjectId": "PL",
+      "order": 14,
+      "title": "Lao động",
+      "objective": "Quan hệ lao động, hợp đồng, quyền/nghĩa vụ",
+      "exercises": "5 tình huống theo văn bản hiện hành",
+      "criteria": "≥4/5",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL15",
+      "subjectId": "PL",
+      "order": 15,
+      "title": "Hình sự",
+      "objective": "Khái niệm tội phạm, trách nhiệm, phân biệt hành chính",
+      "exercises": "6 tình huống nhập môn",
+      "criteria": "≥5/6; không tự kết luận án cụ thể",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL16",
+      "subjectId": "PL",
+      "order": 16,
+      "title": "Hôn nhân gia đình",
+      "objective": "Nguyên tắc, điều kiện, quyền/nghĩa vụ",
+      "exercises": "5 tình huống theo phạm vi lớp",
+      "criteria": "≥4/5",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL17",
+      "subjectId": "PL",
+      "order": 17,
+      "title": "Phòng chống tham nhũng",
+      "objective": "Khái niệm, hành vi, phòng ngừa nếu đề cương có",
+      "exercises": "5 tình huống; bảng ôn khái niệm",
+      "criteria": "≥4/5; đối chiếu quy định hiện hành",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    },
+    {
+      "id": "PL18",
+      "subjectId": "PL",
+      "order": 18,
+      "title": "Test tổng hợp và sửa bẫy",
+      "objective": "So sánh khái niệm; lập luận tình huống",
+      "exercises": "30 câu luyện trong 35 phút, 10 phút sửa",
+      "criteria": "≥27/30; chưa gọi là ma trận thi chính thức",
+      "durationMinutes": 45,
+      "outlineOnly": true,
+      "sourcePath": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/FFS702001-phap-luat-dai-cuong.md",
+      "resources": [
+        {
+          "id": "legal-documents",
+          "title": "Cổng văn bản Chính phủ",
+          "url": "https://vanban.chinhphu.vn/",
+          "kind": "official",
+          "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+        }
+      ],
+      "proposed": true
+    }
+  ],
+  "schedule": [
+    {
+      "id": "class-2026-11-02-000",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-11-02",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02.LT2)_CNTT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-11-03-001",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-11-03",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-11-05-002",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-11-05",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A1-701",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-09-003",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-11-09",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A5-303",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-09-004",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-11-09",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02.LT2)_CNTT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-11-10-005",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-11-10",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-11-11-006",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-11-11",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A8-202",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-11-007",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-11-11",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-11-12-008",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-11-12",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A1-701",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-12-009",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-11-12",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-11-16-010",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-11-16",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A5-303",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-17-011",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-11-17",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-11-18-012",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-11-18",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A8-202",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-18-013",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-11-18",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-11-19-014",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-11-19",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A1-701",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-19-015",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-11-19",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-11-19-016",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-11-19",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-11-23-017",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-11-23",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A5-303",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-25-018",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-11-25",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A8-202",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-25-019",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-11-25",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-11-26-020",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-11-26",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A1-701",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-11-26-021",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-11-26",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-11-26-022",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-11-26",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-11-30-023",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-11-30",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A5-303",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-12-01-024",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-01",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-02-025",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-02",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A8-202",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-12-02-026",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-12-02",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-03-027",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-03",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A1-701",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-12-03-028",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-03",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A1-701",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-03-029",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-03",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-12-03-030",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-12-03",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-04-031",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-04",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A1-501",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-07-032",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-07",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A5-303",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-12-08-033",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-08",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-09-034",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-09",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A8-202",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-12-09-035",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-12-09",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-10-036",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-10",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-12-10-037",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-12-10",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-11-038",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-11",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-14-039",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-14",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A5-303",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-12-15-040",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-15",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-15-041",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-15",
+      "startTime": "13:55",
+      "endTime": "18:25",
+      "room": "A2-509 (TH)",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04.TH2)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "8–12"
+    },
+    {
+      "id": "class-2026-12-16-042",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-16",
+      "startTime": "06:45",
+      "endTime": "09:25",
+      "room": "A8-202",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–3"
+    },
+    {
+      "id": "class-2026-12-16-043",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-12-16",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-17-044",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-17",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-12-17-045",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-12-17",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-18-046",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-18",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-21-047",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-21",
+      "startTime": "06:45",
+      "endTime": "08:30",
+      "room": "A5-303",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "1–2"
+    },
+    {
+      "id": "class-2026-12-22-048",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-22",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-22-049",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-22",
+      "startTime": "13:55",
+      "endTime": "18:25",
+      "room": "A2-509 (TH)",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04.TH2)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "8–12"
+    },
+    {
+      "id": "class-2026-12-23-050",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-23",
+      "startTime": "15:45",
+      "endTime": "18:25",
+      "room": "A6-101.102 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "10–12"
+    },
+    {
+      "id": "class-2026-12-23-051",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-12-23",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-24-052",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-24",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-12-24-053",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-12-24",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-25-054",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-25",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-29-055",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2026-12-29",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2026-12-29-056",
+      "subjectId": "VL",
+      "title": "Vật lý 1",
+      "date": "2026-12-29",
+      "startTime": "13:55",
+      "endTime": "18:25",
+      "room": "A2-509 (TH)",
+      "teacher": "Trần Minh Tiến",
+      "className": "Vật lý 1-5-1-26(N04.TH2)_TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "8–12"
+    },
+    {
+      "id": "class-2026-12-30-057",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-30",
+      "startTime": "15:45",
+      "endTime": "18:25",
+      "room": "A6-101.102 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "10–12"
+    },
+    {
+      "id": "class-2026-12-30-058",
+      "subjectId": "PL",
+      "title": "Pháp luật đại cương",
+      "date": "2026-12-30",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "ONLINE- Elearning",
+      "teacher": "Phan Thị Thu Lê",
+      "className": "Pháp luật đại cương-5-1-26(N10).ELN_CNTT,Luat",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2026-12-31-059",
+      "subjectId": "IT",
+      "title": "Nhập môn Công nghệ thông tin",
+      "date": "2026-12-31",
+      "startTime": "13:00",
+      "endTime": "15:40",
+      "room": "A6-103 (PC)",
+      "teacher": "Nguyễn Thành Trung",
+      "className": "Nhập môn Công nghệ thông tin-5-1-26(N04.TH1)_ TTNT",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "7–9"
+    },
+    {
+      "id": "class-2026-12-31-060",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2026-12-31",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    },
+    {
+      "id": "class-2027-01-01-061",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2027-01-01",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-102",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2027-01-05-062",
+      "subjectId": "GT",
+      "title": "Giải tích 1",
+      "date": "2027-01-05",
+      "startTime": "09:30",
+      "endTime": "12:10",
+      "room": "A4-103",
+      "teacher": "Nguyễn Đức Ngà",
+      "className": "Giải tích 1-5-1-26(N01)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "4–6"
+    },
+    {
+      "id": "class-2027-01-07-063",
+      "subjectId": "PE",
+      "title": "Chạy 1",
+      "date": "2027-01-07",
+      "startTime": "18:30",
+      "endTime": "21:00",
+      "room": "Chưa có phòng",
+      "teacher": "Nguyễn Hà My",
+      "className": "Chạy 1-5-1-26(N02)",
+      "kind": "class",
+      "source": "portal-schedule",
+      "periods": "13–15"
+    }
+  ],
+  "curriculum": [
+    {
+      "order": 1,
+      "code": "FFS703080",
+      "name": "Giải tích 1",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "2026_2027_1,5(1)",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": true
+    },
+    {
+      "order": 2,
+      "code": "CSE702040",
+      "name": "Nhập môn Công nghệ thông tin",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 15.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": true
+    },
+    {
+      "order": 3,
+      "code": "FFS702001",
+      "name": "Pháp luật đại cương",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": true
+    },
+    {
+      "order": 4,
+      "code": "FEL702075",
+      "name": "Tiếng anh cơ bản 1",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Tiếng Anh bổ trợ)",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 60.0,
+      "countsForGpa": true
+    },
+    {
+      "order": 5,
+      "code": "FFS703013",
+      "name": "Vật lý 1",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 37.5,
+      "practicePeriods": 15.0,
+      "countsForGpa": true
+    },
+    {
+      "order": 6,
+      "code": "FFS703007",
+      "name": "Đại số tuyến tính",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_2(2)",
+      "actualSemester": "",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 7,
+      "code": "FEL703076",
+      "name": "Tiếng anh cơ bản 2",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_2(2)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 90.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 8,
+      "code": "FFS703002",
+      "name": "Triết học Mác - Lê nin",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_2(2)",
+      "actualSemester": "",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 9,
+      "code": "FFS703010",
+      "name": "Lý thuyết xác suất thống kê",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_3(3)",
+      "actualSemester": "",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 10,
+      "code": "FEL703077",
+      "name": "Tiếng anh cơ bản 3",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_3(3)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 90.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 11,
+      "code": "FFS702003",
+      "name": "Kinh tế chính trị Mác - Lênin",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "Học trước(Triết học Mác - Lê nin)",
+      "plannedSemester": "2027_2028_1(4)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 12,
+      "code": "FEL703078",
+      "name": "Tiếng anh nâng cao 1",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2027_2028_1(4)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 90.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 13,
+      "code": "FEL703079",
+      "name": "Tiếng anh nâng cao 2",
+      "knowledgeBlock": "A1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2027_2028_2(5)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 90.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 14,
+      "code": "FFS702004",
+      "name": "Chủ nghĩa xã hội khoa học",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "Học trước(Kinh tế chính trị Mác - Lênin)",
+      "plannedSemester": "2027_2028_3(6)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 15,
+      "code": "FEL702080",
+      "name": "Tiếng anh nâng cao 3",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2027_2028_3(6)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 60.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 16,
+      "code": "FFS702005",
+      "name": "Lịch sử Đảng cộng sản Việt Nam",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "Học trước(Chủ nghĩa xã hội khoa học)",
+      "plannedSemester": "2028_2029_1(7)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 17,
+      "code": "FFS702006",
+      "name": "Tư tưởng Hồ Chí Minh",
+      "knowledgeBlock": "A1",
+      "credits": 2,
+      "prerequisite": "Học trước(Chủ nghĩa xã hội khoa học)",
+      "plannedSemester": "2028_2029_3(9)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 18,
+      "code": "CSE703107",
+      "name": "Cơ sở lập trình",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_2(2)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 19,
+      "code": "CSE703006",
+      "name": "Cấu trúc dữ liệu và thuật toán",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "Học trước(Cơ sở lập trình), Tiên quyết(Nhập môn Công nghệ thông tin)",
+      "plannedSemester": "2026_2027_3(3)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 20,
+      "code": "CSE703029",
+      "name": "Lập trình hướng đối tượng",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Cơ sở lập trình)",
+      "plannedSemester": "2027_2028_1(4)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 21,
+      "code": "CSE702028",
+      "name": "Lập trình cho trí tuệ nhân tạo",
+      "knowledgeBlock": "B1",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Cơ sở lập trình)",
+      "plannedSemester": "2027_2028_1(4)",
+      "actualSemester": "",
+      "lecturePeriods": 15.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 22,
+      "code": "CSE703024",
+      "name": "Toán rời rạc",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "Học trước(Đại số tuyến tính)",
+      "plannedSemester": "2026_2027_3(3)",
+      "actualSemester": "",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 23,
+      "code": "CSE703008",
+      "name": "Cơ sở dữ liệu",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2027_2028_2(5)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 24,
+      "code": "CSE703023",
+      "name": "Kiến trúc máy tính",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2027_2028_2(5)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 25,
+      "code": "CSE703004",
+      "name": "An toàn và bảo mật thông tin",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "Học trước(Đại số tuyến tính,Lý thuyết xác suất thống kê)",
+      "plannedSemester": "2027_2028_2(5)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 26,
+      "code": "CSE702036",
+      "name": "Mạng máy tính",
+      "knowledgeBlock": "B1",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Lập trình hướng đối tượng)",
+      "plannedSemester": "2027_2028_3(6)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 27,
+      "code": "CSE703041",
+      "name": "Nhập môn trí tuệ nhân tạo",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Cấu trúc dữ liệu và thuật toán)",
+      "plannedSemester": "2027_2028_3(6)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 28,
+      "code": "CSE703020",
+      "name": "Học máy",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "Học trước(Lý thuyết xác suất thống kê), Tiên quyết(Đại số tuyến tính)",
+      "plannedSemester": "2028_2029_1(7)",
+      "actualSemester": "",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 29,
+      "code": "CSE702025",
+      "name": "Kỹ thuật phần mềm",
+      "knowledgeBlock": "B1",
+      "credits": 2,
+      "prerequisite": "Học trước(Cơ sở lập trình)",
+      "plannedSemester": "2028_2029_1(7)",
+      "actualSemester": "",
+      "lecturePeriods": 22.5,
+      "practicePeriods": 15.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 30,
+      "code": "CSE703054",
+      "name": "Tích hợp và phân tích dữ liệu lớn",
+      "knowledgeBlock": "B1",
+      "credits": 3,
+      "prerequisite": "Học trước(Cấu trúc dữ liệu và thuật toán), Tiên quyết(Cơ sở dữ liệu)",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 31,
+      "code": "CSE703090",
+      "name": "Phân tích và thiết kế thuật toán",
+      "knowledgeBlock": "B2",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Cấu trúc dữ liệu và thuật toán)",
+      "plannedSemester": "2027_2028_3(6)",
+      "actualSemester": "",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 32,
+      "code": "CSE703052",
+      "name": "Thuật toán ứng dụng",
+      "knowledgeBlock": "B2",
+      "credits": 3,
+      "prerequisite": "Học trước(Toán rời rạc)",
+      "plannedSemester": "2027_2028_3(6)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 33,
+      "code": "FBE702001",
+      "name": "Quản trị học",
+      "knowledgeBlock": "C1",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2027_2028_1(4)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 34,
+      "code": "CSE702117",
+      "name": "Kỹ năng viết và thuyết trình bằng Tiếng Anh",
+      "knowledgeBlock": "C1",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Tiếng anh cơ bản 1)",
+      "plannedSemester": "2028_2029_1(7)",
+      "actualSemester": "",
+      "lecturePeriods": 15.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 35,
+      "code": "FTS702003",
+      "name": "Kỹ năng đàm phán, thương lượng",
+      "knowledgeBlock": "C2",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 15.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 36,
+      "code": "FTS702001",
+      "name": "Kỹ năng khởi nghiệp và lãnh đạo",
+      "knowledgeBlock": "C2",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 15.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 37,
+      "code": "FTS702002",
+      "name": "Kỹ năng quản lý dự án",
+      "knowledgeBlock": "C2",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 15.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 38,
+      "code": "FTS702004",
+      "name": "Kỹ năng tư duy sáng tạo và phản biện",
+      "knowledgeBlock": "C2",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 15.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 39,
+      "code": "CSE702022",
+      "name": "Khai phá dữ liệu",
+      "knowledgeBlock": "D1",
+      "credits": 2,
+      "prerequisite": "Học trước(Đại số tuyến tính), Tiên quyết(Cấu trúc dữ liệu và thuật toán)",
+      "plannedSemester": "2028_2029_1(7)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 40,
+      "code": "CSE703037",
+      "name": "Mạng nơron và học sâu",
+      "knowledgeBlock": "D1",
+      "credits": 3,
+      "prerequisite": "Học trước(Lý thuyết xác suất thống kê), Tiên quyết(Học máy)",
+      "plannedSemester": "2028_2029_3(9)",
+      "actualSemester": "",
+      "lecturePeriods": 30.0,
+      "practicePeriods": 30.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 41,
+      "code": "CSE703047",
+      "name": "Phân tích thống kê dữ liệu",
+      "knowledgeBlock": "D1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 45.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 42,
+      "code": "CSE703176",
+      "name": "Xử lý ảnh",
+      "knowledgeBlock": "D1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 43,
+      "code": "CSE703065",
+      "name": "Xử lý ngôn ngữ tự nhiên",
+      "knowledgeBlock": "D1",
+      "credits": 3,
+      "prerequisite": "Học trước(Đại số tuyến tính), Tiên quyết(Lý thuyết xác suất thống kê)",
+      "plannedSemester": "2028_2029_2(8)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 44,
+      "code": "CSE702140",
+      "name": "Các chủ đề mới nổi trong trí tuệ nhân tạo",
+      "knowledgeBlock": "D2",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Nhập môn trí tuệ nhân tạo)",
+      "plannedSemester": "2029_2030_2;2029_2030_1;2028_2029_3(11,10,9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 45,
+      "code": "CSE702139",
+      "name": "Đạo đức trong Trí tuệ nhân tạo và Khoa học dữ liệu",
+      "knowledgeBlock": "D2",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Nhập môn trí tuệ nhân tạo)",
+      "plannedSemester": "2029_2030_2;2029_2030_1;2028_2029_3(11,10,9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 46,
+      "code": "CSE702011",
+      "name": "Điện toán đám mây",
+      "knowledgeBlock": "D2",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_2;2029_2030_1;2028_2029_3(11,10,9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 47,
+      "code": "CSE702141",
+      "name": "Thiết kế sản phẩm Trí tuệ nhân tạo",
+      "knowledgeBlock": "D2",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_2;2029_2030_1;2028_2029_3(11,10,9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 48,
+      "code": "CSE703081",
+      "name": "Học máy nâng cao",
+      "knowledgeBlock": "D2",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Học máy)",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 49,
+      "code": "CSE703138",
+      "name": "Học tăng cường và lập kế hoạch",
+      "knowledgeBlock": "D2",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Học máy)",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 50,
+      "code": "CSE703045",
+      "name": "Phân tích dữ liệu đồ thị",
+      "knowledgeBlock": "D2",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Học máy)",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 51,
+      "code": "CSE703056",
+      "name": "Tính toán lượng tử cho học máy",
+      "knowledgeBlock": "D2",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 52,
+      "code": "CSE703057",
+      "name": "Tối ưu hóa",
+      "knowledgeBlock": "D2",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Đại số tuyến tính)",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 53,
+      "code": "CSE702044",
+      "name": "Phân tích dữ liệu chuỗi thời gian",
+      "knowledgeBlock": "D2.1",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Khai phá dữ liệu)",
+      "plannedSemester": "2028_2029_3(9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 54,
+      "code": "CSE703142",
+      "name": "Phân tích dữ liệu doanh nghiệp",
+      "knowledgeBlock": "D2.1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 55,
+      "code": "CSE702083",
+      "name": "Nhập môn Vận trù học",
+      "knowledgeBlock": "D2.1",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Đại số tuyến tính,Toán rời rạc)",
+      "plannedSemester": "2029_2030_2(11)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 56,
+      "code": "CSE702060",
+      "name": "Trực quan hoá dữ liệu",
+      "knowledgeBlock": "D2.2",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_3(9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 57,
+      "code": "CSE703143",
+      "name": "Thị giác máy tính",
+      "knowledgeBlock": "D2.2",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 58,
+      "code": "CSE702062",
+      "name": "Ứng dụng AI trong nghệ thuật",
+      "knowledgeBlock": "D2.2",
+      "credits": 2,
+      "prerequisite": "Tiên quyết(Mạng nơron và học sâu)",
+      "plannedSemester": "2029_2030_2(11)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 59,
+      "code": "CSE702145",
+      "name": "Mạng ngữ nghĩa",
+      "knowledgeBlock": "D2.3",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_3(9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 60,
+      "code": "CSE703042",
+      "name": "Xử lý ngôn ngữ tự nhiên nâng cao",
+      "knowledgeBlock": "D2.3",
+      "credits": 3,
+      "prerequisite": "Tiên quyết(Xử lý ngôn ngữ tự nhiên)",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 61,
+      "code": "CSE702144",
+      "name": "Phân tích và khai phá mạng xã hội",
+      "knowledgeBlock": "D2.3",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_2(11)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 62,
+      "code": "CSE702146",
+      "name": "Đồ án cơ sở TTNT",
+      "knowledgeBlock": "E1",
+      "credits": 2,
+      "prerequisite": "",
+      "plannedSemester": "2028_2029_3(9)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 63,
+      "code": "CSE703014",
+      "name": "Đồ án liên ngành",
+      "knowledgeBlock": "E1",
+      "credits": 3,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_1(10)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 64,
+      "code": "CSE704171",
+      "name": "Thực tập tốt nghiệp",
+      "knowledgeBlock": "E1",
+      "credits": 4,
+      "prerequisite": "",
+      "plannedSemester": "2029_2030_2(11)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 65,
+      "code": "CSE710172",
+      "name": "Đồ án tốt nghiệp",
+      "knowledgeBlock": "E2",
+      "credits": 10,
+      "prerequisite": "Tiên quyết(Đồ án liên ngành)",
+      "plannedSemester": "2029_2030_3(12)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 66,
+      "code": "FFS708066",
+      "name": "Giáo dục quốc phòng - an ninh",
+      "knowledgeBlock": "F1",
+      "credits": 8,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": false
+    },
+    {
+      "order": 67,
+      "code": "FFS701072",
+      "name": "Chạy 1",
+      "knowledgeBlock": "F2.1",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": false
+    },
+    {
+      "order": 68,
+      "code": "FFS701081",
+      "name": "Thể dục cơ bản",
+      "knowledgeBlock": "F2.1",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 69,
+      "code": "FFS701082",
+      "name": "Thể dục Phát triển chung",
+      "knowledgeBlock": "F2.2",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 70,
+      "code": "FFS701074",
+      "name": "Chạy 2",
+      "knowledgeBlock": "F2.2",
+      "credits": 1,
+      "prerequisite": "Học trước(Chạy 1)",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 71,
+      "code": "FFS701073",
+      "name": "Aerobic",
+      "knowledgeBlock": "F2.3",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 72,
+      "code": "FFS701068",
+      "name": "Bóng chuyền",
+      "knowledgeBlock": "F2.3",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 73,
+      "code": "FFS701069",
+      "name": "Bóng đá",
+      "knowledgeBlock": "F2.3",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 74,
+      "code": "FFS701067",
+      "name": "Bóng rổ",
+      "knowledgeBlock": "F2.3",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 75,
+      "code": "FFS701070",
+      "name": "Cầu lông",
+      "knowledgeBlock": "F2.3",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 76,
+      "code": "FFS701071",
+      "name": "Pickleball",
+      "knowledgeBlock": "F2.3",
+      "credits": 1,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    },
+    {
+      "order": 77,
+      "code": "FEL704000",
+      "name": "Tiếng Anh bổ trợ",
+      "knowledgeBlock": "F3",
+      "credits": 4,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": false
+    },
+    {
+      "order": 78,
+      "code": "DT00001",
+      "name": "Kiểm tra năng lực tiếng Anh đầu khóa",
+      "knowledgeBlock": "",
+      "credits": 0,
+      "prerequisite": "",
+      "plannedSemester": "2026_2027_1(1)",
+      "actualSemester": "",
+      "lecturePeriods": 0.0,
+      "practicePeriods": 0.0,
+      "countsForGpa": null
+    }
+  ],
+  "initialProgress": {
+    "GT01": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT02": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT03": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT04": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT05": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT06": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT07": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT08": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT09": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT10": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT11": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT12": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT13": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT14": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT15": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT16": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT17": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT18": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT19": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT20": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT21": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT22": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT23": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT24": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT25": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT26": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT27": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT28": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT29": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT30": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT31": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "GT32": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL01": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL02": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL03": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL04": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL05": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL06": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL07": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL08": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL09": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL10": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL11": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL12": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL13": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL14": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL15": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL16": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL17": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL18": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL19": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL20": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL21": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL22": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL23": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL24": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL25": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL26": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL27": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "VL28": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT01": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT02": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT03": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT04": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT05": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT06": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT07": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT08": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT09": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT10": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT11": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT12": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT13": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT14": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT15": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT16": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT17": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT18": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT19": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "IT20": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL01": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL02": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL03": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL04": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL05": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL06": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL07": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL08": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL09": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL10": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL11": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL12": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL13": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL14": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL15": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL16": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL17": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "PL18": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN01": {
+      "status": "completed",
+      "studiedAt": "2026-10-07",
+      "result": "Grammar 3/8; vocabulary 3/5; reading 4/5; listening 2/4 sau 2 lượt",
+      "errors": [
+        "Dạng động từ và do/does",
+        "cụm từ",
+        "nghe ký hiệu email",
+        "đọc điều kiện/ngoại lệ"
+      ]
+    },
+    "EN02": {
+      "status": "in_progress",
+      "studiedAt": "2026-10-07",
+      "result": "Khẳng định 4/4; phủ định 2/2 câu mới; chưa kiểm tra nhớ lâu",
+      "errors": [
+        "Viết hoa đầu câu",
+        "ôn +1/+3/+7 ngày",
+        "câu hỏi/dạng rút gọn/đại từ/sở hữu chưa luyện"
+      ]
+    },
+    "EN03": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN04": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN05": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN06": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN07": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN08": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN09": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN10": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN11": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN12": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN13": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN14": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN15": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN16": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN17": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN18": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN19": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN20": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN21": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN22": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN23": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    },
+    "EN24": {
+      "status": "not_started",
+      "studiedAt": null,
+      "result": "",
+      "errors": []
+    }
+  },
+  "sources": [
+    {
+      "id": "repo-profile",
+      "title": "Hồ sơ và checkpoint cá nhân",
+      "url": "ho-so/PROFILE.md",
+      "kind": "repo",
+      "scope": "Thông tin người dùng và kết quả đã ghi; không tự suy ra đã học từ kế hoạch."
+    },
+    {
+      "id": "repo-outlines",
+      "title": "122 tiết tự học đề xuất",
+      "url": "ke-hoach-hoc-tap/hk1-2026/tung-tiet/README.md",
+      "kind": "repo",
+      "scope": "Khung tự học, chưa phải phân phối tiết hay ma trận thi chính thức."
+    },
+    {
+      "id": "portal-schedule",
+      "title": "Cổng sinh viên — lịch cá nhân",
+      "url": "https://qldtbeta.phenikaa-uni.edu.vn/congsinhvien/index.aspx#lichhoc",
+      "kind": "official",
+      "scope": "64 buổi 12/10/2026–31/01/2027, kiểm tra 07/10/2026; lịch có thể thay đổi."
+    },
+    {
+      "id": "portal-curriculum",
+      "title": "Chương trình AI K20",
+      "url": "chuong-trinh-hoc/ai-k20-2026-10-07.md",
+      "kind": "repo",
+      "scope": "78 học phần gồm nhóm lựa chọn; tổng hiển thị không phải số tín chỉ bắt buộc tốt nghiệp."
+    },
+    {
+      "id": "placement-notice",
+      "title": "Thông báo đầu vào từ ảnh người dùng",
+      "url": "ke-hoach-hoc-tap/hk1-2026/tieng-anh-dau-vao-thong-bao-tu-anh-2026-10-07.md",
+      "kind": "user",
+      "scope": "50 câu/60 phút; lịch nhóm dự kiến 17–18/10 tại A6, chưa có ca thi cá nhân."
+    },
+    {
+      "id": "bc-grammar",
+      "title": "British Council — ngữ pháp A1/A2",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2",
+      "kind": "resource",
+      "scope": "Tài nguyên nền miễn phí; không phải đề thi trường."
+    },
+    {
+      "id": "bc-listening",
+      "title": "British Council — nghe A1",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+      "kind": "resource",
+      "scope": "Nghe trước khi xem transcript. Ghi riêng số lượt nghe và câu đúng."
+    },
+    {
+      "id": "bc-reading",
+      "title": "British Council — đọc A1",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/reading/a1",
+      "kind": "resource",
+      "scope": "Đọc tìm bằng chứng, chú ý ngày/giờ và điều kiện trong câu hỏi."
+    },
+    {
+      "id": "openstax-calculus",
+      "title": "OpenStax — Calculus Volume 1",
+      "url": "https://openstax.org/details/books/calculus-volume-1",
+      "kind": "resource",
+      "scope": "Giáo trình nền một biến; chỉ học phần trùng đề cương lớp khi có."
+    },
+    {
+      "id": "openstax-physics",
+      "title": "OpenStax — University Physics Volume 1",
+      "url": "https://openstax.org/details/books/university-physics-volume-1",
+      "kind": "resource",
+      "scope": "Nguồn cơ học mở; không dùng để suy ra phạm vi thi FFS703013."
+    },
+    {
+      "id": "cs50",
+      "title": "Harvard — CS50",
+      "url": "https://cs50.harvard.edu/x/",
+      "kind": "resource",
+      "scope": "Kiến thức CS nền và bài tập; không phải nội dung lab chính thức CSE702040."
+    },
+    {
+      "id": "comp-course-sampler",
+      "title": "Phenikaa — Computer Science course sampler",
+      "url": "https://comp-beta.phenikaa-uni.edu.vn/undergraduate-program/computer-science/",
+      "kind": "official",
+      "scope": "Mô tả tổng quát CSE702040, chưa phải đề cương từng tiết hay rubric K20."
+    },
+    {
+      "id": "legal-documents",
+      "title": "Cổng văn bản Chính phủ",
+      "url": "https://vanban.chinhphu.vn/",
+      "kind": "official",
+      "scope": "Tra văn bản và hiệu lực trước khi áp dụng tình huống pháp luật cụ thể."
+    }
+  ],
+  "initialReviews": [
+    {
+      "id": "EN02-review-08",
+      "lessonId": "EN02",
+      "subjectId": "EN",
+      "date": "2026-10-08",
+      "title": "Ôn am/is/are, not và ký hiệu email",
+      "status": "planned",
+      "source": "recorded_review_plan"
+    },
+    {
+      "id": "EN02-review-10",
+      "lessonId": "EN02",
+      "subjectId": "EN",
+      "date": "2026-10-10",
+      "title": "Ôn am/is/are, not và ký hiệu email",
+      "status": "planned",
+      "source": "recorded_review_plan"
+    },
+    {
+      "id": "EN02-review-14",
+      "lessonId": "EN02",
+      "subjectId": "EN",
+      "date": "2026-10-14",
+      "title": "Ôn am/is/are, not và ký hiệu email",
+      "status": "planned",
+      "source": "recorded_review_plan"
+    }
+  ]
+}

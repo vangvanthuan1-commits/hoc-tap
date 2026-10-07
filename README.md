@@ -2,13 +2,24 @@
 
 Repo này lưu thông tin học tập, tiến độ, mục tiêu, tài liệu và công cụ ôn tập của tôi.
 
+## App học tập chính
+
+[**Mở Thuận · Study Space**](https://vangvanthuan1-commits.github.io/hoc-tap/) — học các môn, ghi chú/highlight, luyện tập/kiểm tra, ôn lỗi và xem lịch. Giao diện xanh nước biển/hồng cho điện thoại và máy tính.
+
+Mã nguồn, cách chạy và phạm vi bài học: [app/README.md](app/README.md). Kết nối Firebase/GitHub: [app/FIREBASE-AND-SYNC.md](app/FIREBASE-AND-SYNC.md). Bản tiến độ gửi từ app nằm ở [ho-so/tu-app/](ho-so/tu-app/README.md).
+
+```sh
+npm ci --prefix app
+npm run dev --prefix app
+```
+
 ## Hồ sơ và tiến độ
 
 - [File ôn tập sau buổi học](ke-hoach-hoc-tap/hk1-2026/on-tap/README.md).
 - [Hồ sơ hiện tại](ho-so/PROFILE.md): mục tiêu, checkpoint kiến thức, cách học và dự án.
 - [Snapshot ngày 07/10/2026](ho-so/snapshots/2026-10-07.md): bản thông tin đầy đủ do tôi cung cấp.
 
-Khi có thông tin mới, cập nhật hồ sơ hiện tại và ghi rõ ngày, nguồn. Giữ snapshot cũ làm lịch sử; phân biệt đã học, đang học, kế hoạch và thông tin chưa xác nhận. Không lưu API key, mật khẩu hoặc thông tin xác thực vào repo.
+Khi có thông tin mới, cập nhật hồ sơ hiện tại và ghi rõ ngày, nguồn. Giữ snapshot cũ làm lịch sử; phân biệt đã học, đang học, kế hoạch và thông tin chưa xác nhận. Không lưu mật khẩu, token hoặc khóa quản trị vào repo. Firebase client config công khai được lưu theo yêu cầu để app kết nối đúng dự án.
 
 ## Lịch học từ cổng sinh viên
 
