@@ -1,0 +1,36 @@
+{
+  "checked_date": "2026-10-07",
+  "selection_policy": "Chấp nhận tài liệu các năm trước cùng mã theo yêu cầu người dùng; không bắt buộc K20. Phân biệt nguồn toàn văn, xem trước và kết quả tìm kiếm.",
+  "sources": [
+    {
+      "id": "VL-DE-01",
+      "code": "FFS703013",
+      "type": "Đề giữa học phần",
+      "title": "Đề Thi Kiểm Tra Giữa Học Phần Vật Lý 1 - FFS703013",
+      "url": "https://www.studocu.vn/vn/document/truong-dai-hoc-phenikaa/vat-li-dai-cuong/de-thi-kiem-tra-giua-hoc-phan-vat-ly-1-ffs703013/165121415",
+      "year": null,
+      "access": "Chỉ tiêu đề/mô tả kết quả Bing; mở trang trả 403 Access Blocked",
+      "scope": "Mô tả tìm kiếm nêu trắc nghiệm và tự luận; chưa đọc đề và chưa biết năm thi"
+    },
+    {
+      "id": "VL-DE-02",
+      "code": "FFS703013",
+      "type": "Đề giữa kỳ",
+      "title": "Đề Thi Giữa Kỳ Vật Lý 1 - Mã Học Phần: FFS703013",
+      "url": "https://www.studocu.vn/vn/document/truong-dai-hoc-phenikaa/vat-li-dai-cuong/de-thi-giua-ky-vat-ly-1-ma-hoc-phan-ffs703013/165121427",
+      "year": null,
+      "access": "Chỉ tiêu đề/mô tả kết quả Bing; chưa đọc toàn văn",
+      "scope": "Mô tả tìm kiếm nêu chuyển động, lực, khí lý tưởng; chưa xác nhận nội dung đề"
+    },
+    {
+      "id": "IT-SLIDE-2024",
+      "code": "CSE702040",
+      "type": "Bài giảng cũ, phần xem trước",
+      "title": "Bai 14 - Chuyen doi so va xu huong.pdf",
+      "url": "https://www.collegesidekick.com/study-docs/22448841",
+      "year": 2024,
+      "access": "HTTP 200; đã đọc phần xem trước công khai, chưa đọc toàn bộ 49 trang",
+      "scope": "Nội dung slide ghi CSE702040, chuyển đổi số và xu hướng công nghệ; ngày slide 7/11/2024, trang ghi tải lên 24/11/2024. Metadata trường/môn trên nền tảng bị gán không phù hợp"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "source": "Cổng sinh viên Phenikaa / Chương trình học / API chi tiết bài học",
+  "checked_on": "2026-10-07",
+  "notes": "grade_flag là LAMONTINHDIEMTHEOCHUONGTRINH; bài học trống không có nghĩa môn không có nội dung.",
+  "courses": [
+    {
+      "code": "FFS703080",
+      "name": "Giải tích 1",
+      "credits": 3,
+      "grade_flag": 1,
+      "success": true,
+      "message": "",
+      "lessons": []
+    },
+    {
+      "code": "FFS703013",
+      "name": "Vật lý 1",
+      "credits": 3,
+      "grade_flag": 1,
+      "success": true,
+      "message": "",
+      "lessons": []
+    },
+    {
+      "code": "CSE702040",
+      "name": "Nhập môn Công nghệ thông tin",
+      "credits": 2,
+      "grade_flag": 1,
+      "success": true,
+      "message": "",
+      "lessons": []
+    },
+    {
+      "code": "FFS702001",
+      "name": "Pháp luật đại cương",
+      "credits": 2,
+      "grade_flag": 1,
+      "success": true,
+      "message": "",
+      "lessons": []
+    },
+    {
+      "code": "FEL702075",
+      "name": "Tiếng anh cơ bản 1",
+      "credits": 2,
+      "grade_flag": 1,
+      "success": true,
+      "message": "",
+      "lessons": []
+    },
+    {
+      "code": "FFS701072",
+      "name": "Chạy 1",
+      "credits": 1,
+      "grade_flag": 0,
+      "success": true,
+      "message": "",
+      "lessons": []
+    },
+    {
+      "code": "FFS708066",
+      "name": "Giáo dục quốc phòng - an ninh",
+      "credits": 8,
+      "grade_flag": 0,
+      "success": true,
+      "message": "",
+      "lessons": []
+    },
+    {
+      "code": "FEL704000",
+      "name": "Tiếng Anh bổ trợ",
+      "credits": 4,
+      "grade_flag": 0,
+      "success": true,
+      "message": "",
+      "lessons": []
+    }
+  ]
+}
