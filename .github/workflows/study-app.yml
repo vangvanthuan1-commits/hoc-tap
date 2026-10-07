@@ -31,6 +31,14 @@ jobs:
       - run: npm ci --prefix app
       - run: npm run test --prefix app
       - run: npm run build --prefix app
+      - name: Use GitHub Actions as Pages source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pages_build_type=$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq .build_type)
+          if [ "$pages_build_type" != "workflow" ]; then
+            gh api --method PUT "repos/${GITHUB_REPOSITORY}/pages" -f build_type=workflow
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
