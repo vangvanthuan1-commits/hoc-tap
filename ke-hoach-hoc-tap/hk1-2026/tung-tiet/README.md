@@ -76,6 +76,8 @@ Chi tiết nguồn: [nhật ký nghiên cứu](../nguon-de-cuong-va-thi-2026-10-
 
 ## Cập nhật và theo dõi
 
-[Tien-do.csv](tien-do.csv) có 122 tiết, tất cả chưa học. Cập nhật ngày, điểm tự kiểm tra, lỗi cần ôn; không đánh dấu bằng việc đã đọc hoặc xem lời giải.
+[Tien-do.csv](tien-do.csv) có 122 tiết; EN01 đã hoàn thành chẩn đoán ngắn, EN02 đang học phần khẳng định to be; 120 tiết còn lại chưa xác nhận đã học. [Kết quả EN01](../ket-qua/2026-10-07-EN01.md). Cập nhật ngày, điểm tự kiểm tra, lỗi cần ôn; không đánh dấu bằng việc đã đọc hoặc xem lời giải.
 
 Khi có slide/đề cương: kiểm tra đúng mã, chương trình, năm áp dụng; cập nhật phạm vi, số tiết, rubric lab, giữa kỳ/cuối kỳ. Khi có thông báo đầu vào: ghi ngày, phòng, hình thức, thời lượng, số câu, kỹ năng, cách tính điểm và quyết định miễn thực tế. Không lưu tài khoản, mật khẩu hoặc dữ liệu phiên vào repo.
+
+[File ôn tập sau buổi học](../on-tap/README.md) có bài tự luyện và đáp án tách riêng.

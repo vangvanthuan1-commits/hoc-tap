@@ -16,7 +16,7 @@ Cập nhật: 07/10/2026. Nguồn: snapshot do người dùng cung cấp, lưu t
 - C: khoảng tiết 11/16, đã tới chuỗi; tiếp theo Pointer + RAM, rồi Pointer với Array/String, Struct, File, tổng hợp/test.
 - Lỗi C cần ôn: scanf thiếu &, thiếu dấu ; hoặc dấu nháy, nhầm = và ==, biến chưa khởi tạo.
 - Giải tích: đang học giới hạn; đã làm thế trực tiếp, dạng 0/0, phân tích nhân tử, nhân liên hợp và giới hạn với sin. Tiếp theo tan, 1-cos(x), mũ/log và vô cùng bé tương đương. Cần chú ý đổi dấu toàn bộ biểu thức.
-- Tiếng Anh: chuẩn bị placement, học pattern ngắn, ngữ cảnh, ví dụ, bẫy và bài tập.
+- Tiếng Anh: đã làm [EN01 chẩn đoán ngắn 07/10](../ke-hoach-hoc-tap/hk1-2026/ket-qua/2026-10-07-EN01.md): grammar 3/8, vocabulary 3/5, reading 4/5, listening British Council A1 Task 1 đạt 2/4 sau 2 lượt. Chưa quy đổi ra điểm thi/CEFR. EN02 đang học: câu khẳng định am/is/are đúng 4/4 sau ví dụ, chưa kiểm tra nhớ lâu; câu phủ định/câu hỏi và sở hữu chưa luyện. Đã luyện ký hiệu email bằng chữ, chưa kiểm tra audio mới. [File ôn](../ke-hoach-hoc-tap/hk1-2026/on-tap/EN01-EN02-email-va-to-be.md).
 - Chưa có xác nhận học chính thức C++/OOP/STL/DSA, Python/data stack, ML/DL/Transformer; dùng các công nghệ trong dự án không chứng minh đã học nền bài bản.
 - Chưa có xác nhận bắt đầu chính thức Vật lý 1, Nhập môn CNTT hoặc Pháp luật đại cương.
 - Roadmap: C → C++ → OOP → STL → DSA → Python → NumPy → Pandas → Matplotlib → ML → DL → Transformer → LLM → RAG → Agent/Multi-Agent.
@@ -25,6 +25,7 @@ Cập nhật: 07/10/2026. Nguồn: snapshot do người dùng cung cấp, lưu t
 
 - Giảng ngắn, giải thích bản chất: lý thuyết ngắn → ví dụ → người dùng tự làm → kiểm tra và chỉ lỗi. Khi luyện, gợi ý trước, không đưa ngay đáp án.
 - Theo dõi riêng phần đã học, đang học, dự định học và lỗi hay mắc; không đánh đồng kế hoạch với kết quả.
+- Yêu cầu mới 07/10: học phần nào phải ghi note và có file ôn lại, gồm lý thuyết ngắn, lỗi thực tế, bài tự luyện, đáp án tách riêng và lịch ôn 1/3/7 ngày.
 - Nghiên cứu cần kiểm chứng và phản biện khách quan.
 - Trong quân sự ưu tiên tiếng Anh → Giải tích → coding → Vật lý; chủ yếu học bằng điện thoại.
 - Kế hoạch tham khảo: 60 phút Anh + 45 phút Giải tích + 20 phút code; ngày mệt 30 phút Anh + 25 phút Giải tích, cắt coding trước. Đây là kế hoạch, không phải lịch đã thực hiện.
@@ -61,7 +62,7 @@ Cập nhật: 07/10/2026. Nguồn: snapshot do người dùng cung cấp, lưu t
 
 - Người dùng yêu cầu đề cương chi tiết từng tiết, tìm đúng mã và thông tin thi; tiếng Anh ưu tiên ôn đầu vào, việc học/miễn môn phụ thuộc kết quả và quy định trường.
 - Trước đầu vào: tiếng Anh → Giải tích. Sau đầu vào: Giải tích → Vật lý → CNTT → Pháp luật; học song song giữa môn, tuần tự trong môn. Giảm thời gian C/VT Math trước khi cắt giờ bài tập học kỳ.
-- [Kế hoạch 122 tiết tự học](../ke-hoach-hoc-tap/hk1-2026/tung-tiet/README.md), [24 tiết đầu vào](../ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md). Mỗi tiết 45 phút tự học, không phải tiết chính thức. Tất cả vẫn chưa học; không cập nhật checkpoint bằng việc soạn kế hoạch.
+- [Kế hoạch 122 tiết tự học](../ke-hoach-hoc-tap/hk1-2026/tung-tiet/README.md), [24 tiết đầu vào](../ke-hoach-hoc-tap/hk1-2026/tung-tiet/tieng-anh-dau-vao.md). Mỗi tiết 45 phút tự học, không phải tiết chính thức. EN01 đã hoàn thành chẩn đoán ngắn theo kết quả hội thoại; EN02 đang học phần khẳng định to be, các tiết khác chưa xác nhận đã học. Không cập nhật checkpoint bằng việc soạn kế hoạch.
 - [Đối chiếu nguồn](../ke-hoach-hoc-tap/hk1-2026/nguon-de-cuong-va-thi-2026-10-07.md): chưa có đề cương/ma trận thi đầy đủ đúng mã; PDF đầu vào K20 của trường tìm thấy nhưng chưa tải được. Thông tin đó đã được bổ sung từ ảnh thông báo người dùng gửi: [bản ghi](../ke-hoach-hoc-tap/hk1-2026/tieng-anh-dau-vao-thong-bao-tu-anh-2026-10-07.md); vẫn chưa có ca thi cá nhân và trọng số từng câu.
 
 ## Tài liệu cũ cùng mã — yêu cầu bổ sung 07/10/2026

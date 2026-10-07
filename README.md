@@ -4,6 +4,7 @@ Repo này lưu thông tin học tập, tiến độ, mục tiêu, tài liệu v�
 
 ## Hồ sơ và tiến độ
 
+- [File ôn tập sau buổi học](ke-hoach-hoc-tap/hk1-2026/on-tap/README.md).
 - [Hồ sơ hiện tại](ho-so/PROFILE.md): mục tiêu, checkpoint kiến thức, cách học và dự án.
 - [Snapshot ngày 07/10/2026](ho-so/snapshots/2026-10-07.md): bản thông tin đầy đủ do tôi cung cấp.
 
