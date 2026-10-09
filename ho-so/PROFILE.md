@@ -82,6 +82,7 @@ Cập nhật: 09/10/2026. Nguồn: Cập nhật trực tiếp theo yêu cầu ng
   + Loại bỏ hoàn toàn game / mini-game; chuyển sang hệ thống **Spaced Repetition 3 ngày** (học xong bài nào, ví dụ EN01 hôm nay, thì 3 ngày sau hiện lên để ôn lại) và **Bộ theo dõi thời gian học thực tế** (Study Time Tracker / Pomodoro 25p), ghi nhận ngày giờ, số phút học theo từng bài.
   + Trình bày **Lịch học** rõ ràng, đẹp mắt với thời gian (tiết, giờ) và địa điểm (phòng học cụ thể: A4-102, A1-701, A5-303, Tòa A6, Sân thể thao...).
   + Tích hợp **Cầu nối Trợ lý AI GLM 5.3** (qua OpenRouter API, bảo mật khóa API bằng mã hóa Base64 phía client), tự động nạp ngữ cảnh nhật ký học tập (ngày nào học gì, mấy tiếng, kết quả ra sao, hẹn ôn ngày nào) để AI theo dõi sát sao tiến trình học của Thuận.
+  + **Tái cấu trúc thành từng trang web nhỏ độc lập (Clean URLs)**: Tách ứng dụng thành các trang web riêng (`/`: Portal Tổng quan, `/bai-hoc`: Phòng học tương tác, `/lo-trinh`: Lộ trình 122 tiết, `/on-tap`: Ôn tập & Thi thử, `/ngat-quang`: Ôn 3 ngày & Bấm giờ, `/lich-hoc`: Lịch học Phenikaa, `/dong-bo`: Cầu nối AI) giúp tải siêu nhanh, nhẹ máy và chấm dứt hoàn toàn tình trạng giật lag khi chuyển tab trên điện thoại và máy tính.
 - Không ghi kết quả thử tự động của phần mềm thành kết quả học của người dùng. Tiến độ gốc vẫn EN01 chẩn đoán hoàn thành, EN02 đã luyện khẳng định/phủ định; câu hỏi và sở hữu chưa xác nhận đã luyện.
 
 ## Phạm vi lưu trữ

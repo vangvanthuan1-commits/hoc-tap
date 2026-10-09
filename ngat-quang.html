@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Học Ngắt Quãng 3 Ngày & Bấm Giờ &bull; Phenikaa K20 AI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .page-main-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 16px 20px 80px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Âm thanh Lofi nền học tập -->
+  <audio id="lofiAudioPlayer" src="bgm.wav" loop preload="none"></audio>
+
+  <!-- HEADER ỨNG DỤNG -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="/" class="brand-section" style="text-decoration: none;">
+        <div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="brand-info">
+          <h1>Phenikaa K20 AI</h1>
+          <p>Học tập cá nhân &bull; Vàng Văn Thuận</p>
+        </div>
+      </a>
+
+      <!-- Navigation Desktop (Clean URLs) -->
+      <nav class="desktop-nav">
+        <a href="/" class="nav-item-btn"><i class="fa-solid fa-house"></i> Tổng quan</a>
+        <a href="/bai-hoc" class="nav-item-btn"><i class="fa-solid fa-book-open"></i> Bài học & Ghi chép</a>
+        <a href="/lo-trinh" class="nav-item-btn"><i class="fa-solid fa-diagram-project"></i> Lộ trình 122 tiết</a>
+        <a href="/on-tap" class="nav-item-btn"><i class="fa-solid fa-pen-nib"></i> Ôn tập & Thi thử</a>
+        <a href="/ngat-quang" class="nav-item-btn active"><i class="fa-solid fa-clock-rotate-left"></i> Ôn 3 ngày & Bấm giờ</a>
+        <a href="/lich-hoc" class="nav-item-btn"><i class="fa-solid fa-calendar-days"></i> Lịch học</a>
+        <a href="/dong-bo" class="nav-item-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Cầu nối AI</a>
+      </nav>
+
+      <!-- Widget Bấm giờ học tập tiện lợi -->
+      <div class="header-actions">
+        <div class="header-study-timer" id="headerStudyTimer">
+          <button class="timer-mode-btn" id="studyTimerModeToggle" title="Chuyển chế độ: Bấm giờ xuôi / Pomodoro đếm ngược">
+            <i class="fa-solid fa-stopwatch"></i> <span id="studyTimerModeText">Bấm giờ</span>
+          </button>
+          <div class="timer-time-display" id="studyTimerDisplay">00:00:00</div>
+          <div class="timer-controls">
+            <button class="timer-btn timer-btn-play" id="studyTimerToggleBtn" title="Bắt đầu học">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="timer-btn timer-btn-reset" id="studyTimerResetBtn" title="Kết thúc buổi học / Đặt lại">
+              <i class="fa-solid fa-stop"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="sync-badge" id="syncStatusBadge">
+          <span class="sync-dot" id="syncStatusDot"></span>
+          <span id="syncStatusText">Firebase Online</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="page-main-container">
+    <div class="section-heading">
+      <div>
+        <h3><i class="fa-solid fa-clock-rotate-left" style="color: var(--pink-primary);"></i> Học Ngắt Quãng (Spaced Repetition 3 Ngày) & Theo Dõi Thời Gian Thực</h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+          Đã loại bỏ trò chơi theo yêu cầu: Tập trung 100% vào chu kỳ ôn tập ngắt quãng (3 ngày sau khi học) và bấm giờ thực tế cho từng bài học.
+        </p>
+      </div>
+    </div>
+
+    <!-- KHỐI 1: HÀNG ĐỢI ÔN TẬP NGẮT QUÃNG 3 NGÀY -->
+    <div class="spaced-queue-card" style="margin-bottom: 24px;">
+      <div class="spaced-header">
+        <div>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0;">
+            <i class="fa-solid fa-calendar-check" style="color: var(--pink-primary);"></i> Hàng Đợi Ôn Tập Ngắt Quãng (Chu kỳ 3 ngày)
+          </h4>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin: 3px 0 0 0;">
+            Khi học xong một bài (ví dụ <code>EN01</code> hôm nay), hệ thống tự động hẹn sau 3 ngày nhắc bạn vào ôn lại để củng cố trí nhớ dài hạn.
+          </p>
+        </div>
+        <span class="badge badge-pink" id="spacedDueBadge">0 bài đến hạn</span>
+      </div>
+
+      <!-- Danh sách bài đến hạn hôm nay -->
+      <div style="margin-top: 14px;">
+        <h5 style="font-size: 0.88rem; font-weight: 800; color: #dc2626; display: flex; align-items: center; gap: 6px;">
+          <i class="fa-solid fa-bell"></i> Cần ôn tập hôm nay (Đã đến hoặc quá hạn 3 ngày):
+        </h5>
+        <div id="spacedDueList" class="spaced-items-grid" style="margin-top: 8px;">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Danh sách bài sắp tới (đang đếm ngược) -->
+      <div style="margin-top: 20px;">
+        <h5 style="font-size: 0.88rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+          <i class="fa-solid fa-hourglass-half"></i> Sắp đến hạn ôn tập tiếp theo:
+        </h5>
+        <div id="spacedUpcomingList" class="spaced-items-grid" style="margin-top: 8px;">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Form thêm nhanh bài học vào lịch ôn ngắt quãng -->
+      <div class="spaced-quick-add" style="margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--border-light); display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-main);">
+          <i class="fa-solid fa-plus-circle" style="color: var(--blue-primary);"></i> Thêm bài vào lịch ôn 3 ngày:
+        </span>
+        <select id="quickAddSpacedLessonSelect" style="padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-size: 0.82rem; min-width: 220px;">
+          <!-- Rendered by JS -->
+        </select>
+        <button class="btn btn-primary-small" onclick="handleQuickAddSpacedReview()">
+          <i class="fa-solid fa-calendar-plus"></i> Đặt lịch ôn sau 3 ngày
+        </button>
+      </div>
+    </div>
+
+    <!-- KHỐI 2: BỘ THEO DÕI THỜI GIAN THỰC & POMODORO FOCUS TIMER -->
+    <div class="study-time-tracker-card">
+      <div class="tracker-header">
+        <div>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0;">
+            <i class="fa-solid fa-stopwatch" style="color: var(--blue-primary);"></i> Bộ Theo Dõi Thời Gian Thực & Pomodoro Focus (25 phút)
+          </h4>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin: 3px 0 0 0;">
+            Bấm giờ học cho từng bài học cụ thể. Khi hoàn thành phiên học, dữ liệu thời gian và bẫy lỗi sẽ tự động lưu và gửi cho AI.
+          </p>
+        </div>
+        <span class="badge badge-blue" id="trackerTotalHoursBadge">Tổng: 0 giờ</span>
+      </div>
+
+      <div class="pomodoro-box" style="margin-top: 16px;">
+        <div class="pomo-display">
+          <div class="pomo-time" id="pomoMinutesDisplay">25:00</div>
+          <span class="pomo-lbl" id="pomoStatusText">Phiên tập trung chuyên sâu (Focus Session)</span>
+        </div>
+        <div class="pomo-actions">
+          <button class="btn btn-primary" id="pomoMainToggleBtn" onclick="togglePomodoro()">
+            <i class="fa-solid fa-play"></i> Bắt đầu 25 phút Focus
+          </button>
+          <button class="btn btn-outline" onclick="resetPomodoro()">
+            <i class="fa-solid fa-rotate-left"></i> Đặt lại 25p
+          </button>
+          <button class="btn btn-outline" id="lofiBgmToggleBtn" onclick="toggleLofiAudio()">
+            <i class="fa-solid fa-headphones"></i> Nhạc Lofi
+          </button>
+        </div>
+      </div>
+
+      <!-- Khu vực hoàn tất phiên học để lưu vào nhật ký -->
+      <div class="session-finish-form" style="margin-top: 20px; background: #f8fafc; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+        <h5 style="font-size: 0.88rem; font-weight: 800; color: var(--blue-primary); margin-bottom: 8px;">
+          <i class="fa-solid fa-flag-checkered"></i> Kết Thúc Phiên Học & Ghi Nhận Thời Gian Vào Trí Nhớ AI:
+        </h5>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+          <div>
+            <label style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted);">Bài học vừa hoàn thành:</label>
+            <select id="trackerLessonSelect" style="width: 100%; padding: 7px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-size: 0.82rem; margin-top: 3px;">
+              <!-- Rendered by JS -->
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted);">Số phút học thực tế:</label>
+            <input type="number" id="trackerMinutesInput" value="25" min="5" max="300" style="width: 100%; padding: 7px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-size: 0.82rem; margin-top: 3px;">
+          </div>
+          <div>
+            <label style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted);">Kết quả / Điểm số đạt được:</label>
+            <input type="text" id="trackerResultInput" placeholder="VD: Đúng 3/3 câu, nhớ công thức..." style="width: 100%; padding: 7px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-size: 0.82rem; margin-top: 3px;">
+          </div>
+        </div>
+        <div style="margin-top: 8px;">
+          <label style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted);">Ghi chú bẫy lỗi đã phát hiện:</label>
+          <input type="text" id="trackerMistakesInput" placeholder="VD: Nhân liên hợp hay quên đổi dấu toàn bộ, To be am/is/are..." style="width: 100%; padding: 7px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-size: 0.82rem; margin-top: 3px;">
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 12px;">
+          <button class="btn btn-primary" onclick="finishCurrentStudySession()" style="flex: 1;">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu Phiên Học & Lên Lịch Ôn Sau 3 Ngày
+          </button>
+          <button class="btn btn-outline" onclick="window.location.href='/dong-bo'" style="flex: 1;">
+            <i class="fa-solid fa-timeline"></i> Xem Nhật Ký Học Tập Của AI
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/" class="mobile-nav-btn"><i class="fa-solid fa-house"></i><span>Tổng quan</span></a>
+    <a href="/bai-hoc" class="mobile-nav-btn"><i class="fa-solid fa-book-open"></i><span>Bài học</span></a>
+    <a href="/on-tap" class="mobile-nav-btn"><i class="fa-solid fa-pen-nib"></i><span>Ôn tập</span></a>
+    <a href="/ngat-quang" class="mobile-nav-btn active"><i class="fa-solid fa-clock-rotate-left"></i><span>Ôn 3 ngày</span></a>
+    <a href="/lich-hoc" class="mobile-nav-btn"><i class="fa-solid fa-calendar-days"></i><span>Lịch học</span></a>
+    <a href="/dong-bo" class="mobile-nav-btn"><i class="fa-solid fa-cloud-arrow-up"></i><span>AI & Repo</span></a>
+  </nav>
+
+  <!-- FLOATING AI WIDGET -->
+  <div class="floating-ai-btn" id="floatingAiToggleBtn" onclick="toggleFloatingAiDrawer()" title="Hỏi Gia sư AI GLM 5.3">
+    <i class="fa-solid fa-robot"></i>
+    <span class="floating-ai-pulse"></span>
+  </div>
+
+  <div class="floating-ai-drawer" id="floatingAiDrawer">
+    <div class="floating-ai-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-robot" style="color: var(--pink-primary); font-size: 1.1rem;"></i>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--blue-primary); margin: 0;">Gia Sư AI GLM 5.3</h4>
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Trực tuyến &bull; Nắm rõ nhật ký học</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 6px;">
+        <button class="btn-icon" onclick="openOpenRouterModal()" title="Cài đặt khóa API"><i class="fa-solid fa-gear"></i></button>
+        <button class="btn-icon" onclick="toggleFloatingAiDrawer()" title="Đóng chat"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="floating-ai-body" id="floatingAiChatBody">
+      <div class="ai-bubble assistant">
+        Chào Thuận! Tôi theo dõi sát lịch ôn 3 ngày của bạn. Bạn muốn ôn lại bài nào hôm nay?
+      </div>
+    </div>
+    <div class="floating-ai-footer">
+      <input type="text" id="floatingAiInput" placeholder="Hỏi AI GLM 5.3..." onkeydown="if(event.key==='Enter')handleFloatingAiSend()">
+      <button class="btn-primary" onclick="handleFloatingAiSend()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT OPENROUTER KEY -->
+  <div class="modal-overlay" id="openRouterModal">
+    <div class="modal-content" style="max-width: 460px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--blue-primary);">
+          <i class="fa-solid fa-key" style="color: var(--pink-primary);"></i> Cài đặt AI OpenRouter
+        </h3>
+        <button class="close-modal-btn" onclick="closeOpenRouterModal()">&times;</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Mô hình AI:</label>
+          <select id="selectOpenRouterModel" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px;">
+            <option value="thuan-glm-5.3">GLM 5.3 (Mặc định cấu hình cá nhân của Thuận)</option>
+            <option value="meta-llama/llama-3.3-70b-instruct">Llama 3.3 70B Instruct (Fallback)</option>
+            <option value="deepseek/deepseek-chat">DeepSeek Chat V3</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Khóa OpenRouter API Key:</label>
+          <input type="password" id="inputOpenRouterKey" placeholder="sk-or-v1-..." style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px; font-family: monospace; font-size: 0.85rem;">
+        </div>
+        <button class="btn btn-primary" onclick="saveOpenRouterKey()" style="margin-top: 6px;">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu Cấu Hình
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-notification" id="toastBox"></div>
+
+  <!-- SCRIPTS -->
+  <script src="data-store.js"></script>
+  <script src="firebase-sync.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

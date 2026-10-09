@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ôn Tập & Thi Thử Theo Môn &bull; Phenikaa K20 AI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .page-main-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 16px 20px 80px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Âm thanh Lofi nền học tập -->
+  <audio id="lofiAudioPlayer" src="bgm.wav" loop preload="none"></audio>
+
+  <!-- HEADER ỨNG DỤNG -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="/" class="brand-section" style="text-decoration: none;">
+        <div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="brand-info">
+          <h1>Phenikaa K20 AI</h1>
+          <p>Học tập cá nhân &bull; Vàng Văn Thuận</p>
+        </div>
+      </a>
+
+      <!-- Navigation Desktop (Clean URLs) -->
+      <nav class="desktop-nav">
+        <a href="/" class="nav-item-btn"><i class="fa-solid fa-house"></i> Tổng quan</a>
+        <a href="/bai-hoc" class="nav-item-btn"><i class="fa-solid fa-book-open"></i> Bài học & Ghi chép</a>
+        <a href="/lo-trinh" class="nav-item-btn"><i class="fa-solid fa-diagram-project"></i> Lộ trình 122 tiết</a>
+        <a href="/on-tap" class="nav-item-btn active"><i class="fa-solid fa-pen-nib"></i> Ôn tập & Thi thử</a>
+        <a href="/ngat-quang" class="nav-item-btn"><i class="fa-solid fa-clock-rotate-left"></i> Ôn 3 ngày & Bấm giờ</a>
+        <a href="/lich-hoc" class="nav-item-btn"><i class="fa-solid fa-calendar-days"></i> Lịch học</a>
+        <a href="/dong-bo" class="nav-item-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Cầu nối AI</a>
+      </nav>
+
+      <!-- Widget Bấm giờ học tập tiện lợi -->
+      <div class="header-actions">
+        <div class="header-study-timer" id="headerStudyTimer">
+          <button class="timer-mode-btn" id="studyTimerModeToggle" title="Chuyển chế độ: Bấm giờ xuôi / Pomodoro đếm ngược">
+            <i class="fa-solid fa-stopwatch"></i> <span id="studyTimerModeText">Bấm giờ</span>
+          </button>
+          <div class="timer-time-display" id="studyTimerDisplay">00:00:00</div>
+          <div class="timer-controls">
+            <button class="timer-btn timer-btn-play" id="studyTimerToggleBtn" title="Bắt đầu học">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="timer-btn timer-btn-reset" id="studyTimerResetBtn" title="Kết thúc buổi học / Đặt lại">
+              <i class="fa-solid fa-stop"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="sync-badge" id="syncStatusBadge">
+          <span class="sync-dot" id="syncStatusDot"></span>
+          <span id="syncStatusText">Firebase Online</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="page-main-container">
+    <div class="section-heading">
+      <div>
+        <h3><i class="fa-solid fa-pen-nib" style="color: var(--blue-primary);"></i> Trung Tâm Ôn Tập & Kiểm Tra Kiến Thức Theo Môn</h3>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+          Chọn môn học bạn muốn ôn tập để hệ thống tự động bốc câu hỏi từ ngân hàng 366 câu trắc nghiệm của 122 tiết học.
+        </p>
+      </div>
+    </div>
+
+    <!-- KHỐI CHỌN MÔN ÔN TẬP ĐƯA LÊN ĐẦU TIÊN (THEO YÊU CẦU NGƯỜI DÙNG) -->
+    <div class="quiz-subject-selector-card" style="margin-bottom: 20px;">
+      <div class="quiz-subject-header">
+        <div>
+          <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--blue-primary); margin: 0;">
+            <i class="fa-solid fa-sliders" style="color: var(--pink-primary);"></i> Chọn Môn Ôn Tập Để Kiểm Tra Kiến Thức
+          </h4>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin: 3px 0 0 0;">
+            Bấm vào môn bên dưới để làm đề kiểm tra đánh giá mức độ ghi nhớ kiến thức:
+          </p>
+        </div>
+        <span class="badge badge-blue">Ngân hàng 122 bài học</span>
+      </div>
+      <div class="quiz-subject-grid" id="quizSubjectFilterButtons">
+        <button class="quiz-subj-btn active" onclick="startQuiz('GT')">
+          <div class="subj-icon" style="background: #e0f2fe; color: #0284c7;"><i class="fa-solid fa-square-root-variable"></i></div>
+          <div class="subj-text">
+            <strong>Ôn Giải tích 1</strong>
+            <small>Giới hạn, Đạo hàm, Vi phân, Chuỗi (32 tiết)</small>
+          </div>
+        </button>
+        <button class="quiz-subj-btn" onclick="startQuiz('EN')">
+          <div class="subj-icon" style="background: #fce7f3; color: #db2777;"><i class="fa-solid fa-spell-check"></i></div>
+          <div class="subj-text">
+            <strong>Ôn Tiếng Anh 8.5+</strong>
+            <small>Ngữ pháp, To be, Sở hữu, Email, Reading</small>
+          </div>
+        </button>
+        <button class="quiz-subj-btn" onclick="startQuiz('IT')">
+          <div class="subj-icon" style="background: #f5f3ff; color: #7c3aed;"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="subj-text">
+            <strong>Ôn CNTT & C</strong>
+            <small>Khai báo, Scanf, Con trỏ Pointer, Mảng, Struct</small>
+          </div>
+        </button>
+        <button class="quiz-subj-btn" onclick="startQuiz('VL')">
+          <div class="subj-icon" style="background: #fffbeb; color: #d97706;"><i class="fa-solid fa-atom"></i></div>
+          <div class="subj-text">
+            <strong>Ôn Vật lý 1</strong>
+            <small>Động học, Động lực học, Năng lượng, Sóng</small>
+          </div>
+        </button>
+        <button class="quiz-subj-btn" onclick="startQuiz('PL')">
+          <div class="subj-icon" style="background: #f0fdf4; color: #16a34a;"><i class="fa-solid fa-scale-balanced"></i></div>
+          <div class="subj-text">
+            <strong>Ôn Pháp luật đại cương</strong>
+            <small>Quy phạm, Quan hệ, Vi phạm & Trách nhiệm</small>
+          </div>
+        </button>
+        <button class="quiz-subj-btn" onclick="startQuiz('ALL')">
+          <div class="subj-icon" style="background: #eef2ff; color: #4f46e5;"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="subj-text">
+            <strong>Đề Tổng Hợp HK1</strong>
+            <small>Trộn ngẫu nhiên câu hỏi tất cả các môn</small>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- KHU VỰC LÀM BÀI TRẮC NGHIỆM -->
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <div>
+          <span class="quiz-badge" id="quizSubjectBadge">Giải tích 1</span>
+          <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-top: 4px;" id="quizQuestionTitle">
+            Đang tải câu hỏi...
+          </h4>
+        </div>
+        <div class="quiz-counter" id="quizCounterText">Câu 1/10</div>
+      </div>
+      
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="quizProgressFill" style="width: 10%;"></div>
+      </div>
+
+      <div class="quiz-body">
+        <div class="quiz-options" id="quizOptionsContainer">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="quiz-explanation-box" id="quizExplanationBox" style="display: none;">
+          <div style="font-weight: 800; font-size: 0.9rem;" id="quizExpTitle">
+            <i class="fa-solid fa-circle-check"></i> Giải thích chi tiết bản chất:
+          </div>
+          <div style="font-size: 0.85rem; margin-top: 6px; line-height: 1.5;" id="quizExpContent"></div>
+        </div>
+      </div>
+
+      <div class="quiz-footer">
+        <button class="btn btn-outline" id="prevQuizBtn" onclick="prevQuizQuestion()" style="display: none;">
+          <i class="fa-solid fa-arrow-left"></i> Câu trước
+        </button>
+        <button class="btn btn-primary" id="nextQuizBtn" onclick="nextQuizQuestion()">
+          Câu tiếp theo <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- KHUNG AI GLM 5.3 TẠO ĐỀ THEO YÊU CẦU -->
+    <div class="ai-quiz-generator-box" style="margin-top: 24px;">
+      <div class="ai-box-header">
+        <i class="fa-solid fa-robot" style="color: var(--pink-primary); font-size: 1.3rem;"></i>
+        <div>
+          <h4 style="font-size: 1rem; font-weight: 800; color: var(--blue-primary);">Gia Sư AI GLM 5.3 Tạo Đề Thi Theo Yêu Cầu</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">
+            Bạn muốn kiểm tra sâu về chủ đề nào (VD: 5 câu bẫy lỗi con trỏ C, 10 câu ngữ pháp To be, hay giới hạn 0/0)?
+          </p>
+        </div>
+      </div>
+      <div class="ai-input-row">
+        <input type="text" id="aiQuizPromptInput" placeholder="VD: Tạo 5 câu trắc nghiệm bẫy kinh điển môn Giải tích 1 về nhân liên hợp đổi dấu..." style="flex: 1; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-size: 0.85rem;">
+        <button class="btn btn-primary" id="generateAiQuizBtn" onclick="generateAiCustomQuiz()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> AI Tạo Đề
+        </button>
+      </div>
+      <div id="aiCustomQuizContainer" style="margin-top: 14px; display: none;"></div>
+    </div>
+  </main>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/" class="mobile-nav-btn"><i class="fa-solid fa-house"></i><span>Tổng quan</span></a>
+    <a href="/bai-hoc" class="mobile-nav-btn"><i class="fa-solid fa-book-open"></i><span>Bài học</span></a>
+    <a href="/on-tap" class="mobile-nav-btn active"><i class="fa-solid fa-pen-nib"></i><span>Ôn tập</span></a>
+    <a href="/ngat-quang" class="mobile-nav-btn"><i class="fa-solid fa-clock-rotate-left"></i><span>Ôn 3 ngày</span></a>
+    <a href="/lich-hoc" class="mobile-nav-btn"><i class="fa-solid fa-calendar-days"></i><span>Lịch học</span></a>
+    <a href="/dong-bo" class="mobile-nav-btn"><i class="fa-solid fa-cloud-arrow-up"></i><span>AI & Repo</span></a>
+  </nav>
+
+  <!-- FLOATING AI WIDGET -->
+  <div class="floating-ai-btn" id="floatingAiToggleBtn" onclick="toggleFloatingAiDrawer()" title="Hỏi Gia sư AI GLM 5.3">
+    <i class="fa-solid fa-robot"></i>
+    <span class="floating-ai-pulse"></span>
+  </div>
+
+  <div class="floating-ai-drawer" id="floatingAiDrawer">
+    <div class="floating-ai-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-robot" style="color: var(--pink-primary); font-size: 1.1rem;"></i>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--blue-primary); margin: 0;">Gia Sư AI GLM 5.3</h4>
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Trực tuyến &bull; Nắm rõ nhật ký học</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 6px;">
+        <button class="btn-icon" onclick="openOpenRouterModal()" title="Cài đặt khóa API"><i class="fa-solid fa-gear"></i></button>
+        <button class="btn-icon" onclick="toggleFloatingAiDrawer()" title="Đóng chat"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="floating-ai-body" id="floatingAiChatBody">
+      <div class="ai-bubble assistant">
+        Chào Thuận! Bạn đang ôn tập môn nào? Hãy làm bài test và nếu gặp câu khó cần gợi ý bản chất, hỏi tôi ngay nhé!
+      </div>
+    </div>
+    <div class="floating-ai-footer">
+      <input type="text" id="floatingAiInput" placeholder="Hỏi AI GLM 5.3..." onkeydown="if(event.key==='Enter')handleFloatingAiSend()">
+      <button class="btn-primary" onclick="handleFloatingAiSend()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT OPENROUTER KEY -->
+  <div class="modal-overlay" id="openRouterModal">
+    <div class="modal-content" style="max-width: 460px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--blue-primary);">
+          <i class="fa-solid fa-key" style="color: var(--pink-primary);"></i> Cài đặt AI OpenRouter
+        </h3>
+        <button class="close-modal-btn" onclick="closeOpenRouterModal()">&times;</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Mô hình AI:</label>
+          <select id="selectOpenRouterModel" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px;">
+            <option value="thuan-glm-5.3">GLM 5.3 (Mặc định cấu hình cá nhân của Thuận)</option>
+            <option value="meta-llama/llama-3.3-70b-instruct">Llama 3.3 70B Instruct (Fallback)</option>
+            <option value="deepseek/deepseek-chat">DeepSeek Chat V3</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Khóa OpenRouter API Key:</label>
+          <input type="password" id="inputOpenRouterKey" placeholder="sk-or-v1-..." style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px; font-family: monospace; font-size: 0.85rem;">
+        </div>
+        <button class="btn btn-primary" onclick="saveOpenRouterKey()" style="margin-top: 6px;">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu Cấu Hình
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-notification" id="toastBox"></div>
+
+  <!-- SCRIPTS -->
+  <script src="data-store.js"></script>
+  <script src="firebase-sync.js"></script>
+  <script type="module" src="app.js"></script>
+
+  <script>
+    // Kích hoạt mặc định môn GT khi vào trang ôn tập
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof window.startQuiz === "function") {
+          window.startQuiz("GT");
+        }
+      }, 150);
+    });
+  </script>
+</body>
+</html>

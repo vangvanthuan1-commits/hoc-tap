@@ -1,5 +1,13 @@
 {
   "version": 2,
   "name": "hoctap-phenikaa-k20",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/bai-hoc", "destination": "/bai-hoc.html" },
+    { "source": "/lo-trinh", "destination": "/lo-trinh.html" },
+    { "source": "/on-tap", "destination": "/on-tap.html" },
+    { "source": "/ngat-quang", "destination": "/ngat-quang.html" },
+    { "source": "/lich-hoc", "destination": "/lich-hoc.html" },
+    { "source": "/dong-bo", "destination": "/dong-bo.html" }
+  ]
 }

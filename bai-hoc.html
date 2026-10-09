@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bài Học & Vở Ghi Chép &bull; Phenikaa K20 AI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .page-main-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 16px 20px 80px 20px;
+    }
+    .lesson-selector-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: #ffffff;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .lesson-selector-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 240px;
+    }
+    .lesson-selector-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .lesson-selector-group select {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      font-size: 0.85rem;
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+    .workspace-standalone-wrapper {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .ws-circular-stepper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 64px;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+    }
+    @media (max-width: 640px) {
+      .ws-circular-stepper {
+        padding: 12px 10px;
+        top: 56px;
+      }
+      .ws-circle-step .step-label {
+        font-size: 0.68rem;
+      }
+      .step-circle {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Âm thanh Lofi nền học tập -->
+  <audio id="lofiAudioPlayer" src="bgm.wav" loop preload="none"></audio>
+
+  <!-- HEADER ỨNG DỤNG -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="/" class="brand-section" style="text-decoration: none;">
+        <div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="brand-info">
+          <h1>Phenikaa K20 AI</h1>
+          <p>Học tập cá nhân &bull; Vàng Văn Thuận</p>
+        </div>
+      </a>
+
+      <!-- Navigation Desktop (Clean URLs) -->
+      <nav class="desktop-nav">
+        <a href="/" class="nav-item-btn"><i class="fa-solid fa-house"></i> Tổng quan</a>
+        <a href="/bai-hoc" class="nav-item-btn active"><i class="fa-solid fa-book-open"></i> Bài học & Ghi chép</a>
+        <a href="/lo-trinh" class="nav-item-btn"><i class="fa-solid fa-diagram-project"></i> Lộ trình 122 tiết</a>
+        <a href="/on-tap" class="nav-item-btn"><i class="fa-solid fa-pen-nib"></i> Ôn tập & Thi thử</a>
+        <a href="/ngat-quang" class="nav-item-btn"><i class="fa-solid fa-clock-rotate-left"></i> Ôn 3 ngày & Bấm giờ</a>
+        <a href="/lich-hoc" class="nav-item-btn"><i class="fa-solid fa-calendar-days"></i> Lịch học</a>
+        <a href="/dong-bo" class="nav-item-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Cầu nối AI</a>
+      </nav>
+
+      <!-- Widget Bấm giờ học tập tiện lợi -->
+      <div class="header-actions">
+        <div class="header-study-timer" id="headerStudyTimer">
+          <button class="timer-mode-btn" id="studyTimerModeToggle" title="Chuyển chế độ: Bấm giờ xuôi / Pomodoro đếm ngược">
+            <i class="fa-solid fa-stopwatch"></i> <span id="studyTimerModeText">Bấm giờ</span>
+          </button>
+          <div class="timer-time-display" id="studyTimerDisplay">00:00:00</div>
+          <div class="timer-controls">
+            <button class="timer-btn timer-btn-play" id="studyTimerToggleBtn" title="Bắt đầu học">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="timer-btn timer-btn-reset" id="studyTimerResetBtn" title="Kết thúc buổi học / Đặt lại">
+              <i class="fa-solid fa-stop"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="sync-badge" id="syncStatusBadge">
+          <span class="sync-dot" id="syncStatusDot"></span>
+          <span id="syncStatusText">Firebase Online</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="page-main-container">
+
+    <!-- THANH CHỌN MÔN & TIẾT HỌC NHANH -->
+    <div class="lesson-selector-bar">
+      <div class="lesson-selector-group">
+        <label><i class="fa-solid fa-layer-group" style="color: var(--blue-primary);"></i> Môn học:</label>
+        <select id="pageSubjectSelect" onchange="handleSubjectSelectChange(this.value)">
+          <option value="EN">Tiếng Anh xếp lớp 8.5+ (24 tiết)</option>
+          <option value="GT">Giải tích 1 (32 tiết)</option>
+          <option value="IT">Nhập môn CNTT & Lập trình C (20 tiết)</option>
+          <option value="VL">Vật lý 1 (28 tiết)</option>
+          <option value="PL">Pháp luật đại cương (18 tiết)</option>
+        </select>
+      </div>
+
+      <div class="lesson-selector-group">
+        <label><i class="fa-solid fa-list-check" style="color: var(--pink-primary);"></i> Tiết học:</label>
+        <select id="pageLessonSelect" onchange="handleLessonSelectChange(this.value)">
+          <!-- Rendered by JS -->
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-outline-small" onclick="goToPrevLesson()" title="Bài trước">
+          <i class="fa-solid fa-chevron-left"></i> Trước
+        </button>
+        <button class="btn btn-outline-small" onclick="goToNextLesson()" title="Bài tiếp">
+          Sau <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- KHUNG WORKSPACE BÀI HỌC TOÀN DIỆN -->
+    <div class="workspace-standalone-wrapper">
+      <!-- Workspace Header -->
+      <div class="ws-header" style="border-radius: var(--radius-lg) var(--radius-lg) 0 0;">
+        <div class="ws-title-group">
+          <span class="ws-code-badge" id="wsCodeBadge">EN02</span>
+          <div class="ws-title" id="wsTitle">To be, đại từ, sở hữu</div>
+        </div>
+        <div class="ws-header-actions">
+          <button class="btn btn-outline-small" onclick="toggleFloatingAiDrawer()" title="Mở Gia sư AI theo sát bài học" style="color: var(--pink-primary); border-color: var(--pink-border);">
+            <i class="fa-solid fa-robot"></i> <span>Hỏi AI</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- VÒNG TRÒN CHUYỂN CÁC MỤC HỌC TẬP (CIRCULAR STEPPER NAVIGATION) -->
+      <div class="ws-circular-stepper">
+        <button class="ws-circle-step active" data-wstab="ws-tab-read" onclick="switchWorkspaceTab('ws-tab-read')" title="Mục 1: Lý thuyết & Ghi chép trên lớp">
+          <span class="step-circle"><span class="step-circle-num">1</span><i class="fa-solid fa-book-open"></i></span>
+          <span class="step-label">1. Lý thuyết & Ghi chép</span>
+        </button>
+        <div class="ws-step-connector"></div>
+        <button class="ws-circle-step" data-wstab="ws-tab-practice" onclick="switchWorkspaceTab('ws-tab-practice')" title="Mục 2: Luyện tập & Quiz trắc nghiệm">
+          <span class="step-circle"><span class="step-circle-num">2</span><i class="fa-solid fa-pen-nib"></i></span>
+          <span class="step-label">2. Luyện tập & Quiz</span>
+        </button>
+        <div class="ws-step-connector"></div>
+        <button class="ws-circle-step ai-circle" data-wstab="ws-tab-ai" onclick="switchWorkspaceTab('ws-tab-ai')" title="Mục 3: Trợ lý AI GLM 5.3">
+          <span class="step-circle"><span class="step-circle-num">3</span><i class="fa-solid fa-robot"></i></span>
+          <span class="step-label">3. Gia sư AI GLM 5.3</span>
+        </button>
+        <div class="ws-step-connector"></div>
+        <button class="ws-circle-step" data-wstab="ws-tab-checkpoint" onclick="switchWorkspaceTab('ws-tab-checkpoint')" title="Mục 4: Checkpoint & Hẹn ôn 3 ngày">
+          <span class="step-circle"><span class="step-circle-num">4</span><i class="fa-solid fa-flag-checkered"></i></span>
+          <span class="step-label">4. Báo cáo Checkpoint</span>
+        </button>
+      </div>
+
+      <!-- WORKSPACE BODY TABS -->
+      <div class="ws-body" style="padding: 24px;">
+        <!-- TAB 1: LÝ THUYẾT & VỞ GHI CHÉP TRÊN LỚP -->
+        <div class="ws-tab-pane active" id="ws-tab-read">
+          <div class="theory-intro-banner" id="wsIntroBanner"></div>
+
+          <!-- Vở ghi chép trên lớp & Tự học (Phần chính khi học trên lớp theo yêu cầu) -->
+          <div class="ws-live-note-card">
+            <div class="ws-live-note-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div class="live-note-icon-badge"><i class="fa-solid fa-pen-to-square"></i></div>
+                <div>
+                  <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--blue-primary); margin: 0;">
+                    Vở Ghi Chép Trên Lớp & Lưu Ý Của Giảng Viên
+                  </h4>
+                  <p style="font-size: 0.76rem; color: var(--text-muted); margin: 2px 0 0 0;">
+                    Bất cứ điều gì thầy cô nhấn mạnh trên lớp, công thức mở rộng hay bẫy lỗi, note ngay vào đây (Tự động lưu và kết nối trực tiếp với trí nhớ AI).
+                  </p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
+                <span class="live-note-autosave-badge" id="wsLiveNoteSaveStatus">
+                  <i class="fa-solid fa-check"></i> Đã tự động lưu
+                </span>
+                <button class="btn-small btn-primary" onclick="saveWsLessonLiveNote()">
+                  <i class="fa-solid fa-floppy-disk"></i> Lưu ghi chép
+                </button>
+              </div>
+            </div>
+            <!-- Chip thao tác nhanh cho ghi chép -->
+            <div class="live-note-chips-row">
+              <button class="live-chip-btn" type="button" onclick="insertNoteSnippet('⚠️ [Bẫy lỗi GV lưu ý]: ')">
+                ⚠️ Bẫy thầy cô dặn
+              </button>
+              <button class="live-chip-btn" type="button" onclick="insertNoteSnippet('📌 [Công thức cốt lõi]: ')">
+                📌 Công thức trọng tâm
+              </button>
+              <button class="live-chip-btn" type="button" onclick="insertNoteSnippet('💡 [Mẹo nhớ nhanh]: ')">
+                💡 Mẹo làm bài
+              </button>
+              <button class="live-chip-btn" type="button" onclick="askAiAboutLiveNote()" style="color: var(--pink-primary); border-color: var(--pink-border);">
+                🤖 Hỏi AI giải thích ghi chép này
+              </button>
+            </div>
+            <textarea id="wsLessonLiveNoteInput" placeholder="Ghi chép lưu ý của giảng viên trên lớp, công thức mở rộng hoặc câu hỏi cần hỏi AI..."></textarea>
+          </div>
+
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+            <i class="fa-solid fa-highlighter" style="color: var(--pink-primary);"></i>
+            <strong>Mẹo:</strong> Bôi đen bất kỳ đoạn văn nào bên dưới để tô màu <em>Xanh nước (Cốt lõi)</em>, <em>Hồng (Bẫy lỗi)</em>, <em>Vàng (Công thức)</em>, <em>Xanh lá (Mẹo nhớ)</em> hoặc bấm <strong>"Hỏi AI"</strong>!
+          </p>
+          <div id="wsTheorySectionsContainer"></div>
+          <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+            <button class="btn btn-primary" id="wsGoToPracticeBtn" onclick="switchWorkspaceTab('ws-tab-practice')">
+              Đã hiểu lý thuyết &bull; Sang phần Luyện tập <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 2: LUYỆN TẬP & BÀI TẬP THEO BÀI -->
+        <div class="ws-tab-pane" id="ws-tab-practice">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--blue-primary);">
+              <i class="fa-solid fa-pen-nib"></i> Bài tập trắc nghiệm & Tự luyện theo bài
+            </h4>
+            <span id="wsPracticeScoreBadge" style="font-size: 0.8rem; font-weight: 700; background: var(--blue-light); color: var(--blue-primary); padding: 4px 10px; border-radius: var(--radius-full);">
+              Tiến độ: 0 câu
+            </span>
+          </div>
+          <div class="practice-container" id="wsPracticeQuestionsContainer"></div>
+          <div style="margin-top: 24px; display: flex; justify-content: space-between;">
+            <button class="btn btn-outline" id="wsBackToReadBtn" onclick="switchWorkspaceTab('ws-tab-read')">
+              <i class="fa-solid fa-arrow-left"></i> Xem lại lý thuyết
+            </button>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline" id="wsAskAiPracticeBtn" onclick="switchWorkspaceTab('ws-tab-ai')" style="color: var(--pink-primary); border-color: var(--pink-border);">
+                <i class="fa-solid fa-robot"></i> Hỏi Trợ lý AI GLM
+              </button>
+              <button class="btn btn-primary" id="wsGoToCheckpointBtn" onclick="switchWorkspaceTab('ws-tab-checkpoint')">
+                Tổng kết Checkpoint <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: TRỢ LÝ AI GLM 5.3 THEO SÁT TIẾT HỌC -->
+        <div class="ws-tab-pane" id="ws-tab-ai">
+          <div class="ws-ai-wrapper">
+            <div class="ws-ai-header">
+              <div>
+                <h4 style="font-size: 0.92rem; font-weight: 800; color: var(--blue-primary);"><i class="fa-solid fa-robot" style="color: var(--pink-primary);"></i> Gia Sư AI GLM 5.3 Cá Nhân</h4>
+                <p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;">
+                  Đồng hành cùng Thuận trong bài <span id="wsAiLessonBadge" style="font-weight: 700; color: var(--blue-primary);">[EN02]</span>. Theo dõi sát bẫy lỗi và hướng dẫn phương pháp giải bản chất.
+                </p>
+              </div>
+              <button class="btn btn-outline-small" onclick="openOpenRouterModal()" title="Cài đặt khóa API">
+                <i class="fa-solid fa-gear"></i> Cài đặt AI
+              </button>
+            </div>
+            <div class="ws-ai-chat-box" id="wsAiChatContainer">
+              <div class="ai-bubble assistant">
+                Xin chào Thuận! Tôi là Gia sư AI GLM 5.3 cá nhân của bạn. Tôi đã nắm rõ nội dung bài học, bẫy lỗi và phương pháp tư duy của tiết học này. Bạn cần tôi gợi ý tư duy, giải thích ghi chép trên lớp hay bẫy lỗi nào không?
+              </div>
+            </div>
+            <div class="ws-ai-input-bar">
+              <input type="text" id="wsAiInput" placeholder="Hỏi AI về bài học này, bẫy lỗi hoặc hướng dẫn giải...">
+              <button class="btn btn-primary" id="wsAiSendBtn" onclick="sendWorkspaceAiMessage()">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: CHECKPOINT TIẾN ĐỘ & HẸN ÔN 3 NGÀY -->
+        <div class="ws-tab-pane" id="ws-tab-checkpoint">
+          <div class="checkpoint-card">
+            <div class="checkpoint-header">
+              <i class="fa-solid fa-flag-checkered" style="font-size: 1.5rem; color: var(--pink-primary);"></i>
+              <div>
+                <h4 style="font-size: 1rem; font-weight: 800; color: var(--blue-primary);">Báo cáo Checkpoint Tiến Độ Tiết Học</h4>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">
+                  Cập nhật kết quả tự học, ghi nhận thời gian và hệ thống tự động lên lịch nhắc ôn lại sau 3 ngày.
+                </p>
+              </div>
+            </div>
+            <div class="checkpoint-form">
+              <div class="form-row">
+                <label>Trạng thái bài học:</label>
+                <select id="wsCheckpointStatusSelect">
+                  <option value="Đang học">Đang học</option>
+                  <option value="Đã hoàn thành">Đã hoàn thành</option>
+                  <option value="Chưa học">Chưa học</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label>Kết quả trắc nghiệm / tự đánh giá:</label>
+                <input type="text" id="wsCheckpointResultInput" placeholder="VD: Đúng 3/3 câu, hiểu bản chất To be và sở hữu">
+              </div>
+              <div class="form-row">
+                <label>Lỗi sai hoặc bẫy cần ghi nhớ kỹ:</label>
+                <textarea id="wsCheckpointMistakesInput" rows="2" placeholder="VD: Hay nhầm hers thành her's, phát âm đuôi s/es..."></textarea>
+              </div>
+              <div style="display: flex; gap: 12px; margin-top: 10px;">
+                <button class="btn btn-primary" id="wsSaveCheckpointBtn" onclick="saveWsCheckpoint()" style="flex: 2;">
+                  <i class="fa-solid fa-floppy-disk"></i> Lưu Checkpoint & Hẹn Ôn Sau 3 Ngày
+                </button>
+                <button class="btn btn-outline" onclick="window.location.href='/ngat-quang'" style="flex: 1;">
+                  <i class="fa-solid fa-clock-rotate-left"></i> Xem lịch ôn
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <a href="/" class="mobile-nav-btn"><i class="fa-solid fa-house"></i><span>Tổng quan</span></a>
+    <a href="/bai-hoc" class="mobile-nav-btn active"><i class="fa-solid fa-book-open"></i><span>Bài học</span></a>
+    <a href="/on-tap" class="mobile-nav-btn"><i class="fa-solid fa-pen-nib"></i><span>Ôn tập</span></a>
+    <a href="/ngat-quang" class="mobile-nav-btn"><i class="fa-solid fa-clock-rotate-left"></i><span>Ôn 3 ngày</span></a>
+    <a href="/lich-hoc" class="mobile-nav-btn"><i class="fa-solid fa-calendar-days"></i><span>Lịch học</span></a>
+    <a href="/dong-bo" class="mobile-nav-btn"><i class="fa-solid fa-cloud-arrow-up"></i><span>AI & Repo</span></a>
+  </nav>
+
+  <!-- FLOATING AI WIDGET -->
+  <div class="floating-ai-btn" id="floatingAiToggleBtn" onclick="toggleFloatingAiDrawer()" title="Hỏi Gia sư AI GLM 5.3">
+    <i class="fa-solid fa-robot"></i>
+    <span class="floating-ai-pulse"></span>
+  </div>
+
+  <div class="floating-ai-drawer" id="floatingAiDrawer">
+    <div class="floating-ai-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-robot" style="color: var(--pink-primary); font-size: 1.1rem;"></i>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--blue-primary); margin: 0;">Gia Sư AI GLM 5.3</h4>
+          <span style="font-size: 0.72rem; color: var(--text-muted);">Trực tuyến &bull; Nắm rõ nhật ký học</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 6px;">
+        <button class="btn-icon" onclick="openOpenRouterModal()" title="Cài đặt khóa API"><i class="fa-solid fa-gear"></i></button>
+        <button class="btn-icon" onclick="toggleFloatingAiDrawer()" title="Đóng chat"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="floating-ai-body" id="floatingAiChatBody">
+      <div class="ai-bubble assistant">
+        Chào Thuận! Tôi đang theo dõi bài học cùng bạn. Bạn cần hỏi gì về kiến thức, bẫy lỗi hay cách giải bài tập không?
+      </div>
+    </div>
+    <div class="floating-ai-footer">
+      <input type="text" id="floatingAiInput" placeholder="Hỏi AI GLM 5.3..." onkeydown="if(event.key==='Enter')handleFloatingAiSend()">
+      <button class="btn-primary" onclick="handleFloatingAiSend()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT OPENROUTER KEY -->
+  <div class="modal-overlay" id="openRouterModal">
+    <div class="modal-content" style="max-width: 460px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--blue-primary);">
+          <i class="fa-solid fa-key" style="color: var(--pink-primary);"></i> Cài đặt AI OpenRouter
+        </h3>
+        <button class="close-modal-btn" onclick="closeOpenRouterModal()">&times;</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Mô hình AI:</label>
+          <select id="selectOpenRouterModel" style="width: 100%; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px;">
+            <option value="thuan-glm-5.3">GLM 5.3 (Mặc định cấu hình cá nhân của Thuận)</option>
+            <option value="meta-llama/llama-3.3-70b-instruct">Llama 3.3 70B Instruct (Fallback tốc độ cao)</option>
+            <option value="deepseek/deepseek-chat">DeepSeek Chat V3 (Tư duy toán & code)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Khóa OpenRouter API Key:</label>
+          <input type="password" id="inputOpenRouterKey" placeholder="sk-or-v1-..." style="width: 100%; padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-top: 4px; font-family: monospace; font-size: 0.85rem;">
+          <small style="color: var(--text-muted); font-size: 0.72rem; display: block; margin-top: 4px;">
+            Đã tự động tải cấu hình OpenRouter GLM 5.3 an toàn trên máy Thuận.
+          </small>
+        </div>
+        <button class="btn btn-primary" onclick="saveOpenRouterKey()" style="margin-top: 6px;">
+          <i class="fa-solid fa-floppy-disk"></i> Lưu Cấu Hình
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING SELECTION TOOLBAR CHO HIGHLIGHT -->
+  <div class="selection-toolbar" id="textSelectionToolbar">
+    <button class="sel-btn-hl hl-blue" onclick="applyHighlightToSelection('blue')" title="Cốt lõi"></button>
+    <button class="sel-btn-hl hl-pink" onclick="applyHighlightToSelection('pink')" title="Bẫy lỗi"></button>
+    <button class="sel-btn-hl hl-yellow" onclick="applyHighlightToSelection('yellow')" title="Công thức"></button>
+    <button class="sel-btn-hl hl-green" onclick="applyHighlightToSelection('green')" title="Mẹo nhớ"></button>
+    <button class="sel-btn-ask" onclick="askAiAboutSelection()" title="Hỏi AI">
+      <i class="fa-solid fa-robot"></i> Hỏi AI
+    </button>
+  </div>
+
+  <div class="toast-notification" id="toastBox"></div>
+
+  <!-- SCRIPTS -->
+  <script src="data-store.js"></script>
+  <script src="firebase-sync.js"></script>
+  <script type="module" src="app.js"></script>
+
+  <script>
+    // Logic khởi tạo trang Bài Học độc lập
+    window.addEventListener("DOMContentLoaded", () => {
+      // Đọc URL param ?lesson=
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetLesson = urlParams.get("lesson") || "EN02";
+
+      // Đợi app.js nạp xong state rồi render
+      setTimeout(() => {
+        populateSubjectAndLessonSelects(targetLesson);
+        if (typeof window.loadWorkspaceLesson === "function") {
+          window.loadWorkspaceLesson(targetLesson);
+        }
+      }, 150);
+    });
+
+    function populateSubjectAndLessonSelects(currentCode) {
+      const subjectSelect = document.getElementById("pageSubjectSelect");
+      const lessonSelect = document.getElementById("pageLessonSelect");
+      if (!subjectSelect || !lessonSelect || typeof SESSIONS_DATA === "undefined") return;
+
+      const currentSession = SESSIONS_DATA.find(s => s.code === currentCode);
+      const currentSubject = currentSession ? currentSession.subject : "EN";
+      subjectSelect.value = currentSubject;
+
+      updateLessonDropdown(currentSubject, currentCode);
+    }
+
+    function updateLessonDropdown(subjectCode, selectedCode) {
+      const lessonSelect = document.getElementById("pageLessonSelect");
+      if (!lessonSelect || typeof SESSIONS_DATA === "undefined") return;
+
+      const lessons = SESSIONS_DATA.filter(s => s.subject === subjectCode);
+      lessonSelect.innerHTML = lessons.map(s => `
+        <option value="${s.code}" ${s.code === selectedCode ? 'selected' : ''}>
+          [${s.code}] ${s.title}
+        </option>
+      `).join("");
+    }
+
+    window.handleSubjectSelectChange = function(subjectCode) {
+      if (typeof SESSIONS_DATA === "undefined") return;
+      const firstLesson = SESSIONS_DATA.find(s => s.subject === subjectCode);
+      if (firstLesson) {
+        updateLessonDropdown(subjectCode, firstLesson.code);
+        switchLesson(firstLesson.code);
+      }
+    };
+
+    window.handleLessonSelectChange = function(lessonCode) {
+      switchLesson(lessonCode);
+    };
+
+    function switchLesson(code) {
+      const newUrl = `${window.location.pathname}?lesson=${encodeURIComponent(code)}`;
+      window.history.pushState({ lesson: code }, "", newUrl);
+      if (typeof window.loadWorkspaceLesson === "function") {
+        window.loadWorkspaceLesson(code);
+      }
+    }
+
+    window.goToPrevLesson = function() {
+      if (typeof SESSIONS_DATA === "undefined") return;
+      const currentCode = document.getElementById("pageLessonSelect").value;
+      const idx = SESSIONS_DATA.findIndex(s => s.code === currentCode);
+      if (idx > 0) {
+        const prevCode = SESSIONS_DATA[idx - 1].code;
+        const subj = SESSIONS_DATA[idx - 1].subject;
+        document.getElementById("pageSubjectSelect").value = subj;
+        updateLessonDropdown(subj, prevCode);
+        switchLesson(prevCode);
+      }
+    };
+
+    window.goToNextLesson = function() {
+      if (typeof SESSIONS_DATA === "undefined") return;
+      const currentCode = document.getElementById("pageLessonSelect").value;
+      const idx = SESSIONS_DATA.findIndex(s => s.code === currentCode);
+      if (idx >= 0 && idx < SESSIONS_DATA.length - 1) {
+        const nextCode = SESSIONS_DATA[idx + 1].code;
+        const subj = SESSIONS_DATA[idx + 1].subject;
+        document.getElementById("pageSubjectSelect").value = subj;
+        updateLessonDropdown(subj, nextCode);
+        switchLesson(nextCode);
+      }
+    };
+  </script>
+</body>
+</html>

@@ -291,10 +291,15 @@ function renderStats() {
   const doneEl = document.getElementById("statDoneCount");
   const learningEl = document.getElementById("statLearningCount");
   const percentEl = document.getElementById("statPercent");
+  const hoursEl = document.getElementById("statHoursDisplay");
 
   if (doneEl) doneEl.textContent = done;
   if (learningEl) learningEl.textContent = learning;
   if (percentEl) percentEl.textContent = `${percent}%`;
+  if (hoursEl) {
+    const totalMins = (state.studyLogs || []).reduce((a, b) => a + (b.durationMinutes || 0), 0);
+    hoursEl.textContent = `${(totalMins / 60).toFixed(1)}h`;
+  }
 }
 
 // =========================================================
@@ -477,9 +482,18 @@ function renderCoursesOverview() {
 
 function openCourseLessons(subjectKey) {
   selectedCourseSubject = subjectKey;
+  if (!window.location.pathname.includes("lo-trinh")) {
+    window.location.href = `/lo-trinh?subject=${encodeURIComponent(subjectKey)}`;
+    return;
+  }
   const overviewView = document.getElementById("subjectsOverviewView");
   const explorerView = document.getElementById("subjectLessonsExplorerView");
-  if (!overviewView || !explorerView) return;
+  if (!overviewView || !explorerView) {
+    if (typeof filterBySubject === "function") {
+      filterBySubject(subjectKey);
+    }
+    return;
+  }
 
   overviewView.style.display = "none";
   explorerView.style.display = "block";
@@ -659,6 +673,108 @@ function renderSessionsList() {
   renderSubjectLessonsList();
 }
 
+export function filterBySubject(subj) {
+  if (!window.location.pathname.includes("lo-trinh")) {
+    window.location.href = `/lo-trinh?subject=${encodeURIComponent(subj)}`;
+    return;
+  }
+  selectedCourseSubject = subj === "ALL" ? "EN" : subj;
+  const pillBtns = document.querySelectorAll(".subject-pill-btn");
+  pillBtns.forEach(p => p.classList.toggle("active", p.dataset.subject === subj));
+
+  const hero = document.getElementById("currentSubjectHero");
+  if (hero) {
+    if (subj === "ALL") {
+      hero.innerHTML = `
+        <div style="flex: 1;">
+          <div class="subject-hero-title">Toàn bộ 122 tiết học Kỳ 1</div>
+          <div class="subject-hero-meta">Tổng hợp 5 môn: Giải tích 1, Tiếng Anh, Lập trình C, Vật lý 1, Pháp luật đại cương.</div>
+        </div>
+      `;
+    } else {
+      const info = SUBJECTS_MAP[subj] || {};
+      const subjectSessions = state.sessions.filter(s => s.subject === subj);
+      const done = subjectSessions.filter(s => s.status === "Đã hoàn thành").length;
+      hero.innerHTML = `
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span style="background: ${info.bgColor || '#e0f2fe'}; color: ${info.color || '#0284c7'}; font-size: 0.75rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;">
+              MÃ: ${info.code || subj}
+            </span>
+            <span style="font-size: 0.8rem; color: var(--pink-primary); font-weight: 700;">
+              <i class="fa-solid fa-bullseye"></i> Mục tiêu: ${info.targetScore || 'Điểm cao'}
+            </span>
+          </div>
+          <div class="subject-hero-title">${info.name || subj}</div>
+          <div class="subject-hero-meta">
+            ${info.description || ''} &bull; GV: <strong>${info.lecturer || 'Giảng viên khoa'}</strong> &bull; Phòng: <strong>${info.room || 'Theo TKB'}</strong>
+          </div>
+        </div>
+        <div style="text-align: right; min-width: 130px;">
+          <div style="font-size: 1.35rem; font-weight: 900; color: ${info.color || '#0284c7'};">${done} / ${subjectSessions.length}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Bài đã hoàn thành</div>
+        </div>
+      `;
+    }
+  }
+
+  const container = document.getElementById("subjectLessonsList");
+  if (!container) return;
+
+  let list = subj === "ALL" ? [...state.sessions] : state.sessions.filter(s => s.subject === subj);
+  if (lessonStatusFilter !== "ALL") {
+    list = list.filter(s => s.status.includes(lessonStatusFilter));
+  }
+  if (lessonSearchKeyword) {
+    list = list.filter(s => 
+      s.code.toLowerCase().includes(lessonSearchKeyword) || 
+      s.title.toLowerCase().includes(lessonSearchKeyword)
+    );
+  }
+
+  container.innerHTML = list.map(s => {
+    let statusClass = "status-todo";
+    if (s.status === "Đã hoàn thành") statusClass = "status-done";
+    if (s.status.includes("Đang học")) statusClass = "status-learning";
+    const subInfo = SUBJECTS_MAP[s.subject] || {};
+
+    return `
+      <div class="lesson-row-card" data-code="${s.code}">
+        <div class="lesson-row-left">
+          <span class="lesson-code-pill" style="background: ${subInfo.bgColor || '#f1f5f9'}; color: ${subInfo.color || '#334155'};">
+            ${s.code}
+          </span>
+          <div>
+            <div class="lesson-title-text">${s.title}</div>
+            <div class="lesson-sub-meta">
+              <span class="session-status ${statusClass}" style="padding: 1px 6px; font-size: 0.72rem;">${s.status}</span>
+              ${s.result ? `<span style="color: var(--success);"><i class="fa-solid fa-check"></i> ${s.result}</span>` : ""}
+              ${s.mistakes ? `<span style="color: #e11d48;"><i class="fa-solid fa-triangle-exclamation"></i> Lỗi: ${escapeHtml(s.mistakes)}</span>` : ""}
+            </div>
+          </div>
+        </div>
+        <div class="lesson-row-right">
+          <a href="/bai-hoc?lesson=${encodeURIComponent(s.code)}" class="btn btn-primary-small" style="padding: 6px 14px; font-size: 0.82rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+            <i class="fa-solid fa-book-open"></i> Vào học
+          </a>
+          <button class="btn-small open-session-update-btn" data-code="${s.code}" title="Cập nhật checkpoint">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  container.querySelectorAll(".open-session-update-btn").forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      openSessionModal(btn.dataset.code);
+    };
+  });
+}
+window.filterBySubject = filterBySubject;
+
+
 // =========================================================
 // 5. MODAL CẬP NHẬT TIẾN ĐỘ TIẾT HỌC (QUICK UPDATE)
 // =========================================================
@@ -685,19 +801,17 @@ function closeSessionModal() {
 // =========================================================
 // 6. KHÔNG GIAN HỌC TẬP CHUYÊN SÂU (LESSON WORKSPACE)
 // =========================================================
-export function openLessonWorkspace(code) {
+export function loadWorkspaceLesson(code) {
   const session = state.sessions.find(s => s.code === code);
   currentWsLessonCode = code;
   state.selectedSessionCode = code;
   currentWsContent = getLessonContent(code);
   practiceAnswers = {};
 
-  const modal = document.getElementById("lessonWorkspaceModal");
-  if (!modal) return;
-
-  // Render Header
-  document.getElementById("wsCodeBadge").textContent = code;
-  document.getElementById("wsTitle").textContent = session ? session.title : code;
+  const badgeEl = document.getElementById("wsCodeBadge");
+  const titleEl = document.getElementById("wsTitle");
+  if (badgeEl) badgeEl.textContent = code;
+  if (titleEl) titleEl.textContent = session ? session.title : code;
 
   // Render Tab 1: Lý thuyết & Highlights
   renderWorkspaceTheory();
@@ -715,7 +829,7 @@ export function openLessonWorkspace(code) {
   const liveNoteInput = document.getElementById("wsLessonLiveNoteInput");
   const statusBadge = document.getElementById("wsLiveNoteSaveStatus");
   if (liveNoteInput) {
-    liveNoteInput.value = state.notes[code] || "";
+    liveNoteInput.value = (state.notes && state.notes[code]) ? state.notes[code] : "";
     liveNoteInput.oninput = triggerLiveNoteAutoSave;
     if (statusBadge) {
       statusBadge.innerHTML = `<i class="fa-solid fa-check"></i> Đã tự động lưu`;
@@ -723,15 +837,35 @@ export function openLessonWorkspace(code) {
     }
   }
 
+  // Cập nhật select môn và bài nếu có
+  const pageLessonSelect = document.getElementById("pageLessonSelect");
+  if (pageLessonSelect && pageLessonSelect.value !== code) {
+    pageLessonSelect.value = code;
+  }
+
   // Mở tab 1 mặc định
   switchWorkspaceTab("ws-tab-read");
 
-  modal.classList.add("active");
+  const modal = document.getElementById("lessonWorkspaceModal");
+  if (modal) modal.classList.add("active");
+
   if (typeof updateAiLiveContext === "function") {
     updateAiLiveContext();
   }
 }
+window.loadWorkspaceLesson = loadWorkspaceLesson;
+
+export function openLessonWorkspace(code) {
+  if (window.location.pathname.includes("bai-hoc")) {
+    loadWorkspaceLesson(code);
+    const newUrl = `${window.location.pathname}?lesson=${encodeURIComponent(code)}`;
+    window.history.pushState({ lesson: code }, "", newUrl);
+  } else {
+    window.location.href = `/bai-hoc?lesson=${encodeURIComponent(code)}`;
+  }
+}
 window.openLessonWorkspace = openLessonWorkspace;
+
 
 export function closeLessonWorkspace() {
   const modal = document.getElementById("lessonWorkspaceModal");
