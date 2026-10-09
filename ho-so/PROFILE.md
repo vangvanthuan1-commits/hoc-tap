@@ -1,6 +1,6 @@
 # Hồ sơ học tập của người dùng
 
-Cập nhật: 07/10/2026. Nguồn: snapshot do người dùng cung cấp, lưu tại [snapshots/2026-10-07.md](snapshots/2026-10-07.md). Đây là thông tin người dùng cung cấp, không phải các dữ kiện đã được kiểm chứng độc lập. Ưu tiên cập nhật mới hơn của người dùng; không tự suy ra tiến độ từ ngày tháng hoặc độ phức tạp của dự án.
+Cập nhật: 09/10/2026. Nguồn: Cập nhật trực tiếp theo yêu cầu người dùng và nâng cấp app học tập Phenikaa K20; lưu snapshot lịch sử tại [snapshots/2026-10-07.md](snapshots/2026-10-07.md). Ưu tiên cập nhật mới hơn của người dùng; không tự suy ra tiến độ từ ngày tháng hoặc độ phức tạp của dự án.
 
 ## Học tập và mục tiêu
 
@@ -71,13 +71,20 @@ Cập nhật: 07/10/2026. Nguồn: snapshot do người dùng cung cấp, lưu t
 - Người dùng chấp nhận đề thi và đề cương các năm trước cùng mã học phần; không cần giới hạn khóa K20. Ghi riêng năm và phần đã đọc; không lấy năm thu thập trang thành năm thi.
 - [Danh mục tài liệu cũ](../ke-hoach-hoc-tap/hk1-2026/tai-lieu-cu-cung-ma-2026-10-07.md): 2 đường dẫn đề giữa kỳ Vật lý FFS703013 mới đọc tiêu đề/mô tả; bài giảng CSE702040 năm 2024 đọc được phần xem trước về chuyển đổi số. Đã cập nhật IT19; chưa xác nhận thêm tiến độ học.
 
-## App học tập cá nhân — yêu cầu 07/10/2026
+## App học tập cá nhân — yêu cầu 07/10/2026 và cập nhật 09/10/2026
 
 - Người dùng muốn Study Space là app chính lâu dài: các môn HK1, ghi chú/highlight, bài luyện/kiểm tra, lịch, tiến độ; tối ưu điện thoại/máy tính, màu xanh nước biển/hồng.
-- Mã ứng dụng ở [app/README.md](../app/README.md); nhập kế hoạch 122 tiết, 64 buổi học, 78 học phần. 22 bài có nội dung và 141 câu tự luyện; còn lại là đề cương, không tự coi đã có toàn bộ giáo trình.
-- Dùng cấu hình client Firebase người dùng cung cấp. Offline lưu trên máy; Authentication/Firestore cần provider và rules hợp lệ để sync giữa thiết bị. Nút GitHub gửi bản JSON + Markdown mới vào [tu-app/](tu-app/README.md) để khôi phục ngữ cảnh.
+- **Nâng cấp ngày 09/10/2026 theo yêu cầu người dùng**:
+  + Thay thế stepper tiến trình bằng **vòng tròn số trực quan** (1. Lý thuyết & Ghi chép, 2. Luyện tập & Quiz, 3. Gia sư AI GLM 5.3, 4. Báo cáo Checkpoint).
+  + Nạp đầy đủ nội dung lý thuyết chi tiết cho **toàn bộ 122 tiết học** (GT: 32 bài, VL: 28 bài, IT: 20 bài, PL: 18 bài, EN: 24 bài), hỗ trợ highlight 4 màu và phân tích bẫy lỗi kinh điển, ngân hàng câu hỏi tự luyện.
+  + Đưa **Vở ghi chép trên lớp & Tự học** thành phần chính nổi bật trong bài học, tự động lưu (debounce) với LocalStorage/Firebase, hỗ trợ gắn chip nhanh và gửi ghi chép cho AI giải thích.
+  + Khu vực Ôn tập / Thi thử (`tab-quiz`): Đưa thanh chọn môn học lên đầu (Giải tích 1, Tiếng Anh xếp lớp 8.5+, CNTT & C, Vật lý 1, Pháp luật đại cương, Tổng hợp), tự động tổng hợp câu hỏi từ toàn bộ 122 bài học.
+  + Loại bỏ hoàn toàn game / mini-game; chuyển sang hệ thống **Spaced Repetition 3 ngày** (học xong bài nào, ví dụ EN01 hôm nay, thì 3 ngày sau hiện lên để ôn lại) và **Bộ theo dõi thời gian học thực tế** (Study Time Tracker / Pomodoro 25p), ghi nhận ngày giờ, số phút học theo từng bài.
+  + Trình bày **Lịch học** rõ ràng, đẹp mắt với thời gian (tiết, giờ) và địa điểm (phòng học cụ thể: A4-102, A1-701, A5-303, Tòa A6, Sân thể thao...).
+  + Tích hợp **Cầu nối Trợ lý AI GLM 5.3** (qua OpenRouter API, bảo mật khóa API bằng mã hóa Base64 phía client), tự động nạp ngữ cảnh nhật ký học tập (ngày nào học gì, mấy tiếng, kết quả ra sao, hẹn ôn ngày nào) để AI theo dõi sát sao tiến trình học của Thuận.
 - Không ghi kết quả thử tự động của phần mềm thành kết quả học của người dùng. Tiến độ gốc vẫn EN01 chẩn đoán hoàn thành, EN02 đã luyện khẳng định/phủ định; câu hỏi và sở hữu chưa xác nhận đã luyện.
 
 ## Phạm vi lưu trữ
 
 Repo hoc-tap là nơi lưu thông tin học tập của người dùng. Hồ sơ hiện tại ở ho-so/PROFILE.md; snapshot lịch sử ở ho-so/snapshots/. Khi tiếp tục công việc, đọc hồ sơ này để khôi phục ngữ cảnh. Các file trong repo không tự tạo bộ nhớ tài khoản; môi trường mới cần có bản repo chứa các cập nhật này.
+

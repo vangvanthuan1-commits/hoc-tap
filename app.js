@@ -711,10 +711,16 @@ export function openLessonWorkspace(code) {
   // Render Tab 4: Checkpoint
   renderWorkspaceCheckpoint();
 
-  // Nạp ghi chép nhanh trên lớp nếu đã có
+  // Nạp ghi chép nhanh trên lớp nếu đã có và gắn tự động lưu
   const liveNoteInput = document.getElementById("wsLessonLiveNoteInput");
+  const statusBadge = document.getElementById("wsLiveNoteSaveStatus");
   if (liveNoteInput) {
     liveNoteInput.value = state.notes[code] || "";
+    liveNoteInput.oninput = triggerLiveNoteAutoSave;
+    if (statusBadge) {
+      statusBadge.innerHTML = `<i class="fa-solid fa-check"></i> Đã tự động lưu`;
+      statusBadge.style.color = "var(--success)";
+    }
   }
 
   // Mở tab 1 mặc định
@@ -758,8 +764,59 @@ export function switchWorkspaceTab(tabId) {
 }
 window.switchWorkspaceTab = switchWorkspaceTab;
 
+let liveNoteAutoSaveTimeout = null;
+
+export function triggerLiveNoteAutoSave() {
+  const input = document.getElementById("wsLessonLiveNoteInput");
+  const statusBadge = document.getElementById("wsLiveNoteSaveStatus");
+  if (!input || !currentWsLessonCode) return;
+
+  if (statusBadge) {
+    statusBadge.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...`;
+    statusBadge.style.color = "var(--pink-primary)";
+  }
+
+  clearTimeout(liveNoteAutoSaveTimeout);
+  liveNoteAutoSaveTimeout = setTimeout(() => {
+    state.notes[currentWsLessonCode] = input.value;
+    saveStudyState(state);
+    if (statusBadge) {
+      statusBadge.innerHTML = `<i class="fa-solid fa-check"></i> Đã tự động lưu`;
+      statusBadge.style.color = "var(--success)";
+    }
+  }, 600);
+}
+window.triggerLiveNoteAutoSave = triggerLiveNoteAutoSave;
+
+export function insertNoteSnippet(text) {
+  const input = document.getElementById("wsLessonLiveNoteInput");
+  if (!input) return;
+  input.focus();
+  const start = input.selectionStart || input.value.length;
+  const end = input.selectionEnd || input.value.length;
+  const prevVal = input.value;
+  const prefix = prevVal.length > 0 && !prevVal.endsWith("\n") ? "\n" : "";
+  input.value = prevVal.substring(0, start) + prefix + text + prevVal.substring(end);
+  input.selectionStart = input.selectionEnd = start + prefix.length + text.length;
+  triggerLiveNoteAutoSave();
+}
+window.insertNoteSnippet = insertNoteSnippet;
+
+export function askAiAboutLiveNote() {
+  const input = document.getElementById("wsLessonLiveNoteInput");
+  const noteText = input ? input.value.trim() : "";
+  if (!noteText) {
+    showToast("Vui lòng ghi nội dung cần giải thích vào vở ghi chép trước nhé!", "fa-circle-info");
+    return;
+  }
+  switchWorkspaceTab("ws-tab-ai");
+  sendAiMessage(`Dưới đây là phần ghi chép trên lớp của tôi ở bài [${currentWsLessonCode}]:\n"${noteText}"\n\nHãy giải thích bản chất thật ngắn gọn, chỉ ra các bẫy đề kinh điển và ví dụ trực quan giúp tôi nhé!`);
+}
+window.askAiAboutLiveNote = askAiAboutLiveNote;
+
 export function saveWsLessonLiveNote() {
   const input = document.getElementById("wsLessonLiveNoteInput");
+  const statusBadge = document.getElementById("wsLiveNoteSaveStatus");
   if (!input) return;
   const content = input.value.trim();
   state.notes[currentWsLessonCode] = content;
@@ -775,7 +832,11 @@ export function saveWsLessonLiveNote() {
   });
 
   saveStudyState(state);
-  showToast(`Đã lưu ghi chép cho bài [${currentWsLessonCode}] vào hệ thống!`);
+  if (statusBadge) {
+    statusBadge.innerHTML = `<i class="fa-solid fa-check-double"></i> Đã lưu vào hệ thống`;
+    statusBadge.style.color = "var(--success)";
+  }
+  showToast(`Đã lưu ghi chép bài [${currentWsLessonCode}] vào hệ thống & Sổ tay!`);
 }
 window.saveWsLessonLiveNote = saveWsLessonLiveNote;
 
@@ -1975,7 +2036,32 @@ Trả về DUY NHẤT một mảng JSON hợp lệ, KHÔNG thêm bất kỳ văn
 }
 
 export function startQuiz(type) {
-  currentQuizList = QUIZ_QUESTIONS[type] || QUIZ_QUESTIONS[type + "_ENTRANCE"] || QUIZ_QUESTIONS["EN"] || [];
+  let list = [...(QUIZ_QUESTIONS[type] || QUIZ_QUESTIONS[type + "_ENTRANCE"] || [])];
+
+  // Gom thêm toàn bộ câu hỏi chuẩn từ các tiết học thuộc môn này
+  const lessonsOfSubject = state.sessions.filter(s => type === "ALL" || s.subject === type);
+  const lessonQuestions = [];
+  lessonsOfSubject.forEach(s => {
+    const content = getLessonContent(s.code);
+    if (content && content.questions && content.questions.length > 0) {
+      content.questions.forEach(q => {
+        lessonQuestions.push({
+          id: q.id,
+          question: q.prompt,
+          options: q.options,
+          correctIndex: q.answer,
+          explanation: q.explanation
+        });
+      });
+    }
+  });
+
+  if (lessonQuestions.length > 0) {
+    list = [...list, ...lessonQuestions];
+  }
+
+  // Lấy 10 câu tiêu biểu
+  currentQuizList = list.slice(0, 10);
   currentQuizIndex = 0;
   userQuizAnswers = {};
 
@@ -1983,10 +2069,11 @@ export function startQuiz(type) {
   if (sourceTag) {
     const titles = {
       EN: "Đề Tiếng Anh (Xếp lớp 8.5+)",
-      GT: "Đề Giải tích 1 (Giới hạn, Vô cùng bé)",
+      GT: "Đề Giải tích 1 (Giới hạn, Đạo hàm, Tích phân)",
       IT: "Đề Nhập môn CNTT & C (Pointer, RAM)",
       VL: "Đề Vật lý 1 (Cơ học, Nhiệt học)",
-      PL: "Đề Pháp luật đại cương (Nhà nước, Quy phạm)"
+      PL: "Đề Pháp luật đại cương (Nhà nước, Vi phạm)",
+      ALL: "Đề Tổng hợp Kỳ 1 K20"
     };
     sourceTag.textContent = titles[type] || `Đề môn ${type}`;
     sourceTag.style.background = "var(--blue-light)";
@@ -2460,6 +2547,49 @@ export function completeSpacedReview(id) {
   showToast(`🎉 Đã đánh dấu ôn tập [${item.lessonCode}]! Hẹn ôn lại sau 3 ngày (${nextStr}).`);
 }
 window.completeSpacedReview = completeSpacedReview;
+
+export function handleQuickAddSpacedReview() {
+  const select = document.getElementById("quickAddSpacedLessonSelect");
+  if (!select) return;
+  const lessonCode = select.value;
+  if (!lessonCode) return;
+
+  const session = state.sessions.find(s => s.code === lessonCode);
+  scheduleSpacedReview(lessonCode, 3, session && session.mistakes ? `Bẫy lỗi: ${session.mistakes}` : "Tự lên lịch ôn ngắt quãng 3 ngày");
+  showToast(`🎉 Đã thêm [${lessonCode}] vào lịch ôn tập sau 3 ngày!`);
+}
+window.handleQuickAddSpacedReview = handleQuickAddSpacedReview;
+
+export function finishCurrentStudySession() {
+  const trackerSelect = document.getElementById("trackerLessonSelect");
+  const lessonCode = trackerSelect ? trackerSelect.value : (currentWsLessonCode || "EN01");
+  const session = state.sessions.find(s => s.code === lessonCode);
+
+  const duration = Math.max(15, Math.round(studyTimerSeconds / 60) || 25);
+
+  addStudyLog({
+    lessonCode: lessonCode,
+    subject: session ? session.subject : lessonCode.slice(0, 2),
+    durationMinutes: duration,
+    action: `Hoàn thành phiên tự học: ${lessonCode}`,
+    resultScore: `Tập trung ${duration} phút`,
+    nextReviewDate: "Hẹn sau 3 ngày",
+    note: session && session.mistakes ? `Bẫy cần ôn: ${session.mistakes}` : "Đã hoàn thành phiên tự học nghiêm túc"
+  });
+
+  scheduleSpacedReview(lessonCode, 3, session && session.mistakes ? `Bẫy lỗi: ${session.mistakes}` : "Ôn tập củng cố sau 3 ngày");
+
+  studyTimerSeconds = 0;
+  updateHeaderStudyTimerDisplay();
+  resetPomodoro();
+
+  saveStudyState(state);
+  renderSpacedReviewQueue();
+  renderStudyLogs();
+
+  showToast(`🎉 Đã ghi nhận ${duration} phút học [${lessonCode}] & hẹn ôn tập sau 3 ngày!`);
+}
+window.finishCurrentStudySession = finishCurrentStudySession;
 
 export function renderSpacedReviewQueue() {
   const container = document.getElementById("spacedReviewsContainer");
@@ -3085,15 +3215,24 @@ ${formatStudyHistoryForAI()}`;
 }
 window.handleFloatingAiSend = handleFloatingAiSend;
 
+function renderSpacedLessonSelects() {
+  const quickSelect = document.getElementById("quickAddSpacedLessonSelect");
+  const trackerSelect = document.getElementById("trackerLessonSelect");
+  if (!quickSelect && !trackerSelect) return;
+  const optionsHtml = state.sessions.map(s => `<option value="${s.code}">[${s.code}] ${s.title}</option>`).join("");
+  if (quickSelect) quickSelect.innerHTML = optionsHtml;
+  if (trackerSelect) trackerSelect.innerHTML = optionsHtml;
+}
+
 // Render toàn bộ dữ liệu ban đầu
 function renderAllViews() {
   renderStats();
   renderSessionsList();
   renderSpacedReviewQueue();
   renderStudyLogs();
-  renderFlashcard();
+  renderSpacedLessonSelects();
   renderHighlightsList();
-  startQuiz("EN");
+  startQuiz("GT");
 }
 
 function escapeHtml(str) {
