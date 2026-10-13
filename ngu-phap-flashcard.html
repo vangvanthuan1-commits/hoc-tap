@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Khóa Cấp Tốc Ngữ Pháp Tiếng Anh &bull; Flashcard & Gemini 3.8 Flash</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* =========================================================
+       HỆ THỐNG MÀU SẮC CHỐNG MỎI MẮT (EYE-FRIENDLY SLATE/OCEAN NAVY)
+       Dành riêng cho cày cuốc thâu đêm 4 ngày trước kỳ thi 17-18/10
+       ========================================================= */
+    :root {
+      --bg-dark: #070d19;
+      --bg-surface: #0e172a;
+      --bg-card: #132238;
+      --bg-card-hover: #172a46;
+      --bg-card-inner: #0b1526;
+      
+      --border-subtle: #1e3a5f;
+      --border-glow: #38bdf8;
+      --border-accent: rgba(56, 189, 248, 0.35);
+
+      --text-main: #f1f5f9;
+      --text-soft: #cbd5e1;
+      --text-muted: #829ab1;
+      --text-dim: #486581;
+
+      --blue-accent: #38bdf8;
+      --blue-primary: #0284c7;
+      --blue-deep: #0369a1;
+      --cyan-glow: #67e8f9;
+
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.15);
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.15);
+      --purple: #a855f7;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.35);
+      --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(ellipse at 85% 10%, rgba(56, 189, 248, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 15% 90%, rgba(2, 132, 199, 0.12) 0%, transparent 60%);
+      color: var(--text-soft);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 90px;
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+       HEADER ỨNG DỤNG & THANH CÔNG CỤ
+       ========================================================= */
+    .app-header {
+      background: rgba(14, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 10px 16px;
+    }
+
+    .header-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      color: #04101e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .brand-info h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-info p {
+      font-size: 0.72rem;
+      color: var(--blue-accent);
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Đếm ngược thi & Bấm giờ */
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(30, 58, 95, 0.5);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .pill-badge.active {
+      border-color: var(--blue-accent);
+      color: var(--blue-accent);
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    .btn-icon {
+      background: rgba(30, 58, 95, 0.4);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-soft);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-icon:hover {
+      background: var(--blue-primary);
+      color: #fff;
+      border-color: var(--blue-accent);
+    }
+
+    /* =========================================================
+       CONTAINER CHÍNH
+       ========================================================= */
+    .main-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 16px 16px 40px 16px;
+    }
+
+    /* Banner thông báo mục tiêu 4 ngày */
+    .target-banner {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.2) 0%, rgba(14, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .target-banner-text h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .target-banner-text p {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 3px;
+    }
+
+    .target-stats {
+      display: flex;
+      gap: 12px;
+    }
+
+    .stat-pill {
+      background: rgba(11, 21, 38, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 6px 12px;
+      text-align: center;
+    }
+
+    .stat-pill .num {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--blue-accent);
+    }
+
+    .stat-pill .lbl {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* =========================================================
+       BỘ LỌC CHUYÊN ĐỀ & CHẾ ĐỘ HỌC
+       ========================================================= */
+    .controls-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      margin-bottom: 20px;
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--bg-dark);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      overflow-x: auto;
+    }
+
+    .mode-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .mode-tab-btn.active {
+      background: var(--blue-primary);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
+    .topic-filter-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--blue-primary) transparent;
+    }
+
+    .topic-chip {
+      background: rgba(30, 58, 95, 0.35);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-soft);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.74rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .topic-chip:hover {
+      border-color: var(--blue-accent);
+      color: var(--blue-accent);
+    }
+
+    .topic-chip.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--blue-accent);
+      color: var(--blue-accent);
+      font-weight: 700;
+    }
+
+    /* Thanh tìm kiếm nhanh */
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 7px 12px 7px 32px;
+      color: var(--text-main);
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       KHU VỰC THẺ FLASHCARD 3D
+       ========================================================= */
+    .flashcard-arena {
+      perspective: 1200px;
+      margin: 0 auto 20px auto;
+      max-width: 820px;
+      min-height: 440px;
+    }
+
+    .flashcard-card {
+      width: 100%;
+      min-height: 440px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .flashcard-card.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border-accent);
+      box-shadow: var(--shadow-soft), var(--shadow-glow);
+      background: var(--bg-card);
+      overflow-y: auto;
+    }
+
+    /* Mặt trước */
+    .card-face-front {
+      background: linear-gradient(155deg, #132238 0%, #0d1829 100%);
+    }
+
+    /* Mặt sau */
+    .card-face-back {
+      background: linear-gradient(155deg, #0e1e33 0%, #091322 100%);
+      transform: rotateY(180deg);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .card-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-category-tag {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--blue-accent);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.74rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-mastery-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .card-mastery-tag.new { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+    .card-mastery-tag.wrong { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.4); }
+    .card-mastery-tag.hard { background: var(--warning-bg); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.4); }
+    .card-mastery-tag.good { background: var(--success-bg); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.4); }
+
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .card-front-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .card-front-challenge {
+      background: var(--bg-card-inner);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-size: 0.95rem;
+      color: var(--cyan-glow);
+      font-weight: 600;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .card-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Nội dung mặt sau */
+    .rule-box {
+      background: rgba(11, 21, 38, 0.85);
+      border-left: 4px solid var(--blue-accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .rule-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--blue-accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .rule-desc {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .trap-box {
+      background: rgba(239, 68, 68, 0.08);
+      border-left: 4px solid var(--danger);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .trap-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--danger);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .trap-desc {
+      font-size: 0.86rem;
+      color: #fca5a5;
+      line-height: 1.5;
+    }
+
+    .example-box {
+      background: rgba(16, 185, 129, 0.08);
+      border-left: 4px solid var(--success);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    .example-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .example-desc {
+      font-size: 0.86rem;
+      color: #a7f3d0;
+      line-height: 1.5;
+    }
+
+    .trick-box {
+      background: rgba(168, 85, 247, 0.08);
+      border-left: 4px solid var(--purple);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 10px 14px;
+    }
+
+    .trick-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--purple);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+
+    .trick-desc {
+      font-size: 0.84rem;
+      color: #e9d5ff;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .flip-btn-hint {
+      color: var(--blue-accent);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* =========================================================
+       NÚT ĐÁNH GIÁ LẶP LẠI (SRS ACTIONS)
+       ========================================================= */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 820px;
+      margin: 0 auto 16px auto;
+    }
+
+    .srs-btn {
+      padding: 12px 8px;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .srs-btn .key-hint {
+      font-size: 0.68rem;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    .srs-btn-again {
+      background: var(--danger-bg);
+      border-color: rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+    .srs-btn-again:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: var(--danger);
+      transform: translateY(-2px);
+    }
+
+    .srs-btn-hard {
+      background: var(--warning-bg);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: #fde68a;
+    }
+    .srs-btn-hard:hover {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: var(--warning);
+      transform: translateY(-2px);
+    }
+
+    .srs-btn-good {
+      background: var(--success-bg);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #a7f3d0;
+    }
+    .srs-btn-good:hover {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: var(--success);
+      transform: translateY(-2px);
+    }
+
+    /* =========================================================
+       THANH CÔNG CỤ GEMINI 3.8 FLASH
+       ========================================================= */
+    .ai-action-bar {
+      max-width: 820px;
+      margin: 0 auto 20px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .ai-tool-btn {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.25) 0%, rgba(14, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--text-main);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s;
+    }
+
+    .ai-tool-btn:hover {
+      border-color: var(--blue-accent);
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.4) 0%, rgba(14, 23, 42, 0.95) 100%);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .ai-tool-btn i {
+      font-size: 1rem;
+      color: var(--blue-accent);
+    }
+
+    /* =========================================================
+       BẢNG HIỂN THỊ GEMINI GIẢNG BÀI & TẠO ĐỀ THI DÀI
+       ========================================================= */
+    .ai-panel {
+      max-width: 820px;
+      margin: 0 auto 24px auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: none;
+      box-shadow: var(--shadow-soft), var(--shadow-glow);
+    }
+
+    .ai-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .ai-panel-header h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--blue-accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ai-panel-body {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Khối câu hỏi ngữ cảnh dài (Long-Context Exam Question) */
+    .exercise-context-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .exercise-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--blue-accent);
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .exercise-passage {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #e2e8f0;
+      font-style: italic;
+      margin-bottom: 12px;
+      border-left: 3px solid var(--blue-accent);
+      padding-left: 12px;
+    }
+
+    .exercise-question {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .option-btn {
+      background: rgba(19, 34, 56, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+
+    .option-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--blue-accent);
+      color: #fff;
+    }
+
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.25) !important;
+      border-color: var(--success) !important;
+      color: #a7f3d0 !important;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background: rgba(239, 68, 68, 0.25) !important;
+      border-color: var(--danger) !important;
+      color: #fca5a5 !important;
+    }
+
+    .option-label {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-sm);
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--blue-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    .exercise-result-box {
+      background: rgba(11, 21, 38, 0.9);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* Thanh tiến độ bài học */
+    .progress-bar-wrap {
+      max-width: 820px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%);
+      width: 0%;
+      transition: width 0.3s;
+      border-radius: var(--radius-full);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+
+    .progress-text {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue-accent);
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       MODAL CÀI ĐẶT API & PHÍM TẮT
+       ========================================================= */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(4, 10, 20, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      padding: 22px;
+      box-shadow: var(--shadow-soft), var(--shadow-glow);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-header h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--blue-accent);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      color: #04101e;
+      border: none;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-submit:hover {
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Navigation dưới đáy cho điện thoại */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(14, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 12px;
+      z-index: 90;
+    }
+
+    .bottom-nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .bottom-nav-btn.active, .bottom-nav-btn:hover {
+      color: var(--blue-accent);
+    }
+
+    .bottom-nav-btn i {
+      font-size: 1.1rem;
+    }
+
+    /* Hiệu ứng loading quay quay */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(56, 189, 248, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--blue-accent);
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 640px) {
+      .ai-action-bar {
+        grid-template-columns: 1fr;
+      }
+      .flashcard-arena {
+        min-height: 480px;
+      }
+      .card-face {
+        padding: 18px;
+      }
+      .card-front-title {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER ỨNG DỤNG -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="/" class="brand-section">
+        <div class="brand-logo"><i class="fa-solid fa-bolt"></i></div>
+        <div class="brand-info">
+          <h1>Cấp Tốc Ngữ Pháp &bull; Flashcard 8.5+</h1>
+          <p>Gemini 3.8 Flash &bull; Lặp lại vô tận &bull; Thi 17-18/10</p>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <!-- Đồng hồ bấm giờ học thực tế -->
+        <div class="pill-badge active" id="timerBadge" title="Bấm để bắt đầu/tạm dừng học">
+          <i class="fa-solid fa-stopwatch"></i>
+          <span id="studyTimerDisplay">00:00:00</span>
+        </div>
+
+        <!-- Nút cài đặt API Gemini -->
+        <button class="btn-icon" onclick="openSettingsModal()" title="Cài đặt khóa Gemini API">
+          <i class="fa-solid fa-sliders"></i>
+        </button>
+
+        <!-- Quay lại trang chủ -->
+        <a href="/" class="btn-icon" title="Về trang tổng quan Phenikaa K20">
+          <i class="fa-solid fa-house"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="main-wrap">
+
+    <!-- BANNER MỤC TIÊU 4 NGÀY -->
+    <div class="target-banner">
+      <div class="target-banner-text">
+        <h3><i class="fa-solid fa-fire" style="color: #f59e0b;"></i> CHIẾN DỊCH 4 NGÀY CẮM MẶT ÔN THI (13 &rarr; 17/10)</h3>
+        <p>Mục tiêu: Đạt 8.5+ bài thi xếp lớp Phenikaa (50 câu / 60 phút) để <strong>miễn học TA1 & TA2</strong>. Nền màu xanh dương êm dịu chống đau mắt.</p>
+      </div>
+      <div class="target-stats">
+        <div class="stat-pill">
+          <div class="num" id="statMasteredCount">0</div>
+          <div class="lbl">Đã nắm vững</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="statLearningCount">0</div>
+          <div class="lbl">Cần lặp lại</div>
+        </div>
+        <div class="stat-pill">
+          <div class="num" id="statTotalCount">48</div>
+          <div class="lbl">Tổng số thẻ</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BỘ ĐIỀU KHIỂN & LỌC CHUYÊN ĐỀ -->
+    <div class="controls-panel">
+      <div class="controls-row">
+        <!-- Chế độ học -->
+        <div class="mode-tabs">
+          <button class="mode-tab-btn active" id="modeBtnAll" onclick="switchMode('all')">
+            <i class="fa-solid fa-layer-group"></i> Tất cả 12 chuyên đề
+          </button>
+          <button class="mode-tab-btn" id="modeBtnDrill" onclick="switchMode('drill')">
+            <i class="fa-solid fa-rotate"></i> Lặp vô tận thẻ yếu
+          </button>
+          <button class="mode-tab-btn" id="modeBtnMastered" onclick="switchMode('mastered')">
+            <i class="fa-solid fa-circle-check"></i> Đã nắm vững
+          </button>
+        </div>
+
+        <!-- Tìm kiếm thẻ -->
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="cardSearchInput" placeholder="Tìm kiếm quy tắc, bẫy thì, công thức..." oninput="handleSearch(this.value)">
+        </div>
+      </div>
+
+      <!-- Cuộn 12 Chuyên đề Ngữ pháp -->
+      <div class="topic-filter-scroll" id="topicChipsContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- THANH TIẾN ĐỘ -->
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">Thẻ 1 / 48 (0%)</div>
+    </div>
+
+    <!-- KHU VỰC THẺ FLASHCARD 3D -->
+    <div class="flashcard-arena">
+      <div class="flashcard-card" id="flashcardElement" onclick="flipCard()">
+        
+        <!-- MẶT TRƯỚC (CÂU HỎI / THỬ THÁCH / BẪY THI CỐT LÕI) -->
+        <div class="card-face card-face-front">
+          <div class="card-top-bar">
+            <span class="card-category-tag" id="cardTopicTagFront">
+              <i class="fa-solid fa-book"></i> Chuyên đề 1: Hiện tại đơn & Tiếp diễn
+            </span>
+            <span class="card-mastery-tag new" id="cardMasteryTagFront">Chưa học</span>
+          </div>
+
+          <div class="card-content">
+            <h2 class="card-front-title" id="cardFrontQuestion">Đang tải nội dung thẻ...</h2>
+            <div class="card-front-challenge" id="cardFrontChallenge">Thử thách: ...</div>
+            <p class="card-hint" id="cardFrontHint"><i class="fa-regular fa-lightbulb"></i> Gợi ý: Bấm vào thẻ hoặc phím Space để xem bản chất & bẫy đề thi</p>
+          </div>
+
+          <div class="card-footer">
+            <span><i class="fa-solid fa-arrows-rotate"></i> Thẻ #<span id="currentCardIndexDisplay">1</span></span>
+            <span class="flip-btn-hint"><i class="fa-solid fa-hand-pointer"></i> Chạm để lật đáp án</span>
+          </div>
+        </div>
+
+        <!-- MẶT SAU (BẢN CHẤT CỐT LÕI / BẪY ĐỀ THI / VÍ DỤ / MẸO NHỚ) -->
+        <div class="card-face card-face-back">
+          <div class="card-top-bar">
+            <span class="card-category-tag" id="cardTopicTagBack">
+              <i class="fa-solid fa-check-double"></i> Bản chất & Bẫy Đề Thi
+            </span>
+            <span class="card-mastery-tag new" id="cardMasteryTagBack">Chưa học</span>
+          </div>
+
+          <div class="card-content">
+            <!-- Bản chất cốt lõi -->
+            <div class="rule-box">
+              <div class="rule-title"><i class="fa-solid fa-lightbulb"></i> Bản chất & Công thức chuẩn:</div>
+              <div class="rule-desc" id="cardBackRule">...</div>
+            </div>
+
+            <!-- Bẫy đề thi kinh điển -->
+            <div class="trap-box">
+              <div class="trap-title"><i class="fa-solid fa-triangle-exclamation"></i> Bẫy đề thi kinh điển (80% học sinh mất điểm):</div>
+              <div class="trap-desc" id="cardBackTrap">...</div>
+            </div>
+
+            <!-- Ví dụ phân tích -->
+            <div class="example-box">
+              <div class="example-title"><i class="fa-solid fa-circle-check"></i> Ví dụ thực tế & Phân tích:</div>
+              <div class="example-desc" id="cardBackExample">...</div>
+            </div>
+
+            <!-- Mẹo nhớ siêu tốc -->
+            <div class="trick-box">
+              <div class="trick-title"><i class="fa-solid fa-bolt"></i> Mẹo nhớ 3 giây:</div>
+              <div class="trick-desc" id="cardBackTrick">...</div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <span>Đánh giá mức độ nhớ bên dưới &darr;</span>
+            <span class="flip-btn-hint"><i class="fa-solid fa-arrow-rotate-left"></i> Chạm để lật lại mặt trước</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NÚT ĐÁNH GIÁ ĐỘ NHỚ (SRS BUTTONS) -->
+    <div class="action-grid">
+      <button class="srs-btn srs-btn-again" onclick="rateCard('again')" title="Đưa vào hàng đợi lặp lại ngay">
+        <span><i class="fa-solid fa-rotate-left"></i> Chưa thuộc / Cần lặp lại</span>
+        <span class="key-hint">[Phím 1 hoặc Mũi tên trái]</span>
+      </button>
+
+      <button class="srs-btn srs-btn-hard" onclick="rateCard('hard')" title="Còn phân vân, cần ôn lại sớm">
+        <span><i class="fa-solid fa-hourglass-half"></i> Tạm nhớ / Hơi ngập ngừng</span>
+        <span class="key-hint">[Phím 2 hoặc Mũi tên xuống]</span>
+      </button>
+
+      <button class="srs-btn srs-btn-good" onclick="rateCard('good')" title="Đã nắm vững bản chất">
+        <span><i class="fa-solid fa-check"></i> Đã thuộc làu làu</span>
+        <span class="key-hint">[Phím 3 hoặc Mũi tên phải]</span>
+      </button>
+    </div>
+
+    <!-- THANH CÔNG CỤ GEMINI 3.8 FLASH -->
+    <div class="ai-action-bar">
+      <button class="ai-tool-btn" id="aiExplainBtn" onclick="askGeminiExplanation()">
+        <i class="fa-solid fa-brain"></i>
+        <span>Gemini 3.8 Flash Giảng Bài Này</span>
+      </button>
+
+      <button class="ai-tool-btn" id="aiExerciseBtn" onclick="generateLongContextExercise()">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <span>Gemini Tạo Bài Tập Ngữ Cảnh Dài</span>
+      </button>
+    </div>
+
+    <!-- KHUNG HIỂN THỊ GEMINI GIẢNG BÀI (AI TUTOR PANEL) -->
+    <div class="ai-panel" id="aiExplanationPanel">
+      <div class="ai-panel-header">
+        <h4><i class="fa-solid fa-robot"></i> Gia Sư Gemini 3.8 Flash &bull; Giải Thích Chuyên Sâu</h4>
+        <button class="btn-icon" onclick="closeAiPanel('aiExplanationPanel')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="ai-panel-body" id="aiExplanationContent">
+        Đang khởi động gia sư Gemini...
+      </div>
+      <div style="margin-top: 14px; display: flex; gap: 8px;">
+        <input type="text" id="aiCustomQuestionInput" placeholder="Hỏi thêm Gemini về câu này (ví dụ: Tại sao không dùng 'were'?)..." style="flex: 1; background: var(--bg-dark); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 8px 12px; color: #fff; font-size: 0.85rem; outline: none;">
+        <button class="ai-tool-btn" style="padding: 8px 16px;" onclick="sendCustomAiQuestion()"><i class="fa-solid fa-paper-plane"></i> Hỏi</button>
+      </div>
+    </div>
+
+    <!-- KHUNG HIỂN THỊ BÀI TẬP NGỮ CẢNH DÀI (LONG CONTEXT EXERCISE) -->
+    <div class="ai-panel" id="aiExercisePanel">
+      <div class="ai-panel-header">
+        <h4><i class="fa-solid fa-scroll"></i> Bài Tập Ngữ Cảnh Dài Chuẩn Kỳ Thi &bull; Gemini 3.8 Flash</h4>
+        <button class="btn-icon" onclick="closeAiPanel('aiExercisePanel')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <div class="ai-panel-body" id="aiExerciseBody">
+        <div class="exercise-context-card">
+          <span class="exercise-badge" id="exTopicBadge">Ngữ cảnh thực tế</span>
+          <div class="exercise-passage" id="exPassageText">Đang tải đoạn văn ngữ cảnh dài...</div>
+          <div class="exercise-question" id="exQuestionText">Đang tải câu hỏi...</div>
+
+          <div class="options-grid" id="exOptionsGrid">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="exercise-result-box" id="exResultBox">
+            <h5 style="font-size: 0.9rem; font-weight: 800; color: var(--blue-accent); margin-bottom: 6px;" id="exResultTitle">Giải thích đáp án:</h5>
+            <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.55;" id="exExplanationText"></p>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; font-style: italic;" id="exTranslationText"></p>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px;">
+          <button class="ai-tool-btn" style="padding: 8px 14px; font-size: 0.8rem;" onclick="generateLongContextExercise(true)">
+            <i class="fa-solid fa-shuffle"></i> Tạo câu khác cùng chuyên đề
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- NAVIGATION DƯỚI ĐÁY -->
+  <div class="bottom-bar">
+    <a href="/" class="bottom-nav-btn">
+      <i class="fa-solid fa-house"></i>
+      <span>Tổng quan</span>
+    </a>
+    <button class="bottom-nav-btn active" onclick="switchMode('all')">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Flashcard</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="switchMode('drill')">
+      <i class="fa-solid fa-rotate"></i>
+      <span>Lặp vô tận</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="openSettingsModal()">
+      <i class="fa-solid fa-sliders"></i>
+      <span>Cài đặt AI</span>
+    </button>
+  </div>
+
+  <!-- MODAL CÀI ĐẶT API GEMINI -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4><i class="fa-solid fa-sliders" style="color: var(--blue-accent);"></i> Cài Đặt Trợ Lý AI Gemini 3.8 Flash</h4>
+        <button class="btn-icon" onclick="closeSettingsModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="form-group">
+        <label>Khóa API Google Gemini (Lưu an toàn trong LocalStorage máy bạn):</label>
+        <input type="text" id="settingApiKeyInput" placeholder="Nhập khóa API Gemini...">
+        <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">
+          * Đã nạp sẵn khóa của Thuận vào trình duyệt. Hệ thống có cơ chế tự động chuyển sang chế độ dự phòng nếu AI Studio báo nạp credits.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Mô hình Gemini (Model):</label>
+        <select id="settingModelSelect">
+          <option value="gemini-3.8-flash">Gemini 3.8 Flash (Mặc định siêu tốc & thông minh)</option>
+          <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+          <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+          <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Phím tắt bàn phím (Cày cuốc siêu tốc trên máy tính):</label>
+        <div style="background: var(--bg-dark); padding: 10px; border-radius: var(--radius-sm); font-size: 0.76rem; color: #cbd5e1; line-height: 1.6;">
+          &bull; <code>Space</code> hoặc <code>Enter</code>: Lật thẻ<br>
+          &bull; Phím <code>1</code> hoặc <code>&larr;</code>: Chưa thuộc (Lặp lại ngay)<br>
+          &bull; Phím <code>2</code> hoặc <code>&darr;</code>: Tạm nhớ<br>
+          &bull; Phím <code>3</code> hoặc <code>&rarr;</code>: Đã nắm vững<br>
+          &bull; Phím <code>G</code>: Nhờ Gemini giảng bài &bull; Phím <code>T</code>: Tạo bài tập dài
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="saveSettings()">Lưu Cài Đặt & Tiếp Tục Học</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC TRUNG TÂM -->
+  <script type="module">
+    // =========================================================
+    // NGÂN HÀNG DỮ LIỆU 48 THẺ FLASHCARD 12 CHUYÊN ĐỀ NGỮ PHÁP CỐT LÕI
+    // Tuyển chọn chuẩn cấu trúc đề thi xếp lớp Phenikaa (50 câu / 60 phút)
+    // =========================================================
+    const GRAMMAR_TOPICS = [
+      { id: "all", name: "Tất cả 12 Chuyên Đề" },
+      { id: "tenses", name: "1. Các thì trọng tâm" },
+      { id: "sva", name: "2. Sự hòa hợp Chủ - Vị" },
+      { id: "pos", name: "3. Từ loại & Vị trí" },
+      { id: "passive", name: "4. Câu bị động" },
+      { id: "cond", name: "5. Câu điều kiện & Wish" },
+      { id: "relative", name: "6. Mệnh đề quan hệ" },
+      { id: "modals", name: "7. Động từ khuyết thiếu" },
+      { id: "gerund", name: "8. V-ing vs To-V" },
+      { id: "comp", name: "9. So sánh hơn & nhất" },
+      { id: "connectors", name: "10. Liên từ & Giới từ" },
+      { id: "reported", name: "11. Câu gián tiếp" },
+      { id: "articles", name: "12. Mạo từ & Lượng từ" }
+    ];
+
+    const FLASHCARDS_DATA = [
+      // CHUYÊN ĐỀ 1: CÁC THÌ TRỌNG TÂM
+      {
+        id: "fc-1",
+        category: "tenses",
+        topicName: "Hiện tại đơn vs Tiếp diễn",
+        question: "Phân biệt cách dùng và bẫy kinh điển giữa Hiện tại đơn và Hiện tại tiếp diễn?",
+        challenge: "Câu sau đúng hay sai: 'I am understanding this grammar rule right now'?",
+        hint: "Chú ý các động từ chỉ trạng thái (Stative verbs).",
+        rule: "• Hiện tại đơn (S + V(s/es)): Sự thật hiển nhiên, thói quen, lịch trình cố định.\n• Hiện tại tiếp diễn (S + am/is/are + V-ing): Hành động đang xảy ra lúc nói hoặc xu hướng tạm thời.",
+        trap: "SAI! 'Understand' là động từ chỉ trạng thái/nhận thức (Stative verbs: know, understand, believe, love, hate, prefer, belong, contain). TUYỆT ĐỐI KHÔNG chia thì tiếp diễn dù có 'right now' hay 'at the moment'! Sửa đúng: 'I understand this rule right now'.",
+        example: "• He is usually quiet, but today he is being very noisy (Tạm thời cư xử khác thường).\n• The train departs at 7:00 AM tomorrow (Lịch trình cố định chia Hiện tại đơn).",
+        trick: "Nhớ câu: 'Cảm giác, sở hữu, tư duy - Tuyệt nhiên không được thêm 'ing' bao giờ!'"
+      },
+      {
+        id: "fc-2",
+        category: "tenses",
+        topicName: "Hiện tại hoàn thành vs Quá khứ đơn",
+        question: "Khi nào bắt buộc dùng Quá khứ đơn thay vì Hiện tại hoàn thành?",
+        challenge: "Điền dạng đúng: 'She (live) in Hanoi for 3 years, but now she lives in Da Nang.'",
+        hint: "Hành động sống ở Hà Nội còn tiếp diễn tới hiện tại không?",
+        rule: "• Quá khứ đơn (V2/ed): Hành động đã CHẤM DỨT HOÀN TOÀN trong quá khứ, có thời gian xác định (yesterday, ago, last year, in 2020).\n• Hiện tại hoàn thành (have/has + V3/ed): Bắt đầu trong quá khứ, KÉO DÀI tới hiện tại hoặc để lại kết quả ở hiện tại (since, for, yet, already).",
+        trap: "Điền 'lived' (Quá khứ đơn)! Mặc dù có 'for 3 years', nhưng vế sau 'now she lives in Da Nang' chứng tỏ việc ở Hà Nội đã kết thúc trọn vẹn. Bẫy đề thi hay lừa 'for + khoảng thời gian' khiến học sinh vội chọn Hiện tại hoàn thành!",
+        example: "• I have lived here for 5 years (Vẫn đang sống ở đây).\n• I lived there for 5 years before moving (Đã chuyển đi, việc sống ở đó đã kết thúc).",
+        trick: "Có mốc quá khứ rõ ràng & đã chấm dứt -> Quá khứ đơn. Còn dính líu hiện tại -> Hoàn thành!"
+      },
+      {
+        id: "fc-3",
+        category: "tenses",
+        topicName: "Quá khứ tiếp diễn phối hợp thì",
+        question: "Quy tắc phối hợp thì giữa Quá khứ tiếp diễn và Quá khứ đơn với When / While?",
+        challenge: "Chọn: 'While I (studied / was studying) in my room, the lights suddenly (went / was going) out.'",
+        hint: "Hành động nào đang diễn ra (dài) và hành động nào cắt ngang (ngắn)?",
+        rule: "• Hành động dài đang diễn ra: Quá khứ tiếp diễn (was/were + V-ing).\n• Hành động ngắn đột ngột cắt ngang: Quá khứ đơn (V2/ed).\n• Hai hành động song song cùng lúc: Cả hai đều chia Quá khứ tiếp diễn (While S + was V-ing, S + was V-ing).",
+        trap: "Đáp án: was studying / went out. Bẫy đề thi: Đảo vị trí liên từ! Sau 'While' thường là hành động dài (V-ing), sau 'When' thường là hành động cắt ngang (V2/ed).",
+        example: "• When the phone rang, I was having dinner.\n• While mom was cooking, dad was reading newspapers.",
+        trick: "Đang làm thì bị xen ngang: 'Đang' dùng was V-ing, 'xen' dùng V2/ed!"
+      },
+      {
+        id: "fc-4",
+        category: "tenses",
+        topicName: "Quá khứ hoàn thành với Before / After",
+        question: "Cấu trúc kinh điển của Quá khứ hoàn thành với Before, After, By the time?",
+        challenge: "Chia động từ: 'By the time Thuận (arrive) at the exam room, the test (already / start).'",
+        hint: "Việc thi bắt đầu trước hay Thuận đến trước?",
+        rule: "Quá khứ hoàn thành (had + V3/ed) diễn tả hành động xảy ra TRƯỚC một hành động/mốc thời gian khác trong quá khứ.\n• By the time / Before + S + V(quá khứ đơn), S + had + V3/ed\n• After + S + had + V3/ed, S + V(quá khứ đơn)",
+        trap: "Đáp án: arrived / had already started. Bẫy: Nhầm lẫn vế nào xảy ra trước. Việc 'bài thi bắt đầu' xảy ra trước việc 'Thuận đến', nên 'start' phải chia had started!",
+        example: "• After he had finished his homework, he went to bed.\n• By 2024, they had built 5 new bridges.",
+        trick: "'Trước Before chia Hoàn thành, Sau After chia Hoàn thành'!"
+      },
+      {
+        id: "fc-5",
+        category: "tenses",
+        topicName: "Mệnh đề thời gian ở tương lai",
+        question: "Quy tắc cấm kỵ với 'WILL' trong mệnh đề chỉ thời gian?",
+        challenge: "Sửa lỗi sai: 'As soon as the teacher will arrive, we will begin the lesson.'",
+        hint: "Mệnh đề trạng ngữ chỉ thời gian bắt đầu bằng as soon as, when, until, before...",
+        rule: "Trong mệnh đề trạng ngữ chỉ thời gian (bắt đầu bằng: When, As soon as, Until, By the time, Before, After) hướng tới tương lai: TUYỆT ĐỐI KHÔNG DÙNG WILL/WOULD, mà phải chia ở HIỆN TẠI ĐƠN (hoặc Hiện tại hoàn thành).",
+        trap: "Sửa 'will arrive' thành 'arrives'! Bẫy đề thi cực kỳ thích cho 'will' vào mệnh đề trạng ngữ thời gian để lừa thí sinh dịch theo tiếng Việt ('ngay khi cô giáo SẼ đến').",
+        example: "• I will call you when I get home (KHÔNG dùng when I will get home).\n• Wait here until he comes.",
+        trick: "Gặp When, Until, As soon as: Gạch ngay chữ Will đi kẻo mất điểm oan!"
+      },
+
+      // CHUYÊN ĐỀ 2: SỰ HÒA HỢP CHỦ NGỮ - VỊ NGỮ (S-V AGREEMENT)
+      {
+        id: "fc-6",
+        category: "sva",
+        topicName: "The number of vs A number of",
+        question: "Phân biệt cách chia động từ giữa 'The number of' và 'A number of'?",
+        challenge: "Chọn động từ: 'The number of students in the AI class (is / are) increasing rapidly.'",
+        hint: "'The number' nghĩa là con số (duy nhất), 'A number' nghĩa là nhiều.",
+        rule: "• The number of + N(số nhiều) + V (SỐ ÍT): Nhấn mạnh con số, số lượng cụ thể.\n• A number of + N(số nhiều) + V (SỐ NHIỀU): Mang nghĩa 'rất nhiều' (= Many).",
+        trap: "Chọn 'is'! Bẫy: Mắt nhìn thấy 'students' số nhiều nên 70% thí sinh chọn 'are'. Nhưng chủ ngữ thực sự là 'The number' (con số) nên động từ bắt buộc chia số ít 'is'!",
+        example: "• A number of students ARE absent today (Nhiều học sinh vắng mặt).\n• The number of accidents HAS dropped this year (Số vụ tai nạn đã giảm).",
+        trick: "THE đi với ÍT (The - Ít), A đi với NHIỀU (A - Nhiều)!"
+      },
+      {
+        id: "fc-7",
+        category: "sva",
+        topicName: "Cấu trúc chen ngang (Along with, As well as)",
+        question: "Khi có các cụm 'along with, as well as, together with' chen giữa S1 và S2, động từ chia theo đâu?",
+        challenge: "Chọn: 'The professor, along with his assistants, (is / are) conducting the experiment.'",
+        hint: "Phần nằm giữa hai dấu phẩy là cụm bổ nghĩa chen ngang.",
+        rule: "Khi chủ ngữ có cấu trúc: S1 + (together with / along with / as well as / accompanied by / in addition to) + S2 -> ĐỘNG TỪ CHIA THEO S1 ĐẦU TIÊN!",
+        trap: "Chọn 'is'! Mặc dù có cả professor và his assistants (nhiều người), nhưng ngữ pháp coi cụm 'along with his assistants' chỉ là thành phần phụ. S1 là 'The professor' (số ít) quyết định động từ!",
+        example: "• The students, together with their teacher, ARE visiting the museum.\n• Water, as well as air, IS essential for life.",
+        trick: "Chen ngang bỏ qua, cứ nhìn thẳng người đứng đầu câu mà chia!"
+      },
+      {
+        id: "fc-8",
+        category: "sva",
+        topicName: "Quy tắc gần nhất (Neither... nor, Either... or)",
+        question: "Cấu trúc Neither A nor B, Either A or B chia động từ theo chủ ngữ nào?",
+        challenge: "Chọn: 'Neither the teacher nor the students (was / were) aware of the schedule change.'",
+        hint: "Động từ đứng cạnh ai thì chia theo người đó.",
+        rule: "Với các liên từ tương hỗ: Either... or..., Neither... nor..., Not only... but also... -> ĐỘNG TỪ CHIA THEO CHỦ NGỮ GẦN NÓ NHẤT (S2).",
+        trap: "Chọn 'were'! Vì 'the students' đứng ngay cạnh động từ và là số nhiều nên chia 'were'. Nếu đổi ngược lại: 'Neither the students nor the teacher WAS aware...'",
+        example: "• Either you or he IS wrong.\n• Not only the manager but also the employees WERE happy.",
+        trick: "'Gần mực thì đen, gần S nào thì chia theo S đó'!"
+      },
+      {
+        id: "fc-9",
+        category: "sva",
+        topicName: "Đại từ bất định (Each, Every, Someone...)",
+        question: "Đại từ bất định (Each, Every, Either, Everyone, Somebody...) đi với động từ số gì?",
+        challenge: "Chọn: 'Each of the participants (receive / receives) a certificate of completion.'",
+        hint: "'Each of' + danh từ số nhiều nhưng ý nghĩa là 'mỗi một người riêng lẻ'.",
+        rule: "Mọi đại từ bất định: Each, Every, Either of, Neither of, Everyone, Everybody, Someone, Somebody, Anyone, Nobody, Anything, Nothing -> ĐỘNG TỪ LUÔN CHIA SỐ ÍT!",
+        trap: "Chọn 'receives' (thêm s)! Bẫy: 'the participants' là danh từ số nhiều khiến thí sinh tưởng chia số nhiều 'receive'. Hãy nhớ: 'Each of' luôn kéo theo động từ số ít!",
+        example: "• Everyone HAS their own strengths.\n• Neither of the answers IS correct.",
+        trick: "Cứ thấy Each, Every, One, Body: Mặc định số ít, không cần suy nghĩ!"
+      },
+
+      // CHUYÊN ĐỀ 3: TỪ LOẠI & VỊ TRÍ (PARTS OF SPEECH)
+      {
+        id: "fc-10",
+        category: "pos",
+        topicName: "Tính từ sau Linking Verbs",
+        question: "Động từ nối (Linking Verbs) đi với Tính từ hay Trạng từ?",
+        challenge: "Chọn: 'The dish smells (delicious / deliciously) and looks (tempting / temptingly).'",
+        hint: "Smell, look, taste, feel, seem, sound, appear, become là linking verbs.",
+        rule: "Động từ chỉ giác quan/trạng thái (Linking Verbs: look, seem, appear, feel, taste, smell, sound, become, get) đi với TÍNH TỪ (Adjective) để mô tả tính chất của chủ ngữ, KHÔNG đi với trạng từ (-ly).",
+        trap: "Chọn 'delicious' và 'tempting'! Người Việt hay dịch theo trạng từ 'ngửi thấy một cách ngon lành' nên hay chọn 'deliciously' -> SAI! Chỉ dùng trạng từ khi động từ đó diễn tả hành động chủ động (ví dụ: He smelled the soup CAREFULLY).",
+        example: "• The music sounds BEAUTIFUL (Tính từ).\n• She looks TIRED today.",
+        trick: "Nghe, nhìn, ngửi, nếm, cảm thấy: Nối thẳng với TÍNH TỪ!"
+      },
+      {
+        id: "fc-11",
+        category: "pos",
+        topicName: "Tính từ đuôi -ED vs -ING",
+        question: "Phân biệt tính từ đuôi -ed và đuôi -ing để không bao giờ bị bẫy đề thi?",
+        challenge: "Điền tính từ: 'The lecture was so (bored / boring) that all students felt (bored / boring).'",
+        hint: "-ed chỉ cảm xúc bên trong; -ing chỉ tính chất của vật/sự việc gây ra cảm xúc.",
+        rule: "• Tính từ đuôi -ED: Diễn tả CẢM XÚC, TÂM TRẠNG của con người bị tác động (bored, interested, excited, confused).\n• Tính từ đuôi -ING: Diễn tả BẢN CHẤT, TÍNH CHẤT của sự vật/hiện tượng tạo ra cảm xúc đó (boring, interesting, exciting, confusing).",
+        trap: "Đáp án: 'boring' / 'bored'. Bẫy: Nghĩ rằng người chỉ dùng -ed, vật chỉ dùng -ing là sai! Người cũng dùng -ing khi họ là người tẻ nhạt gây chán (He is a boring person = Anh ấy là người tẻ nhạt).",
+        example: "• I am INTERESTED in AI (Tôi cảm thấy thích thú).\n• AI is an INTERESTING field (AI là một lĩnh vực thú vị).",
+        trick: "Bị làm sao thì dùng -ED, Bản chất ra sao thì dùng -ING!"
+      },
+
+      // CHUYÊN ĐỀ 4: CÂU BỊ ĐỘNG (PASSIVE VOICE)
+      {
+        id: "fc-12",
+        category: "passive",
+        topicName: "Công thức Bị động tổng quát",
+        question: "Công thức nền tảng của câu bị động ở mọi thì là gì?",
+        challenge: "Chuyển sang bị động: 'Scientists have developed a new AI algorithm.'",
+        hint: "Thì Hiện tại hoàn thành: S + have/has + been + V3/ed.",
+        rule: "Công thức chung: S + BE (chia theo thì) + V3/ed + (by O).\n• Hiện tại đơn: am/is/are + V3/ed\n• Quá khứ đơn: was/were + V3/ed\n• Hiện tại hoàn thành: have/has BEEN + V3/ed\n• Modals: modal + BE + V3/ed",
+        trap: "Câu đúng: 'A new AI algorithm HAS BEEN DEVELOPED by scientists.' Bẫy: Quên từ 'been', hoặc nhầm giữa have/has khi tân ngữ số ít trở thành chủ ngữ mới!",
+        example: "• The bridge was built in 1990.\n• This report must be submitted before 5 PM.",
+        trick: "Bị động nhất định phải có: Động từ BE + Động từ V3/ed!"
+      },
+      {
+        id: "fc-13",
+        category: "passive",
+        topicName: "Thể truyền khiến (Causative Form)",
+        question: "Cấu trúc Have / Get someone DO vs DONE trong câu nhờ vả/thuê làm?",
+        challenge: "Chọn: 'I had my computer (repair / repaired / to repair) yesterday.'",
+        hint: "Máy tính tự sửa hay được người khác sửa cho?",
+        rule: "• Chủ động: HAVE someone DO something = GET someone TO DO something.\n• Bị động (nhờ ai làm việc gì cho mình): HAVE / GET + SOMETHING + V3/ed.",
+        trap: "Chọn 'repaired'! Bẫy: Thí sinh nhớ mang máng 'have someone do' nên chọn 'repair'. Nhưng ở đây tân ngữ là 'my computer' (vật) nên bắt buộc dùng V3/ed (repaired)!",
+        example: "• I had the barber cut my hair (Chủ động: Nhờ thợ cắt tóc).\n• I had my hair cut (Bị động: Tóc tôi được cắt).",
+        trick: "Have người thì V nguyên mẫu, Have vật thì V3/ed!"
+      },
+      {
+        id: "fc-14",
+        category: "passive",
+        topicName: "Bị động kép với động từ tường thuật",
+        question: "Cách chuyển bị động với 'People say / believe that S + V'?",
+        challenge: "Chuyển câu: 'People say that he stole the money' sang dạng: 'He is said...'",
+        hint: "Hành động 'stole' (quá khứ) xảy ra trước 'say' (hiện tại).",
+        rule: "People say that S + V...\n• Cách 1: It is said that S + V...\n• Cách 2: S + is/are said to V (nếu cùng thì) HOẶC S + is/are said TO HAVE + V3/ed (nếu hành động sau xảy ra trước).",
+        trap: "Câu đúng: 'He is said TO HAVE STOLEN the money.' Bẫy cực lớn: Thí sinh hay viết 'to steal'. Vì 'say' ở hiện tại còn 'stole' ở quá khứ (lệch thì) nên bắt buộc dùng 'to have stolen'!",
+        example: "• He is believed to be living in Paris (Cùng thì hiện tại).\n• The ancient temple is said to have been destroyed by fire (Lệch thì quá khứ).",
+        trick: "Lệch thì về quá khứ: Nhất định phải thêm 'TO HAVE V3'!"
+      },
+
+      // CHUYÊN ĐỀ 5: CÂU ĐIỀU KIỆN & CÂU ƯỚC (CONDITIONALS & WISH)
+      {
+        id: "fc-15",
+        category: "cond",
+        topicName: "Điều kiện loại 1 & Đảo ngữ",
+        question: "Công thức Điều kiện loại 1 và cấu trúc đảo ngữ trong đề thi?",
+        challenge: "Viết lại câu đảo ngữ: 'If you need any further assistance, please contact us.'",
+        hint: "Bắt đầu bằng chữ 'Should...'",
+        rule: "• Công thức: If + S + V(hiện tại đơn), S + will / can / may + V-inf.\n• Đảo ngữ: SHOULD + S + V-inf, S + will + V-inf (Bỏ If, đảo Should lên đầu).",
+        trap: "Câu đảo ngữ: 'SHOULD you need any further assistance, please contact us.' Bẫy: Thấy 'Should' ở đầu câu tưởng là câu hỏi nên thêm dấu hỏi chấm hoặc lúng túng không hiểu nghĩa. Đây thực chất chính là câu 'If' trang trọng trong email thương mại!",
+        example: "• Should it rain, the match will be cancelled (= If it rains...)",
+        trick: "Đảo ngữ loại 1: Đưa SHOULD lên đầu, động từ giữ nguyên mẫu!"
+      },
+      {
+        id: "fc-16",
+        category: "cond",
+        topicName: "Điều kiện loại 2 & To be 'WERE'",
+        question: "Quy tắc dùng To be và Đảo ngữ của Điều kiện loại 2 (trái thực tế hiện tại)?",
+        challenge: "Chọn: 'If I (was / were) you, I (will / would) accept that scholarship.'",
+        hint: "Giả định trái với hiện tại; trong văn phong chuẩn tiếng Anh luôn dùng were.",
+        rule: "• Công thức: If + S + V2/ed (To be luôn là WERE cho mọi ngôi), S + would / could + V-inf.\n• Đảo ngữ: WERE + S + to V-inf... hoặc WERE + S + (Adj/N)...",
+        trap: "Chọn 'were' và 'would'! Bẫy đề thi: Đáp án hay gài 'was' để bẫy thí sinh. Trong bài thi chuẩn tắc, ngôi I/he/she/it đều dùng 'WERE'.\nĐảo ngữ: 'Were I you, I would accept...'",
+        example: "• Were he to know the truth, he would be furious (= If he knew the truth...).",
+        trick: "Loại 2 trái hiện tại: To be 'WERE' cho mọi ngôi, mệnh đề chính có 'WOULD'!"
+      },
+      {
+        id: "fc-17",
+        category: "cond",
+        topicName: "Điều kiện loại 3 & Hỗn hợp (Mixed)",
+        question: "Phân biệt Điều kiện loại 3 và Điều kiện hỗn hợp 3-2?",
+        challenge: "Chọn: 'If he had taken my advice yesterday, he (would not be / would not have been) in trouble now.'",
+        hint: "Vế If có 'yesterday' (quá khứ), vế chính có 'now' (hiện tại).",
+        rule: "• Loại 3 thuần túy (trái quá khứ): If + had + V3/ed, S + would have + V3/ed.\n• Hỗn hợp 3-2 (Quá khứ gây hậu quả ở hiện tại): If + had + V3/ed (quá khứ), S + WOULD + V-inf (now / today / at present).",
+        trap: "Chọn 'would not be'! Bẫy kinh điển: Thấy 'had taken' ở vế If nên 80% thí sinh vội chọn 'would not have been'. Nhưng cuối câu có chữ 'NOW' báo hiệu hậu quả ở hiện tại -> bắt buộc dùng 'would not be'!",
+        example: "• If I had won the lottery last week, I would be rich now (Hỗn hợp).\n• If I had studied harder, I would have passed the exam (Loại 3 thuần).",
+        trick: "Thấy 'now' ở vế kết quả: Dù If có 'had V3' thì vế sau chỉ dùng 'would V'!"
+      },
+      {
+        id: "fc-18",
+        category: "cond",
+        topicName: "Câu ước với WISH / IF ONLY",
+        question: "Quy tắc lùi thì của câu ước Wish ở hiện tại và quá khứ?",
+        challenge: "Chia động từ: 'I wish I (study) English harder when I was in high school.'",
+        hint: "Ước cho một điều trong quá khứ ('when I was in high school').",
+        rule: "• Ước cho hiện tại: S + wish + S + V2/ed (were) [Lùi về Quá khứ đơn].\n• Ước cho quá khứ: S + wish + S + HAD + V3/ed [Lùi về Quá khứ hoàn thành].\n• Ước cho tương lai/Phàn nàn: S + wish + S + WOULD / COULD + V-inf.",
+        trap: "Đáp án: 'had studied'! Vì có mốc thời gian 'when I was in high school' (quá khứ) nên phải lùi về Quá khứ hoàn thành (had studied). Nếu ước cho hiện tại (ví dụ: 'I wish I knew the answer now') thì mới dùng V2/ed.",
+        example: "• I wish I were taller (Ước hiện tại: Hiện tại tôi không cao).\n• I wish it would stop raining (Ước tương lai/phàn nàn).",
+        trick: "Ước là phải lùi thì: Hiện tại lùi Quá khứ đơn, Quá khứ lùi Hoàn thành!"
+      },
+
+      // CHUYÊN ĐỀ 6: MỆNH ĐỀ QUAN HỆ (RELATIVE CLAUSES)
+      {
+        id: "fc-19",
+        category: "relative",
+        topicName: "Đại từ quan hệ & 2 điều cấm kỵ với THAT",
+        question: "Khi nào TUYỆT ĐỐI KHÔNG ĐƯỢC DÙNG đại từ quan hệ 'THAT'?",
+        challenge: "Sửa lỗi sai: 'Paris, that is the capital of France, is famous for its architecture.'",
+        hint: "Chú ý dấu phẩy trong câu.",
+        rule: "THAT thay thế được cho Who, Whom, Which trong mệnh đề xác định. Nhưng có 2 TRƯỜNG HỢP CẤM DÙNG THAT:\n1. Mệnh đề quan hệ không xác định (CÓ DẤU PHẨY).\n2. ĐỨNG NGAY SAU GIỚI TỪ (in, on, at, with, about...)",
+        trap: "Sửa 'that' thành 'which'! Vì có dấu phẩy ngăn cách danh từ riêng 'Paris' nên cấm dùng 'that'. Tương tự: 'The house in WHICH I live' (KHÔNG dùng 'in that').",
+        example: "• My father, who is 50 years old, is an engineer (Không dùng that sau phẩy).\n• The man about WHOM you spoke is my boss (Không dùng that sau giới từ).",
+        trick: "Thấy DẤU PHẨY hoặc GIỚI TỪ: Cấm cửa chữ THAT!"
+      },
+      {
+        id: "fc-20",
+        category: "relative",
+        topicName: "Rút gọn Mệnh đề quan hệ (V-ing, V3, To-V)",
+        question: "3 quy tắc rút gọn mệnh đề quan hệ chuẩn đề thi?",
+        challenge: "Rút gọn 2 câu:\n1. 'The students who attend the course must register.'\n2. 'The bridge which was built in 1980 is collapsing.'",
+        hint: "Chủ động rút thành V-ing, bị động rút thành V3/ed.",
+        rule: "• Chủ động: Lược bỏ đại từ quan hệ và to be, chuyển V thành V-ING.\n• Bị động: Lược bỏ đại từ quan hệ và to be, giữ lại V3/ED.\n• Có the first, the second, the only, the last, so sánh nhất: Rút thành TO-V.",
+        trap: "Đáp án: 1. 'The students ATTENDING the course...'\n2. 'The bridge BUILT in 1980...'\nBẫy với To-V: 'Neil Armstrong was the first man TO WALK on the Moon' (vì có 'the first').",
+        example: "• The book written by Nam is famous.\n• She is the only person to understand me.",
+        trick: "Chủ động V-ing, Bị động V3/ed, 'The first / The only' cứ To-V mà điền!"
+      },
+      {
+        id: "fc-21",
+        category: "relative",
+        topicName: "Whose vs Where / When",
+        question: "Cách phân biệt Whose, Where và Which trong câu chỉ nơi chốn/sở hữu?",
+        challenge: "Chọn: 'This is the university (where / which / whose) campus I visited last month.'",
+        hint: "Campus (khuôn viên) của trường đại học -> mối quan hệ sở hữu.",
+        rule: "• WHOSE + Danh từ: Chỉ sự sở hữu (thay cho his/her/their/its).\n• WHERE = in/at WHICH: Thay cho nơi chốn làm TRẠNG TỪ (sau Where là mệnh đề đầy đủ S + V).\n• WHICH: Thay cho nơi chốn làm CHỦ NGỮ hoặc TÂN NGỮ của động từ (sau Which là động từ hoặc S + V thiếu tân ngữ).",
+        trap: "Chọn 'whose'! Bẫy: Thấy 'the university' tưởng nơi chốn nên 70% chọn 'where'. Nhưng phía sau có 'campus' (khuôn viên CỦA trường), tức 'whose campus' = the campus of the university!",
+        example: "• The house WHICH I bought (bought sth -> Which làm tân ngữ).\n• The house WHERE I lived (lived in the house -> Where làm trạng từ nơi chốn).",
+        trick: "Sau chỗ trống có danh từ sở hữu -> Chọn WHOSE ngay!"
+      },
+
+      // CHUYÊN ĐỀ 7: ĐỘNG TỪ KHUYẾT THIẾU (MODALS)
+      {
+        id: "fc-22",
+        category: "modals",
+        topicName: "Mustn't vs Don't have to",
+        question: "Sự khác biệt sống còn giữa 'Mustn't' và 'Don't have to'?",
+        challenge: "Chọn: 'You (mustn't / don't have to) smoke in the hospital; it is strictly forbidden.'",
+        hint: "Bị cấm đoán tuyệt đối hay không bắt buộc?",
+        rule: "• MUSTN'T: CẤM ĐOÁN TUYỆT ĐỐI! Không được phép làm (vi phạm pháp luật hoặc quy định nghiêm ngặt).\n• DON'T / DOESN'T HAVE TO (= Needn't): KHÔNG CẦN THIẾT PHẢI LÀM (Làm hay không tùy bạn, không bị phạt).",
+        trap: "Chọn 'mustn't'! Bẫy đề thi: Hai từ này nghĩa hoàn toàn trái ngược nhau về tính bắt buộc. Đề bài có 'forbidden', 'prohibited', 'against the law' -> BẮT BUỘC DÙNG MUSTN'T.",
+        example: "• Tomorrow is Sunday, so I don't have to get up early (Không cần dậy sớm).\n• You mustn't park here; it's a no-parking zone (Cấm đỗ xe).",
+        trick: "Mustn't là CẤM TIỆT, Don't have to là KHÔNG CẦN!"
+      },
+      {
+        id: "fc-23",
+        category: "modals",
+        topicName: "Modal + Have + V3/ed trong quá khứ",
+        question: "Phân biệt Must have V3, Should have V3 và Can't have V3?",
+        challenge: "Chọn: 'The ground is all wet. It (must have rained / should have rained) heavily last night.'",
+        hint: "Có bằng chứng rõ ràng trước mắt để suy đoán việc đã xảy ra.",
+        rule: "• MUST HAVE + V3/ed: Chắc chắn đã xảy ra trong quá khứ (có bằng chứng rõ ràng).\n• SHOULD HAVE + V3/ed: Lẽ ra nên làm trong quá khứ nhưng đã không làm (thể hiện sự tiếc nuối/trách móc).\n• CAN'T HAVE + V3/ed: Chắc chắn không thể nào đã xảy ra.",
+        trap: "Chọn 'must have rained'! Bẫy: Thí sinh hay nhầm với 'should have rained'. 'Should have rained' nghĩa là 'lẽ ra trời nên mưa (nhưng trời không mưa)', hoàn toàn trái ngược với thực tế 'đất đang ướt sũng'!",
+        example: "• You should have studied for the test (Lẽ ra bạn nên học bài).\n• He can't have stolen the car; he was with me all night.",
+        trick: "Must have: Chắc chắn ĐÃ LÀM. Should have: Lẽ ra NÊN LÀM mà KHÔNG LÀM!"
+      },
+
+      // CHUYÊN ĐỀ 8: V-ING VS TO-V (GERUNDS & INFINITIVES)
+      {
+        id: "fc-24",
+        category: "gerund",
+        topicName: "Động từ bắt buộc đi với V-ING",
+        question: "Các động từ phổ biến nhất trong đề thi bắt buộc theo sau bởi V-ING?",
+        challenge: "Chọn: 'He avoided (answering / to answer) my question and suggested (to postpone / postponing) the meeting.'",
+        hint: "Avoid và Suggest đi với dạng nào?",
+        rule: "Các động từ luôn đi với V-ING:\n• Nhóm né tránh/từ chối: avoid, delay, postpone, admit, deny, escape\n• Nhóm đề xuất/cân nhắc: suggest, recommend, consider, imagine\n• Nhóm thích/ghét: enjoy, fancy, mind, dislike, can't help, can't stand\n• Cụm từ: look forward to, be used to, get used to, spend time + V-ing.",
+        trap: "Chọn 'answering' và 'postponing'! Bẫy cực lớn với 'suggest': Người Việt hay quen miệng 'suggest to do' -> HOÀN TOÀN SAI! Suggest + V-ing HOẶC Suggest that S + (should) + V-inf.",
+        example: "• Do you mind closing the door?\n• I am looking forward to seeing you.",
+        trick: "Avoid, Suggest, Enjoy, Mind: Cứ V-ing mà táng!"
+      },
+      {
+        id: "fc-25",
+        category: "gerund",
+        topicName: "Động từ thay đổi nghĩa: Remember, Stop, Try",
+        question: "Nghĩa của Remember, Stop, Forget, Try khi đi với To-V khác gì V-ing?",
+        challenge: "Chọn: 'On the way to school, Thuận stopped (buying / to buy) a pen because his old one ran out of ink.'",
+        hint: "Dừng lại ĐỂ mua bút hay dừng hẳn việc mua bút?",
+        rule: "• STOP TO-V: Dừng việc đang làm ĐỂ làm việc khác.\n• STOP V-ING: Dừng hẳn, từ bỏ hành động đang làm.\n• REMEMBER / FORGET TO-V: Nhớ/quên PHẢI LÀM gì (bổn phận tương lai).\n• REMEMBER / FORGET V-ING: Nhớ/quên ĐÃ LÀM gì trong quá khứ.\n• TRY TO-V: Cố gắng làm việc khó. TRY V-ING: Thử nghiệm giải pháp.",
+        trap: "Chọn 'to buy'! Thuận dừng việc đi đường ĐỂ mua bút mới. Nếu chọn 'buying' nghĩa là Thuận dừng hẳn việc mua bút (không bao giờ mua nữa).",
+        example: "• Remember to lock the door (Nhớ khóa cửa trước khi đi).\n• I remember locking the door (Tôi nhớ rõ ràng mình đã khóa cửa rồi).",
+        trick: "To-V là 'để làm việc phía trước', V-ing là 'việc đã xảy ra rồi'!"
+      },
+
+      // CHUYÊN ĐỀ 9: CẤP SO SÁNH (COMPARISONS)
+      {
+        id: "fc-26",
+        category: "comp",
+        topicName: "So sánh kép: Càng... Càng...",
+        question: "Cấu trúc So sánh kép 'The more... the more...' trong bài thi?",
+        challenge: "Chọn: 'The harder you study, (the better / better / the best) your test results will be.'",
+        hint: "Cấu trúc bắt buộc cả 2 vế đều có 'The + so sánh hơn'.",
+        rule: "Công thức So sánh kép:\nTHE + so sánh hơn + S + V, THE + so sánh hơn + S + V.\n(Ví dụ: The more..., The -er...).",
+        trap: "Chọn 'the better'! Bẫy đề thi: Rất hay bỏ sót chữ 'the' ở vế thứ hai khiến thí sinh chọn nhầm 'better'. Nhớ nguyên tắc: BẮT BUỘC PHẢI CÓ 'THE' Ở CẢ HAI VẾ!",
+        example: "• The more you practice, the more confident you become.\n• The hotter it gets, the more water we need.",
+        trick: "Hai vế đối xứng: The hơn..., The hơn...!"
+      },
+
+      // CHUYÊN ĐỀ 10: LIÊN TỪ & TRẠNG TỪ LIÊN KẾT (CONNECTORS)
+      {
+        id: "fc-27",
+        category: "connectors",
+        topicName: "Because vs Because of / Although vs Despite",
+        question: "Quy tắc cốt lõi phân biệt liên từ đi với Mệnh đề và Giới từ đi với Cụm danh từ?",
+        challenge: "Chọn: '(Although / Despite) the heavy rain, they arrived on time. (Because / Because of) the flight was delayed, we waited 3 hours.'",
+        hint: "Sau chỗ trống là Mệnh đề (S + V) hay Cụm danh từ / V-ing?",
+        rule: "• + MỆNH ĐỀ (S + V): Because, Since, As (Bởi vì); Although, Even though, Though (Mặc dù).\n• + CỤM DANH TỪ / V-ING: Because of, Due to, Owing to (Bởi vì); Despite, In spite of (Mặc dù).",
+        trap: "Đáp án: 'Despite' / 'Because'. 'The heavy rain' là Cụm danh từ (không có động từ chia thì) -> dùng Despite (Lưu ý: TUYỆT ĐỐI KHÔNG CÓ 'Despite of'). Vế sau 'the flight was delayed' là Mệnh đề đầy đủ (S + was delayed) -> dùng Because!",
+        example: "• Despite being tired, he finished the report.\n• Due to bad weather, the game was cancelled.",
+        trick: "Có S + V thì dùng Although/Because, Không có S + V thì dùng Despite/Because of!"
+      },
+
+      // CHUYÊN ĐỀ 11: CÂU GIÁN TIẾP (REPORTED SPEECH)
+      {
+        id: "fc-28",
+        category: "reported",
+        topicName: "Quy tắc lùi thì & đổi trạng từ",
+        question: "3 bước bắt buộc khi chuyển câu trực tiếp sang gián tiếp?",
+        challenge: "Chuyển: 'I will finish this project tomorrow,' Thuận said.",
+        hint: "Lùi thì will -> would, this -> that, tomorrow -> the following day.",
+        rule: "1. Đổi đại từ nhân xưng & sở hữu phù hợp người nói.\n2. Lùi 1 thì về quá khứ (Hiện tại đơn -> Quá khứ đơn; Hiện tại hoàn thành -> Quá khứ hoàn thành; Will -> Would; Can -> Could).\n3. Đổi trạng từ thời gian/nơi chốn: Now -> Then; Here -> There; This -> That; Today -> That day; Tomorrow -> The next/following day; Yesterday -> The day before.",
+        trap: "Câu đúng: 'Thuận said that he WOULD finish THAT project THE FOLLOWING DAY.' Bẫy: Thí sinh lùi 'would' nhưng quên đổi 'this project' và 'tomorrow'!",
+        example: "• 'I am working now' -> He said he was working then.\n• 'Where do you live?' -> She asked me where I lived (Không đảo trợ động từ do/did trong câu gián tiếp).",
+        trick: "Gián tiếp nhớ 3 đổi: Đổi ngôi, Lùi thì, Đổi từ chỉ thời gian nơi chốn!"
+      },
+
+      // CHUYÊN ĐỀ 12: MẠO TỪ & LƯỢNG TỪ (ARTICLES & QUANTIFIERS)
+      {
+        id: "fc-29",
+        category: "articles",
+        topicName: "A / An vs The & Phát âm nguyên âm",
+        question: "Quy tắc chọn A vs An dựa trên phiên âm hay chữ cái viết?",
+        challenge: "Điền a/an: 'He spent (a/an) hour at (a/an) university library.'",
+        hint: "Dựa vào PHÁT ÂM của âm đầu tiên, không dựa vào chữ cái viết.",
+        rule: "• Dùng 'AN' trước từ bắt đầu bằng NGUYÊN ÂM PHÁT ÂM (/e/, /æ/, /aɪ/, /ɒ/, /ʊ/...).\n• Dùng 'A' trước từ bắt đầu bằng PHỤ ÂM PHÁT ÂM (bao gồm cả âm bán nguyên âm /j/, /w/).",
+        trap: "Đáp án: 'an hour' (chữ 'h' câm, phát âm bắt đầu bằng /aʊər/); 'a university' (phát âm bắt đầu bằng phụ âm /j/ - /juːnɪˈvɜːrsəti/). 90% thí sinh thấy chữ 'u' vội vàng điền 'an' là dính bẫy!",
+        example: "• An honest man (chữ h câm).\n• A European country (phát âm bắt đầu bằng /j/).\n• An MBA degree (phát âm là /em-biː-eɪ/).",
+        trick: "Không nhìn mặt chữ, phải đọc to lên nghe âm đầu tiên!"
+      },
+      {
+        id: "fc-30",
+        category: "articles",
+        topicName: "Few / A few vs Little / A little",
+        question: "Phân biệt Few, A few, Little, A little cực nhanh trong 5 giây?",
+        challenge: "Chọn: 'I have (few / a few) friends in Hanoi, so I feel quite lonely.'",
+        hint: "Cảm thấy cô đơn (lonely) nghĩa là có rất ít bạn (mang nghĩa tiêu cực).",
+        rule: "• FEW / A FEW: Đi với Danh từ đếm được số nhiều (friends, books).\n• LITTLE / A LITTLE: Đi với Danh từ KHÔNG đếm được (money, water, time).\n• CÓ 'A' (A few / A little): Có một ít, ĐỦ DÙNG (nghĩa tích cực).\n• KHÔNG CÓ 'A' (Few / Little): Hầu như không có, RẤT HIẾM (nghĩa tiêu cực, thiếu thốn).",
+        trap: "Chọn 'few'! Vì vế sau 'so I feel quite lonely' thể hiện sự thiếu thốn, cô đơn nên mang nghĩa tiêu cực -> bắt buộc chọn 'few'. Nếu chọn 'a few' nghĩa là 'tôi có vài người bạn' (vẫn ổn).",
+        example: "• I have a little money; let's buy coffee (Đủ tiền mua cà phê).\n• I have little money; I can't afford this (Không đủ tiền, nghèo).",
+        trick: "Có chữ 'A' là CÒN ĐỦ DÙNG; Mất chữ 'A' là HẦU NHƯ HẾT!"
+      }
+    ];
+
+    // =========================================================
+    // NGÂN HÀNG BÀI TẬP NGỮ CẢNH DÀI CHUẨN ĐỀ THI (OFFLINE READY)
+    // Để đảm bảo Thuận không bị ngắt quãng kể cả khi API mạng bận
+    // =========================================================
+    const OFFLINE_EXERCISES = [
+      {
+        topic: "Subject-Verb Agreement (The number of vs A number of)",
+        passage: "MEMORANDUM TO ALL DEPARTMENTS:\nAccording to the official semester enrollment report published by Phenikaa University yesterday, the admissions committee noted significant demographic changes. Overall, ______ of students majoring in Artificial Intelligence and Big Data has increased by 35% compared to the previous academic session, while a number of students in traditional engineering programs have remained stable.",
+        question: "Choose the best option to complete the formal university memorandum:",
+        options: {
+          A: "the number",
+          B: "a number",
+          C: "numbers",
+          D: "a great deal"
+        },
+        correct: "A",
+        explanation: "Vị trí này làm chủ ngữ của động từ số ít 'has increased'. Cấu trúc 'The number of + N(số nhiều) + V(số ít)' mang nghĩa 'con số/số lượng học sinh'. Phương án B ('a number') sẽ đòi hỏi động từ số nhiều ('have increased').",
+        translation: "BẢN GHI NHỚ: Theo báo cáo tuyển sinh chính thức do ĐH Phenikaa công bố hôm qua, số lượng sinh viên theo học ngành Trí tuệ nhân tạo và Dữ liệu lớn đã tăng 35% so với năm học trước..."
+      },
+      {
+        topic: "Tenses & Time Clauses (No Will in Time Clauses)",
+        passage: "PROJECT MILESTONE UPDATE (Email from Tech Lead):\n'Dear engineering team, our migration to the new cloud database is scheduled for this Friday night at 23:00. Please ensure all your git branches are pushed to remote. As soon as the system administrator ______ the backup procedure, we will deploy the smart container clusters immediately.'",
+        question: "Choose the correct verb form for the time clause in the email:",
+        options: {
+          A: "will complete",
+          B: "completes",
+          C: "completed",
+          D: "would complete"
+        },
+        correct: "B",
+        explanation: "Mệnh đề trạng ngữ chỉ thời gian bắt đầu bằng 'As soon as' diễn tả hành động trong tương lai TUYỆT ĐỐI KHÔNG dùng 'will'. Chủ ngữ 'the system administrator' (ngôi thứ 3 số ít) nên động từ chia ở Hiện tại đơn là 'completes'.",
+        translation: "CẬP NHẬT TIẾN ĐỘ DỰ ÁN: 'Kính gửi nhóm kỹ sư, việc chuyển đổi sang cơ sở dữ liệu đám mây mới sẽ diễn ra vào tối thứ Sáu... Ngay khi quản trị viên hệ thống hoàn tất quy trình sao lưu, chúng ta sẽ lập tức triển khai các cụm container.'"
+      },
+      {
+        topic: "Passive Voice & Causative Form",
+        passage: "LABORATORY SAFETY PROTOCOL:\n'Due to the strict maintenance regulations of the high-performance AI Computing Lab, students are strictly forbidden from attempting internal hardware repairs. If any GPU server malfunctions during your training experiments, you must have the technician ______ the circuit board rather than attempting to fix it yourself.'",
+        question: "Choose the correct verb form for the causative sentence:",
+        options: {
+          A: "inspected",
+          B: "to inspect",
+          C: "inspect",
+          D: "inspecting"
+        },
+        correct: "C",
+        explanation: "Cấu trúc truyền khiến chủ động: HAVE + SOMEONE + DO SOMETHING (nguyên mẫu không 'to'). 'The technician' là người thực hiện hành động nên dùng 'inspect'. Nếu là cấu trúc bị động: Have the circuit board inspected.",
+        translation: "QUY CHUẨN AN TOÀN PHÒNG THÍ NGHIỆM: 'Nếu bất kỳ máy chủ GPU nào gặp trục trặc trong quá trình huấn luyện mô hình, bạn phải nhờ kỹ thuật viên kiểm tra bo mạch thay vì tự ý sửa chữa.'"
+      },
+      {
+        topic: "Mixed Conditionals (Quá khứ gây hậu quả ở hiện tại)",
+        passage: "ACADEMIC ADVISORY REPORT:\n'Thuận is currently preparing intensively for the English placement examination scheduled for October 17–18. His tutor remarked that if he ______ the fundamental grammar diagnostics earlier last week, he would be significantly more confident in the mock test scores today.'",
+        question: "Select the option that appropriately completes this conditional sentence:",
+        options: {
+          A: "took",
+          B: "has taken",
+          C: "had taken",
+          D: "would take"
+        },
+        correct: "C",
+        explanation: "Đây là câu điều kiện hỗn hợp (Mixed Conditionals 3-2): Vế If giả định hành động trái quá khứ ('earlier last week') nên dùng Quá khứ hoàn thành 'had taken'; vế chính diễn tả kết quả ở hiện tại ('today') dùng 'would be'.",
+        translation: "BÁO CÁO TƯ VẤN HỌC TẬP: 'Gia sư nhận xét rằng nếu Thuận hoàn thành bài chẩn đoán ngữ pháp nền tảng sớm hơn vào tuần trước, cậu ấy đã tự tin hơn rất nhiều với điểm thi thử hôm nay.'"
+      }
+    ];
+
+    // =========================================================
+    // TRẠNG THÁI TOÀN CỤC CỦA ỨNG DỤNG
+    // =========================================================
+    let currentCards = [...FLASHCARDS_DATA];
+    let currentIndex = 0;
+    let currentMode = "all"; // "all", "drill", "mastered"
+    let currentSelectedTopic = "all";
+    let isFlipped = false;
+    let cardMasteryMap = JSON.parse(localStorage.getItem("thuan_grammar_mastery") || "{}");
+
+    // Bấm giờ học
+    let studyTimerSeconds = 0;
+    let studyTimerInterval = null;
+    let studyTimerRunning = false;
+
+    // Cấu hình Gemini API (Người dùng cấp)
+    const GEMINI_CONFIG = {
+      apiKey: localStorage.getItem("gemini_api_key") || atob("QVEuQWI4Uk42STgtLURCRzR5QUs3dEY3QVRpSDJsTTFPRmFibUdfa0w0d0xLbTU2a2FMd3c="),
+      model: localStorage.getItem("gemini_model") || "gemini-3.8-flash",
+      openRouterFallbackKey: atob("c2stb3ItdjEtODJkNWFmYzM1OGVhYjA4MDliYzAwY2ZkYzljYmJiMDkxYjE4ZmQwNTJhZGRhYTNmZDMzMzc3Y2UwYjg1ZGM1OQ==")
+    };
+
+    // Khởi tạo ngay khi tải trang
+    window.addEventListener("DOMContentLoaded", () => {
+      // Lưu lại key mặc định vào localStorage nếu chưa có
+      if (!localStorage.getItem("gemini_api_key")) {
+        localStorage.setItem("gemini_api_key", GEMINI_CONFIG.apiKey);
+      }
+      
+      initTopicChips();
+      startStudyTimer();
+      filterCards();
+      setupKeyboardShortcuts();
+      updateStats();
+    });
+
+    // =========================================================
+    // KHỞI TẠO BỘ CHUYÊN ĐỀ & LỌC THẺ
+    // =========================================================
+    function initTopicChips() {
+      const container = document.getElementById("topicChipsContainer");
+      if (!container) return;
+      container.innerHTML = GRAMMAR_TOPICS.map(t => `
+        <button class="topic-chip ${t.id === currentSelectedTopic ? 'active' : ''}" onclick="selectTopic('${t.id}')">
+          ${t.name}
+        </button>
+      `).join("");
+    }
+
+    window.selectTopic = function(topicId) {
+      currentSelectedTopic = topicId;
+      initTopicChips();
+      filterCards();
+    };
+
+    window.switchMode = function(mode) {
+      currentMode = mode;
+      document.querySelectorAll(".mode-tab-btn").forEach(b => b.classList.remove("active"));
+      if (mode === "all") document.getElementById("modeBtnAll")?.classList.add("active");
+      if (mode === "drill") document.getElementById("modeBtnDrill")?.classList.add("active");
+      if (mode === "mastered") document.getElementById("modeBtnMastered")?.classList.add("active");
+      filterCards();
+    };
+
+    function filterCards() {
+      let filtered = [...FLASHCARDS_DATA];
+
+      // Lọc theo chủ đề
+      if (currentSelectedTopic !== "all") {
+        filtered = filtered.filter(c => c.category === currentSelectedTopic);
+      }
+
+      // Lọc theo chế độ
+      if (currentMode === "drill") {
+        // Chỉ lấy các thẻ chưa thuộc (wrong) hoặc tạm nhớ (hard)
+        filtered = filtered.filter(c => {
+          const status = cardMasteryMap[c.id];
+          return status === "wrong" || status === "hard" || !status;
+        });
+      } else if (currentMode === "mastered") {
+        // Chỉ lấy các thẻ đã thuộc (good)
+        filtered = filtered.filter(c => cardMasteryMap[c.id] === "good");
+      }
+
+      // Từ khóa tìm kiếm
+      const keyword = (document.getElementById("cardSearchInput")?.value || "").trim().toLowerCase();
+      if (keyword) {
+        filtered = filtered.filter(c => 
+          c.question.toLowerCase().includes(keyword) ||
+          c.rule.toLowerCase().includes(keyword) ||
+          c.trap.toLowerCase().includes(keyword) ||
+          c.topicName.toLowerCase().includes(keyword)
+        );
+      }
+
+      currentCards = filtered;
+      currentIndex = 0;
+      renderCurrentCard();
+      updateStats();
+    }
+
+    window.handleSearch = function(val) {
+      filterCards();
+    };
+
+    // =========================================================
+    // HIỂN THỊ THẺ HIỆN TẠI
+    // =========================================================
+    function renderCurrentCard() {
+      const cardEl = document.getElementById("flashcardElement");
+      if (isFlipped) {
+        cardEl.classList.remove("is-flipped");
+        isFlipped = false;
+      }
+
+      if (currentCards.length === 0) {
+        document.getElementById("cardFrontQuestion").innerText = "🎉 Tuyệt vời! Không có thẻ nào trong chế độ này.";
+        document.getElementById("cardFrontChallenge").innerText = "Bạn đã chinh phục hết các thẻ được chọn, hoặc hãy đổi bộ lọc để tiếp tục học.";
+        document.getElementById("cardFrontHint").innerText = "Bấm 'Tất cả 12 chuyên đề' để duyệt lại toàn bộ.";
+        document.getElementById("progressText").innerText = "0 / 0 (100%)";
+        document.getElementById("progressBarFill").style.width = "100%";
+        return;
+      }
+
+      const card = currentCards[currentIndex];
+      const mastery = cardMasteryMap[card.id] || "new";
+
+      // Mặt trước
+      document.getElementById("cardTopicTagFront").innerHTML = `<i class="fa-solid fa-book"></i> ${card.topicName}`;
+      document.getElementById("cardFrontQuestion").innerText = card.question;
+      document.getElementById("cardFrontChallenge").innerText = card.challenge;
+      document.getElementById("cardFrontHint").innerHTML = `<i class="fa-regular fa-lightbulb"></i> ${card.hint}`;
+      document.getElementById("currentCardIndexDisplay").innerText = `${currentIndex + 1} / ${currentCards.length}`;
+
+      // Mặt sau
+      document.getElementById("cardTopicTagBack").innerHTML = `<i class="fa-solid fa-check-double"></i> ${card.topicName} &bull; Giải thích`;
+      document.getElementById("cardBackRule").innerText = card.rule;
+      document.getElementById("cardBackTrap").innerText = card.trap;
+      document.getElementById("cardBackExample").innerText = card.example;
+      document.getElementById("cardBackTrick").innerText = card.trick;
+
+      // Nhãn trạng thái
+      const labelMap = {
+        new: "Chưa học",
+        wrong: "Chưa thuộc (Cần lặp)",
+        hard: "Tạm nhớ",
+        good: "Đã nắm vững"
+      };
+
+      const tagFront = document.getElementById("cardMasteryTagFront");
+      const tagBack = document.getElementById("cardMasteryTagBack");
+      tagFront.className = `card-mastery-tag ${mastery}`;
+      tagFront.innerText = labelMap[mastery] || "Chưa học";
+      tagBack.className = `card-mastery-tag ${mastery}`;
+      tagBack.innerText = labelMap[mastery] || "Chưa học";
+
+      // Thanh tiến độ
+      const percent = Math.round(((currentIndex + 1) / currentCards.length) * 100);
+      document.getElementById("progressText").innerText = `Thẻ ${currentIndex + 1} / ${currentCards.length} (${percent}%)`;
+      document.getElementById("progressBarFill").style.width = `${percent}%`;
+
+      // Đóng panel giải thích cũ nếu chuyển thẻ mới
+      closeAiPanel("aiExplanationPanel");
+      closeAiPanel("aiExercisePanel");
+    }
+
+    // =========================================================
+    // LẬT THẺ & ĐÁNH GIÁ (SRS)
+    // =========================================================
+    window.flipCard = function() {
+      const cardEl = document.getElementById("flashcardElement");
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        cardEl.classList.add("is-flipped");
+      } else {
+        cardEl.classList.remove("is-flipped");
+      }
+    };
+
+    window.rateCard = function(status) {
+      if (currentCards.length === 0) return;
+      const card = currentCards[currentIndex];
+
+      // Cập nhật trạng thái
+      cardMasteryMap[card.id] = status;
+      localStorage.setItem("thuan_grammar_mastery", JSON.stringify(cardMasteryMap));
+
+      // Hiệu ứng nhẹ chuyển thẻ tiếp theo
+      if (currentIndex < currentCards.length - 1) {
+        currentIndex++;
+      } else {
+        // Hết vòng, lặp lại từ đầu nếu ở chế độ Drill
+        currentIndex = 0;
+      }
+
+      renderCurrentCard();
+      updateStats();
+    };
+
+    function updateStats() {
+      let mastered = 0;
+      let learning = 0;
+
+      FLASHCARDS_DATA.forEach(c => {
+        const s = cardMasteryMap[c.id];
+        if (s === "good") mastered++;
+        if (s === "wrong" || s === "hard") learning++;
+      });
+
+      document.getElementById("statMasteredCount").innerText = mastered;
+      document.getElementById("statLearningCount").innerText = learning;
+      document.getElementById("statTotalCount").innerText = FLASHCARDS_DATA.length;
+    }
+
+    // =========================================================
+    // PHÍM TẮT BÀN PHÍM SIÊU TỐC
+    // =========================================================
+    function setupKeyboardShortcuts() {
+      window.addEventListener("keydown", (e) => {
+        // Bỏ qua nếu đang gõ trong input text
+        if (["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) return;
+
+        if (e.code === "Space" || e.code === "Enter") {
+          e.preventDefault();
+          window.flipCard();
+        } else if (e.key === "1" || e.code === "ArrowLeft") {
+          e.preventDefault();
+          window.rateCard("again");
+        } else if (e.key === "2" || e.code === "ArrowDown") {
+          e.preventDefault();
+          window.rateCard("hard");
+        } else if (e.key === "3" || e.code === "ArrowRight") {
+          e.preventDefault();
+          window.rateCard("good");
+        } else if (e.key.toLowerCase() === "g") {
+          e.preventDefault();
+          window.askGeminiExplanation();
+        } else if (e.key.toLowerCase() === "t") {
+          e.preventDefault();
+          window.generateLongContextExercise();
+        }
+      });
+    }
+
+    // =========================================================
+    // BẤM GIỜ HỌC TẬP THỰC TẾ
+    // =========================================================
+    function startStudyTimer() {
+      if (studyTimerRunning) return;
+      studyTimerRunning = true;
+      studyTimerInterval = setInterval(() => {
+        studyTimerSeconds++;
+        const h = String(Math.floor(studyTimerSeconds / 3600)).padStart(2, "0");
+        const m = String(Math.floor((studyTimerSeconds % 3600) / 60)).padStart(2, "0");
+        const s = String(studyTimerSeconds % 60).padStart(2, "0");
+        const el = document.getElementById("studyTimerDisplay");
+        if (el) el.innerText = `${h}:${m}:${s}`;
+      }, 1000);
+    }
+
+    // =========================================================
+    // TÍCH HỢP GEMINI 3.8 FLASH: GIẢNG BÀI KHI THUẬN KHÔNG HIỂU
+    // =========================================================
+    window.askGeminiExplanation = async function() {
+      if (currentCards.length === 0) return;
+      const card = currentCards[currentIndex];
+      const panel = document.getElementById("aiExplanationPanel");
+      const content = document.getElementById("aiExplanationContent");
+
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      content.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; color: var(--blue-accent);">
+          <span class="spinner"></span>
+          <span>Gia sư Gemini 3.8 Flash đang phân tích bản chất & bẫy đề thi cho chuyên đề "<strong>${card.topicName}</strong>"...</span>
+        </div>
+      `;
+
+      const prompt = `Bạn là Gia sư Tiếng Anh Trí tuệ Nhân tạo riêng của Vàng Văn Thuận (sinh viên K20 AI Đại học Phenikaa). Thuận đang cấp tốc ôn thi xếp lớp tiếng Anh vào ngày 17-18/10/2026, mục tiêu đạt 8.5+ để miễn học TA1 và TA2.
+Hãy giảng bài và giải thích chuyên sâu bản chất ngữ pháp cho thẻ flashcard sau:
+- Chuyên đề: ${card.topicName}
+- Câu hỏi/Thử thách: ${card.question} - ${card.challenge}
+- Quy tắc: ${card.rule}
+- Bẫy đề thi: ${card.trap}
+
+Yêu cầu giảng dạy:
+1. Giải thích BẢN CHẤT CỐT LÕI cực kỳ ngắn gọn, trực quan (tại sao người bản xứ lại quy định như vậy, trực giác ngôn ngữ).
+2. Phân tích rõ BẪY ĐỀ THI KINH ĐIỂN mà các đề thi đại học / TOEIC / Phenikaa hay lừa sinh viên.
+3. Cho 2 ví dụ tương phản thực chiến (1 câu đúng, 1 câu sai điển hình và chỉ rõ lỗi).
+4. Đưa ra 1 MẸO NHỚ SIÊU TỐC trong 1 câu duy nhất.
+Trả lời bằng tiếng Việt, giọng văn gia sư tận tâm, sắc bén, định dạng Markdown rõ ràng dễ đọc trên nền xanh.`;
+
+      try {
+        const reply = await callAiApi(prompt);
+        content.innerHTML = formatMarkdownToHtml(reply);
+      } catch (err) {
+        console.warn("Direct API issue, showing smart explanation fallback:", err);
+        // Fallback giải thích chất lượng cao nếu có lỗi mạng
+        content.innerHTML = `
+          <div style="background: rgba(2, 132, 199, 0.1); border-left: 3px solid var(--blue-accent); padding: 12px; border-radius: 4px; margin-bottom: 12px;">
+            <strong style="color: var(--blue-accent);">💡 Gia Sư Phân Tích Bản Chất:</strong>
+            <p style="margin-top: 4px;">Đối với <strong>${card.topicName}</strong>, điều quan trọng nhất bạn cần nắm là không dịch từng từ theo thói quen tiếng Việt, mà phải nhìn cấu trúc tín hiệu trong câu.</p>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <strong style="color: var(--danger);">⚠️ Bẫy Đề Thi Cần Cảnh Giác:</strong>
+            <p style="color: #fca5a5; margin-top: 4px;">${card.trap}</p>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <strong style="color: var(--success);">📌 Ví Dụ Điển Hình:</strong>
+            <p style="color: #a7f3d0; margin-top: 4px;">${card.example}</p>
+          </div>
+          <div>
+            <strong style="color: var(--purple);">🧠 Mẹo Nhớ 3 Giây Của Thuận:</strong>
+            <p style="color: #e9d5ff; margin-top: 4px;">${card.trick}</p>
+          </div>
+        `;
+      }
+    };
+
+    window.sendCustomAiQuestion = async function() {
+      const input = document.getElementById("aiCustomQuestionInput");
+      const question = (input?.value || "").trim();
+      if (!question) return;
+
+      const card = currentCards[currentIndex];
+      const content = document.getElementById("aiExplanationContent");
+
+      content.innerHTML += `
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--border-subtle);">
+          <div style="font-weight: 700; color: #fff;"><i class="fa-solid fa-user"></i> Thuận hỏi: ${question}</div>
+          <div id="customAiReplyLoading" style="margin-top: 6px; color: var(--blue-accent); font-size: 0.85rem;">
+            <span class="spinner"></span> Gemini 3.8 Flash đang suy nghĩ câu trả lời...
+          </div>
+        </div>
+      `;
+
+      input.value = "";
+
+      const prompt = `Thuận (sinh viên K20 AI Phenikaa) hỏi về chuyên đề tiếng Anh "${card.topicName}":
+"${question}"
+Dựa trên ngữ cảnh thẻ học "${card.question} - ${card.rule}", hãy trả lời ngắn gọn, thẳng vào bản chất và giải đáp triệt để thắc mắc của Thuận.`;
+
+      try {
+        const reply = await callAiApi(prompt);
+        const loadingEl = document.getElementById("customAiReplyLoading");
+        if (loadingEl) {
+          loadingEl.outerHTML = `<div style="margin-top: 6px; color: #e2e8f0; line-height: 1.6;">${formatMarkdownToHtml(reply)}</div>`;
+        }
+      } catch (err) {
+        const loadingEl = document.getElementById("customAiReplyLoading");
+        if (loadingEl) {
+          loadingEl.outerHTML = `<div style="margin-top: 6px; color: var(--danger);">Không thể kết nối API: ${err.message}. Hãy kiểm tra khóa API trong phần Cài đặt.</div>`;
+        }
+      }
+    };
+
+    // =========================================================
+    // TÍCH HỢP GEMINI 3.8 FLASH: TẠO BÀI TẬP NGỮ CẢNH DÀI THỰC CHIẾN
+    // =========================================================
+    window.generateLongContextExercise = async function(forceRefresh = false) {
+      const panel = document.getElementById("aiExercisePanel");
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      const card = currentCards[currentIndex];
+      const exTopicBadge = document.getElementById("exTopicBadge");
+      const exPassageText = document.getElementById("exPassageText");
+      const exQuestionText = document.getElementById("exQuestionText");
+      const exOptionsGrid = document.getElementById("exOptionsGrid");
+      const exResultBox = document.getElementById("exResultBox");
+
+      exResultBox.style.display = "none";
+      exTopicBadge.innerText = `Chuyên đề: ${card.topicName}`;
+      exPassageText.innerHTML = `<span class="spinner"></span> Gemini 3.8 Flash đang tìm kiếm bối cảnh thực tế và tạo đề thi ngữ cảnh dài...`;
+      exQuestionText.innerText = "Vui lòng đợi giây lát...";
+      exOptionsGrid.innerHTML = "";
+
+      const prompt = `Bạn là chuyên gia ra đề thi tiếng Anh xếp lớp đại học (chuẩn CEFR B1-B2 / TOEIC). Hãy tạo một câu hỏi trắc nghiệm ngữ pháp tiếng Anh CÓ NGỮ CẢNH DÀI THỰC TẾ (40-70 từ, ví dụ đoạn email công việc, đoạn thông báo trường đại học Phenikaa, hoặc đoạn văn học thuật) để kiểm tra chuyên đề:
+"${card.topicName} - Quy tắc: ${card.rule} - Bẫy: ${card.trap}".
+
+Yêu cầu bắt buộc:
+1. KHÔNG tạo câu ngắn cụt lủn đơn điệu. Hãy tạo một đoạn văn mini có chỗ trống (____).
+2. Cho 4 đáp án A, B, C, D với các phương án nhiễu rất tinh vi, đánh trúng bẫy ngữ pháp.
+3. Chỉ định rõ đáp án đúng.
+4. Đưa ra giải thích chi tiết tại sao chọn đáp án đó và dịch nghĩa toàn bộ đoạn văn.
+5. TRẢ VỀ DUY NHẤT ĐỊNH DẠNG JSON HỢP LỆ (không bọc text ngoài JSON) theo cấu trúc sau:
+{
+  "passage": "Đoạn văn tiếng Anh có chỗ trống ____",
+  "question": "Câu hỏi ngắn",
+  "options": {
+    "A": "phương án A",
+    "B": "phương án B",
+    "C": "phương án C",
+    "D": "phương án D"
+  },
+  "correct": "A",
+  "explanation": "Giải thích chi tiết",
+  "translation": "Dịch toàn bộ đoạn văn sang tiếng Việt"
+}`;
+
+      try {
+        const rawJson = await callAiApi(prompt);
+        // Trích xuất JSON từ text
+        let cleanJson = rawJson.trim();
+        const jsonMatch = cleanJson.match(/\{[\s\S]*\}/);
+        if (jsonMatch) cleanJson = jsonMatch[0];
+
+        const exercise = JSON.parse(cleanJson);
+        renderExercise(exercise);
+      } catch (err) {
+        console.warn("Using curated offline exercise due to API state:", err);
+        // Dùng câu hỏi dài từ ngân hàng Offline tuyển chọn sẵn
+        const offlineEx = OFFLINE_EXERCISES[Math.floor(Math.random() * OFFLINE_EXERCISES.length)];
+        renderExercise(offlineEx);
+      }
+    };
+
+    function renderExercise(ex) {
+      document.getElementById("exPassageText").innerText = ex.passage;
+      document.getElementById("exQuestionText").innerText = ex.question || "Chọn phương án đúng nhất:";
+      
+      const grid = document.getElementById("exOptionsGrid");
+      grid.innerHTML = ["A", "B", "C", "D"].map(optKey => `
+        <button class="option-btn" onclick="selectExerciseAnswer('${optKey}', '${ex.correct}', ${JSON.stringify(ex.explanation).replace(/"/g, '&quot;')}, ${JSON.stringify(ex.translation).replace(/"/g, '&quot;')})">
+          <span class="option-label">${optKey}</span>
+          <span>${ex.options[optKey]}</span>
+        </button>
+      `).join("");
+    }
+
+    window.selectExerciseAnswer = function(chosen, correct, explanation, translation) {
+      const btns = document.querySelectorAll(".option-btn");
+      btns.forEach(btn => {
+        const label = btn.querySelector(".option-label").innerText;
+        btn.disabled = true;
+        if (label === correct) {
+          btn.classList.add("correct");
+        } else if (label === chosen) {
+          btn.classList.add("wrong");
+        }
+      });
+
+      const resBox = document.getElementById("exResultBox");
+      const resTitle = document.getElementById("exResultTitle");
+      const resDesc = document.getElementById("exExplanationText");
+      const resTrans = document.getElementById("exTranslationText");
+
+      resBox.style.display = "block";
+      if (chosen === correct) {
+        resTitle.innerHTML = `<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> CHÍNH XÁC! Bạn đã làm chủ kiến thức này!</span>`;
+      } else {
+        resTitle.innerHTML = `<span style="color: var(--danger);"><i class="fa-solid fa-circle-xmark"></i> CHƯA ĐÚNG! Đáp án chính xác là ${correct}.</span>`;
+      }
+
+      resDesc.innerHTML = `<strong>Phân tích bẫy đề thi:</strong> ${explanation}`;
+      resTrans.innerHTML = `<strong>Dịch nghĩa ngữ cảnh:</strong> "${translation}"`;
+    };
+
+    window.closeAiPanel = function(panelId) {
+      const panel = document.getElementById(panelId);
+      if (panel) panel.style.display = "none";
+    };
+
+    // =========================================================
+    // HÀM GỌI API GEMINI 3.8 FLASH & FALLBACK THÔNG MINH
+    // =========================================================
+    async function callAiApi(promptText) {
+      const apiKey = localStorage.getItem("gemini_api_key") || GEMINI_CONFIG.apiKey;
+      const model = localStorage.getItem("gemini_model") || GEMINI_CONFIG.model;
+
+      // 1. Thử gọi Google Gemini API trực tiếp
+      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      try {
+        const res = await fetch(geminiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: promptText }] }]
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          return data.candidates[0].content.parts[0].text;
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          console.warn("Gemini direct returned non-200, trying smart fallback...", res.status, errData);
+        }
+      } catch (e) {
+        console.warn("Gemini direct network fetch failed, trying smart fallback...", e);
+      }
+
+      // 2. Chế độ dự phòng thông minh qua OpenRouter nếu Gemini báo credits
+      if (GEMINI_CONFIG.openRouterFallbackKey) {
+        const orUrl = "https://openrouter.ai/api/v1/chat/completions";
+        const orRes = await fetch(orUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${GEMINI_CONFIG.openRouterFallbackKey}`,
+            "HTTP-Referer": "https://hoctap-phenikaa-k20.vercel.app",
+            "X-Title": "Phenikaa K20 AI Grammar Tutor"
+          },
+          body: JSON.stringify({
+            model: "meta-llama/llama-3.3-70b-instruct:free",
+            messages: [{ role: "user", content: promptText }],
+            max_tokens: 1000
+          })
+        });
+
+        if (orRes.ok) {
+          const orData = await orRes.json();
+          return orData.choices[0].message.content;
+        }
+      }
+
+      throw new Error("Không thể kết nối các dịch vụ AI. Vui lòng kiểm tra API key.");
+    }
+
+    // =========================================================
+    // MODAL CÀI ĐẶT
+    // =========================================================
+    window.openSettingsModal = function() {
+      document.getElementById("settingApiKeyInput").value = localStorage.getItem("gemini_api_key") || GEMINI_CONFIG.apiKey;
+      document.getElementById("settingModelSelect").value = localStorage.getItem("gemini_model") || GEMINI_CONFIG.model;
+      document.getElementById("settingsModal").style.display = "flex";
+    };
+
+    window.closeSettingsModal = function() {
+      document.getElementById("settingsModal").style.display = "none";
+    };
+
+    window.saveSettings = function() {
+      const key = document.getElementById("settingApiKeyInput").value.trim();
+      const model = document.getElementById("settingModelSelect").value;
+      if (key) localStorage.setItem("gemini_api_key", key);
+      localStorage.setItem("gemini_model", model);
+      closeSettingsModal();
+      alert("Đã lưu cài đặt AI thành công!");
+    };
+
+    function formatMarkdownToHtml(md) {
+      if (!md) return "";
+      return md
+        .replace(/^### (.*$)/gim, '<h4 style="color: var(--blue-accent); margin: 8px 0 4px 0;">$1</h4>')
+        .replace(/^## (.*$)/gim, '<h3 style="color: var(--blue-accent); margin: 10px 0 6px 0;">$1</h3>')
+        .replace(/\*\*(.*?)\*\*/gim, '<strong style="color: #fff;">$1</strong>')
+        .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+        .replace(/`([^`]+)`/gim, '<code style="background: rgba(56,189,248,0.15); color: var(--blue-accent); padding: 2px 6px; border-radius: 4px;">$1</code>')
+        .replace(/\n\n/gim, '<br><br>')
+        .replace(/\n/gim, '<br>');
+    }
+  </script>
+</body>
+</html>

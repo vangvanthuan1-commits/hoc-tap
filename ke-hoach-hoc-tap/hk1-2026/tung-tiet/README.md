@@ -1,5 +1,7 @@
 # Học tuần tự theo từng tiết — mục tiêu GPA ≥3.6
 
+> **11/10/2026:** lịch học đang áp dụng đã đổi sang [kế hoạch mới](../ke-hoach-moi-2026-10-11.md). Phần lịch/thứ tự bên dưới giữ làm lịch sử và kho nội dung các tiết.
+
 **Cập nhật yêu cầu:** chấp nhận đề thi/đề cương các năm trước cùng mã. [Danh mục tài liệu cũ và phần đã đọc](../tai-lieu-cu-cung-ma-2026-10-07.md). Đã có 2 đường dẫn đề giữa kỳ Vật lý đúng mã (chưa đọc toàn văn) và phần xem trước bài giảng CNTT năm 2024 đúng mã.
 
 Cập nhật 07/10/2026. Các bảng tiết là kế hoạch tự học đề xuất. **Chưa có đề cương đúng mã được xác minh đầy đủ và chưa có ma trận thi chính thức.** Không suy ra nội dung chắc chắn thi từ kế hoạch này.

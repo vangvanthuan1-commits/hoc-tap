@@ -3,7 +3,7 @@ import rawContent from "./content.json";
 import type { LessonContent, StudyData } from "./types";
 
 export const studyData = rawStudyData as StudyData;
-export const lessonContent = rawContent as Record<string, LessonContent>;
+export const lessonContent = rawContent as unknown as Record<string, LessonContent>;
 export const subjects = studyData.subjects;
 export const lessons = studyData.lessons;
 export const schedule = studyData.schedule;

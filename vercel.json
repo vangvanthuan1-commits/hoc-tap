@@ -8,6 +8,8 @@
     { "source": "/on-tap", "destination": "/on-tap.html" },
     { "source": "/ngat-quang", "destination": "/ngat-quang.html" },
     { "source": "/lich-hoc", "destination": "/lich-hoc.html" },
-    { "source": "/dong-bo", "destination": "/dong-bo.html" }
+    { "source": "/dong-bo", "destination": "/dong-bo.html" },
+    { "source": "/ngu-phap-flashcard", "destination": "/ngu-phap-flashcard.html" },
+    { "source": "/flashcard", "destination": "/ngu-phap-flashcard.html" }
   ]
 }

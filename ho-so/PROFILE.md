@@ -2,6 +2,15 @@
 
 Cập nhật: 09/10/2026. Nguồn: Cập nhật trực tiếp theo yêu cầu người dùng và nâng cấp app học tập Phenikaa K20; lưu snapshot lịch sử tại [snapshots/2026-10-07.md](snapshots/2026-10-07.md). Ưu tiên cập nhật mới hơn của người dùng; không tự suy ra tiến độ từ ngày tháng hoặc độ phức tạp của dự án.
 
+## Giới thiệu bản thân và 3 mục tiêu chính
+
+Cập nhật 11/10/2026. Nguồn: người dùng tự nói trực tiếp trong hội thoại.
+
+- Sinh viên K20 Đại học Phenikaa, ngành Trí tuệ nhân tạo, mới vào đầu năm học đầu tiên.
+- Thích nghịch AI và đam mê code.
+- Về học tập: muốn đạt GPA trên 3.6.
+- Hiện có 3 mục tiêu chính song song: **học tập, kiếm tiền, làm dự án**. Người dùng chưa nêu thứ tự ưu tiên, số tiền hay thời hạn cho mục tiêu kiếm tiền và dự án; khi tư vấn cần hỏi lại thay vì tự suy ra, và cân đối thời gian giữa ba mục tiêu (học kỳ 1 vẫn ưu tiên học tập theo phần dưới).
+
 ## Học tập và mục tiêu
 
 - Sinh viên Đại học Phenikaa, K20, ngành Trí tuệ nhân tạo (AI/ICT5), niên khóa 2026–2030. Lớp từng được ghi: ICT5-2610210.01.
@@ -51,6 +60,7 @@ Cập nhật: 09/10/2026. Nguồn: Cập nhật trực tiếp theo yêu cầu ng
 - [Lịch từng tuần](../lich-hoc/2026-10-07-cac-tuan-sau.md) và [dữ liệu lịch](../lich-hoc/2026-10-07-cac-tuan-sau.json).
 - [Chương trình AI K20](../chuong-trinh-hoc/ai-k20-2026-10-07.md): 78 học phần gồm các nhóm lựa chọn, giao diện cộng 196 tín chỉ; không coi đây là yêu cầu tín chỉ tốt nghiệp. HK2 có Đại số tuyến tính, Tiếng Anh cơ bản 2, Triết học và Cơ sở lập trình; HK3 có Xác suất thống kê, Tiếng Anh cơ bản 3, DSA và Toán rời rạc.
 - Chi tiết: [lần kiểm tra lịch học 07/10/2026](../lich-hoc/2026-10-07.md).
+- Cập nhật 11/10/2026 (nguồn: cổng sinh viên, đọc qua Chrome của người dùng): lịch vẫn trống trước 02/11; tuần 02/11 và 30/11 khớp bản 07/10; chương trình học vẫn 78 học phần/196 tín chỉ. Chưa đối chiếu từng tuần còn lại, chưa đọc lại lịch thi. [Chi tiết](../lich-hoc/2026-10-11.md).
 
 ## Kế hoạch kỳ 1 và quy chế GPA
 

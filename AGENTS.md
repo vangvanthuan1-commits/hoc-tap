@@ -10,4 +10,5 @@ Repo này là nơi lưu thông tin học tập của người dùng và website 
 - Theo yêu cầu người dùng ngày 07/10/2026: sau mỗi phần đã học, cập nhật nhật ký kết quả/checkpoint và file ôn tập có lý thuyết ngắn, lỗi, bài tự làm, đáp án tách riêng. Chỉ đánh dấu đúng phần đã luyện; giữ phần chưa học và lịch ôn dự kiến riêng.
 - App học tập ở `app/`; trước khi tư vấn, đọc bản JSON/Markdown mới nhất trong `ho-so/tu-app/` nếu có, ưu tiên thời điểm từng bản ghi và thông tin mới trong hội thoại. Tiến độ trên máy chưa gửi GitHub không tự xuất hiện trong repo.
 - Người dùng không thích bài tập chia quá vụn và lặp kiểu giống nhau: ưu tiên tình huống, mini challenge, làm một lượt rồi chữa lỗi. App là công cụ học chính lâu dài, cần giữ ghi chú/highlight/kết quả thật qua các phiên.
+- Vai trò gia sư, quy trình đầu/cuối phiên và theo dõi giờ học: đọc và làm theo `GIA-SU.md` ở đầu mỗi phiên (người dùng yêu cầu 11/10/2026).
 - Firebase client config do người dùng cung cấp là định danh công khai của app, được lưu trong `app/src/lib/firebase.ts` theo yêu cầu; không lưu service-account, OAuth Client Secret, token hay mật khẩu.

@@ -11,7 +11,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { upsertReviewCard, useLearningState } from "../lib/store";
-import type { ReviewCard } from "../types";
+import type { ReviewCard, SubjectId } from "../types";
 import "./learning.css";
 
 interface ReviewPanelProps {
@@ -28,6 +28,9 @@ export default function ReviewPanel({ onOpenLesson }: ReviewPanelProps) {
   const [revealedId, setRevealedId] = useState<string | null>(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [showAdd, setShowAdd] = useState(false);
+  const [bulkText, setBulkText] = useState("");
+  const [bulkSubject, setBulkSubject] = useState<SubjectId>("EN");
   const now = Date.now();
   const cards = useMemo(
     () => [...state.reviewCards].sort((a, b) => a.dueAt.localeCompare(b.dueAt)),
@@ -44,6 +47,47 @@ export default function ReviewPanel({ onOpenLesson }: ReviewPanelProps) {
       new Date(card.lastReviewedAt).toLocaleDateString("vi-VN") ===
         new Date().toLocaleDateString("vi-VN"),
   ).length;
+
+  function addCards() {
+    const lines = bulkText
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+    const parsed = lines.map((line) => {
+      const at = line.indexOf("|");
+      return at < 0
+        ? null
+        : [line.slice(0, at).trim(), line.slice(at + 1).trim()];
+    });
+    if (!parsed.length || parsed.some((pair) => !pair || !pair[0] || !pair[1])) {
+      setError("Mỗi dòng cần dạng: mặt trước | mặt sau.");
+      return;
+    }
+    try {
+      const nowIso = new Date().toISOString();
+      for (const pair of parsed as string[][]) {
+        upsertReviewCard({
+          lessonId: "flashcard",
+          subjectId: bulkSubject,
+          front: pair[0],
+          back: pair[1],
+          dueAt: nowIso,
+          intervalDays: 1,
+          repetitions: 0,
+          lastReviewedAt: null,
+        });
+      }
+      setBulkText("");
+      setShowAdd(false);
+      setShowFuture(false);
+      setError("");
+      setMessage(`Đã thêm ${parsed.length} thẻ, ôn ngay hôm nay.`);
+    } catch (caught) {
+      setError(
+        caught instanceof Error ? caught.message : "Không lưu được thẻ.",
+      );
+    }
+  }
 
   function review(card: ReviewCard, remembered: boolean) {
     try {
@@ -125,6 +169,46 @@ export default function ReviewPanel({ onOpenLesson }: ReviewPanelProps) {
           <ChevronRight size={16} />
         </button>
       </div>
+      <div className="learning-review-add">
+        <button
+          className="learning-button"
+          onClick={() => setShowAdd((current) => !current)}
+        >
+          {showAdd ? "Đóng" : "+ Thêm thẻ nhớ"}
+        </button>
+        {showAdd && (
+          <div>
+            <label>
+              Môn{" "}
+              <select
+                value={bulkSubject}
+                onChange={(event) =>
+                  setBulkSubject(event.target.value as SubjectId)
+                }
+              >
+                <option value="EN">Tiếng Anh</option>
+                <option value="GT">Giải tích</option>
+                <option value="VL">Vật lý</option>
+                <option value="IT">Nhập môn CNTT</option>
+                <option value="PL">Pháp luật</option>
+              </select>
+            </label>
+            <textarea
+              rows={6}
+              value={bulkText}
+              onChange={(event) => setBulkText(event.target.value)}
+              placeholder={"Mỗi dòng một thẻ: mặt trước | mặt sau\nborrow | mượn (borrow from)\nlend | cho mượn"}
+              style={{ width: "100%" }}
+            />
+            <button
+              className="learning-button learning-button-primary"
+              onClick={addCards}
+            >
+              Thêm các thẻ
+            </button>
+          </div>
+        )}
+      </div>
       {message && (
         <p className="learning-inline-message" role="status">
           <Check size={17} /> {message}
@@ -197,7 +281,7 @@ export default function ReviewPanel({ onOpenLesson }: ReviewPanelProps) {
                 <Eye size={18} /> Mở đáp án để đối chiếu
               </button>
             )}
-            {onOpenLesson && (
+            {onOpenLesson && activeCard.lessonId !== "flashcard" && (
               <button
                 className="learning-text-button learning-open-lesson"
                 onClick={() => onOpenLesson(activeCard.lessonId)}
