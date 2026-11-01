@@ -24,6 +24,8 @@ Các file gốc hiện người dùng đã gửi trong hội thoại, dự kiế
 
 **Phạm vi:** Bộ sách gốc có 4 chương, nhưng **chưa có đề cương chính thức xác nhận tất cả 4 chương thuộc học phần Giải tích 1 trong kỳ này**. Chương I ưu tiên trước; Chương II học tiếp khi lớp đi tới; Chương III–IV đánh dấu **mở rộng/chờ xác nhận**, không mặc định là nội dung thi HK1. Bài tập và lịch trong file này là **chương trình gia sư đề xuất**, không phải lịch nộp bài do trường ban hành.
 
+**Danh sách chi tiết 62 chủ đề, mã 130 buổi lý thuyết/luyện tập/kiểm tra:** [DANH-SACH-130-BUOI.md](DANH-SACH-130-BUOI.md). Đây là tổng thể tự học cả 4 chương, **không đồng nhất với 45 tiết chính khóa** và không buộc hoàn thành trong học kỳ này.
+
 ## 2. Quy tắc dạy và luyện tập (mỗi buổi 45–60 phút)
 
 1. **5–10 phút khởi động:** ôn ngắn nền đại số/lượng giác hoặc bài lần trước. Bài tự làm, không nhận lời giải ngay.
