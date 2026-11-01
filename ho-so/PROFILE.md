@@ -99,3 +99,19 @@ Cập nhật 11/10/2026. Nguồn: người dùng tự nói trực tiếp trong h
 
 Repo hoc-tap là nơi lưu thông tin học tập của người dùng. Hồ sơ hiện tại ở ho-so/PROFILE.md; snapshot lịch sử ở ho-so/snapshots/. Khi tiếp tục công việc, đọc hồ sơ này để khôi phục ngữ cảnh. Các file trong repo không tự tạo bộ nhớ tài khoản; môi trường mới cần có bản repo chứa các cập nhật này.
 
+## Định hướng học tập mới — 01/11/2026
+
+Nguồn: người dùng trực tiếp xác nhận trong cuộc trò chuyện ngày 01/11/2026. Đây là **định hướng hiện hành**, được ưu tiên hơn các roadmap tự học AI/C++/DSA cũ trong hồ sơ; không thay đổi yêu cầu học phần chính thức của trường.
+
+### Hai trục học chính
+
+1. **Bắt buộc — nền tảng năm nhất và kiến thức học thuật:** học và ôn theo chương trình trên lớp, đặc biệt **lập trình C, Giải tích 1** và các môn hiện hành; học **Python** song song để phục vụ AI/thực hành. Về sau tiếp tục các môn nền tảng theo chương trình như đại số tuyến tính, xác suất thống kê, cấu trúc dữ liệu. Phải học chắc kiến thức và làm bài thật, không nhầm một kế hoạch với tiến độ hoàn thành.
+2. **Ứng dụng thực tế — sử dụng và xây dựng hệ thống AI:** hiểu cách dùng các mô hình AI hiệu quả, token/context/API, quản lý chi phí, prompt và đánh giá kết quả; từng bước học tool calling, JSON, skills, plugins/MCP, agents, harness, memory và workflows; thực hành trong dự án phù hợp. Đi từ khái niệm cơ bản đến hệ thống phức tạp, không nhảy cóc vào thuật ngữ nâng cao.
+
+### Quan điểm và giới hạn cần tôn trọng
+
+- Người dùng có kinh nghiệm tạo sản phẩm bằng AI (web, game, thiết kế), nhưng **tự xác nhận chưa có nền kỹ năng tự lập trình sâu**; các dự án viết bằng nhiều ngôn ngữ thường nhờ AI triển khai. Không lấy kích thước dự án hoặc code do AI tạo làm bằng chứng người dùng đã thông thạo ngôn ngữ đó.
+- **Không đặt việc tự đọc/viết toàn bộ code web, Roblox hay PowerPoint bằng nhiều ngôn ngữ làm điều kiện tiên quyết** để sử dụng AI. Vẫn học C/Python vì học thuật, tư duy lập trình và thực hành có chủ đích; có thể dùng AI để triển khai dự án.
+- Người dùng tự tin về sáng tạo ý tưởng, product thinking và khả năng nắm xu hướng; **không ưu tiên khóa học product/marketing** lúc này. Tránh liên tục chuyển mục tiêu sang kinh doanh khi người dùng muốn học kiến thức AI và môn trên lớp.
+- Cách dạy: giải thích từ trực giác → nguyên lý → ví dụ gần dự án thật → bài thực hành/chẩn đoán nhỏ → chữa lỗi. Giảng theo từng bước, hạn chế dồn quá nhiều kiến thức một lúc. Phân biệt phần đã chứng minh là hiểu, phần từng học nhưng quên và phần mới chỉ được lên kế hoạch.
+- **Ưu tiên ngay hôm nay:** học **Giải tích 1** trước. Mốc cũ (tháng 10): đã tiếp xúc giới hạn, dạng 0/0, phân tích nhân tử, nhân liên hợp, giới hạn sin; phải chẩn đoán nhẹ trước khi đánh dấu đã nắm lại. Mốc này là bản ghi cũ, không khẳng định mức nhớ hiện tại.
