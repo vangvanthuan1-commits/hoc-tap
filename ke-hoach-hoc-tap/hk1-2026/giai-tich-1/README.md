@@ -66,7 +66,7 @@ PDF Chương I có trang bìa/mục lục; cột “Trang PDF” dưới đây l
 | **I.10** | Taylor/Maclaurin có phần dư, bậc khai triển và chặn sai số | Ch1 tr.54–58; §1.10 | **1.141, 1.142, 1.144, 1.146**, nâng cao **1.149** |
 | **I.11** | Quy tắc L’Hospital: nhận dạng dạng vô định và kiểm tra điều kiện | Ch1 tr.59–64; §1.11 | **1.151, 1.152, 1.154, 1.156**, nâng cao **1.159** |
 | **I.12** | Dấu đạo hàm, khoảng đơn điệu, điểm tới hạn, cực trị địa phương | Ch1 tr.65–69; §1.12 | **1.161, 1.162, 1.164, 1.166**, nâng cao **1.169** |
-| **I.13** | GTLN/GTNN, bài toán tối ưu, tính gần đúng và điều kiện biên | Ch1 tr.70–74; §1.13 | **1.171, 1.174, 1.181, 1.184, 1.191, 1.194, 1.201, 1.204** |
+| **I.13** | GTLN/GTNN, bài toán tối ưu, tính gần đúng và điều kiện biên | Ch1 tr.70–74; §1.13 | **1.171, 1.174, 1.181, 1.184, 1.191, 1.194** |
 | **I.14** | Tổng hợp phương pháp, chọn lời giải và phát hiện lập luận sai | Ch1 tr.75–81; §1.14 | **Đề tổng hợp Chương I** trong [file bài tập](BAI-TAP-VA-KIEM-TRA.md) |
 
 **Nhịp đề xuất:** học 2 bài/tuần, thêm 1 khối luyện/ôn; 14 bài ≈ 7 tuần nếu giữ nhịp này. Đây là nhịp **tự học**, thay đổi theo tốc độ giảng viên. Chưa học tới đâu thì không đánh dấu xong.
