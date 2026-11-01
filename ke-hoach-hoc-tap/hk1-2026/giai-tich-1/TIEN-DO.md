@@ -14,7 +14,7 @@
 
 | Mã | Chủ đề | Trạng thái | Bài tự giải đúng/tổng | Lỗi, hẹn ôn |
 |---|---|---|---|---|
-| GT0 | Chẩn đoán đại số/hàm số/giới hạn | Chưa kiểm tra | — | — |
+| GT0 | Chẩn đoán đại số/hàm số/giới hạn | Đang kiểm tra (1/5 câu) | Câu 1: 2/2 điểm, có gợi ý | Ban đầu thiếu điều kiện căn; sau gợi ý tự kết hợp đúng x≤3, x≠1 và D=(-∞,1)∪(1,3]. Chờ câu 2–5. |
 | I.01 | Hàm số một biến, hợp/ngược | Chưa kiểm tra | — | — |
 | I.02 | Giới hạn tại điểm, một phía | Chưa kiểm tra | — | — |
 | I.03 | Phương pháp tính giới hạn | Chưa kiểm tra | — | — |
@@ -48,5 +48,6 @@ Snapshot tháng 10/2026 ghi từng học giới hạn thế trực tiếp, 0/0, 
 | Ngày | Mã bài | Giờ bắt đầu–kết thúc | Bài đúng/tổng | Quyết định |
 |---|---|---|---|---|
 | 01/11/2026 | Thiết lập chương trình từ 3 PDF và tài liệu bổ trợ | Không tính là buổi giải bài | 0/0 | Chờ chẩn đoán GT0 |
+| 01/11/2026 | GT0 câu 1: miền xác định sqrt(3-x)/(x-1) | Không xác định | 1/1 (có gợi ý; 2/2 điểm câu này) | Câu đầu chỉ nêu x≠1; sau gợi ý hoàn thiện D=(-∞,1)∪(1,3]. Tiếp tục câu 2/5. |
 
 **Bước tiếp theo:** làm GT0 trong [README](README.md), sau đó vào I.01.
