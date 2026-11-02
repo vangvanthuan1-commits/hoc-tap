@@ -10,6 +10,13 @@ Cập nhật 01/11/2026. Đồng hành cùng [giáo trình học cá nhân](READ
 - **Đạt**: ≥80% của ít nhất 5 bài chưa xem giải, gồm ≥2 câu trung bình; giải thích được phương pháp. **Chưa đạt**: luyện lại lỗi bằng mã bài khác cùng dạng.
 - Các câu AI tự soạn có thể đổi số, nhưng nếu mã bài PDF đã giao thì giữ nguyên mã để đối chiếu.
 
+### Quy tắc mới sau phản hồi 02/11/2026
+
+- **Buổi P phải dùng bài tập gốc từ `Bai_tap_Giai_tich_Sinh_vien.pdf`, ghi rõ mã bài và mức độ**, không dùng câu tự soạn chỉ thay số của ví dụ đã giảng. Nếu không có bản PDF trong phiên đó, nói rõ thiếu nguồn và chỉ dùng bài tự soạn khi người học đồng ý.
+- **Ví dụ L không được trùng bài P**. Chọn bài vận dụng biến thể, kiểm tra điều kiện/biện luận, tránh lặp vô ích.
+- **Không gửi đáp án hoặc gợi ý quá sớm**: cho người học thử, chữa theo ảnh, chỉ gợi ý khi bế tắc; người học muốn nhận cả đề một lượt thì gửi cả đề.
+- **I.01-P được giao theo sách thầy:** Bài **1.6** (hàm hợp có phân thức/căn, mức trung bình), Bài **1.14** (hàm ngược của phân thức, mức trung bình). Khi làm vững mới mở **1.17** (trung bình) hoặc **1.9** (vận dụng có tham số). Bài tự luyện 5 câu cũ (9/10) chỉ là checkpoint L, không thay bài P.
+
 ## GT0 — Chẩn đoán nền (20–25 phút, không tính điểm)
 
 Tự làm cả 5 câu; giải thích bằng lời tại sao thực hiện từng bước.
