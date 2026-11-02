@@ -15,7 +15,7 @@
 | Mã | Chủ đề | Trạng thái | Bài tự giải đúng/tổng | Lỗi, hẹn ôn |
 |---|---|---|---|---|
 | GT0 | Chẩn đoán đại số/hàm số/giới hạn | Đã kiểm tra; đạt cơ bản, cần ôn giới hạn lượng giác | 7/10 điểm; 4/5 câu có trả lời, câu 4 chưa nhớ; câu 1 có gợi ý | C1 2/2 (sau gợi ý); C2 2/2; C3 2/2; C4 0/2 (quên sin t/t); C5 1/2 (đúng rằng giới hạn có thể tồn tại dù f(2) không xác định, cần phân biệt giá trị hàm/giới hạn và tránh dùng sai từ tiệm cận). Sau GT0: I.01-L. |
-| I.01 | Hàm số một biến, hợp/ngược | I.01-L đạt; I.01-P chờ bài tập sách thầy | Quiz tự biên soạn: 9/10 (câu 4 chép thiếu x−2) | Đã hiểu hàm hợp và hàm ngược; bài tự biên soạn quá giống ví dụ, không tính là vượt buổi luyện tập. Tiếp theo làm Bài 1.6, 1.14 trong PDF thầy (trung bình), không lặp lại ví dụ. |
+| I.01 | Hàm số một biến, hợp/ngược | I.01-L đạt; I.01-P chưa đạt, đang sửa lỗi | Quiz nền 9/10; Bài 1.6 và 1.14 PDF: chưa hoàn tất | 1.6 hiểu thứ tự hàm hợp nhưng chép g=(x−2)/(x−1) thay vì (x−2)/(x+1), thiếu hai miền xác định. 1.14 viết đúng f=(x−1)/(x+2) nhưng biến đổi chưa đúng, chưa chứng minh một–một/tập giá trị/hàm ngược. Ôn tăng dần độ khó; vận dụng KHÔNG bắt buộc để qua bài, theo ngưỡng ≥80% ít nhất 5 câu gồm ≥2 trung bình. |
 | I.02 | Giới hạn tại điểm, một phía | Chưa kiểm tra | — | — |
 | I.03 | Phương pháp tính giới hạn | Chưa kiểm tra | — | — |
 | I.04 | Vô cùng bé, vô cùng lớn, tương đương | Chưa kiểm tra | — | — |
@@ -54,4 +54,6 @@ Snapshot tháng 10/2026 ghi từng học giới hạn thế trực tiếp, 0/0, 
 
 | 02/11/2026 | I.01-L / bài tự kiểm tra bằng ảnh | Không xác định | 9/10 (câu 4 dùng nhầm x² thay vì (x−2)²) | Đúng C1 hàm hợp, C2 hàm ngược tuyến tính, C3 nhánh dương, C5 phản ví dụ một–một. C4 hiểu nhánh âm nhưng chép sai đề. Kết luận: đạt lý thuyết; I.01-P phải kiểm tra bằng bài tập thật trong PDF của thầy, không dùng câu lặp lại ví dụ. |
 
-**Bước tiếp theo:** I.01-P — dùng đúng bài tập *thầy cung cấp*, ưu tiên Bài 1.6 (hàm hợp + điều kiện), Bài 1.14 (hàm ngược phân thức + chứng minh). Không ra bài chỉ thay số của ví dụ vừa giảng. Trong I.02–I.03 ôn bản chất giới hạn và lim(sin t)/t.
+| 02/11/2026 | I.01-P: thử Bài 1.6 và 1.14 (PDF thầy), bài làm qua ảnh | Không xác định | Chưa đạt, không gán điểm khi hai bài chưa hoàn thành đúng yêu cầu | 1.6 sai chép mẫu x+1 thành x−1, thiếu miền; 1.14 biến đổi đại số sai, chưa tìm hàm ngược. Người học yêu cầu đi từ nhận biết → trung bình → vận dụng; xác nhận không bắt buộc vận dụng để hoàn tất mọi bài. |
+
+**Bước tiếp theo:** củng cố miền của hàm hợp bằng bài nhận biết rồi quay lại Bài 1.6; hướng dẫn kỹ biến đổi phương trình phân thức trước khi làm lại Bài 1.14. Bài vận dụng là tùy năng lực, không bắt buộc để qua bài I.01. Trong I.02–I.03 ôn bản chất giới hạn và lim(sin t)/t.
