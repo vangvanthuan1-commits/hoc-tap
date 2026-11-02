@@ -4,10 +4,10 @@ Cập nhật 01/11/2026. Đồng hành cùng [giáo trình học cá nhân](READ
 
 ## Cách giao bài
 
-- Với mỗi dạng trong sách bài tập: 3 câu nhận biết, 5 câu trung bình, 2 câu vận dụng; không cần hoàn thành cả 10 nếu đã nắm chắc.
-- Một buổi: 2 nhận biết + 2 trung bình; thêm 1 vận dụng khi đã đúng tối thiểu 4/4. Khi gặp khó, AI gợi ý từng bước; không đưa đáp án trước.
+- **Mỗi bài học trong giáo trình cá nhân:** bắt buộc thử 10 bài tập gốc từ sách thầy, gồm 3 nhận biết + 5 trung bình + 2 vận dụng, lựa chọn từ các dạng sát nội dung; có thể làm đủ 10 bài của từng dạng nếu muốn học hết 800 bài trong sách.
+- **Thứ tự:** nhận biết → trung bình → vận dụng; có thể chia 10 bài ra 2–3 hoặc nhiều buổi P, không nhồi vào 45 phút. Khi gặp khó, AI dạy kỹ thuật thiếu và gợi ý từng bước; không đưa đáp án trước.
 - **Chấm 4 tiêu chí**: xác định miền/giả thiết; chọn phương pháp; biến đổi hợp lệ; trình bày và kiểm tra.
-- **Đạt**: ≥80% của ít nhất 5 bài chưa xem giải, gồm ≥2 câu trung bình; giải thích được phương pháp. **Chưa đạt**: luyện lại lỗi bằng mã bài khác cùng dạng.
+- **Đạt**: đã thử đủ 10 bài, ≥8/10 bài tự giải đúng khi chưa xem giải, chữa và tự giải lại tất cả bài sai/thiếu, giải thích được phương pháp và điều kiện; bài vận dụng bắt buộc thử và chữa cho hiểu. **Chưa đạt**: luyện lại lỗi, chưa chuyển bài dù đã xem/hiểu bài giảng.
 - Các câu AI tự soạn có thể đổi số, nhưng nếu mã bài PDF đã giao thì giữ nguyên mã để đối chiếu.
 
 ### Quy tắc mới sau phản hồi 02/11/2026
@@ -15,7 +15,7 @@ Cập nhật 01/11/2026. Đồng hành cùng [giáo trình học cá nhân](READ
 - **Buổi P phải dùng bài tập gốc từ `Bai_tap_Giai_tich_Sinh_vien.pdf`, ghi rõ mã bài và mức độ**, không dùng câu tự soạn chỉ thay số của ví dụ đã giảng. Nếu không có bản PDF trong phiên đó, nói rõ thiếu nguồn và chỉ dùng bài tự soạn khi người học đồng ý.
 - **Ví dụ L không được trùng bài P**. Chọn bài vận dụng biến thể, kiểm tra điều kiện/biện luận, tránh lặp vô ích.
 - **Không gửi đáp án hoặc gợi ý quá sớm**: cho người học thử, chữa theo ảnh, chỉ gợi ý khi bế tắc; người học muốn nhận cả đề một lượt thì gửi cả đề.
-- **I.01-P được giao theo sách thầy:** Bài **1.6** (hàm hợp có phân thức/căn, mức trung bình), Bài **1.14** (hàm ngược của phân thức, mức trung bình). Khi làm vững mới mở **1.17** (trung bình) hoặc **1.9** (vận dụng có tham số). Bài tự luyện 5 câu cũ (9/10) chỉ là checkpoint L, không thay bài P.
+- **I.01-P thay đổi 02/11 — gói 10 bài gốc bắt buộc:** nhận biết **1.3, 1.11, 1.13**; trung bình **1.4, 1.5, 1.6, 1.14, 1.15**; vận dụng **1.9, 1.10**. Theo tiến trình: **1.3 → 1.11 → 1.13 → 1.4 → 1.5 → 1.15 → 1.6 → 1.14 → 1.9 → 1.10**. Phải dạy kỹ cách xét điều kiện trên cả khoảng/đoạn trước 1.9–1.10. 1.6/1.14 người học đã thử, chưa đạt; làm lại sau khi củng cố. Quiz tự biên soạn 9/10 là checkpoint L, không thay bài P.
 
 ## GT0 — Chẩn đoán nền (20–25 phút, không tính điểm)
 
