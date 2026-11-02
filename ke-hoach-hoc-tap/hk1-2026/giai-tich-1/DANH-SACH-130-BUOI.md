@@ -6,17 +6,17 @@
 
 ## Cách đếm buổi
 
-- Với mỗi mục §x.y: **1 buổi L** (lý thuyết và ví dụ 45 phút) + **1 buổi P** (bài tập độc lập 45 phút), tổng **124 buổi**.
+- Với mỗi mục §x.y: **1 buổi L** (lý thuyết và ví dụ 45 phút) + **ít nhất 1 buổi P** (luyện các bài tập trong PDF thầy). Mỗi bài học cần **10 bài tập gốc**: 3 nhận biết, 5 trung bình, 2 vận dụng; nếu chưa hết trong 45 phút thì mở thêm buổi P. Tổng 124 buổi học/luyện là **ước lượng tối thiểu ban đầu**, không cố định khi áp dụng chuẩn 10 bài.
 - **GT0**: 1 buổi kiểm tra đầu vào; **KT-I/II/III/IV**: 4 buổi kiểm tra cuối chương; **KT-TONG**: 1 buổi tổng hợp. Tổng **130 buổi × 45 phút = 97,5 giờ tự học** nếu hoàn thành cả bốn chương.
-- Mỗi buổi P: ưu tiên 5 câu trong ít nhất một *dạng* được ghi, theo mức 2 nhận biết (mã vị trí 1–3), 2 trung bình (vị trí 4–8), 1 vận dụng (vị trí 9–10); chỉ lấy vận dụng khi đã làm vững. Mã bài trong sách: dạng a.b tương ứng dải 10 bài, ví dụ dạng 1.3 là bài 1.21–1.30.
-- Mốc hoàn thành: ≥4/5 câu tự giải, gồm ≥2 câu trung bình và lý giải điều kiện. Nếu chưa đạt, buổi P có thể lặp lại; **130 chỉ là mức tối thiểu kế hoạch**, không có hạn chót cố định.
+- Trong cụm các buổi P của mỗi bài lý thuyết: chọn đủ **10 câu thực tế** từ dạng được ghi (3 nhận biết + 5 trung bình + 2 vận dụng); làm theo thứ tự từ dễ lên khó. Mã bài trong sách: dạng a.b tương ứng dải 10 bài, ví dụ dạng 1.3 là bài 1.21–1.30. Nếu một bài học phủ nhiều dạng, chọn 10 câu từ các dạng đó, không ép đủ mọi dạng trong 45 phút.
+- Mốc hoàn thành bài học: đã làm đủ 10 câu gốc, tự giải đúng ≥8/10 trước khi xem lời giải, làm lại tất cả câu sai/thiếu và giải thích điều kiện áp dụng; hai bài vận dụng phải được thử và sửa. **130 không còn là tổng số buổi cố định**, chỉ là khung tối thiểu cũ; phải điều chỉnh tăng số buổi P theo tiến độ.
 - Ngay trong **học kỳ I** chỉ ưu tiên nội dung thầy xác nhận. Chương III/IV giữ trạng thái mở rộng, không gộp vào kỳ thi theo suy đoán.
 
 ## Quy trình cho từng cặp buổi
 
 **Buổi L:** 5 phút gợi nhớ → 10 phút trực giác → 15 phút định nghĩa/định lý & điều kiện → 10 phút ví dụ có hướng dẫn → 5 phút tóm tắt.
 
-**Buổi P:** 5 phút ôn lỗi → 30 phút tự giải bài từ sách thầy → 5 phút chữa theo lập luận → 5 phút ghi checkpoint và hẹn ôn +1/+3/+7 ngày.
+**Buổi P:** 5 phút ôn lỗi → 30 phút tự giải các bài từ sách thầy → 5 phút chữa theo lập luận → 5 phút ghi checkpoint và hẹn ôn +1/+3/+7 ngày. Một gói 10 bài có thể dùng nhiều buổi P.
 
 **Các ký hiệu:** `I.01-L` là buổi học lý thuyết đầu Chương I; `I.01-P` là buổi làm bài cho mục đó. Giáo trình gốc tham chiếu ở cột **§**, và cột **Dạng BT** là dải các dạng trong PDF 800 bài, không phải số trang PDF.
 
@@ -118,7 +118,7 @@
 | Chương I–II | 32 | 32 | 1 GT0 + 2 KT | **67** | **50,25** |
 | Cả 4 chương | 62 | 62 | 1 GT0 + 4 KT + 1 KT-TONG | **130** | **97,5** |
 
-**Không có nghĩa phải làm cả 800 bài.** Với 5 bài cho mỗi buổi P, lượng luyện cốt lõi khoảng **310 câu** trên toàn bộ 62 chủ đề, thêm câu kiểm tra và câu ôn sai. Bài vận dụng khó có thể cần hơn một buổi; số buổi thực tế tăng tương ứng. Mỗi chương có 200 bài để chọn phù hợp trình độ, không bắt giải hết.
+**Không có nghĩa phải làm cả 800 bài.** Theo chuẩn 10 bài mỗi chủ đề, lượng luyện cốt lõi **ít nhất 620 lượt bài** trên toàn bộ 62 chủ đề, thêm câu kiểm tra và câu ôn sai. Bài vận dụng khó có thể cần hơn một buổi; số buổi thực tế tăng tương ứng. Mỗi chương có 200 bài để chọn phù hợp trình độ, không bắt giải hết.
 
 ## Cần học gì từ hôm nay?
 
