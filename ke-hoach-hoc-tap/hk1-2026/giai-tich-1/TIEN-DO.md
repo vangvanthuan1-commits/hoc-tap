@@ -15,7 +15,7 @@
 | Mã | Chủ đề | Trạng thái | Bài tự giải đúng/tổng | Lỗi, hẹn ôn |
 |---|---|---|---|---|
 | GT0 | Chẩn đoán đại số/hàm số/giới hạn | Đã kiểm tra; đạt cơ bản, cần ôn giới hạn lượng giác | 7/10 điểm; 4/5 câu có trả lời, câu 4 chưa nhớ; câu 1 có gợi ý | C1 2/2 (sau gợi ý); C2 2/2; C3 2/2; C4 0/2 (quên sin t/t); C5 1/2 (đúng rằng giới hạn có thể tồn tại dù f(2) không xác định, cần phân biệt giá trị hàm/giới hạn và tránh dùng sai từ tiệm cận). Sau GT0: I.01-L. |
-| I.01 | Hàm số một biến, hợp/ngược | Chưa kiểm tra | — | — |
+| I.01 | Hàm số một biến, hợp/ngược | Đang học: I.01-L | — | Đã bắt đầu lý thuyết; chờ người học nộp bài luyện, chưa chấm hoàn thành. |
 | I.02 | Giới hạn tại điểm, một phía | Chưa kiểm tra | — | — |
 | I.03 | Phương pháp tính giới hạn | Chưa kiểm tra | — | — |
 | I.04 | Vô cùng bé, vô cùng lớn, tương đương | Chưa kiểm tra | — | — |
