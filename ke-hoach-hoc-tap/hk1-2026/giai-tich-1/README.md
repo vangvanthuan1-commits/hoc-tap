@@ -31,12 +31,19 @@ Các file gốc hiện người dùng đã gửi trong hội thoại, dự kiế
 1. **5–10 phút khởi động:** ôn ngắn nền đại số/lượng giác hoặc bài lần trước. Bài tự làm, không nhận lời giải ngay.
 2. **15 phút khái niệm:** trực giác → định nghĩa và điều kiện → 1 ví dụ nhận biết + 1 phản ví dụ/điều kiện sai.
 3. **10 phút ví dụ hướng dẫn:** che lời giải PDF, tự nêu bước đầu, sau đó mới so sánh cách làm.
-4. **15–20 phút luyện độc lập:** 2 câu nhận biết, 2 câu trung bình; sau khi làm tốt mới mở câu vận dụng. Ghi rõ miền, điều kiện và bước biến đổi.
+4. **Luyện tập từ sách thầy:** sau lý thuyết giao đủ **10 bài gốc/mục học**, theo lộ trình 3 nhận biết → 5 trung bình → 2 vận dụng; làm theo nhiều buổi nếu cần. Ghi rõ miền, điều kiện và bước biến đổi.
 5. **5 phút checkpoint:** tự nói được “vì sao cách này dùng được”; lưu mã bài, đúng/sai và lỗi, hẹn ôn +1, +3, +7 ngày.
 
-**Quy tắc qua bài:** tối thiểu 80% trên ít nhất 5 câu chưa xem lời giải, gồm ít nhất 2 câu trung bình; phải giải thích được điều kiện áp dụng. Nếu chưa đạt: ôn đúng lỗi, làm bài cùng dạng khác thay vì đọc lại toàn chương. Với bài lý thuyết/chứng minh, đánh giá lập luận thay vì chỉ đáp số.
+**Quy tắc qua bài (chốt ngày 02/11/2026):** mỗi **bài học lý thuyết** phải có **10 bài tập gốc trong PDF thầy**, theo 3 nhận biết + 5 trung bình + 2 vận dụng, không bỏ qua vận dụng. Chỉ đánh dấu bài học **ĐẠT** sau khi thử đủ 10 bài, có ≥8/10 bài tự giải đúng trước khi xem lời giải (bao gồm bài mức trung bình), sửa và tự trình bày lại **tất cả các bài chưa đúng**, giải thích điều kiện áp dụng. Nếu chưa đạt, ôn đúng lỗi và luyện tiếp, không vội chuyển bài. Người học muốn làm toàn bộ bài trong sách vẫn được: 20 dạng × 10 bài = 200 bài Chương I, nhiều hơn mục tiêu tối thiểu 14 × 10 = 140 lượt bài; sẽ phân bổ phần còn lại vào buổi ôn/tổng hợp. 10 bài **không nhất thiết hoàn thành trong một tiết 45 phút**; có thể kéo dài 2–3 buổi P hoặc hơn. Số 130 buổi trong kế hoạch ban đầu là khung ước lượng, không phải hạn mức cứng.
 
-**Lưu ý về mã bài tập:** Dạng `1.k` chứa bài `1.(10k−9)` đến `1.(10k)`; thông thường 3 bài đầu nhận biết, 5 tiếp theo trung bình, 2 cuối vận dụng. Chọn mẫu 5 bài `đầu dạng, +1, +3, +5, +8` khi cần luyện đầy đủ. Mã giao bài dưới đây là **bài trong PDF của thầy**, không chép lại đề hoặc lời giải.
+**Lưu ý về mã bài tập:** Dạng `1.k` chứa bài `1.(10k−9)` đến `1.(10k)`; thông thường 3 bài đầu nhận biết, 5 tiếp theo trung bình, 2 cuối vận dụng. Chọn **10 bài nguyên bản** cho mỗi bài học từ các dạng phù hợp; chia mức nhận biết → trung bình → vận dụng. Đánh dấu bài nào đã làm để không tính trùng khi ôn. Mã giao bài dưới đây là **bài trong PDF của thầy**, không chép lại đề hoặc lời giải.
+
+**I.01 — gói 10 bài tập gốc phải hoàn thành:**
+
+- Nhận biết: **1.3** (miền xác định), **1.11** (hàm ngược và chọn nhánh), **1.13** (hàm ngược bậc nhất).
+- Trung bình: **1.4**, **1.5** (điều kiện log/căn), **1.6** (hàm hợp căn–phân thức), **1.14** (hàm ngược phân thức), **1.15** (nhánh âm).
+- Vận dụng: **1.9**, **1.10** (miền xác định có tham số và yêu cầu đúng trên cả đoạn).
+- Thứ tự: 1.3 → 1.11 → 1.13 → 1.4 → 1.5 → 1.15 → 1.6 → 1.14 → 1.9 → 1.10. Với 1.9–1.10, **dạy phương pháp xét điều kiện trên đoạn trước**, không giao ngay khi chưa học kỹ thuật tham số. Những bài 1.6 và 1.14 người học đã thử nhưng chưa đạt, cần làm lại đúng đề gốc.
 
 ## 3. Bài mở đầu — đánh giá nền (GT0)
 
