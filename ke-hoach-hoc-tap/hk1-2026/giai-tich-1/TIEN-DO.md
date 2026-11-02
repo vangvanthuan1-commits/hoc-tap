@@ -6,7 +6,7 @@
 
 - `Chưa kiểm tra`: chưa có bài giải tự làm trong khóa học này.
 - `Đang học`: đã học lý thuyết/đang làm bài nhưng chưa vượt bài kiểm tra.
-- `Đạt`: có ít nhất 5 câu tự giải chưa xem lời giải, ≥80%, gồm ≥2 câu trung bình và giải thích điều kiện.
+- `Đạt`: đã thử đủ 10 bài gốc trong sách thầy theo 3 nhận biết + 5 trung bình + 2 vận dụng, ≥8/10 tự giải đúng khi chưa xem lời giải, chữa và tự giải lại mọi bài chưa đúng, giải thích điều kiện. Bài khó làm qua nhiều buổi nếu cần.
 - `Cần ôn`: từng học nhưng bài làm hiện tại còn lỗi; luyện lại +1, +3, +7 ngày.
 - Mỗi buổi ghi **giờ thật khi có công cụ đo**; nếu không đo được, ghi “không xác định”, không bịa phút.
 
@@ -15,7 +15,7 @@
 | Mã | Chủ đề | Trạng thái | Bài tự giải đúng/tổng | Lỗi, hẹn ôn |
 |---|---|---|---|---|
 | GT0 | Chẩn đoán đại số/hàm số/giới hạn | Đã kiểm tra; đạt cơ bản, cần ôn giới hạn lượng giác | 7/10 điểm; 4/5 câu có trả lời, câu 4 chưa nhớ; câu 1 có gợi ý | C1 2/2 (sau gợi ý); C2 2/2; C3 2/2; C4 0/2 (quên sin t/t); C5 1/2 (đúng rằng giới hạn có thể tồn tại dù f(2) không xác định, cần phân biệt giá trị hàm/giới hạn và tránh dùng sai từ tiệm cận). Sau GT0: I.01-L. |
-| I.01 | Hàm số một biến, hợp/ngược | I.01-L đạt; I.01-P chưa đạt, đang sửa lỗi | Quiz nền 9/10; Bài 1.6 và 1.14 PDF: chưa hoàn tất | 1.6 hiểu thứ tự hàm hợp nhưng chép g=(x−2)/(x−1) thay vì (x−2)/(x+1), thiếu hai miền xác định. 1.14 viết đúng f=(x−1)/(x+2) nhưng biến đổi chưa đúng, chưa chứng minh một–một/tập giá trị/hàm ngược. Ôn tăng dần độ khó; vận dụng KHÔNG bắt buộc để qua bài, theo ngưỡng ≥80% ít nhất 5 câu gồm ≥2 trung bình. |
+| I.01 | Hàm số một biến, hợp/ngược | I.01-L đạt; I.01-P đang làm gói 10 câu gốc | Quiz nền 9/10; Bài 1.6 và 1.14 PDF: chưa hoàn tất | 1.6 hiểu thứ tự hàm hợp nhưng chép g=(x−2)/(x−1) thay vì (x−2)/(x+1), thiếu hai miền xác định. 1.14 viết đúng f=(x−1)/(x+2) nhưng biến đổi chưa đúng, chưa chứng minh một–một/tập giá trị/hàm ngược. Ôn tăng dần độ khó; Đã chốt yêu cầu mới: 10 câu gốc gồm 3 nhận biết + 5 trung bình + 2 vận dụng, ≥8/10 tự giải đúng và sửa hết lỗi. |
 | I.02 | Giới hạn tại điểm, một phía | Chưa kiểm tra | — | — |
 | I.03 | Phương pháp tính giới hạn | Chưa kiểm tra | — | — |
 | I.04 | Vô cùng bé, vô cùng lớn, tương đương | Chưa kiểm tra | — | — |
@@ -37,6 +37,9 @@
 
 Snapshot tháng 10/2026 ghi từng học giới hạn thế trực tiếp, 0/0, phân tích nhân tử, nhân liên hợp, sin. Không có cơ sở chắc chắn bạn còn nhớ ở 01/11/2026; **làm GT0 trước khi nhảy bài**.
 
+
+**Chuẩn mới theo yêu cầu 02/11/2026:** Mỗi bài học đạt sau 10 bài gốc từ PDF (3 NB, 5 TB, 2 VD), ≥8/10 đúng tự làm và sửa hết bài sai; chưa hoàn thành 10 câu không chuyển bài. Các nhận xét trước đây nói bài vận dụng không bắt buộc đã được **thay thế** theo mong muốn mới.
+
 ## Lịch ôn
 
 - Khi học xong mỗi dạng, hẹn ôn **ngày tiếp theo**, **3 ngày sau**, **7 ngày sau** bằng bài khác cùng dạng.
@@ -56,4 +59,4 @@ Snapshot tháng 10/2026 ghi từng học giới hạn thế trực tiếp, 0/0, 
 
 | 02/11/2026 | I.01-P: thử Bài 1.6 và 1.14 (PDF thầy), bài làm qua ảnh | Không xác định | Chưa đạt, không gán điểm khi hai bài chưa hoàn thành đúng yêu cầu | 1.6 sai chép mẫu x+1 thành x−1, thiếu miền; 1.14 biến đổi đại số sai, chưa tìm hàm ngược. Người học yêu cầu đi từ nhận biết → trung bình → vận dụng; xác nhận không bắt buộc vận dụng để hoàn tất mọi bài. |
 
-**Bước tiếp theo:** củng cố miền của hàm hợp bằng bài nhận biết rồi quay lại Bài 1.6; hướng dẫn kỹ biến đổi phương trình phân thức trước khi làm lại Bài 1.14. Bài vận dụng là tùy năng lực, không bắt buộc để qua bài I.01. Trong I.02–I.03 ôn bản chất giới hạn và lim(sin t)/t.
+**Bước tiếp theo:** làm gói 10 bài gốc I.01 theo thứ tự **1.3 → 1.11 → 1.13 → 1.4 → 1.5 → 1.15 → 1.6 → 1.14 → 1.9 → 1.10**. Bài 1.6 và 1.14 đã thử nhưng chưa hoàn thành; không tính đạt. Bài 1.9–1.10 cần được dạy kỹ thuật tham số trước khi yêu cầu tự giải. Các câu trùng bài đã thử được chấm sau khi làm lại. Trong I.02–I.03 ôn giới hạn lượng giác.
