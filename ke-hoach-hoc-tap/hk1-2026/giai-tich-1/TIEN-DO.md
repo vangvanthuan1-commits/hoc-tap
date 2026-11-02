@@ -1,6 +1,6 @@
 # GIẢI TÍCH 1 — TIẾN ĐỘ VÀ ÔN TẬP
 
-**Khởi tạo:** 01/11/2026. **Trạng thái:** chưa làm chẩn đoán GT0 trong phiên học mới. Không chuyển các dấu “đã học” từ bản kế hoạch cũ sang đây vì tiến độ cũ chưa được kiểm tra lại.
+**Khởi tạo:** 01/11/2026. **Trạng thái:** đã hoàn thành chẩn đoán GT0 ngày 02/11/2026, đạt 7/10 (câu 1 được hướng dẫn). Học tiếp I.01-L và ôn hai điểm yếu ở I.02–I.03.
 
 ## Hướng dẫn
 
@@ -14,7 +14,7 @@
 
 | Mã | Chủ đề | Trạng thái | Bài tự giải đúng/tổng | Lỗi, hẹn ôn |
 |---|---|---|---|---|
-| GT0 | Chẩn đoán đại số/hàm số/giới hạn | Đang kiểm tra (1/5 câu) | Câu 1: 2/2 điểm, có gợi ý | Ban đầu thiếu điều kiện căn; sau gợi ý tự kết hợp đúng x≤3, x≠1 và D=(-∞,1)∪(1,3]. Chờ câu 2–5. |
+| GT0 | Chẩn đoán đại số/hàm số/giới hạn | Đã kiểm tra; đạt cơ bản, cần ôn giới hạn lượng giác | 7/10 điểm; 4/5 câu có trả lời, câu 4 chưa nhớ; câu 1 có gợi ý | C1 2/2 (sau gợi ý); C2 2/2; C3 2/2; C4 0/2 (quên sin t/t); C5 1/2 (đúng rằng giới hạn có thể tồn tại dù f(2) không xác định, cần phân biệt giá trị hàm/giới hạn và tránh dùng sai từ tiệm cận). Sau GT0: I.01-L. |
 | I.01 | Hàm số một biến, hợp/ngược | Chưa kiểm tra | — | — |
 | I.02 | Giới hạn tại điểm, một phía | Chưa kiểm tra | — | — |
 | I.03 | Phương pháp tính giới hạn | Chưa kiểm tra | — | — |
@@ -50,4 +50,6 @@ Snapshot tháng 10/2026 ghi từng học giới hạn thế trực tiếp, 0/0, 
 | 01/11/2026 | Thiết lập chương trình từ 3 PDF và tài liệu bổ trợ | Không tính là buổi giải bài | 0/0 | Chờ chẩn đoán GT0 |
 | 01/11/2026 | GT0 câu 1: miền xác định sqrt(3-x)/(x-1) | Không xác định | 1/1 (có gợi ý; 2/2 điểm câu này) | Câu đầu chỉ nêu x≠1; sau gợi ý hoàn thiện D=(-∞,1)∪(1,3]. Tiếp tục câu 2/5. |
 
-**Bước tiếp theo:** làm GT0 trong [README](README.md), sau đó vào I.01.
+| 02/11/2026 | GT0 câu 2–5: bài làm bằng ảnh và nhận xét trực tiếp | Không xác định | Tổng GT0: 7/10 (C1 có gợi ý) | C2 và C3 đúng; C4 chưa nhớ giới hạn lượng giác; C5 hiểu một phần về giới hạn và giá trị tại điểm. Chuyển I.01-L, tiếp tục củng cố giới hạn khi tới I.02–I.03. |
+
+**Bước tiếp theo:** học I.01-L (hàm số, miền xác định, hàm hợp/ngược); trong I.02–I.03 ôn bản chất giới hạn và lim(sin t)/t.
